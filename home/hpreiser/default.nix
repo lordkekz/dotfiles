@@ -7,7 +7,10 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  username = "hpreiser";
+  worm = "storm";
+in {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -44,18 +47,20 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+
+      # For some reason I get an error message if this doesn't exist. It works, but I don't like seeing the error.
+      news.json.output = "";
     };
   };
 
-  # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    inherit username;
+    homeDirectory = "/home/${username}";
   };
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [hello];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
