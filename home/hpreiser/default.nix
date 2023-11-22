@@ -6,10 +6,10 @@
   lib,
   config,
   pkgs,
+  mode,
   ...
 }: let
   username = "hpreiser";
-  worm = "storm";
 in {
   # You can import other home-manager modules here
   imports = [
@@ -60,7 +60,10 @@ in {
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [hello];
+  home.packages = with pkgs; [
+    hello
+    nushell
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

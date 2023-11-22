@@ -39,23 +39,58 @@
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
+  in rec {
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (
-      system:
-        (import ./pkgs nixpkgs.legacyPackages.${system})
-        // import ./lib/sketchyHomeConfigurationsForNixShow.nix {
-          inherit system;
+    packages =
+      forAllSystems
+      (
+        system: let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+          (import ./pkgs pkgs)
+          // import ./lib/sketchyHomeConfigurationsForNixShow.nix {
+            inherit pkgs system;
 
-          # Standalone home-manager configuration entrypoint
-          # Available through 'home-manager --flake .#your-username@your-hostname'
+            # Standalone home-manager configuration entrypoint
+            # Available through 'home-manager --flake .#your-username@your-hostname'
+            homeConfigs = (import ./home) {
+              inherit pkgs home-manager nixpkgs inputs outputs;
+            };
+          }
+      );
+
+    apps =
+      forAllSystems
+      (
+        system: let
+          pkgs = nixpkgs.legacyPackages.${system};
+
           homeConfigs = (import ./home) {
-            inherit home-manager nixpkgs inputs outputs;
+            inherit pkgs home-manager nixpkgs inputs outputs;
+          };
+          hostConfigs = import ./hosts {
+            inherit nixpkgs inputs outputs;
             pkgs = nixpkgs.legacyPackages.${system};
           };
-        }
-    );
+          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit pkgs homeConfigs;};
+          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
+          script = pkgs.writeShellApplication {
+            name = "apply-dotfiles-all";
+            runtimeInputs = [pkgs.nushell];
+            text = ''
+              echo "{
+                homeConfigs: ${myListOfHomeConfigs.listNamesNuonEscaped}
+                hostConfigs: ${myListOfHostConfigs.listNamesNuonEscaped}
+              }" | nu --stdin ${./apply.nu}
+            '';
+          };
+          app = {
+            type = "app";
+            program = "${script}/bin/apply-dotfiles-all";
+          };
+        in {default = app;}
+      );
 
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'

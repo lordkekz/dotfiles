@@ -16,5 +16,6 @@
 in rec {
   imports = [];
 
+  default = KeksWork-Win11;
   KeksWork-Win11 = myMkNixOSConfig KeksWork-Win11;
 }
