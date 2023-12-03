@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
+args @ {
   inputs,
   outputs,
   lib,
@@ -10,18 +10,29 @@
   ...
 }: let
   username = "hpreiser";
-in {
+in rec {
   # You can import other home-manager modules here
-  imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
+  imports =
+    [
+      # If you want to use modules your own flake exports (from modules/home-manager):
+      # outputs.homeManagerModules.example
 
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
+      # Or modules exported from other flakes (such as nix-colors):
+      # inputs.nix-colors.homeManagerModules.default
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-  ];
+      # You can also split up your configuration and import pieces of it here:
+      # ./nvim.nix
+    ]
+    ++ (
+      if mode.desktop
+      then [./desktop.nix]
+      else []
+    )
+    ++ (
+      if mode.terminal
+      then [./terminal.nix]
+      else []
+    );
 
   nixpkgs = {
     # You can add overlays here
@@ -47,9 +58,6 @@ in {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
-
-      # For some reason I get an error message if this doesn't exist. It works, but I don't like seeing the error.
-      news.json.output = "";
     };
   };
 
@@ -61,16 +69,14 @@ in {
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
-    hello
     nushell
   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+  # systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";

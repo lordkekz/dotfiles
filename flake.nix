@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -24,6 +25,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -49,6 +51,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
           (import ./pkgs pkgs)
+          // {hm = home-manager.packages.${system}.default;}
           // import ./lib/sketchyHomeConfigurationsForNixShow.nix {
             inherit pkgs system;
 
@@ -77,7 +80,7 @@
           myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
           script = pkgs.writeShellApplication {
             name = "apply-dotfiles-all";
-            runtimeInputs = [pkgs.nushell];
+            runtimeInputs = [pkgs.nushell pkgs.home-manager];
             text = ''
               echo "{
                 homeConfigs: ${myListOfHomeConfigs.listNamesNuonEscaped}

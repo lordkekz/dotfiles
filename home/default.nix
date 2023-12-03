@@ -18,7 +18,13 @@
 in rec {
   imports = [];
 
-  "hpreiser@Desk" = myMkHomeConfig "hpreiser" "Desk";
-  "hpreiser@Term" = myMkHomeConfig "hpreiser" "Term";
-  hpreiser = throw "";
+  "hpreiser@Desk" = myMkHomeConfig "hpreiser" {
+    desktop = true;
+    terminal = true;
+  };
+  "hpreiser@Term" = myMkHomeConfig "hpreiser" {
+    desktop = false;
+    terminal = true;
+  };
+  hpreiser = throw "Just choose bro";
 }

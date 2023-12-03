@@ -7,7 +7,7 @@ let y = if ($x | describe) == "string" {
     $x
 }
 
-print ($y | table -e)
+# print ($y | table -e)
 
 print "Hello there!"
 print ("Detected user: " + $env.USER)
@@ -44,17 +44,18 @@ let homeConfigList = (
     sort-by distance |
     get item
 )
-
-let hostConfigList = (
-    $y.hostConfigs |
-    enumerate |
-    upsert distance {|e| $e.item | str distance $env.NAME } |
-    sort-by distance |
-    get item
-)
-
 let homeConfig = ($homeConfigList | input list -f "Select a user config:")
-let hostConfig = ($hostConfigList | input list -f "Select a host config:")
+
+let hostConfig = if (which nixos-rebuild | is-empty) { null } else {
+    let hostConfigList = (
+        $y.hostConfigs |
+        enumerate |
+        upsert distance {|e| $e.item | str distance $env.NAME } |
+        sort-by distance |
+        get item
+    )
+    ($hostConfigList | input list -f "Select a host config:")
+}
 
 print "Please review the selection:"
 print (if $isGraphicalDesktop == "Yes, it's a desktop" {
@@ -69,7 +70,9 @@ print (if $homeConfig == "" {
     "- We will try to apply the homeConfig '" + $homeConfig + "'"
 })
 
-print (if $hostConfig == "" {
+print (if $hostConfig == null {
+    "- No hostConfig will be applied (because `nixos-rebuild` was not found)."
+} else if $hostConfig == "" {
     "- No hostConfig will be applied."
 } else {
     "- We will try to apply the hostConfig '" + $hostConfig + "'"
@@ -78,18 +81,22 @@ print (if $hostConfig == "" {
 let isContinue = (["Make it so!" "Abort"] | input list -f "Continue?") == "Make it so!"
 
 if $isContinue {
-    print "\n\nApplying hostConfig."
-    try {
-        let command = "nixos-rebuild --flake .#" + $hostConfig
-        print ("Running: " + $command)
-        $command | sh -
+    if ($hostConfig != null and $hostConfig != "") {
+        print "\nApplying hostConfig."
+        try {
+            let command = "nixos-rebuild --flake .#" + $hostConfig
+            print ("Running: " + $command)
+            $command | sh -
+        }
     }
 
-    print "\n\nApplying homeConfig."
-    try {
-        let command = "home-manager --flake .#" + $homeConfig + " switch"
-        print ("Running: " + $command)
-        $command | sh -
+    if ($homeConfig != "") {
+        print "\nApplying homeConfig."
+        try {
+            let command = "home-manager --flake .#" + $homeConfig + " switch"
+            print ("Running: " + $command)
+            $command | sh -
+        }
     }
 
     print "Done."
