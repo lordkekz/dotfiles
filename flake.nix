@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
@@ -13,6 +13,10 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Use sops-nix for secret management
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
@@ -48,9 +52,9 @@
       forAllSystems
       (
         system: let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {inherit system;};
         in
-          (import ./pkgs pkgs)
+          (import ./pkgs {inherit pkgs system;})
           // {hm = home-manager.packages.${system}.default;}
           // import ./lib/sketchyHomeConfigurationsForNixShow.nix {
             inherit pkgs system;
@@ -67,14 +71,13 @@
       forAllSystems
       (
         system: let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {inherit system;};
 
           homeConfigs = (import ./home) {
             inherit pkgs home-manager nixpkgs inputs outputs;
           };
           hostConfigs = import ./hosts {
-            inherit nixpkgs inputs outputs;
-            pkgs = nixpkgs.legacyPackages.${system};
+            inherit pkgs nixpkgs inputs outputs;
           };
           myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit pkgs homeConfigs;};
           myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
