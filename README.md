@@ -28,8 +28,6 @@ Or you can enter a shell which has the `satk` command available:
 
 **Note:** The `<out>.exe` binaries produced with `satk -o <out> <filename>` do not require the Mono Runtime to be present.
 
-Where to
-
 **Full example:**
 ```bash
 $ nix shell github:lordkekz/dotfiles#satk -L
