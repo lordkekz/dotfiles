@@ -7,7 +7,7 @@ You can see some things about this flake using these commands:
 - `nix search github:lordkekz/dotfiles` (Lists provided packages)
 
 # Sather-K Compiler Halle (nix-based distribution)
-I've written a nix package/derivation for the Sather-K Compiler Halle, which has compatibility issues with modern versions of GCC (>=10) and Mono (>= 5 or 6). You can audit the derivation located in [pkgs/satk.nix](pkgs/satk.nix). It simply downloads the source code zip from the university website, builds it with GCC 4.8 and the GNU Multiple Precision Arithmetic Library (libgmp / GMP), and also adds a wrapper script to define needed environment variables and a workaround to a bug in Mono 4. Mono is automatically loaded as a runtime dependency.
+I've written a nix package/derivation for the [Sather-K Compiler Halle](https://swt.informatik.uni-halle.de/software/satherkhalle/), which has compatibility issues with modern versions of GCC (>=10) and Mono (>= 5 or 6). You can audit the derivation located in [pkgs/satk.nix](pkgs/satk.nix). It simply downloads the source code zip from the university website, builds it with GCC 4.8 and the GNU Multiple Precision Arithmetic Library (libgmp / GMP), and also adds a wrapper script to define needed environment variables and a workaround to a bug in Mono 4. Mono is automatically loaded as a runtime dependency.
 
 ## Installation / Prerequisites
 1. Make sure you have a working linux distribution or WSL2 environment set up.
