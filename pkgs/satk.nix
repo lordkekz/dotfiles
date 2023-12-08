@@ -35,7 +35,7 @@ in rec {
     meta = with pkgs.lib;
       baseMeta
       // {
-        description = "Sather-K Compiler Halle";
+        description = "Sather-K Compiler Halle (base binary)";
         inherit longDescription;
       };
 
@@ -60,12 +60,29 @@ in rec {
     '';
   };
 
+  satk-get-examples = pkgs.writeShellApplication {
+    name = "satk-get-examples";
+    meta = with pkgs.lib;
+      baseMeta
+      // {
+        description = "A helper to get you the example files for satk.";
+        mainProgram = "satk-get-examples";
+      };
+
+    runtimeInputs = [satk-base];
+
+    text = ''
+      printf "The example files are located in:\n${satk-base}/examples/\n"
+      find ${satk-base}/examples/*
+    '';
+  };
+
   satk-wrapper = pkgs.writeShellApplication {
     name = "satk";
     meta = with pkgs.lib;
       baseMeta
       // {
-        description = "Sather-K Compiler Halle (wrapper)";
+        description = "Sather-K Compiler Halle (wrapper script)";
         longDescription = "This is a wrapper script for Sather-K Compiler Halle.\n" ++ longDescription;
       };
 
@@ -83,5 +100,18 @@ in rec {
 
       satk "$@"
     '';
+  };
+
+  satk-full = pkgs.symlinkJoin {
+    name = "satk-full";
+    meta = with pkgs.lib;
+      baseMeta
+      // {
+        description = "Sather-K Compiler Halle (full)";
+        longDescription = "This contains both the wrapper script and the satk-get-examples helper.\n" ++ longDescription;
+      };
+    
+    paths = [satk-wrapper satk-get-examples];
+    postBuild = "echo links added";
   };
 }

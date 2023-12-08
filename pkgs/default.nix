@@ -10,5 +10,6 @@ in rec {
   # example = pkgs.callPackage ./example { };
   satk-base = sather-k-compiler-halle.satk-base;
   satk-wrapper = sather-k-compiler-halle.satk-wrapper;
-  satk = satk-wrapper;
+  satk-get-examples = sather-k-compiler-halle.satk-get-examples;
+  satk = sather-k-compiler-halle.satk-full;
 }
