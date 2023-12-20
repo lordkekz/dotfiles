@@ -48,6 +48,9 @@ args @ {
     extraConfig = {
       init.defaultBranch = "main";
     };
+    attributes = [
+      # global .gitattributes
+    ];
     userName = "lordkekz";
     userEmail = "lordkekz@lkekz.de";
     signing = {

@@ -10,6 +10,9 @@ args @ {
   system,
   ...
 }: {
+  # Make autostart symlinks
+  imports = [./desktop-autostart.nix];
+
   # Make fonts from font packages available
   fonts.fontconfig.enable = true;
 
@@ -20,7 +23,7 @@ args @ {
     # Mixed apps
     obsidian # Markdown-based Notes
     vlc # Media player
-    birdtray # System tray icon for Thunderbird
+    #birdtray # System tray icon for Thunderbird
     syncthingtray # FIXME it autostarts itself without nix's help. It also has a plasmoid.
     anki # Spaced-repetition flashcards
     filezilla # FTP client
@@ -67,6 +70,7 @@ args @ {
   programs.firefox.enable = true;
   programs.thunderbird = {
     enable = true;
+    package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
     settings = {
       "privacy.donottrackheader.enabled" = true;
     };
