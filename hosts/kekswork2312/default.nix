@@ -178,7 +178,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = "Heinrich Preiser";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       firefox
       vscodium

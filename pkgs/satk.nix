@@ -88,7 +88,7 @@ in rec {
 
     text = ''
       printf "The example files are located in:\n${satk-base}/examples/\n"
-      find ${satk-base}/examples/*
+      ${pkgs.findutils}/bin/find ${satk-base}/examples/*
     '';
   };
 
