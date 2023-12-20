@@ -1,6 +1,6 @@
 # USED_BY: /flake.nix
 # DESC: Defines the nixosConfigurations.
-# CMD: 'nixos-rebuild --flake .#<hostname>'
+# CMD: 'nixos-rebuild switch --flake .#<hostname>'
 {
   nixpkgs,
   pkgs,
@@ -11,11 +11,11 @@
   myMkNixOSConfig = hostname:
     nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
-      modules = [./hosts/${hostname}];
+      modules = [./${hostname}];
     };
-in rec {
+in {
   imports = [];
 
-  default = KeksWork-Win11;
-  KeksWork-Win11 = myMkNixOSConfig KeksWork-Win11;
+  KeksWork-Win11 = myMkNixOSConfig "KeksWork-Win11";
+  kekswork2312 = myMkNixOSConfig "kekswork2312";
 }

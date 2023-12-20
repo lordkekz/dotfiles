@@ -7,11 +7,14 @@ let y = if ($x | describe) == "string" {
     $x
 }
 
-# print ($y | table -e)
+print ($y | table -e)
+
+let username = $env.USER;
+let hostname = hostname;
 
 print "Hello there!"
-print ("Detected user: " + $env.USER)
-print ("Detected hostname: " + $env.NAME)
+print ("Detected user: " + $username)
+print ("Detected hostname: " + $hostname)
 
 let isWSL = ("WSL_DISTRO_NAME" in ($env | columns))
 print (if $isWSL {
@@ -28,13 +31,13 @@ print (if $isWAYLAND {
 })
 
 let guiSelectionList = ["Yes, it's a desktop" "No, just a terminal"]
-let guiSelectionList = if (not $isWSL and $isWAYLAND) { $guiSelectionList } else { $guiSelectionList | reverse }
+let guiSelectionList = if ($isWAYLAND and (not $isWSL)) { $guiSelectionList } else { $guiSelectionList | reverse }
 let isGraphicalDesktop = ($guiSelectionList | input list -f "Is this a graphical desktop?") == "Yes, it's a desktop"
 
 let guessedHomeConfigName = if $isGraphicalDesktop {
-    $env.USER + "@" + "Desk"
+    $username + "@" + "Desk"
 } else {
-    $env.USER + "@" + "Term"
+    $username + "@" + "Term"
 }
 
 let homeConfigList = (
@@ -50,7 +53,7 @@ let hostConfig = if (which nixos-rebuild | is-empty) { null } else {
     let hostConfigList = (
         $y.hostConfigs |
         enumerate |
-        upsert distance {|e| $e.item | str distance $env.NAME } |
+        upsert distance {|e| $e.item | str distance $hostname } |
         sort-by distance |
         get item
     )
@@ -84,7 +87,7 @@ if $isContinue {
     if ($hostConfig != null and $hostConfig != "") {
         print "\nApplying hostConfig."
         try {
-            let command = "nixos-rebuild --flake .#" + $hostConfig
+            let command = "nixos-rebuild switch -L -v --flake .#" + $hostConfig
             print ("Running: " + $command)
             $command | sh -
         }
@@ -93,7 +96,7 @@ if $isContinue {
     if ($homeConfig != "") {
         print "\nApplying homeConfig."
         try {
-            let command = "home-manager --flake .#" + $homeConfig + " switch"
+            let command = "home-manager switch -L -v --flake .#" + $homeConfig
             print ("Running: " + $command)
             $command | sh -
         }

@@ -38,9 +38,9 @@ in rec {
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      #outputs.overlays.additions
+      #outputs.overlays.modifications
+      #outputs.overlays.unstable-packages
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -66,12 +66,6 @@ in rec {
     homeDirectory = "/home/${username}";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  home.packages = with pkgs; [
-    nushell
-  ];
-
   # Enable home-manager and git
   programs.home-manager.enable = true;
 
@@ -79,5 +73,5 @@ in rec {
   # systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }

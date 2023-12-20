@@ -29,6 +29,21 @@
     hash = "sha256-Q9HeSkBRTrd5Xfp8YuGvd30f9HMvCMe6XcoKu2wBOKk=";
   };
 in rec {
+  mono-wrapper = pkgs.writeShellApplication {
+    name = "mono";
+    meta.description = "A wrapper script for the old mono 4.8.1 package. Includes a workaround for $TERM variable.";
+
+    runtimeInputs = [pkgs.mono4];
+
+    text = ''
+      # Workaround for a bug in Mono ILASM:
+      # https://stackoverflow.com/questions/49242075/mono-bug-magic-number-is-wrong-542
+      export TERM=xterm
+
+      ${pkgs.mono4}/bin/mono "$@"
+    '';
+  };
+
   satk-base = pkgs.stdenv.mkDerivation rec {
     name = "satk-compiler-halle";
     version = "0.3.5-347";
@@ -43,7 +58,7 @@ in rec {
 
     nativeBuildInputs = [pkgs.gcc48];
     buildInputs = [pkgs.gmp];
-    runtimeInputs = [pkgs.mono4];
+    runtimeInputs = [mono-wrapper];
 
     buildPhase = ''
       cd src && make && cd ..
@@ -108,10 +123,15 @@ in rec {
       baseMeta
       // {
         description = "Sather-K Compiler Halle (full)";
-        longDescription = "This contains both the wrapper script and the satk-get-examples helper.\n" ++ longDescription;
+        longDescription = "" "
+          A meta-package consisting of:
+          - A wrapper script for mono 4.8.1
+          - A wrapper script for satk
+          - The satk-get-examples helper
+          " "" ++ longDescription;
       };
-    
-    paths = [satk-wrapper satk-get-examples];
+
+    paths = [mono-wrapper satk-wrapper satk-get-examples];
     postBuild = "echo links added";
   };
 }

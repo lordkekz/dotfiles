@@ -11,7 +11,7 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use sops-nix for secret management
@@ -19,7 +19,9 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
+    hardware.url = "github:nixos/nixos-hardware";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
@@ -31,6 +33,8 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    hardware,
+    nix-vscode-extensions,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -56,15 +60,15 @@
         in
           (import ./pkgs {inherit pkgs system;})
           // {hm = home-manager.packages.${system}.default;}
-          // import ./lib/sketchyHomeConfigurationsForNixShow.nix {
+          // (import ./lib/sketchyHomeConfigurationsForNixShow.nix {
             inherit pkgs system;
 
             # Standalone home-manager configuration entrypoint
             # Available through 'home-manager --flake .#your-username@your-hostname'
             homeConfigs = (import ./home) {
-              inherit pkgs home-manager nixpkgs inputs outputs;
+              inherit pkgs home-manager nixpkgs inputs outputs system;
             };
-          }
+          })
       );
 
     apps =
@@ -74,13 +78,13 @@
           pkgs = import nixpkgs {inherit system;};
 
           homeConfigs = (import ./home) {
-            inherit pkgs home-manager nixpkgs inputs outputs;
+            inherit inputs outputs pkgs nixpkgs system home-manager;
           };
           hostConfigs = import ./hosts {
-            inherit pkgs nixpkgs inputs outputs;
+            inherit inputs outputs pkgs nixpkgs system hardware;
           };
-          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit pkgs homeConfigs;};
-          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
+          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit system pkgs homeConfigs;};
+          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit system pkgs hostConfigs;};
           script = pkgs.writeShellApplication {
             name = "apply-dotfiles-all";
             runtimeInputs = [pkgs.nushell pkgs.home-manager];
@@ -113,6 +117,9 @@
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#<hostname>'
-    nixosConfigurations = forAllSystems (system: import ./hosts nixpkgs nixpkgs.legacyPackages.${system} inputs outputs);
+    nixosConfigurations = import ./hosts {
+      inherit nixpkgs inputs outputs;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    };
   };
 }

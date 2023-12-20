@@ -7,12 +7,13 @@
   pkgs,
   inputs,
   outputs,
+  system,
   ...
 }: let
   myMkHomeConfig = username: mode:
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs outputs username mode;};
+      extraSpecialArgs = {inherit inputs outputs username mode system;};
       modules = [./${username}];
     };
 in rec {
