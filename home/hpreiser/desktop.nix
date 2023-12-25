@@ -1,5 +1,4 @@
 # All my desktop-specific user configuration.
-# TODO implement it properly
 args @ {
   inputs,
   outputs,
@@ -11,13 +10,17 @@ args @ {
   ...
 }: {
   # Make autostart symlinks
-  imports = [./desktop-autostart.nix];
+  imports = [
+    ./desktop-autostart.nix
+    ./mail.nix
+    ./plasma-config.nix
+  ];
 
   # Make fonts from font packages available
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    # Nerfonts
+    # Nerdfonts
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
     # Mixed apps
@@ -32,6 +35,8 @@ args @ {
     jellyfin-media-player
     audacity
     kleopatra
+    sqlitebrowser
+    meld # visual diff and merge tool
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5
@@ -68,16 +73,6 @@ args @ {
   programs.alacritty = import ./alacritty.nix {inherit pkgs;};
 
   programs.firefox.enable = true;
-  programs.thunderbird = {
-    enable = true;
-    package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
-    settings = {
-      "privacy.donottrackheader.enabled" = true;
-    };
-    profiles = {};
-  };
-
-  # TODO use plasma-manager https://github.com/pjones/plasma-manager
 
   programs.texlive = {
     enable = true;
@@ -90,10 +85,12 @@ args @ {
     indicator = true;
   };
 
-  accounts.email.accounts."privat" = {
-    thunderbird.enable = true;
-    realName = "Heinrich Preiser";
-    address = "heinrich.preiser@lkekz.de";
-    primary = true;
+  # Declaratively configure connection of virt-manager to libvirtd QEMU/KVM
+  # https://nixos.wiki/wiki/Virt-manager
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
 }

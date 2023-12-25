@@ -178,7 +178,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = "Heinrich Preiser";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd"];
     packages = with pkgs; [
       firefox
       vscodium
@@ -195,6 +195,9 @@ in {
     pkgs.fwupd
   ];
 
+  # Enable graphical KDE Partition Manager
+  programs.partition-manager.enable = true;
+
   # Use syncthing
   services.syncthing = import ../common/syncthing.nix {
     inherit username;
@@ -209,6 +212,10 @@ in {
   # Enable Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = false;
+
+  # Enable virt-manager for QUEMU/KVM based VMs
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # Globally enable git
   programs.git.enable = true;
