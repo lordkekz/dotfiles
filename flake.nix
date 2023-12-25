@@ -92,8 +92,8 @@
           hostConfigs = import ./hosts {
             inherit inputs outputs pkgs nixpkgs system hardware;
           };
-          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit system pkgs homeConfigs;};
-          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit system pkgs hostConfigs;};
+          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit pkgs homeConfigs;};
+          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
           script = pkgs.writeShellApplication {
             name = "apply-dotfiles-all";
             runtimeInputs = [pkgs.nushell pkgs.home-manager];
