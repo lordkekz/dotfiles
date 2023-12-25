@@ -33,7 +33,7 @@ in rec {
 
   programs.thunderbird = {
     enable = true;
-    #package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
+    package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
     settings = {
       "privacy.donottrackheader.enabled" = true;
     };

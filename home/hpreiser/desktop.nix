@@ -21,22 +21,32 @@ args @ {
 
   home.packages = with pkgs; [
     # Nerdfonts
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
 
-    # Mixed apps
+    # OFFICE
     obsidian # Markdown-based Notes
-    vlc # Media player
-    #birdtray # System tray icon for Thunderbird
+    libreoffice
+    # FIXME choose which PDF tool to use
+    pdfmixtool # https://www.scarpetta.eu/pdfmixtool
+    pdfarranger # https://github.com/pdfarranger/pdfarranger
+    diff-pdf # https://github.com/vslavik/diff-pdf
+
+    # UTILITY
     syncthingtray # FIXME it autostarts itself without nix's help. It also has a plasmoid.
     anki # Spaced-repetition flashcards
     filezilla # FTP client
     filelight # A fancy directory size viewer by KDE
-    libreoffice
+    meld # visual diff and merge tool
+    kleopatra
+    isoimagewriter # KDE's ISO Image Writer
+
+    # MULTIMEDIA
+    elisa
+    vlc
     jellyfin-media-player
     audacity
-    kleopatra
-    sqlitebrowser
-    meld # visual diff and merge tool
+    gimp
+    (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5
@@ -54,9 +64,10 @@ args @ {
     element-desktop
     # There is an unofficial whatsapp client: whatsapp-for-linux
 
+    # PROGRAMMING
     jetbrains-toolbox
-
-    # VSCODIUM
+    sqlitebrowser
+    # vscodium
     (vscode-with-extensions.override
       {
         vscode = vscodium;
@@ -83,6 +94,16 @@ args @ {
   services.kdeconnect = {
     enable = true;
     indicator = true;
+  };
+
+  # TODO test it
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+      obs-vkcapture
+      obs-input-overlay
+    ];
   };
 
   # Declaratively configure connection of virt-manager to libvirtd QEMU/KVM
