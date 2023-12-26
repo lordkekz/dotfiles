@@ -14,6 +14,7 @@ args @ {
 
   programs.tmux = {
     enable = true;
+    #package = pkgs.tmux;
     mouse = true;
     shell = "${pkgs.nushell}/bin/nu";
     clock24 = true;

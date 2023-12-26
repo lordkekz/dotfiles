@@ -11,6 +11,7 @@ args @ {
 }: {
   # Make autostart symlinks
   imports = [
+    ./alacritty.nix
     ./desktop-autostart.nix
     ./mail.nix
     ./plasma-config.nix
@@ -26,8 +27,6 @@ args @ {
     # OFFICE
     obsidian # Markdown-based Notes
     libreoffice
-    # FIXME choose which PDF tool to use
-    pdfmixtool # https://www.scarpetta.eu/pdfmixtool
     pdfarranger # https://github.com/pdfarranger/pdfarranger
     diff-pdf # https://github.com/vslavik/diff-pdf
 
@@ -50,13 +49,15 @@ args @ {
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5
-    minecraft
+    prismlauncher
+    #minecraft # official launcher is BROKEN, see https://github.com/NixOS/nixpkgs/issues/114732
     optifine
     #steam # steam gets enabled in NixOSConfig
     wineWowPackages.stable # support both 32- and 64-bit applications
     linux-wallpaperengine # Wallpaper Engine
 
     # COMMUNICATION
+    birdtray
     telegram-desktop
     signal-desktop
     discord
@@ -81,8 +82,6 @@ args @ {
       })
   ];
 
-  programs.alacritty = import ./alacritty.nix {inherit pkgs;};
-
   programs.firefox.enable = true;
 
   programs.texlive = {
@@ -96,13 +95,12 @@ args @ {
     indicator = true;
   };
 
-  # TODO test it
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
       obs-vkcapture
-      obs-input-overlay
+      input-overlay
     ];
   };
 
