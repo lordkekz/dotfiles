@@ -20,6 +20,7 @@ in {
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
+    ../common/syncthing.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware.nix
@@ -198,12 +199,7 @@ in {
   # Enable graphical KDE Partition Manager
   programs.partition-manager.enable = true;
 
-  # Use syncthing
-  services.syncthing = import ../common/syncthing.nix {
-    inherit username;
-    userHome = "/home/${username}";
-  };
-
+  # Enable Steam
   programs.steam.enable = true;
 
   # Enable Waydroid to run Android apps on Linux.
