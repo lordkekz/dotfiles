@@ -5,12 +5,15 @@ args @ {
   lib,
   config,
   pkgs,
-  mode,
+  # extraSpecialArgs:
   system,
+  username,
   ...
 }: {
   # Make autostart symlinks
   imports = [
+    ../common.nix
+    ../Term
     ./alacritty.nix
     ./desktop-autostart.nix
     ./mail.nix

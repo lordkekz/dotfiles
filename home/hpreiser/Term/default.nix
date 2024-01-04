@@ -5,9 +5,15 @@ args @ {
   lib,
   config,
   pkgs,
-  mode,
+  # extraSpecialArgs:
+  system,
+  username,
   ...
 }: {
+  imports = [
+    ../common.nix
+  ];
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [neofetch sops];

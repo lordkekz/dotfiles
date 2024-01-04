@@ -15,17 +15,11 @@ args @ {
   myMkHomeConfig = username: mode:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs outputs username mode system;};
-      modules = [./${username}];
+      extraSpecialArgs = {inherit inputs outputs system username;};
+      modules = [./${username}/${mode}];
     };
 in {
-  "hpreiser@Desk" = myMkHomeConfig "hpreiser" {
-    desktop = true;
-    terminal = true;
-  };
-  "hpreiser@Term" = myMkHomeConfig "hpreiser" {
-    desktop = false;
-    terminal = true;
-  };
+  "hpreiser@Desk" = myMkHomeConfig "hpreiser" "Desk";
+  "hpreiser@Term" = myMkHomeConfig "hpreiser" "Term";
   hpreiser = throw "Just choose bro";
 }

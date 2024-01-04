@@ -4,8 +4,9 @@ args @ {
   lib,
   config,
   pkgs,
-  mode,
+  # extraSpecialArgs:
   system,
+  username,
   ...
 }: let
   mkAutostart = appDesktopNames:

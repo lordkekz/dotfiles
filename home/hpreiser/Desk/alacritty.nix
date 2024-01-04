@@ -5,8 +5,9 @@ args @ {
   lib,
   config,
   pkgs,
-  mode,
+  # extraSpecialArgs:
   system,
+  username,
   ...
 }: {
   programs.alacritty = {
