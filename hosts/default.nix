@@ -16,6 +16,5 @@
 in {
   imports = [];
 
-  KeksWork-Win11 = myMkNixOSConfig "KeksWork-Win11";
   kekswork2312 = myMkNixOSConfig "kekswork2312";
 }
