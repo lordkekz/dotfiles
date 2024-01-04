@@ -3,12 +3,9 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
+    nixpkgs.follows = "nixpkgs-stable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
@@ -17,14 +14,17 @@
     # Plasma manager
     plasma-manager.url = "github:pjones/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Use sops-nix for secret management
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    # TODO: Add any other flake you might need
+    # Hardware configs for known systems.
     hardware.url = "github:nixos/nixos-hardware";
+
+    # Mirror of VSCode marketplace and Open VSX registry.
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
