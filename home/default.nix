@@ -1,24 +1,24 @@
 # USED_BY: /flake.nix
 # DESC: Defines the homeConfigurations.
 # CMD: 'home-manager --flake .#<username> switch'
-{
-  home-manager,
-  nixpkgs,
-  pkgs,
+args @ {
+  # Flake's inputs and outputs
   inputs,
   outputs,
+  # Targeted system
   system,
-  ...
+  # Nixpkgs instances for targeted system
+  pkgs-stable,
+  pkgs-unstable,
+  pkgs,
 }: let
   myMkHomeConfig = username: mode:
-    home-manager.lib.homeManagerConfiguration {
+    inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {inherit inputs outputs username mode system;};
       modules = [./${username}];
     };
-in rec {
-  imports = [];
-
+in {
   "hpreiser@Desk" = myMkHomeConfig "hpreiser" {
     desktop = true;
     terminal = true;

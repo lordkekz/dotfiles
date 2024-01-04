@@ -2,19 +2,15 @@
 # DESC: Defines the nixosConfigurations.
 # CMD: 'nixos-rebuild switch --flake .#<hostname>'
 {
-  nixpkgs,
-  pkgs,
+  # Flake's inputs and outputs
   inputs,
   outputs,
-  ...
 }: let
   myMkNixOSConfig = hostname:
-    nixpkgs.lib.nixosSystem {
+    inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
       modules = [./${hostname}];
     };
 in {
-  imports = [];
-
   kekswork2312 = myMkNixOSConfig "kekswork2312";
 }

@@ -1,5 +1,9 @@
 # This file defines overlays
-{inputs, ...}: {
+args @ {
+  # Flake's inputs and outputs
+  inputs,
+  outputs,
+}: {
   # This one brings our custom packages from the 'pkgs' directory
   #additions = final: _prev: ""; #forAllSystems (system: import ../pkgs {pkgs = final; inherit system;});
 

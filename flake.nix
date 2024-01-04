@@ -33,102 +33,63 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
+    nixpkgs-stable,
     nixpkgs-unstable,
-    home-manager,
-    plasma-manager,
-    hardware,
-    nix-vscode-extensions,
     ...
-  } @ inputs: let
+  }: let
     inherit (self) outputs;
     # Supported systems for your flake packages, shell, etc.
     systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
+      "aarch64-linux" # 64-bit ARM with Linux
+      "x86_64-linux" # 64-bit x86 with Linux
+      # I don't use any 32-bit systems or darwin systems.
     ];
+
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
+
+    # System-agnostic args
+    args = {inherit inputs outputs;};
+
+    # System-specific args
+    mkArgs = system:
+      args
+      // {
+        inherit system;
+        pkgs-stable = import nixpkgs-stable {inherit system;};
+        pkgs-unstable = import nixpkgs-unstable {inherit system;};
+        pkgs = import nixpkgs {inherit system;};
+      };
   in rec {
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
-    packages =
-      forAllSystems
-      (
-        system: let
-          pkgs = import nixpkgs {inherit system;};
-        in
-          (import ./pkgs {inherit pkgs system;})
-          // {
-            hm = home-manager.packages.${system}.default;
-            pm = plasma-manager.packages.${system}.default;
-          }
-          // (import ./lib/sketchyHomeConfigurationsForNixShow.nix {
-            inherit pkgs system;
+    packages = forAllSystems (system: (import ./pkgs (mkArgs system)));
 
-            # Standalone home-manager configuration entrypoint
-            # Available through 'home-manager --flake .#your-username@your-hostname'
-            homeConfigs = (import ./home) {
-              inherit pkgs home-manager nixpkgs inputs outputs system;
-            };
-          })
-      );
-
-    apps =
-      forAllSystems
-      (
-        system: let
-          pkgs = import nixpkgs {inherit system;};
-
-          homeConfigs = (import ./home) {
-            inherit inputs outputs pkgs nixpkgs system home-manager;
-          };
-          hostConfigs = import ./hosts {
-            inherit inputs outputs pkgs nixpkgs system hardware;
-          };
-          myListOfHomeConfigs = import ./lib/listOfHomeConfigs.nix {inherit pkgs homeConfigs;};
-          myListOfHostConfigs = import ./lib/listOfHostConfigs.nix {inherit pkgs hostConfigs;};
-          script = pkgs.writeShellApplication {
-            name = "apply-dotfiles-all";
-            runtimeInputs = [pkgs.nushell pkgs.home-manager];
-            text = ''
-              echo "{
-                homeConfigs: ${myListOfHomeConfigs.listNamesNuonEscaped}
-                hostConfigs: ${myListOfHostConfigs.listNamesNuonEscaped}
-              }" | nu --stdin ${./apply.nu}
-            '';
-          };
-          app = {
-            type = "app";
-            program = "${script}/bin/apply-dotfiles-all";
-          };
-        in {default = app;}
-      );
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    legacyPackages = forAllSystems (system: {homeConfigurations = import ./home (mkArgs system);});
 
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays args;
+
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
+    nixosModules = import ./modules/nixos args;
+
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
+    homeManagerModules = import ./modules/home-manager args;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#<hostname>'
-    nixosConfigurations = import ./hosts {
-      inherit nixpkgs inputs outputs;
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    };
+    nixosConfigurations = import ./hosts args;
   };
 }
