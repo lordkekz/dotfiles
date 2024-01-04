@@ -43,6 +43,10 @@ args @ {
     loginFile.text = "";
   };
 
+  programs.btop = {
+    enable = true;
+  };
+
   programs.bat = {
     enable = true;
     config.style = "full";
