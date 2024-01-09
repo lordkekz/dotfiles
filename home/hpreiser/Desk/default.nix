@@ -17,6 +17,7 @@ args @ {
     ./alacritty.nix
     ./desktop-autostart.nix
     ./mail.nix
+    ./firefox.nix
     ./plasma-config.nix
   ];
 
@@ -49,6 +50,7 @@ args @ {
     audacity
     gimp
     (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
+    microsoft-edge # In case I need chromium or want to access bing AI.
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5
@@ -72,6 +74,8 @@ args @ {
     # There is an unofficial whatsapp client: whatsapp-for-linux
 
     # PROGRAMMING
+    podman-desktop
+    docker-compose
     jetbrains-toolbox
     sqlitebrowser
     # vscodium
@@ -91,8 +95,6 @@ args @ {
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0" # Used by Obsidian, as of 2024-01-01
   ];
-
-  programs.firefox.enable = true;
 
   programs.texlive = {
     enable = true;
