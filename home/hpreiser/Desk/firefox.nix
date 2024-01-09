@@ -12,8 +12,13 @@ args @ {
 }: {
   programs.firefox = {
     enable = true;
-    languagePacks = ["de" "en-US"];
-    profiles."default".isDefault = true;
-    profiles."homework".isDefault = false;
+    profiles."default" = {
+      id = 0;
+      isDefault = true;
+    };
+    profiles."homework" = {
+      id = 1;
+      isDefault = false;
+    };
   };
 }
