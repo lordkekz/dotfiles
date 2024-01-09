@@ -163,7 +163,7 @@ args @ {
       "kwinrc"."Tiling.3c373409-48e0-57e9-a1a9-eb32e49f8772"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       "kwinrc"."Tiling.5f997858-bd2c-529b-8e36-04d038038924"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       "kwinrc"."Xwayland"."Scale" = 1.2;
-      "plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
+      "plasma-localerc"."Formats"."LANG" = "de_DE.UTF-8";
       "systemsettingsrc"."KFileDialog Settings"."detailViewIconSize" = 16;
     };
   };
