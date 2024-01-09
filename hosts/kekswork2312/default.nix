@@ -202,6 +202,11 @@ in {
   # Enable Steam
   programs.steam.enable = true;
 
+  # Enable Flatpak with KDE
+  services.flatpak.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+  xdg.portal.config.common.default = "kde";
+
   # Enable Waydroid to run Android apps on Linux.
   virtualisation.waydroid.enable = true;
 
