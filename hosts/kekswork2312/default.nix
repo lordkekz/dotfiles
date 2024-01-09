@@ -204,15 +204,18 @@ in {
 
   # Enable Flatpak with KDE
   services.flatpak.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
   xdg.portal.config.common.default = "kde";
 
   # Enable Waydroid to run Android apps on Linux.
   virtualisation.waydroid.enable = true;
 
-  # Enable Docker
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = false;
+  # Enable Podman
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
 
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd.enable = true;
