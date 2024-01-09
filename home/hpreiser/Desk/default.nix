@@ -58,6 +58,9 @@ args @ {
     #steam # steam gets enabled in NixOSConfig
     wineWowPackages.stable # support both 32- and 64-bit applications
     linux-wallpaperengine # Wallpaper Engine
+    superTux
+    superTuxKart
+    extremetuxracer
 
     # COMMUNICATION
     birdtray
