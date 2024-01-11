@@ -84,7 +84,7 @@ in {
           "{531906d3-e22f-4a6c-a102-8057b88a1a63}" = mkExt "single-file";
           "extension@one-tab.com" = mkExt "onetab";
           "jetpack-extension@dashlane.com" = mkExt "dashlane";
-          
+
           # Plasma integration is broken as of 2024-01-10.
           #"plasma-browser-integration@kde.org" = mkExt "plasma-integration";
         };
@@ -121,7 +121,10 @@ in {
             Status = "default";
           };
           "dom.security.https_only_mode" = lock-true;
-    "widget.use-xdg-desktop-portal.file-picker" = {Value = 1;Status = "lock";};
+          "widget.use-xdg-desktop-portal.file-picker" = {
+            Value = 1;
+            Status = "lock";
+          };
         };
       };
     };
