@@ -35,6 +35,7 @@ args @ {
     diff-pdf # https://github.com/vslavik/diff-pdf
 
     # UTILITY
+    tailscale-systray
     syncthingtray # FIXME it autostarts itself without nix's help. It also has a plasmoid.
     anki # Spaced-repetition flashcards
     filezilla # FTP client
@@ -78,6 +79,7 @@ args @ {
     docker-compose
     jetbrains-toolbox
     sqlitebrowser
+    python312Full
     # vscodium
     (vscode-with-extensions.override
       {
