@@ -105,6 +105,13 @@ in {
     #wireless.enable = true; # Enables wireless support via wpa_supplicant.
   };
 
+  # Enable tailscale service
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    authKeyFile = "/home/hpreiser/Downloads/tsauthkey";
+  };
+
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
