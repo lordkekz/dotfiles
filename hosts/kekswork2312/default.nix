@@ -12,12 +12,6 @@
 in {
   # You can import other NixOS modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
-    inputs.hardware.nixosModules.framework-12th-gen-intel
-
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
     ../common/syncthing.nix

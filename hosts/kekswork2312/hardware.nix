@@ -2,13 +2,19 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
+  inputs,
+  outputs,
   lib,
+  config,
   pkgs,
   modulesPath,
   ...
 }: {
   imports = [
+    # Get the defaults from nixos-hardware
+    inputs.hardware.nixosModules.framework-12th-gen-intel
+
+    # Default imports
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -30,6 +36,9 @@
   swapDevices = [
     {device = "/dev/disk/by-uuid/d5c45e29-0278-4f03-920e-76f682c4341c";}
   ];
+
+  # See: https://wiki.archlinux.org/title/Framework_Laptop_13#Lowering_fan_noise
+  services.thermald.enable = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
