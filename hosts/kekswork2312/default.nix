@@ -204,6 +204,9 @@ in {
   # Enable Steam
   programs.steam.enable = true;
 
+  # Enable ratbagd, to configure peripherals with piper
+  services.ratbagd.enable = true;
+
   # Enable Flatpak with KDE
   services.flatpak.enable = true;
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
