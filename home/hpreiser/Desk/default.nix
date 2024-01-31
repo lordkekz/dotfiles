@@ -43,6 +43,7 @@ args @ {
     meld # visual diff and merge tool
     kleopatra
     isoimagewriter # KDE's ISO Image Writer
+    piper # Frontend to configure peripherals using ratbagd
 
     # MULTIMEDIA
     elisa
