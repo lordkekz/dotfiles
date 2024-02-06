@@ -31,6 +31,7 @@ args @ {
     shellAliases = {
       ll = "ls -l";
       la = "ls -a";
+      lla = "ls -la";
       gd = "cd ~/git/dotfiles";
     };
   };
