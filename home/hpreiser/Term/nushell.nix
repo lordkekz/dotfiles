@@ -28,11 +28,16 @@ args @ {
     environmentVariables = {
       hello_there = ''"obi wan kenobi"'';
     };
-    shellAliases = {
+    shellAliases = let
+      dotfiles-dir = "~/git/dotfiles";
+    in rec {
       ll = "ls -l";
       la = "ls -a";
       lla = "ls -la";
-      gd = "cd ~/git/dotfiles";
+      gd = "cd ${dotfiles-dir}";
+      hmSwitch = "home-manager switch -L -v --flake";
+      hmDesk = "${hmSwitch} ${dotfiles-dir}#hpreiser@Desk";
+      hmTerm = "${hmSwitch} ${dotfiles-dir}#hpreiser@Term";
     };
   };
 
