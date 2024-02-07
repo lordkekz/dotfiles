@@ -1,4 +1,4 @@
-# All my terminal-specific user configuration.
+# My nushell configuration, along with the starship prompt.
 args @ {
   inputs,
   outputs,

@@ -1,4 +1,4 @@
-# All my terminal-specific user configuration.
+# My private git configuration.
 args @ {
   inputs,
   outputs,

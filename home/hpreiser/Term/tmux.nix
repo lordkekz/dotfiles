@@ -1,4 +1,4 @@
-# All my terminal-specific user configuration.
+# My tmux configuration.
 args @ {
   inputs,
   outputs,
