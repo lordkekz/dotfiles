@@ -38,6 +38,7 @@ args @ {
       hmSwitch = "home-manager switch -L -v --flake";
       hmDesk = "${hmSwitch} ${dotfiles-dir}#hpreiser@Desk";
       hmTerm = "${hmSwitch} ${dotfiles-dir}#hpreiser@Term";
+      osSwitch = "sudo nixos-rebuild switch -L -v --flake ~/git/dotfiles";
     };
   };
 
