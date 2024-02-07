@@ -181,7 +181,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = "Heinrich Preiser";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "lxd"];
     packages = with pkgs; [
       firefox
       vscodium
@@ -222,6 +222,9 @@ in {
     dockerSocket.enable = true;
     defaultNetwork.settings.dns_enabled = true;
   };
+
+  # Enable LXC/LXD containers
+  virtualisation.lxd.enable = true;
 
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd.enable = true;
