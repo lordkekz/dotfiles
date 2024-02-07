@@ -12,14 +12,25 @@ args @ {
   pkgs-unstable,
   pkgs,
 }: let
-  myMkHomeConfig = username: mode:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = {inherit inputs outputs system username;};
-      modules = [./${username}/${mode}];
-    };
-in {
-  "hpreiser@Desk" = myMkHomeConfig "hpreiser" "Desk";
-  "hpreiser@Term" = myMkHomeConfig "hpreiser" "Term";
-  hpreiser = throw "Just choose bro";
+  myMkHomeConfigParams = username: mode: {
+    inherit pkgs;
+    extraSpecialArgs = {inherit inputs outputs system username;};
+    modules = [./${username}/${mode}];
+  };
+  hmConfig = inputs.home-manager.lib.homeManagerConfiguration;
+in rec {
+  # Specify the home config params for each of my configs.
+  # This acts as a source of truth.
+  homeConfigrationParams = {
+    "hpreiser@Desk" = myMkHomeConfigParams "hpreiser" "Desk";
+    "hpreiser@Term" = myMkHomeConfigParams "hpreiser" "Term";
+  };
+
+  # Actually generate an attrset containing my home configs.
+  # This can be merged into legacyPackages.${system}
+  homeConfigurations = pkgs.lib.attrsets.mapAttrs (name: value: hmConfig value) homeConfigrationParams;
+
+  # Generate an attrset containing only the root modules of each config.
+  # This can be used to easily extends my config in other flakes, e.g. at work.
+  homeModules = pkgs.lib.attrsets.mapAttrs (name: value: builtins.elemAt value.modules 0) homeConfigrationParams;
 }
