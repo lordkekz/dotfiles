@@ -14,7 +14,7 @@ args @ {
 }: let
   myMkHomeConfigParams = username: mode: {
     inherit pkgs;
-    extraSpecialArgs = {inherit inputs outputs system username;};
+    extraSpecialArgs = {inherit inputs outputs pkgs-stable pkgs-unstable system username;};
     modules = [./${username}/${mode}];
   };
   hmConfig = inputs.home-manager.lib.homeManagerConfiguration;
