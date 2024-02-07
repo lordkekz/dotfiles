@@ -21,16 +21,16 @@ args @ {
 in rec {
   # Specify the home config params for each of my configs.
   # This acts as a source of truth.
-  homeConfigrationParams = {
+  homeConfigurationParams = {
     "hpreiser@Desk" = myMkHomeConfigParams "hpreiser" "Desk";
     "hpreiser@Term" = myMkHomeConfigParams "hpreiser" "Term";
   };
 
   # Actually generate an attrset containing my home configs.
   # This can be merged into legacyPackages.${system}
-  homeConfigurations = pkgs.lib.attrsets.mapAttrs (name: value: hmConfig value) homeConfigrationParams;
+  homeConfigurations = pkgs.lib.attrsets.mapAttrs (name: value: hmConfig value) homeConfigurationParams;
 
   # Generate an attrset containing only the root modules of each config.
   # This can be used to easily extends my config in other flakes, e.g. at work.
-  homeModules = pkgs.lib.attrsets.mapAttrs (name: value: builtins.elemAt value.modules 0) homeConfigrationParams;
+  homeModules = pkgs.lib.attrsets.mapAttrs (name: value: builtins.elemAt value.modules 0) homeConfigurationParams;
 }
