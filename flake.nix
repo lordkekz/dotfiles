@@ -92,5 +92,10 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = import ./hosts args;
+
+    templates.dotfiles-extension = {
+      path = ./templates/dotfiles-extension;
+      description = "A template to dynamically extend my dotfiles without forking them.";
+    };
   };
 }
