@@ -16,6 +16,7 @@ in {
     # ./users.nix
     ../common/syncthing.nix
     ../common/firefox.nix
+    ../common/tailscale.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware.nix
@@ -97,13 +98,6 @@ in {
       ];
     };
     #wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  };
-
-  # Enable tailscale service
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-    authKeyFile = "/home/hpreiser/Downloads/tsauthkey";
   };
 
   # Enable Bluetooth
