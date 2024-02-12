@@ -65,14 +65,19 @@
         pkgs-unstable = import nixpkgs-unstable {inherit system;};
         pkgs = import nixpkgs {inherit system;};
       };
+
+    # Importing stuff
+    importPkgs = system: import ./pkgs (mkArgs system);
+    importHome = system: import ./home (mkArgs system);
+    hosts = import ./hosts args;
   in rec {
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: (import ./pkgs (mkArgs system)));
+    packages = forAllSystems importPkgs;
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
-    legacyPackages = forAllSystems (system: (import ./home (mkArgs system)));
+    legacyPackages = forAllSystems importHome;
 
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
@@ -83,7 +88,7 @@
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos args;
+    nixosModules = (import ./modules/nixos args) // hosts.nixosModules;
 
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
@@ -91,8 +96,9 @@
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#<hostname>'
-    nixosConfigurations = import ./hosts args;
+    inherit (hosts) nixosConfigurations nixosConfigurationParams;
 
+    # Templates for related flakes
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
       description = "A template to dynamically extend my dotfiles without forking them.";
