@@ -15,6 +15,7 @@ args @ {
     ./tmux.nix
     ./nushell.nix
     ./git.nix
+    ./nixvim.nix
   ];
 
   # Add stuff for your user as you see fit:
