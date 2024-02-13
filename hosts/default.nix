@@ -16,6 +16,7 @@ in rec {
   # This acts as a source of truth.
   nixosConfigurationParams = {
     kekswork2312 = myMkNixOSConfigParams "kekswork2312";
+    nixos-wsl2 = myMkNixOSConfigParams "nixos-wsl2";
   };
 
   # Actually generate an attrset containing my NixOS configs.

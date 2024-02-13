@@ -34,6 +34,10 @@
     # Doesn't work: nixvim.inputs.pre-commit-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     # see: https://github.com/msteen/nix-flake-override
 
+    # NixOS-WSL
+    NixOS-WSL.url = "github:nix-community/NixOS-WSL";
+    NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
