@@ -1,4 +1,4 @@
-# My nushell configuration, along with the starship prompt.
+# My nushell configuration, along with the starship prompt and carapace completions.
 args @ {
   inputs,
   outputs,
@@ -20,13 +20,28 @@ args @ {
       # Some funky extraConfig from nushell.nix
       #printf $'(ansi cyan_bold)extraConfig(ansi reset) '
       $env.config.show_banner = false;
+
+      # Specifies how environment variables are:
+      # - converted from a string to a value on Nushell startup (from_string)
+      # - converted from a value back to a string when running external commands (to_string)
+      # Note: The conversions happen *after* config.nu is loaded
+      $env.ENV_CONVERSIONS = {
+          "PATH": {
+              from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
+              to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+          }
+          "Path": {
+              from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
+              to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+          }
+      }
     '';
     extraLogin = ''
       # Some funky extraLogin from nushell.nix
       #printf $'(ansi blue_bold)extraLogin(ansi reset) '
     '';
     environmentVariables = {
-      hello_there = ''"obi wan kenobi"'';
+      # hello_there = ''"obi wan kenobi"'';
     };
     shellAliases = let
       dotfiles-dir = "~/git/dotfiles";
@@ -34,6 +49,7 @@ args @ {
       ll = "ls -l";
       la = "ls -a";
       lla = "ls -la";
+      which = "which --all"; # Always list all matches
       gd = "cd ${dotfiles-dir}";
       hmSwitch = "home-manager switch -L -v --flake";
       hmDesk = "${hmSwitch} ${dotfiles-dir}#hpreiser@Desk";
@@ -42,6 +58,7 @@ args @ {
     };
   };
 
+  # Use starship prompt
   programs.starship = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
@@ -76,5 +93,20 @@ args @ {
 
       # package.disabled = true;
     };
+  };
+
+  # Carapace provides lots of command completions
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  # Zoxide is a cd command which learns common paths
+  programs.zoxide = {
+    enable = true;
+    enableNushellIntegration = true;
+    options = [
+      "--cmd cd" # Replace built-in cd command withzoxide
+    ];
   };
 }
