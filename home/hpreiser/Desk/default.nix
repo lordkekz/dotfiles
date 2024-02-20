@@ -71,6 +71,7 @@ args @ {
     telegram-desktop
     signal-desktop
     discord
+    webcord
     # FIXME There is also 'element-desktop-wayland', maybe we need to use that for screen sharing or sth.
     element-desktop
     # There is an unofficial whatsapp client: whatsapp-for-linux
