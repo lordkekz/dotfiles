@@ -103,6 +103,9 @@ in {
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
+  # Enable Bolt deamon for thunderbolt
+  services.hardware.bolt.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
@@ -190,6 +193,7 @@ in {
     pkgs.vulkan-tools-lunarg
     pkgs.pciutils # provides lspci
     pkgs.fwupd
+    pkgs.plasma5Packages.plasma-thunderbolt
   ];
 
   # Enable graphical KDE Partition Manager
