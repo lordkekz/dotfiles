@@ -74,8 +74,18 @@ in {
 
   # Bootloader.
   boot.loader = {
-    systemd-boot.enable = true;
+    # Use systemd-boot
+    systemd-boot = {
+      enable = true;
+      # Maximum number of old NixOS generations to show in bootloader
+      configurationLimit = 40;
+      # Add an entry for Memtest86+ (the open source one)
+      memtest86.enable = true;
+    };
     efi.canTouchEfiVariables = true;
+
+    # Default entry is booted after timeout seconds
+    timeout = 1;
   };
 
   # Enable networking
