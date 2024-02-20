@@ -27,6 +27,9 @@ args @ {
 
     sops # Secret management
     gh # GitHub CLI tool
+    
+    # Benchmarking
+    geekbench
   ];
 
   programs.btop = {
