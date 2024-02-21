@@ -89,15 +89,6 @@ in {
   # Fix missing maximize/minimize buttons on firefox etc.
   programs.dconf.enable = true; # doesn't help
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "de";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

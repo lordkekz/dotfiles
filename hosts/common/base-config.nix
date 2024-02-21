@@ -59,7 +59,7 @@
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
   };
-  
+
   ### MY PREFERENCES ###
 
   # Set your time zone.
@@ -78,6 +78,15 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "de";
+    xkbVariant = "";
+  };
+
+  # Configure console keymap
+  console.keyMap = "de";
 
   # Globally enable git.
   programs.git.enable = true;
