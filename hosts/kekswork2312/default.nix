@@ -202,6 +202,7 @@ in {
     pkgs.glxinfo
     pkgs.vulkan-tools-lunarg
     pkgs.pciutils # provides lspci
+    pkgs.usbutils # provides lsusb
     pkgs.fwupd
     pkgs.plasma5Packages.plasma-thunderbolt
   ];
