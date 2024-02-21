@@ -27,7 +27,7 @@ args @ {
 
     sops # Secret management
     gh # GitHub CLI tool
-    
+
     # Benchmarking
     geekbench
   ];
