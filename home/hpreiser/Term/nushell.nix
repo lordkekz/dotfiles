@@ -35,6 +35,8 @@ args @ {
               to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
           }
       }
+
+      source ${./custom-commands.nu}
     '';
     extraLogin = ''
       # Some funky extraLogin from nushell.nix
