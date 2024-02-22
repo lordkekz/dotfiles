@@ -44,7 +44,7 @@ args @ {
     kleopatra
     isoimagewriter # KDE's ISO Image Writer
     piper # Frontend to configure peripherals using ratbagd
-    gsmartcontrol # GUI for smartctl 
+    gsmartcontrol # GUI for smartctl
     smartmontools # S.M.A.R.T. tools; provides smartctl
 
     # MULTIMEDIA
