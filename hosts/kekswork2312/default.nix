@@ -113,6 +113,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = "Heinrich Preiser";
+    initialPassword = "changeme";
     extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "lxd"];
     packages = with pkgs; [
       firefox
