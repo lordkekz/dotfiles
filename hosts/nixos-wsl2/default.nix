@@ -29,7 +29,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = "Heinrich Preiser";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "lxd"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "lxd" "incus-admin"];
   };
 
   # Enable Waydroid to run Android apps on Linux.
@@ -37,4 +37,7 @@ in {
 
   # Enable LXC/LXD containers
   virtualisation.lxd.enable = true;
+
+  # Enable Incus LXC containers
+  virtualisation.incus.enable = true;
 }
