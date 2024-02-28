@@ -73,7 +73,7 @@ args @ {
   # Yazi is a TUI file manager
   programs.yazi = {
     enable = true;
-    enableNushellIntegration = true;
+    enableNushellIntegration = false; # Disable because we're waiting for nix-community/home-manager#5045
     package = pkgs-unstable.yazi;
   };
 
