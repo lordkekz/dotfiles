@@ -161,6 +161,9 @@ in {
   # Enable LXC/LXD containers
   virtualisation.lxd.enable = true;
 
+  # Enable Incus LXC containers
+  virtualisation.incus.enable = true;
+
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
