@@ -62,6 +62,9 @@
 
   ### MY PREFERENCES ###
 
+  # Never ever use cgroupv1, it only causes issues.
+  boot.kernelParams = ["systemd.unified_cgroup_hierarchy=1" "cgroup_no_v1=all"];
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
