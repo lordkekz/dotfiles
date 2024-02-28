@@ -43,7 +43,9 @@ args @ {
       #printf $'(ansi blue_bold)extraLogin(ansi reset) '
     '';
     environmentVariables = {
-      # hello_there = ''"obi wan kenobi"'';
+      # Make neovim the default editor
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
     shellAliases = let
       dotfiles-dir = "~/git/dotfiles";
@@ -56,7 +58,8 @@ args @ {
       hmSwitch = "home-manager switch -L -v --flake";
       hmDesk = "${hmSwitch} ${dotfiles-dir}#hpreiser@Desk";
       hmTerm = "${hmSwitch} ${dotfiles-dir}#hpreiser@Term";
-      osSwitch = "sudo nixos-rebuild switch -L -v --flake ~/git/dotfiles";
+      osSwitch = "sudo nixos-rebuild switch -L -v --flake ${dotfiles-dir}";
+      cat = "bat";
     };
   };
 
@@ -95,20 +98,5 @@ args @ {
 
       # package.disabled = true;
     };
-  };
-
-  # Carapace provides lots of command completions
-  programs.carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  # Zoxide is a cd command which learns common paths
-  programs.zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-    options = [
-      "--cmd cd" # Replace built-in cd command withzoxide
-    ];
   };
 }

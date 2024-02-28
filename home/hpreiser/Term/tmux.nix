@@ -14,7 +14,7 @@ args @ {
     enable = true;
     #package = pkgs.tmux;
     mouse = true;
-    shell = "${pkgs.nushell}/bin/nu";
+    shell = "${config.programs.nushell.package}/bin/nu";
     keyMode = "vi";
     clock24 = true;
     newSession = true;
@@ -28,7 +28,10 @@ args @ {
       power-theme # tmux-powerline
     ];
     extraConfig = ''
-
+      # Improve chances that images work. See https://yazi-rs.github.io/docs/image-preview/#tmux-users
+      set -g allow-passthrough on
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
     '';
   };
 }
