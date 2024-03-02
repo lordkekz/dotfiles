@@ -28,7 +28,7 @@ args @ {
       };
       scrolling = {};
       font.normal.family = "JetBrainsMono Nerd Font";
-      font.normal.size = 16;
+      font.size = 13;
 
       colors.transparent_background_colors = true;
 
