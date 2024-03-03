@@ -15,7 +15,11 @@ args @ {
   myMkHomeConfigParams = username: mode: {
     inherit pkgs;
     extraSpecialArgs = {inherit inputs outputs pkgs-stable pkgs-unstable system username;};
-    modules = [./${username}/${mode}];
+    modules =
+      [./${username}/${mode}]
+      # Unlike with hosts, we don't put homeModules from below into
+      # homeManagerModules output, so no filtering required.
+      ++ outputs.homeManagerModules;
   };
   hmConfig = inputs.home-manager.lib.homeManagerConfiguration;
 in rec {

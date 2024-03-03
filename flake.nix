@@ -113,5 +113,8 @@
       path = ./templates/dotfiles-extension;
       description = "A template to dynamically extend my dotfiles without forking them.";
     };
+
+    # Custom library functions
+    lib = import ./lib;
   };
 }
