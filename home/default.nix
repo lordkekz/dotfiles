@@ -11,7 +11,8 @@ args @ {
   pkgs-stable,
   pkgs-unstable,
   pkgs,
-}: let
+}:
+with pkgs.lib.attrsets; let
   myMkHomeConfigParams = username: mode: {
     inherit pkgs;
     extraSpecialArgs = {inherit inputs outputs pkgs-stable pkgs-unstable system username;};
@@ -19,7 +20,7 @@ args @ {
       [./${username}/${mode}]
       # Unlike with hosts, we don't put homeModules from below into
       # homeManagerModules output, so no filtering required.
-      ++ outputs.homeManagerModules;
+      ++ (attrValues outputs.homeManagerModules);
   };
   hmConfig = inputs.home-manager.lib.homeManagerConfiguration;
 in rec {
@@ -32,9 +33,9 @@ in rec {
 
   # Actually generate an attrset containing my home configs.
   # This can be merged into legacyPackages.${system}
-  homeConfigurations = pkgs.lib.attrsets.mapAttrs (name: value: hmConfig value) homeConfigurationParams;
+  homeConfigurations = mapAttrs (name: value: hmConfig value) homeConfigurationParams;
 
   # Generate an attrset containing only the root modules of each config.
   # This can be used to easily extends my config in other flakes, e.g. at work.
-  homeModules = pkgs.lib.attrsets.mapAttrs (name: value: builtins.elemAt value.modules 0) homeConfigurationParams;
+  homeModules = mapAttrs (name: value: builtins.elemAt value.modules 0) homeConfigurationParams;
 }

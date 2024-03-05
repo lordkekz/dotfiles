@@ -30,3 +30,4 @@ def dwhich (application: string, ...rest: string) -> table<command: string, step
 def dwhich1 (application: string) -> path {
   dwhich $application | get steps | first-or-null | first-or-null | last-or-null
 }
+
