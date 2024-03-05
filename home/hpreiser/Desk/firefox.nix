@@ -101,4 +101,9 @@ in {
       inherit search;
     };
   };
+
+  my.firefox-desktopfile-per-profile = {
+    enable = true;
+    profileNames = ["default" "homework"];
+  };
 }
