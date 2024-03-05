@@ -8,6 +8,8 @@ args @ {
   # extraSpecialArgs:
   system,
   username,
+  pkgs-stable,
+  pkgs-unstable,
   ...
 }: {
   # Make autostart symlinks
@@ -46,6 +48,8 @@ args @ {
     piper # Frontend to configure peripherals using ratbagd
     gsmartcontrol # GUI for smartctl
     smartmontools # S.M.A.R.T. tools; provides smartctl
+    # ProtonVPN switched to a new GTK which isn't packaged in 23.11
+    pkgs-unstable.protonvpn-gui
 
     # MULTIMEDIA
     elisa
