@@ -7,5 +7,6 @@ args @ {
 }: {
   # List your module files here
   # my-module = import ./my-module.nix;
-  firefox-desktopfile-per-profile = import ./firefox-desktopfile-per-profile.nix;
+  #firefox-desktopfile-per-profile = import ./firefox-desktopfile-per-profile.nix;
+  firefox = import ./firefox.nix;
 }
