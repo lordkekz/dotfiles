@@ -1007,9 +1007,10 @@ in {
           wm_class =
             # To group windows of different profiles.
             # Set WM_CLASS on Xorg using --class, set app-id on Wayland using --name.
-            if profile.name == "default"
-            then "firefox"
-            else "firefox-${profile.name}";
+            #if profile.name == "default"
+            #then "firefox"
+            #else "firefox-${profile.name}";
+            "firefox";
           ff-cmd-raw = ''${cfg.package}/bin/firefox'';
           ff-cmd = ''${ff-cmd-raw} -p "${profile.name}" --class="${wm_class}" --name="${wm_class}"'';
         in {

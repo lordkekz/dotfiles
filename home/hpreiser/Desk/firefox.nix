@@ -102,23 +102,5 @@ in {
       desktopFile.enable = true;
       desktopFile.icon = "${../../../assets/Firefox_Homework_Icon_128x128.png}";
     };
-    profiles."testprofileA" = {
-      id = 2;
-      isDefault = false;
-      settings =
-        settings-default
-        // {};
-      inherit search;
-      desktopFile.enable = true;
-    };
-    profiles."testprofileB" = {
-      id = 3;
-      isDefault = false;
-      settings =
-        settings-default
-        // {};
-      inherit search;
-      desktopFile.enable = true;
-    };
   };
 }
