@@ -29,8 +29,9 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixVim distro for neovim
-    nixvim.url = "github:nix-community/nixvim/nixos-23.11";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim/main";
+    #nixvim.url = "github:lordkekz/nixvim/main";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # Doesn't work: nixvim.inputs.pre-commit-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     # see: https://github.com/msteen/nix-flake-override
 
