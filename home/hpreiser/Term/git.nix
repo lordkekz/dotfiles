@@ -34,7 +34,7 @@ in {
       init.defaultBranch = "main";
     };
     aliases = {
-      lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset %C(yellow)%h%Creset %C(bold)%s%Creset" --all --graph'';
+      lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --all --graph'';
     };
     attributes = [
       # global .gitattributes
