@@ -49,7 +49,7 @@ args @ {
       plugins.lsp.enable = true;
       plugins.lsp.servers = {
         nixd.enable = true;
-        #nushell.enable = true; # Not yet available on nixos-23.11; mixing nixvim unstable and nixpkgs stable wreaks havoc.
+        nushell.enable = true;
         java-language-server.enable = true;
       };
 
@@ -63,8 +63,7 @@ args @ {
         };
         which-key.enable = true;
         # Guess tab size based on first tab-like occurence in file
-        # Not available in 23.11
-        #indent-o-matic.enable = true;
+        indent-o-matic.enable = true;
         # Colorize color codes like #abcdef or gray
         nvim-colorizer.enable = true;
         # Indentation guides
