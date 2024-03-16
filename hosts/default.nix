@@ -24,6 +24,7 @@
       kekswork2312 = myMkNixOSConfigParams "kekswork2312";
       nixos-wsl2 = myMkNixOSConfigParams "nixos-wsl2";
       nixos-live-image = myMkNixOSConfigParams "nixos-live-image";
+      nixos-minimal = myMkNixOSConfigParams "nixos-minimal";
     };
 
     # Actually generate an attrset containing my NixOS configs.
