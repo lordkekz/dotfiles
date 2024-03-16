@@ -11,7 +11,7 @@ args @ {
   pkgs-unstable,
   pkgs,
 }: let
-  sather-k-compiler-halle = import ./satk.nix {inherit pkgs system;};
+  sather-k-compiler-halle = import ./satk.nix args;
 in rec {
   hm = inputs.home-manager.packages.${system}.default;
   pm = inputs.plasma-manager.packages.${system}.default;

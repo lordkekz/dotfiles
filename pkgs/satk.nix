@@ -1,7 +1,13 @@
-{
-  pkgs,
+args @ {
+  # Flake's inputs and outputs
+  inputs,
+  outputs,
+  # Targeted system
   system,
-  ...
+  # Nixpkgs instances for targeted system
+  pkgs-stable,
+  pkgs-unstable,
+  pkgs,
 }: let
   longDescription = ''
     Sather-K ist eine objektorientierte, imperative Sprache, welche überwiegend in der Lehre eingesetzt wird. Sie wurde in Karlsruhe aus der Sprache Sather entwickelt, welche Anfang der Neunziger in der Universität von Kalifornien (Berkley) entstanden ist. Beide Sprachen werden stark von Konzepten der Sprache Eiffel beeinflußt.
@@ -25,7 +31,9 @@
   };
 
   src = pkgs.fetchzip {
-    url = "https://swt2.informatik.uni-halle.de/downloads//Software/satk_0.3.5-347.zip";
+    # Uni website gives a 502 for this URL; probably because they're replacing the software.
+    # url = "https://swt2.informatik.uni-halle.de/downloads//Software/satk_0.3.5-347.zip";
+    url = "file:///${inputs.self}/assets/satk_0.3.5-347.zip";
     hash = "sha256-Q9HeSkBRTrd5Xfp8YuGvd30f9HMvCMe6XcoKu2wBOKk=";
   };
 in rec {
