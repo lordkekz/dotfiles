@@ -60,6 +60,7 @@ args @ {
       hmTerm = "${hmSwitch} ${dotfiles-dir}#hpreiser@Term";
       osSwitch = "sudo nixos-rebuild switch -L -v --flake ${dotfiles-dir}";
       cat = "bat";
+      mm = "tmatrix -C yellow -c black -g 20,80 -l 1,40 -r 10,30 -s 10 -f 0.2,1.0";
     };
   };
 

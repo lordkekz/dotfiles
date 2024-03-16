@@ -27,6 +27,7 @@ args @ {
     hyfetch
     fastfetch
 
+    tmatrix # Epic matrix effect
     du-dust # Disk usage visualizer (kind of like Filelight)
 
     sops # Secret management
