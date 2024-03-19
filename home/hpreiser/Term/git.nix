@@ -35,6 +35,8 @@ in {
     };
     aliases = {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --all --graph'';
+      ec = ''commit --allow-empty'';
+      amend = ''commit --amend'';
     };
     attributes = [
       # global .gitattributes
