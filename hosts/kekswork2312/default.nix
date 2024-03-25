@@ -133,6 +133,11 @@ in {
     pkgs.plasma5Packages.plasma-thunderbolt
   ];
 
+  environment.sessionVariables = {
+    # Hint electron apps to use Wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
   # Enable graphical KDE Partition Manager
   programs.partition-manager.enable = true;
 
@@ -159,10 +164,10 @@ in {
   };
 
   # Enable LXC/LXD containers
-  virtualisation.lxd.enable = true;
+  #virtualisation.lxd.enable = true;
 
   # Enable Incus LXC containers
-  virtualisation.incus.enable = true;
+  #virtualisation.incus.enable = true;
 
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd.enable = true;
