@@ -50,6 +50,7 @@ args @ {
     smartmontools # S.M.A.R.T. tools; provides smartctl
     # ProtonVPN switched to a new GTK which isn't packaged in 23.11
     pkgs-unstable.protonvpn-gui
+    ookla-speedtest
 
     # MULTIMEDIA
     elisa
