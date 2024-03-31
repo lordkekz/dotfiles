@@ -39,6 +39,22 @@
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
 
+    # A nixpkgs downstream which only contains the lib
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+
+    # Haumea for directory-defined attrset loading
+    haumea.url = "github:nix-community/haumea/v0.2.2";
+    haumea.inputs.nixpkgs.follows = "nixpkgs-lib";
+
+    # My personal data which is *not* technically secret but I don't want to show in this repo.
+    personal-data.url = "github:lordkekz/personal-data";
+    personal-data.inputs.haumea.follows = "haumea";
+    personal-data.inputs.systems.follows = "systems";
+    personal-data.inputs.nixpkgs.follows = "nixpkgs";
+
+    # The list of supported systems.
+    systems.url = "github:nix-systems/default-linux";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
