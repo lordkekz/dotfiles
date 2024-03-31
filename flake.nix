@@ -55,6 +55,12 @@
     # The list of supported systems.
     systems.url = "github:nix-systems/default-linux";
 
+    # Flake utils for stripping some boilerplate
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.0";
+    flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
@@ -66,67 +72,59 @@
     nixpkgs-stable,
     nixpkgs-unstable,
     systems,
+    flake-utils-plus,
+    haumea,
     ...
   }: let
     inherit (self) outputs;
+    hl = haumea.lib;
 
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument.
-    # forallSystems :: fn ("SystemName" -> {...}) -> { SystemName = {...}; ...}
-    forAllSystems = nixpkgs.lib.genAttrs (import systems);
-
-    # System-agnostic args
-    args = {inherit inputs outputs;};
-
-    # System-specific args
-    mkArgs = system:
-      args
-      // {
-        inherit system;
-        pkgs-stable = import nixpkgs-stable {inherit system;};
-        pkgs-unstable = import nixpkgs-unstable {inherit system;};
-        pkgs = import nixpkgs {inherit system;};
+    # homeModules :: (set of (set of (home-manager module))
+    # e.g. homeModules.graphical.alacritty :: (home-manager module)
+    homeModules = hl.load {
+      src = ./dot2/homeProfiles;
+      inputs = {
+        inherit (nixpkgs) lib;
+        flake = self;
+        # TODO how to pass systemless pkgs, pkgs-stable and pkgs-unstable here?
+        # TODO pass list of outputs.homeManagerModules to be imported
       };
-
-    # Importing stuff
-    importPkgs = system: import ./pkgs (mkArgs system);
-    importHome = system: import ./home (mkArgs system);
-    hosts = import ./hosts args;
-  in rec {
-    # Your custom packages
-    # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems importPkgs;
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    legacyPackages = forAllSystems importHome;
-
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays args;
-
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = (import ./modules/nixos args) // hosts.nixosModules;
-
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager args;
-
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#<hostname>'
-    inherit (hosts) nixosConfigurations nixosConfigurationParams;
-
-    # Templates for related flakes
-    templates.dotfiles-extension = {
-      path = ./templates/dotfiles-extension;
-      description = "A template to dynamically extend my dotfiles without forking them.";
+      # Load it without requiring explicit handling of above inputs in each file.
+      loader = hl.loaders.scoped;
     };
 
-    # Custom library functions
-    lib = import ./lib;
-  };
+    # homeProfiles :: (set of (home-manager module))
+    # e.g. homeProfiles.graphical imports homeModules.graphical.*
+    # TODO transform homeModules to generate a single home-manager module which imports all modules of a profile
+    homeProfiles = {};
+
+    # TODO do something similar with nixosProfiles and hardwareProfiles
+    nixosModules = {};
+    nixosProfiles = {};
+  in
+    flake-utils-plus.lib.mkFlake {
+      inherit self inputs;
+
+      # Channel definitions.
+      # Channels are automatically generated from nixpkgs inputs
+      # e.g the inputs which contain `legacyPackages` attribute are used.
+      channelsConfig.allowUnfree = true;
+
+      hostDefaults.extraArgs = {
+        # TODO anything required here?
+      };
+
+      # TODO declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
+
+      # TODO generate homeConfigurations from homeProfiles
+
+      # export homeProfiles and nixosProfiles
+      inherit homeProfiles nixosProfiles;
+
+      # TODO export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
+
+      # TODO load & export lib, templates, etc.
+
+      # TODO define formatter
+    };
 }
