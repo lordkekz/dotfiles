@@ -15,7 +15,10 @@ args @ {
 with pkgs.lib.attrsets; let
   myMkHomeConfigParams = username: mode: {
     inherit pkgs;
-    extraSpecialArgs = {inherit inputs outputs pkgs-stable pkgs-unstable system username;};
+    extraSpecialArgs = {
+      inherit inputs outputs pkgs-stable pkgs-unstable system username;
+      inherit (inputs) personal-data;
+    };
     modules =
       [./${username}/${mode}]
       # Unlike with hosts, we don't put homeModules from below into
