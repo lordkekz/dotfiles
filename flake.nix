@@ -65,20 +65,15 @@
     nixpkgs,
     nixpkgs-stable,
     nixpkgs-unstable,
+    systems,
     ...
   }: let
     inherit (self) outputs;
-    # Supported systems for your flake packages, shell, etc.
-    systems = [
-      "aarch64-linux" # 64-bit ARM with Linux
-      "x86_64-linux" # 64-bit x86 with Linux
-      # I don't use any 32-bit systems or darwin systems.
-    ];
 
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument.
     # forallSystems :: fn ("SystemName" -> {...}) -> { SystemName = {...}; ...}
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    forAllSystems = nixpkgs.lib.genAttrs (import systems);
 
     # System-agnostic args
     args = {inherit inputs outputs;};
