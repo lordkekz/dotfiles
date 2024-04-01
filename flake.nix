@@ -134,7 +134,10 @@
       hostDefaults.modules = attrValues nixosModules;
 
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
-      hosts.kekswork2312.modules = [hardwareProfiles.framework-laptop-2022 nixosProfiles.kde];
+      hosts.kekswork2312.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2022];
+      hosts.kekstop2304.modules = [nixosProfiles.hypr hardwareProfiles.desktop-2015];
+      hosts.nasman.modules = [nixosProfiles.headless hardwareProfiles.server-ryzen-2024];
+      hosts.vortex.modules = [nixosProfiles.headless hardwareProfiles.vps-2023];
       hosts.nixos-wsl2.modules = [nixosProfiles.wsl];
 
       # PER-SYSTEM OUTPUTS
