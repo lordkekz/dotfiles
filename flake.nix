@@ -74,9 +74,12 @@
     systems,
     flake-utils-plus,
     haumea,
+    home-manager,
     ...
   }: let
     inherit (self) outputs;
+    inherit (nixpkgs.lib) attrValues mapAttrs;
+
     hl = haumea.lib;
     lib = hl.load {
       src = ./lib;
@@ -128,7 +131,7 @@
       channelsConfig.allowUnfree = true;
 
       # HOST DEFINITIONS
-      hostDefaults.modules = nixpkgs.lib.attrValues nixosModules;
+      hostDefaults.modules = attrValues nixosModules;
 
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
       hosts.kekswork2312.modules = [hardwareProfiles.framework-laptop-2022 nixosProfiles.kde];
@@ -136,7 +139,21 @@
 
       # PER-SYSTEM OUTPUTS
       outputsBuilder = channels: {
-        # TODO generate homeConfigurations from homeProfiles
+        # generate homeConfigurations from homeProfiles
+        legacyPackages.homeConfigurations = mapAttrs (homeProfileName: homeProfile:
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = channels.nixpkgs;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+              inherit (inputs) personal-data;
+              pkgs-stable = channels.nixpkgs-stable;
+              pkgs-unstable = channels.nixpkgs-unstable;
+            };
+            modules = [homeProfile];
+          }) homeProfiles;
+
+        # Output channels for easier debugging in nix repl
+        inherit channels;
 
         formatter = channels.nixpkgs.alejandra;
       };
