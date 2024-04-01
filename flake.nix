@@ -110,9 +110,9 @@
       loader = hl.loaders.verbatim;
     };
 
-    homeProfiles = lib.loadProfiles "home" outputs.homeManagerModules;
-    nixosProfiles = lib.loadProfiles "nixos" outputs.nixosModules;
-    hardwareProfiles = lib.loadProfiles "hardware" outputs.nixosModules;
+    homeProfiles = lib.loadProfiles "home" homeManagerModules;
+    nixosProfiles = lib.loadProfiles "nixos" nixosModules;
+    hardwareProfiles = lib.loadProfiles "hardware" nixosModules;
 
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
@@ -122,28 +122,34 @@
     flake-utils-plus.lib.mkFlake {
       inherit self inputs;
 
-      # Channel definitions.
+      # CHANNEL DEFINITIONS
       # Channels are automatically generated from nixpkgs inputs
       # e.g the inputs which contain `legacyPackages` attribute are used.
       channelsConfig.allowUnfree = true;
 
-      hostDefaults.extraArgs = {
-        # TODO anything required here?
+      # HOST DEFINITIONS
+      hostDefaults.modules = nixpkgs.lib.attrValues nixosModules;
+
+      # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
+      hosts.kekswork2312.modules = [hardwareProfiles.framework-laptop-2022 nixosProfiles.kde];
+      hosts.nixos-wsl2.modules = [nixosProfiles.wsl];
+
+      # PER-SYSTEM OUTPUTS
+      outputsBuilder = channels: {
+        # TODO generate homeConfigurations from homeProfiles
+
+        formatter = channels.nixpkgs.alejandra;
       };
 
-      # TODO declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
-
-      # TODO generate homeConfigurations from homeProfiles
+      # SYSTEMLESS OUTPUTS
 
       # export homeProfiles and nixosProfiles but not hardwareProfiles
       inherit homeProfiles nixosProfiles;
 
-      # TODO export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
+      # export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
       inherit homeManagerModules nixosModules;
 
-      # TODO load & export lib, templates, etc.
+      # export lib, templates, etc.
       inherit lib templates;
-
-      # TODO define formatter
     };
 }
