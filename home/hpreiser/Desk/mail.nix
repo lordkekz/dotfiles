@@ -8,29 +8,22 @@ args @ {
   # extraSpecialArgs:
   system,
   username,
+  personal-data,
   ...
 }: let
+  inherit (lib.attrsets) mapAttrs;
+
   mainProfile = "mainProfile";
-in rec {
-  accounts.email.accounts."privat" = rec {
-    realName = "Heinrich Preiser";
-    address = "heinrich.preiser@lkekz.de";
-    aliases = ["lordkekz@lkekz.de"];
-    primary = true;
+
+  enableThunderbirdForMailbox = {
     thunderbird.enable = true;
     thunderbird.profiles = [mainProfile];
-    userName = address;
-    imap = {
-      host = "imap.goneo.de";
-      port = 993;
-      tls.enable = true;
-    };
-    smtp = {
-      host = "smtp.goneo.de";
-      port = 465;
-      tls.enable = true;
-    };
   };
+
+  rawMailboxes = personal-data.data.home.mail;
+  mailboxesWithThunderbird = mapAttrs (n: v: v // enableThunderbirdForMailbox) rawMailboxes;
+in rec {
+  accounts.email.accounts = mailboxesWithThunderbird;
 
   programs.thunderbird = {
     enable = true;
