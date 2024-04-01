@@ -8,9 +8,9 @@
   hl = flake.inputs.haumea.lib;
 
   # mkImportModulesForProfiles :: set of module -> set of (set of module) -> module
-  mkImportModulesForProfiles = baseModules:
+  mkImportModulesForProfiles = 
     lib.mapAttrs (n: v: {...}: {
-      imports = (lib.attrValues baseModules) ++ (lib.attrValues v);
+      imports = lib.attrValues v;
     });
 
   # loadModulesOfProfiles :: string -> set of (set of module)
@@ -25,8 +25,8 @@
 
   # loadProfiles :: string -> set of module -> set of module
   # e.g. (loadProfiles "home" []).graphical imports (loadModulesOfProfiles "home").graphical.*
-  loadProfiles = profileKind: baseModules:
-    mkImportModulesForProfiles baseModules (loadModulesOfProfiles profileKind);
+  loadProfiles = profileKind:
+    mkImportModulesForProfiles (loadModulesOfProfiles profileKind);
 in {
   __functor = self: loadProfiles;
   inherit loadProfiles mkImportModulesForProfiles loadModulesOfProfiles;

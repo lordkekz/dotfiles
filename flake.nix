@@ -113,9 +113,9 @@
       loader = hl.loaders.verbatim;
     };
 
-    homeProfiles = lib.loadProfiles "home" homeManagerModules;
-    nixosProfiles = lib.loadProfiles "nixos" nixosModules;
-    hardwareProfiles = lib.loadProfiles "hardware" nixosModules;
+    homeProfiles = lib.loadProfiles "home";
+    nixosProfiles = lib.loadProfiles "nixos";
+    hardwareProfiles = lib.loadProfiles "hardware";
 
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
@@ -147,12 +147,13 @@
           home-manager.lib.homeManagerConfiguration {
             pkgs = channels.nixpkgs;
             extraSpecialArgs = {
-              inherit inputs outputs;
+              inherit inputs outputs homeProfiles;
               inherit (inputs) personal-data;
               pkgs-stable = channels.nixpkgs-stable;
               pkgs-unstable = channels.nixpkgs-unstable;
+              system = channels.nixpkgs.system;
             };
-            modules = [homeProfile];
+            modules = [homeProfile] ++ (attrValues homeManagerModules);
           })
         homeProfiles;
 
