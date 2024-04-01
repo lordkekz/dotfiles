@@ -79,28 +79,47 @@
     inherit (self) outputs;
     hl = haumea.lib;
 
-    # homeModules :: (set of (set of (home-manager module))
-    # e.g. homeModules.graphical.alacritty :: (home-manager module)
-    homeModules = hl.load {
+    # mkImportModule :: list of module -> (set of (set of module) -> module
+    mkImportModule = baseModules:
+      nixpkgs.lib.updateAttrs (n: v: {...}: {
+      imports = baseModules ++ (nixpkgs.lib.attrValues v);
+    });
+
+    # homeProfileModules :: (set of (set of (home-manager module)))
+    # e.g. homeProfileModules.graphical.alacritty :: (home-manager module)
+    homeProfileModules = hl.load {
       src = ./dot2/homeProfiles;
       inputs = {
         inherit (nixpkgs) lib;
         flake = self;
         # TODO how to pass systemless pkgs, pkgs-stable and pkgs-unstable here?
-        # TODO pass list of outputs.homeManagerModules to be imported
       };
       # Load it without requiring explicit handling of above inputs in each file.
       loader = hl.loaders.scoped;
     };
 
     # homeProfiles :: (set of (home-manager module))
-    # e.g. homeProfiles.graphical imports homeModules.graphical.*
-    # TODO transform homeModules to generate a single home-manager module which imports all modules of a profile
-    homeProfiles = {};
+    # e.g. homeProfiles.graphical imports homeProfileModules.graphical.*
+    # Transform homeProfileModules to generate a single home-manager module for each profile which imports all modules of a profile
+    homeProfiles = mkImportModule outputs.homeModules homeProfileModules;
 
-    # TODO do something similar with nixosProfiles and hardwareProfiles
-    nixosModules = {};
-    nixosProfiles = {};
+    # nixosProfileModules :: (set of (set of (NixOS module)))
+    # e.g. nixosProfileModules.graphical.firefox :: (NixOS module)
+    nixosProfileModules = hl.load {
+      src = ./dot2/nixosProfiles;
+      inputs = {
+        inherit (nixpkgs) lib;
+        flake = self;
+        # TODO how to pass systemless pkgs, pkgs-stable and pkgs-unstable here?
+      };
+      # Load it without requiring explicit handling of above inputs in each file.
+      loader = hl.loaders.scoped;
+    };
+
+    # nixosProfiles :: (set of (NixOS module))
+    # e.g. nixosProfiles.graphical imports nixosProfileModules.graphical.*
+    # Transform nixosProfileModules to generate a single NixOS module for each profile which imports all modules of a profile
+    nixosProfiles = mkImportModule outputs.nixosModules nixosProfileModules;
   in
     flake-utils-plus.lib.mkFlake {
       inherit self inputs;
