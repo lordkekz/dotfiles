@@ -1,4 +1,10 @@
-let
+{
+  self,
+  super,
+  root,
+  lib,
+  flake,
+}: let
   inherit (builtins) filter attrNames map any elem;
 
   # subtractList :: list -> list -> list
@@ -8,4 +14,6 @@ let
   # subtractAttrSet :: set -> set -> set
   #  subtractAttrSet A B := attributes from B for which A has no attribute with same name
   subtractAttrSet = A: B: map (name: B.${name}) (subtractList (attrNames A) (attrNames B));
-in {inherit subtractList subtractAttrSet;}
+in {
+  inherit subtractList subtractAttrSet;
+}

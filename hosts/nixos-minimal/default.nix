@@ -12,7 +12,7 @@
     ../common/base-config.nix
   ];
 
-  boot.kernelParams = [ "copytoram" ];
+  boot.kernelParams = ["copytoram"];
   boot.tmp.useTmpfs = true;
   boot.readOnlyNixStore = false;
 
