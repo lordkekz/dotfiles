@@ -1,6 +1,7 @@
 args @ {
   inputs,
   outputs,
+  homeProfiles,
   personal-data,
   pkgs,
   pkgs-stable,
@@ -10,7 +11,7 @@ args @ {
   config,
   ...
 }: let
-  inherit (personal-data.data.home) username; 
+  inherit (personal-data.data.home) username;
 in rec {
   # You can import other home-manager modules here
   imports = [];

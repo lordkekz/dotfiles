@@ -8,10 +8,9 @@
   hl = flake.inputs.haumea.lib;
 
   # mkImportModulesForProfiles :: set of module -> set of (set of module) -> module
-  mkImportModulesForProfiles = 
-    lib.mapAttrs (n: v: {...}: {
-      imports = lib.attrValues v;
-    });
+  mkImportModulesForProfiles = lib.mapAttrs (n: v: {...}: {
+    imports = lib.attrValues v;
+  });
 
   # loadModulesOfProfiles :: string -> set of (set of module)
   # e.g. (loadModulesOfProfiles "home").graphical.alacritty :: (home-manager module)

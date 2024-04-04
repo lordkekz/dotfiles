@@ -12,7 +12,7 @@ args @ {
   config,
   ...
 }: {
-  imports = [ homeProfiles.common ];
+  imports = [homeProfiles.common];
 
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
