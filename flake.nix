@@ -132,9 +132,22 @@
 
       # HOST DEFINITIONS
       hostDefaults.modules = attrValues nixosModules;
+      hostDefaults.specialArgs = {
+        inherit inputs outputs nixosProfiles;
+        inherit (inputs) personal-data;
+      };
+      worm = {
+        inherit inputs outputs nixosProfiles;
+        inherit (inputs) personal-data;
+        inherit (nixpkgs) lib;
+        pkgs = import nixpkgs {};
+        pkgs-stable = import nixpkgs-stable {};
+        pkgs-unstable = import nixpkgs-unstable {};
+        config = {};
+      };
 
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
-      hosts.kekswork2312.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2022];
+      hosts.kekswork2312.modules = [nixosProfiles.kde]; #hardwareProfiles.framework-laptop-2022];
       hosts.kekstop2304.modules = [nixosProfiles.hypr hardwareProfiles.desktop-2015];
       hosts.nasman.modules = [nixosProfiles.headless hardwareProfiles.server-ryzen-2024];
       hosts.vortex.modules = [nixosProfiles.headless hardwareProfiles.vps-2023];
@@ -155,7 +168,21 @@
             };
             modules = [homeProfile] ++ (attrValues homeManagerModules);
           })
-        homeProfiles;
+          homeProfiles;
+        # generate nixosConfigurations from nixosProfiles
+        packages = mapAttrs (nixosProfileName: nixosProfile:
+nixpkgs.lib.nixosSystem {
+            pkgs = channels.nixpkgs;
+            specialArgs = {
+              inherit inputs outputs nixosProfiles;
+              inherit (inputs) personal-data;
+              pkgs-stable = channels.nixpkgs-stable;
+              pkgs-unstable = channels.nixpkgs-unstable;
+              system = channels.nixpkgs.system;
+            };
+            modules = [nixosProfile] ++ (attrValues nixosModules);
+          })
+        nixosProfiles;
 
         # Output channels for easier debugging in nix repl
         inherit channels;
@@ -166,7 +193,8 @@
       # SYSTEMLESS OUTPUTS
 
       # export homeProfiles and nixosProfiles but not hardwareProfiles
-      inherit homeProfiles nixosProfiles;
+      profiles.nixos = nixosProfiles;
+      profiles.home = homeProfiles;
 
       # export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
       inherit homeManagerModules nixosModules;
