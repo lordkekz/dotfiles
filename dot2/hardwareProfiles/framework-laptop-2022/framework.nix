@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  hardwareProfiles,
   lib,
   config,
   pkgs,
@@ -8,6 +9,8 @@
   ...
 }: {
   imports = [
+    hardwareProfiles.physical
+
     # Get the defaults from nixos-hardware
     inputs.hardware.nixosModules.framework-12th-gen-intel
 
