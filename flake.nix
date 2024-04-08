@@ -140,7 +140,7 @@
 
       # HOST DEFINITIONS
       hostDefaults = {
-        modules = attrValues nixosModules;
+        modules = (attrValues nixosModules) ++ [nixosProfiles.personal];
         specialArgs = {
           inherit inputs outputs nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;
