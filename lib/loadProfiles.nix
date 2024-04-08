@@ -16,7 +16,7 @@
   # e.g. (loadModulesOfProfiles "home").graphical.alacritty :: (home-manager module)
   loadModulesOfProfiles = profileKind:
     hl.load {
-      src = "${flake.outPath}/dot2/${profileKind}Profiles";
+      src = "${flake.outPath}/${profileKind}Profiles";
       inputs = {};
       # Load it without passing inputs, to preserve the functional nature of the modules
       loader = hl.loaders.verbatim;

@@ -44,6 +44,9 @@ args @ {
         shiftwidth = 2; # Tab width should be 2
       };
 
+      # Use system clipboard, to allow copying between programs
+      clipboard.register = "unnamedplus";
+
       # LSP
       plugins.lsp.enable = true;
       plugins.lsp.servers = {
