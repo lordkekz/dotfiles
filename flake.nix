@@ -7,7 +7,7 @@
     # Flake utils for stripping some boilerplate
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.0";
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
     # Haumea for directory-defined attrset loading
