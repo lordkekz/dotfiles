@@ -27,6 +27,7 @@
                 mountpoint = "/boot";
                 mountOptions = [
                   "defaults"
+                  "umask=0077"
                 ];
               };
             };
@@ -39,7 +40,6 @@
                 settings = {
                   allowDiscards = true;
                 };
-                additionalKeyFiles = ["/tmp/additionalSecret.key"];
                 content = {
                   type = "btrfs";
                   extraArgs = ["-f"];
