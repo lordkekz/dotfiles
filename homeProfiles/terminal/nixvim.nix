@@ -59,7 +59,7 @@ args @ {
         telescope = {
           enable = true;
           extensions = {
-            file_browser.enable = true;
+            file-browser.enable = true;
             frecency.enable = true;
           };
         };
@@ -69,13 +69,13 @@ args @ {
         # Colorize color codes like #abcdef or gray
         nvim-colorizer.enable = true;
         # Indentation guides
-        indent-blankline = {
-          enable = true;
+        indent-blankline.enable = true;
+        indent-blankline.settings = {
           indent.char = "▏"; # U+258F "Left One Eigth Block" instead of quarter block
         };
         # Git Signs shows if lines are changed in working tree
-        gitsigns = {
-          enable = true;
+        gitsigns.enable = true;
+        gitsigns.settings = {
           base = "HEAD"; # Compare to HEAD, not staged
           numhl = true; # Set line number bg
           linehl = false; # Don't set line bg
