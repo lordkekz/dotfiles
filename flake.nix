@@ -4,6 +4,10 @@
   inputs = {
     ## PURE-NIX UTILITIES ##
 
+    # Disko for declarative partitioning
+    disko.url = "github:nix-community/disko/v1.5.0";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     # Flake utils for stripping some boilerplate
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
@@ -146,7 +150,8 @@
       };
 
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
-      hosts.kekswork2312.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2022];
+      hosts.kekswork2312.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2312];
+      hosts.kekswork2404.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2404];
       hosts.kekstop2304.modules = [nixosProfiles.hypr hardwareProfiles.desktop-2015];
       hosts.nasman.modules = [nixosProfiles.headless hardwareProfiles.server-ryzen-2024];
       hosts.vortex.modules = [nixosProfiles.headless hardwareProfiles.vps-2023];
