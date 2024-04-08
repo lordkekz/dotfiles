@@ -1,12 +1,15 @@
 {
   inputs,
   outputs,
+  hardwareProfiles,
   lib,
   config,
   pkgs,
   modulesPath,
   ...
 }: {
+  imports = [hardwareProfiles.common];
+
   # Bootloader.
   boot.loader = {
     # Use systemd-boot
