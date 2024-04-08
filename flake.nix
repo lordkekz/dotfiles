@@ -81,22 +81,26 @@
     inherit (nixpkgs.lib) attrValues mapAttrs;
 
     hl = haumea.lib;
-    lib = hl.load {
-      src = ./lib;
-      inputs = {
-        inherit (nixpkgs) lib;
-        flake = self;
+    lib =
+      nixpkgs.lib
+      // {
+        my = hl.load {
+          src = ./lib;
+          inputs = {
+            inherit (nixpkgs) lib;
+            flake = self;
+          };
+          # Load it but require explicit inputs line in each file
+          loader = hl.loaders.default;
+          # Make the default.nix's attrs directly children of lib
+          transformer = hl.transformers.liftDefault;
+        };
       };
-      # Load it but require explicit inputs line in each file
-      loader = hl.loaders.default;
-      # Make the default.nix's attrs directly children of lib
-      transformer = hl.transformers.liftDefault;
-    };
 
     homeManagerModules = hl.load {
       src = ./modules/home-manager;
       inputs = {
-        inherit (nixpkgs) lib;
+        inherit lib;
         flake = self;
       };
       # Load it without passing inputs, to preserve the functional nature of the modules
@@ -106,16 +110,16 @@
     nixosModules = hl.load {
       src = ./modules/nixos;
       inputs = {
-        inherit (nixpkgs) lib;
+        inherit lib;
         flake = self;
       };
       # Load it without passing inputs, to preserve the functional nature of the modules
       loader = hl.loaders.verbatim;
     };
 
-    homeProfiles = lib.loadProfiles "home";
-    nixosProfiles = lib.loadProfiles "nixos";
-    hardwareProfiles = lib.loadProfiles "hardware";
+    homeProfiles = lib.my.loadProfiles "home";
+    nixosProfiles = lib.my.loadProfiles "nixos";
+    hardwareProfiles = lib.my.loadProfiles "hardware";
 
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
