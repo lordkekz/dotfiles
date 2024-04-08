@@ -168,10 +168,10 @@
             };
             modules = [homeProfile] ++ (attrValues homeManagerModules);
           })
-          homeProfiles;
+        homeProfiles;
         # generate nixosConfigurations from nixosProfiles
         packages = mapAttrs (nixosProfileName: nixosProfile:
-nixpkgs.lib.nixosSystem {
+          nixpkgs.lib.nixosSystem {
             pkgs = channels.nixpkgs;
             specialArgs = {
               inherit inputs outputs nixosProfiles;
