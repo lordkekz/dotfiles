@@ -18,6 +18,9 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # Enable bluetooth (why wouldn't they enable it in nixos-hardware?!?)
+  hardware.bluetooth.enable = true;
+
   # See: https://wiki.archlinux.org/title/Framework_Laptop_13#Lowering_fan_noise
   services.thermald.enable = true;
 
@@ -25,6 +28,11 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "50%";
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
