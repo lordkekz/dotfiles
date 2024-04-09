@@ -16,19 +16,6 @@ args @ {
 
   programs.plasma = {
     enable = true;
-    shortcuts = {
-      "ActivityManager"."switch-to-activity-0ea01e9d-4522-405e-ad09-1a5d4e7b3669" = [];
-      "kcm_touchpad"."Toggle Touchpad" = ["Meta+Ctrl+Zenkaku Hankaku" "Touchpad Toggle"];
-      "kwin"."Invert" = "Meta+Ctrl+I";
-      "kwin"."Invert Screen Colors" = [];
-      "kwin"."InvertWindow" = "Meta+Ctrl+U";
-      "kwin"."Move Tablet to Next Output" = [];
-      "kwin"."Toggle" = [];
-      "kwin"."ToggleMouseClick" = "Meta+*";
-      "kwin"."TrackMouse" = [];
-      "org.kde.spectacle.desktop"."RectangularRegionScreenShot" = ["Meta+Shift+Print" "Meta+Shift+S"];
-      "org_kde_powerdevil"."Sleep" = ["Launch Media" "Sleep"];
-    };
     configFile = {
       "dolphinrc"."DetailsMode"."PreviewSize".value = 16;
       "dolphinrc"."KFileDialog Settings"."detailViewIconSize".value = 16;
