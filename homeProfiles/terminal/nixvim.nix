@@ -80,9 +80,9 @@ args @ {
           numhl = true; # Set line number bg
           linehl = false; # Don't set line bg
           signcolumn = false; # Don't show signs in column
-          wordDiff = true; # Set bg of changed words
-          currentLineBlame = true;
-          currentLineBlameOpts.virtTextPos = "right_align";
+          word_diff = true; # Set bg of changed words
+          current_line_blame = true;
+          current_line_blame_opts.virt_text_pos = "right_align";
         };
         # Highlight where the cursor jumps
         specs = {
