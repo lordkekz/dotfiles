@@ -26,5 +26,10 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "50%";
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

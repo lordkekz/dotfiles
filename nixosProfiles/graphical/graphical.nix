@@ -37,6 +37,26 @@
     #media-session.enable = true;
   };
 
+  # Enable networking
+  networking = {
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        } # KDE Connect
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        } # KDE Connect
+      ];
+    };
+  };
+
   environment.sessionVariables = {
     # Hint electron apps to use Wayland
     NIXOS_OZONE_WL = "1";

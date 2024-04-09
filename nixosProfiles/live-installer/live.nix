@@ -15,8 +15,6 @@
 
   boot.kernelParams = ["copytoram"];
 
-  networking.hostName = "nixos-live";
-
   environment.systemPackages = with pkgs; [
     # Cool stuff
     pkgs.fastfetch

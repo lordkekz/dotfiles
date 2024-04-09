@@ -29,4 +29,10 @@
     # KDE Info Center dependencies
     pkgs.plasma5Packages.plasma-thunderbolt
   ];
+
+  # Disable fingerprint for lock screen auth, because passwords
+  # are still required and it waits for fingerprint anyways if I entered the password.
+  # FIXME find an alternative to SDDM which can handle multiple unlocking methods simultaneously.
+  security.pam.services.kde.fprintAuth = false;
+  security.pam.services.login.fprintAuth = false;
 }

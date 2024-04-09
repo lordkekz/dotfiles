@@ -29,11 +29,4 @@
 
   # Enable ratbagd to configure peripherals with piper
   services.ratbagd.enable = true;
-
-  # Enable Waydroid to run Android apps
-  virtualisation.waydroid.enable = true;
-
-  # Enable virt-manager for QUEMU/KVM based VMs
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 }
