@@ -17,6 +17,9 @@ args @ {
   programs.plasma = {
     enable = true;
     configFile = {
+      # Use Thumbnail Grid instead of ugly left-side switcher.
+      "kwinrc"."TabBox"."LayoutName".value = "thumbnail_grid";
+
       "dolphinrc"."DetailsMode"."PreviewSize".value = 16;
       "dolphinrc"."KFileDialog Settings"."detailViewIconSize".value = 16;
       "kactivitymanagerdrc"."activities"."0ea01e9d-4522-405e-ad09-1a5d4e7b3669".value = "Default";
