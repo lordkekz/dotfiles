@@ -36,7 +36,8 @@
               content = {
                 type = "luks";
                 name = "crypted";
-                passwordFile = "/tmp/luks-password"; # Interactive
+                # LUKS will ask for password during boot
+                passwordFile = "/tmp/luks-password";
                 settings = {
                   allowDiscards = true;
                 };
@@ -58,7 +59,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "64G"; # To allow for hibernation
+                      swap.swapfile.size = "4G";
                     };
                   };
                 };
