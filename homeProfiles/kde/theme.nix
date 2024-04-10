@@ -12,7 +12,6 @@ args @ {
   config,
   ...
 }: {
-
   home.packages = [
     # Install theme package, so that its outputs will be in user share and plasma can find it.
     pkgs.graphite-kde-theme
@@ -21,16 +20,16 @@ args @ {
   # Style Apps using Qt
   qt = {
     enable = true;
-    platformTheme = "qtct";
-    style.name = "kvantum";
+    platformTheme = "kde";
+    #style.name = "kvantum";
   };
 
   # Tell kvantum which style to use
-  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-    [General]
-    theme=GraphiteNordDark
-  '';
-  xdg.configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
+  #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+  #  [General]
+  #  theme=GraphiteNordDark
+  #'';
+  #xdg.configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
 
   # Tell plasma which style to use
   programs.plasma.workspace = {
@@ -38,7 +37,7 @@ args @ {
     colorScheme = "GraphiteNordDark";
     cursorTheme = "Breeze_Snow";
     lookAndFeel = "com.github.vinceliuice.Graphite-nord-dark";
-    iconTheme = "Breeze Dark";
+    #iconTheme = "Breeze Dark";
     wallpaper = "${pkgs.graphite-kde-theme}/share/wallpapers/Graphite-nord-dark/contents/images/3840x2160.png";
   };
 }
