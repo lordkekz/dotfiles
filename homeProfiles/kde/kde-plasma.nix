@@ -16,6 +16,7 @@ args @ {
 
   programs.plasma = {
     enable = true;
+    workspace.clickItemTo = "select";
     configFile = {
       # Use Thumbnail Grid instead of ugly left-side switcher.
       "kwinrc"."TabBox"."LayoutName".value = "thumbnail_grid";
