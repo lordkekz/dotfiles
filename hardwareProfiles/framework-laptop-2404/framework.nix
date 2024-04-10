@@ -21,6 +21,9 @@
   # Enable bluetooth (why wouldn't they enable it in nixos-hardware?!?)
   hardware.bluetooth.enable = true;
 
+  # Enable boltctl (why wouldn't they enable it in nixos-hardware?!?)
+  services.hardware.bolt.enable = true;
+
   # See: https://wiki.archlinux.org/title/Framework_Laptop_13#Lowering_fan_noise
   services.thermald.enable = true;
 
