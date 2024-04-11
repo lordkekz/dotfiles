@@ -17,7 +17,7 @@ args @ {
     {
       height = 48;
       offset = 0;
-      minLength = 675;
+      minLength = 720;
       maxLength = 2400;
       location = "bottom";
       alignment = "center";
