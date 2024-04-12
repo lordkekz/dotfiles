@@ -129,6 +129,12 @@
       path = ./templates/dotfiles-extension;
       description = "A template to dynamically extend my dotfiles without forking them.";
     };
+
+    # A set containing the paths of assets in ./assets directory
+    assets = hl.load {
+      src = ./assets;
+      loader = [(hl.matchers.always hl.loaders.path)];
+    };
   in
     flake-utils-plus.lib.mkFlake {
       inherit self inputs;
@@ -142,7 +148,7 @@
       hostDefaults = {
         modules = (attrValues nixosModules) ++ [nixosProfiles.personal];
         specialArgs = {
-          inherit inputs outputs nixosProfiles hardwareProfiles;
+          inherit inputs outputs assets nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;
         };
         channelName = "nixpkgs";
@@ -158,21 +164,35 @@
       hosts.nixos-wsl2.modules = [nixosProfiles.wsl];
 
       # PER-SYSTEM OUTPUTS
-      outputsBuilder = channels: {
+      outputsBuilder = channels: let
+        system = channels.nixpkgs.system;
+        pkgs = channels.nixpkgs;
+        pkgs-stable = channels.nixpkgs-stable;
+        pkgs-unstable = channels.nixpkgs-unstable;
+        flake = self;
+      in {
         # generate homeConfigurations from homeProfiles
         legacyPackages.homeConfigurations = mapAttrs (homeProfileName: homeProfile:
           home-manager.lib.homeManagerConfiguration {
-            pkgs = channels.nixpkgs;
+            inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs outputs homeProfiles;
+              inherit flake inputs outputs assets system pkgs-stable pkgs-unstable homeProfiles;
               inherit (inputs) personal-data;
-              pkgs-stable = channels.nixpkgs-stable;
-              pkgs-unstable = channels.nixpkgs-unstable;
-              system = channels.nixpkgs.system;
             };
             modules = [homeProfile] ++ (attrValues homeManagerModules);
           })
         homeProfiles;
+
+        packages = hl.load {
+          src = ./pkgs;
+          inputs = {
+            inherit flake inputs outputs assets system pkgs pkgs-stable pkgs-unstable;
+          };
+          # Load it but require explicit inputs line in each file
+          loader = hl.loaders.default;
+          # Make the default.nix's attrs directly children of lib
+          transformer = hl.transformers.liftDefault;
+        };
 
         # Output channels for easier debugging in nix repl
         inherit channels;
@@ -190,6 +210,6 @@
       inherit homeManagerModules nixosModules;
 
       # export lib, templates, etc.
-      inherit lib templates;
+      inherit lib templates assets;
     };
 }

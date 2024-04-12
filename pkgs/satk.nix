@@ -1,13 +1,18 @@
 args @ {
+  self,
+  super,
+  root,
   # Flake's inputs and outputs
+  flake,
   inputs,
   outputs,
+  assets,
   # Targeted system
   system,
   # Nixpkgs instances for targeted system
+  pkgs,
   pkgs-stable,
   pkgs-unstable,
-  pkgs,
 }: let
   longDescription = ''
     Sather-K ist eine objektorientierte, imperative Sprache, welche überwiegend in der Lehre eingesetzt wird. Sie wurde in Karlsruhe aus der Sprache Sather entwickelt, welche Anfang der Neunziger in der Universität von Kalifornien (Berkley) entstanden ist. Beide Sprachen werden stark von Konzepten der Sprache Eiffel beeinflußt.
@@ -30,13 +35,6 @@ args @ {
     maintainers = [];
   };
 
-  src = pkgs.fetchzip {
-    # Uni website gives a 502 for this URL; probably because they're replacing the software.
-    # url = "https://swt2.informatik.uni-halle.de/downloads//Software/satk_0.3.5-347.zip";
-    url = "file:///${inputs.self}/assets/satk_0.3.5-347.zip";
-    hash = "sha256-Q9HeSkBRTrd5Xfp8YuGvd30f9HMvCMe6XcoKu2wBOKk=";
-  };
-in rec {
   mono-wrapper = pkgs.writeShellApplication {
     name = "mono";
     meta.description = "A wrapper script for the old mono 4.8.1 package. Includes a workaround for $TERM variable.";
@@ -62,7 +60,13 @@ in rec {
         inherit longDescription;
       };
 
-    inherit src system;
+    inherit system;
+    src = pkgs.fetchzip {
+      # Uni website gives a 502 for this URL; probably because they're replacing the software.
+      # url = "https://swt2.informatik.uni-halle.de/downloads//Software/satk_0.3.5-347.zip";
+      url = "file:///" + assets."satk_${version}";
+      hash = "sha256-Q9HeSkBRTrd5Xfp8YuGvd30f9HMvCMe6XcoKu2wBOKk=";
+    };
 
     nativeBuildInputs = [pkgs.gcc48];
     buildInputs = [pkgs.gmp];
@@ -142,4 +146,5 @@ in rec {
     paths = [mono-wrapper satk-wrapper satk-get-examples];
     postBuild = "echo links added";
   };
-}
+in
+  satk-full
