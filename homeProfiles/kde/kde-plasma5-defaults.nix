@@ -13,9 +13,14 @@ args @ {
 }: {
   imports = [inputs.plasma-manager.homeManagerModules.plasma-manager];
 
-  programs.plasma = {
+  options.my.kde-plasma-activity-id = lib.mkOption {
+    type = lib.types.str;
+    default = "4e35dba4-c466-4e8c-82a0-404f9a7419b5";
+  };
+
+  config.programs.plasma = {
     shortcuts = {
-      "ActivityManager"."switch-to-activity-4e35dba4-c466-4e8c-82a0-404f9a7419b5" = lib.mkDefault [];
+      "ActivityManager"."switch-to-activity-${config.my.kde-plasma-activity-id}" = lib.mkDefault [];
       "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = lib.mkDefault "Meta+Alt+K";
       "kaccess"."Toggle Screen Reader On and Off" = lib.mkDefault "Meta+Alt+S";
       "kcm_touchpad"."Disable Touchpad" = lib.mkDefault "Touchpad Off";
@@ -261,8 +266,8 @@ args @ {
       "baloofilerc"."General"."exclude filters version".value = lib.mkDefault 8;
       "dolphinrc"."KFileDialog Settings"."Places Icons Auto-resize".value = lib.mkDefault false;
       "dolphinrc"."KFileDialog Settings"."Places Icons Static Size".value = lib.mkDefault 22;
-      "kactivitymanagerdrc"."activities"."4e35dba4-c466-4e8c-82a0-404f9a7419b5".value = lib.mkDefault "Default";
-      "kactivitymanagerdrc"."main"."currentActivity".value = lib.mkDefault "4e35dba4-c466-4e8c-82a0-404f9a7419b5";
+      "kactivitymanagerdrc"."activities"."${config.my.kde-plasma-activity-id}".value = lib.mkDefault "Default";
+      "kactivitymanagerdrc"."main"."currentActivity".value = lib.mkDefault "${config.my.kde-plasma-activity-id}";
       "kcminputrc"."Mouse"."X11LibInputXAccelProfileFlat".value = lib.mkDefault true;
       "kcminputrc"."Tmp"."update_info".value = lib.mkDefault "delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize";
       "kded5rc"."Module-device_automounter"."autoload".value = lib.mkDefault false;

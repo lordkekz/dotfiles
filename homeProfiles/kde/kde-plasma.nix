@@ -23,10 +23,7 @@ args @ {
 
       "dolphinrc"."DetailsMode"."PreviewSize".value = 16;
       "dolphinrc"."KFileDialog Settings"."detailViewIconSize".value = 16;
-      "kactivitymanagerdrc"."activities"."0ea01e9d-4522-405e-ad09-1a5d4e7b3669".value = "Default";
-      "kactivitymanagerdrc"."main"."currentActivity".value = "0ea01e9d-4522-405e-ad09-1a5d4e7b3669";
-      "kactivitymanagerdrc"."main"."runningActivities".value = "0ea01e9d-4522-405e-ad09-1a5d4e7b3669";
-      "kactivitymanagerdrc"."main"."stoppedActivities".value = "";
+      "kactivitymanagerdrc"."activities"."${config.my.kde-plasma-activity-id}".value = "Nixy Stuff";
       "kcminputrc"."Libinput.2362.628.PIXA3854:00 093A:0274 Touchpad"."ClickMethod".value = 2;
       "kcminputrc"."Libinput.2362.628.PIXA3854:00 093A:0274 Touchpad"."NaturalScroll".value = true;
       "kcminputrc"."Libinput.2362.628.PIXA3854:00 093A:0274 Touchpad"."ScrollFactor".value = 0.5;
