@@ -91,6 +91,7 @@ args @ {
           ms-azuretools.vscode-docker
           tecosaur.latex-utilities
           james-yu.latex-workshop
+          vscodevim.vim
         ];
       })
   ];
