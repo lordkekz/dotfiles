@@ -55,6 +55,11 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Generate images etc. from NixOS configs
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.inputs.nixlib.follows = "nixpkgs";
+
     # NixOS-WSL
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +82,7 @@
     nixpkgs,
     nixpkgs-stable,
     nixpkgs-unstable,
+    nixos-generators,
     self,
     systems,
     ...
@@ -146,7 +152,10 @@
 
       # HOST DEFINITIONS
       hostDefaults = {
-        modules = (attrValues nixosModules) ++ [nixosProfiles.personal];
+        modules = (attrValues nixosModules) ++ [
+          nixos-generators.nixosModules.all-formats
+          nixosProfiles.personal
+        ];
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;
