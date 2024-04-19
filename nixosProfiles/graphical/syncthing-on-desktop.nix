@@ -38,7 +38,7 @@
       folders = {
         "Documents" = {
           id = "a9t3y-uxeo6";
-          path = userHome + "/DocumentsSynced"; # Which folder to add to Syncthing
+          path = userHome + "/Documents"; # Which folder to add to Syncthing
           devices = [
             # "Vortex"
             "KeksWork-Win11"

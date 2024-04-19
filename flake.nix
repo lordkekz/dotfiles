@@ -18,6 +18,9 @@
     haumea.url = "github:nix-community/haumea/v0.2.2";
     haumea.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Impermanence
+    impermanence.url = "github:nix-community/impermanence";
+
     # My personal data which is *not* technically secret but I don't want to show in this repo.
     personal-data.url = "github:lordkekz/personal-data";
     personal-data.inputs.haumea.follows = "haumea";
@@ -152,10 +155,12 @@
 
       # HOST DEFINITIONS
       hostDefaults = {
-        modules = (attrValues nixosModules) ++ [
-          nixos-generators.nixosModules.all-formats
-          nixosProfiles.personal
-        ];
+        modules =
+          (attrValues nixosModules)
+          ++ [
+            nixos-generators.nixosModules.all-formats
+            nixosProfiles.personal
+          ];
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;

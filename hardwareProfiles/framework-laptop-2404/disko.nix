@@ -45,12 +45,16 @@
                   type = "btrfs";
                   extraArgs = ["-f"];
                   subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
+                    "/persist/ephemeral" = {
+                      mountpoint = "/persist/ephemeral";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
-                    "/home" = {
-                      mountpoint = "/home";
+                    "/persist/local" = {
+                      mountpoint = "/persist/local";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    "/persist/roaming" = {
+                      mountpoint = "/persist/roaming";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
                     "/nix" = {
@@ -68,6 +72,14 @@
           };
         };
       };
+    };
+    nodev."/" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=25%"
+        "defaults"
+        "mode=755"
+      ];
     };
   };
 }
