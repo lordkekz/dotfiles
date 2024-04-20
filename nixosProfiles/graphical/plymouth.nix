@@ -11,14 +11,14 @@
 }: {
   boot.plymouth = {
     enable = true;
-    theme = "bgrt";
+    #theme = "nixos-bgrt";
+    theme = "colorful_sliced";
     themePackages = [
       # By default we would install all themes
       (pkgs.adi1090x-plymouth-themes.override {
         selected_themes = [
           "abstract_ring_alt"
           "colorful_sliced"
-          "dark_planet"
           "deus_ex"
           "green_blocks"
           "hexagon"
