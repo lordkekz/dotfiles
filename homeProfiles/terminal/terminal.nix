@@ -87,5 +87,10 @@ args @ {
     enable = true;
     enableNushellIntegration = true;
     package = pkgs-unstable.atuin;
+    settings = {
+      # See https://docs.atuin.sh/configuration/config
+      search_mode = "fuzzy";
+      secrets_filter = true;
+    };
   };
 }
