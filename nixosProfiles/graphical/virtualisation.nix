@@ -10,6 +10,16 @@
   pkgs-unstable,
   ...
 }: {
+  # Enable Incus Linux containers
+  virtualisation.incus.enable = true;
+
+  # Enable podman containers
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+  };
+
   # Enable Waydroid to run Android apps
   virtualisation.waydroid.enable = true;
 
