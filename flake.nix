@@ -133,6 +133,7 @@
     homeProfiles = lib.my.loadProfiles "home";
     nixosProfiles = lib.my.loadProfiles "nixos";
     hardwareProfiles = lib.my.loadProfiles "hardware";
+    getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
 
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
@@ -170,12 +171,16 @@
       };
 
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
-      hosts.kekswork2312.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2312];
-      hosts.kekswork2404.modules = [nixosProfiles.kde hardwareProfiles.framework-laptop-2404];
-      hosts.kekstop2304.modules = [nixosProfiles.hypr hardwareProfiles.desktop-2015];
-      hosts.nasman.modules = [nixosProfiles.headless hardwareProfiles.server-ryzen-2024];
-      hosts.vortex.modules = [nixosProfiles.headless hardwareProfiles.vps-2023];
-      hosts.nixos-wsl2.modules = [nixosProfiles.wsl];
+      hosts = with nixosProfiles;
+      with hardwareProfiles; {
+        kekswork2312.modules = [kde framework-laptop-2312];
+        kekswork2404.modules = [
+          kde
+          framework-laptop-2404
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
+        ];
+        kekstop2304.modules = [hypr desktop-2015];
+      };
 
       # PER-SYSTEM OUTPUTS
       outputsBuilder = channels: let
