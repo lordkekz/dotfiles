@@ -65,7 +65,15 @@ args @ {
   programs.fzf.enable = true;
 
   # Quick, example-driven man pages powered by tldr-pages
-  programs.tealdeer.enable = true;
+  programs.tealdeer = {
+    enable = true;
+    settings.updates = {
+      # Automatically update the cache.
+      # Also useful if cache gets deleted; otherwise needs to be fixed manually.
+      auto_update = true;
+      auto_update_interval_hours = 24 * 7;
+    };
+  };
 
   # Yazi is a TUI file manager
   programs.yazi = {
