@@ -25,7 +25,7 @@
   in {
     enable = true;
     inherit user;
-    dataDir = userHome + "/.syncthing"; # Default folder for new synced folders
+    dataDir = userHome + "/.syncthing-folders"; # Default folder for new synced folders
     configDir = userHome + "/.config/syncthing"; # Folder for Syncthing's settings and keys
 
     overrideDevices = true; # overrides any devices added or deleted through the WebUI

@@ -26,10 +26,17 @@ in {
     users.${username} = {
       directories = [
         ".cache/fontconfig"
+        ".cache/flatpak"
+        ".cache/nix"
         ".cache/thumbnails"
+        ".cache/tealdeer"
+        # Contains some KDE config and telemetry
         ".config/KDE"
         ".config/kde.org"
-        ".config/kdeconnect"
+      ];
+      files = [
+        ".local/share/nix/repl-history"
+        ".local/share/krunnerstaterc"
       ];
     };
   };
@@ -40,6 +47,7 @@ in {
     hideMounts = true;
     directories = [
       "/var/lib/bluetooth"
+      "/var/lib/flatpak"
       "/var/lib/nixos"
       "/etc/NetworkManager/system-connections"
     ];
@@ -49,17 +57,23 @@ in {
 
     users.${username} = {
       directories = [
-        ".cache/nix"
-        ".cache/tealdeer"
         ".config/discord"
         ".config/Element"
+        ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
         ".config/microsoft-edge"
         ".config/obs-studio"
         ".config/obsidian"
         ".config/Podman Desktop"
         ".config/Signal"
-        # ".config/syncthing" or ".syncthing" # contains index db
+        ".config/syncthing" # Syncthing settings, e.g. telemetry and web interface
+        ".local/share/atuin" # Atuin shell history database, host_id and sync keys
+        ".local/share/flatpak"
+        ".local/share/kwalletd" # KWallet database, contains e.g. WiFi passwords
+        ".local/share/lutris"
+        ".local/share/PrismLauncher"
+        ".local/share/Steam"
+        ".syncthing-folders" # Default folder for new synced folders
         ".gnupg"
         ".jdks" # JDKs downloaded by IntellIJ IDEA
         ".m2" # Local Maven Repo
@@ -67,7 +81,7 @@ in {
         ".renpy"
         ".ssh"
         ".steam"
-        ".thunderbird"
+        ".thunderbird" # Thunderbird profiles, not config
         "Desktop"
         "Downloads"
         "Games"
