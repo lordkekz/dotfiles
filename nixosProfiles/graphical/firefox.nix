@@ -44,7 +44,7 @@ in {
       DisableFirefoxScreenshots = true;
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";
-      DontCheckDefaultBrowser = false;
+      DontCheckDefaultBrowser = true; # For some reason this fucks up with my impermanence setup
       DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
       DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
       SearchBar = "unified"; # alternative: "separate"
