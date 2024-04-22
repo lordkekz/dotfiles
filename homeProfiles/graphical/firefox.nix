@@ -21,7 +21,7 @@ args @ {
     "browser.compactmode.show" = true;
 
     # Disable caching requests to disk; enable and expand in-memory caching.
-    "browser.cache.memory.enable" = false;
+    "browser.cache.memory.enable" = true;
     "browser.cache.memory.capacity" = -1; # Unlimited
     "browser.cache.memory.max_entry_size" = 51200;
     "browser.cache.disk.enable" = false;
