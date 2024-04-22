@@ -36,6 +36,7 @@ def find-inpermanent (): path -> table {
   sudo nu -c 'rsync -amvxx --dry-run --no-links / /this/path/does/not/exist
   | lines | skip 2 | drop 3
   | where {|x| $x !~ "^skipping|/$"}
-  | each {|x| "/" + $x | ls $in | first}'
+  | each {|x| "/" + $x | $in}
+  | to nuon' | from nuon
 }
 

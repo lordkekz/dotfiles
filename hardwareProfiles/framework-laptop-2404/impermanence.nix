@@ -25,16 +25,25 @@ in {
     ];
     users.${username} = {
       directories = [
+        ".config/carapace"
+        ".config/nushell"
+        ".local/share/kactivitymanagerd"
+
+        ".cache/bat"
+        ".cache/bookmarksrunner"
         ".cache/fontconfig"
         ".cache/flatpak"
         ".cache/nix"
-        ".cache/thumbnails"
         ".cache/tealdeer"
+        ".cache/thumbnails"
         # Contains some KDE config and telemetry
         ".config/KDE"
         ".config/kde.org"
       ];
       files = [
+        ".config/birdtray-config.json"
+        ".config/bluedevilglobalrc"
+        ".config/kcminputrc" # Contains touchpad config
         ".local/share/nix/repl-history"
         ".local/share/krunnerstaterc"
       ];
@@ -46,6 +55,14 @@ in {
   environment.persistence."/persist/local" = {
     hideMounts = true;
     directories = [
+      "/var/db/sudo/lectured"
+
+      "/var/lib/cups"
+      "/var/lib/incus"
+      "/var/lib/libvirt"
+      "/var/lib/tailscale"
+      "/var/lib/upower"
+
       "/var/lib/bluetooth"
       "/var/lib/flatpak"
       "/var/lib/nixos"
@@ -69,10 +86,17 @@ in {
         ".config/syncthing" # Syncthing settings, e.g. telemetry and web interface
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
         ".local/share/flatpak"
+        ".local/share/home-manager"
         ".local/share/kwalletd" # KWallet database, contains e.g. WiFi passwords
+        ".local/share/kscreen" # KDE Plasma Display/Monitor configuration
         ".local/share/lutris"
+        ".local/share/mime"
+        ".local/share/nvim" # File Frecency
+        ".local/share/containers/podman-desktop"
         ".local/share/PrismLauncher"
         ".local/share/Steam"
+        ".local/share/TelegramDesktop"
+        ".local/share/zoxide" # Zoxide cd history
         ".syncthing-folders" # Default folder for new synced folders
         ".gnupg"
         ".jdks" # JDKs downloaded by IntellIJ IDEA
@@ -85,6 +109,12 @@ in {
         "Desktop"
         "Downloads"
         "Games"
+      ];
+      files = [
+        ".config/mimeapps.list"
+        ".config/powerdevilrc"
+        ".config/powermanagementprofilesrc"
+        ".config/syncthingtray.ini"
       ];
     };
   };
