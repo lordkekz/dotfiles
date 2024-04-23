@@ -27,6 +27,7 @@ in {
       directories = [
         ".config/carapace"
         ".config/nushell"
+        ".config/VSCodium"
         ".local/share/kactivitymanagerd"
 
         ".cache/bat"
@@ -60,6 +61,7 @@ in {
       "/var/lib/cups"
       "/var/lib/incus"
       "/var/lib/libvirt"
+      "/var/lib/waydroid"
       "/var/lib/tailscale"
       "/var/lib/upower"
 
@@ -78,7 +80,7 @@ in {
         ".config/Element"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
-        ".config/microsoft-edge"
+        #".config/microsoft-edge"
         ".config/obs-studio"
         ".config/obsidian"
         ".config/Podman Desktop"
