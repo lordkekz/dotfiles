@@ -104,7 +104,7 @@ args @ {
     enable = true;
     extraPackages = tpkgs: {inherit (tpkgs) scheme-full;};
   };
-  home.file.texmf.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/DocumentsSynced/texmf";
+  home.file.texmf.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/texmf";
 
   services.kdeconnect = {
     enable = true;
