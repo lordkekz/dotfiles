@@ -26,9 +26,9 @@ in {
   home.file = mkAutostart [
     "com.ulduzsoft.Birdtray"
     "discord"
-    "element-desktop"
-    "obsidian"
-    "org.telegram.desktop"
+    #"element-desktop"
+    #"obsidian"
+    #"org.telegram.desktop"
     "signal-desktop"
     # "syncthingtray" # starts automatically anyways; gives error if started before tray is available.
   ];
