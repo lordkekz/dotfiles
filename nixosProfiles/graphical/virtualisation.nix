@@ -11,7 +11,11 @@
   ...
 }: {
   # Enable Incus Linux containers
-  virtualisation.incus.enable = true;
+  virtualisation.incus = {
+    enable = true;
+    # Start when socket opened instead of at boot.
+    socketActivation = true;
+  };
 
   # Enable podman containers
   virtualisation.podman = {
@@ -22,6 +26,7 @@
 
   # Enable Waydroid to run Android apps
   virtualisation.waydroid.enable = true;
+  systemd.services.waydroid-container.wantedBy = lib.mkForce [];
 
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd = {
