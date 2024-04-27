@@ -160,7 +160,6 @@
           (attrValues nixosModules)
           ++ [
             nixos-generators.nixosModules.all-formats
-            nixosProfiles.personal
           ];
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
@@ -173,13 +172,20 @@
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
       hosts = with nixosProfiles;
       with hardwareProfiles; {
-        kekswork2312.modules = [kde framework-laptop-2312];
+        kekswork2312.modules = [personal kde framework-laptop-2312];
         kekswork2404.modules = [
+          personal
           kde
           framework-laptop-2404
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
         ];
-        kekstop2304.modules = [hypr desktop-2015];
+        nasman2404.modules = [
+          homelab
+          headless
+          ryzen-server-2404
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
+        kekstop2304.modules = [personal hypr desktop-2015];
       };
 
       # PER-SYSTEM OUTPUTS
