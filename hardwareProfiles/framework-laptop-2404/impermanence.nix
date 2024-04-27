@@ -78,6 +78,7 @@ in {
       directories = [
         ".config/discord"
         ".config/Element"
+        ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
         #".config/microsoft-edge"
@@ -86,9 +87,11 @@ in {
         ".config/Podman Desktop"
         ".config/Signal"
         ".config/syncthing" # Syncthing settings, e.g. telemetry and web interface
+        ".local/share/applications"
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
         ".local/share/flatpak"
         ".local/share/home-manager"
+        ".local/share/JetBrains"
         ".local/share/kwalletd" # KWallet database, contains e.g. WiFi passwords
         ".local/share/kscreen" # KDE Plasma Display/Monitor configuration
         ".local/share/lutris"
@@ -101,6 +104,7 @@ in {
         ".local/share/zoxide" # Zoxide cd history
         ".syncthing-folders" # Default folder for new synced folders
         ".gnupg"
+        ".java/.userPrefs/jetbrains"
         ".jdks" # JDKs downloaded by IntellIJ IDEA
         ".m2" # Local Maven Repo
         ".mozilla/firefox"
