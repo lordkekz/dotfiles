@@ -121,6 +121,7 @@ in {
         ".config/powerdevilrc"
         ".config/powermanagementprofilesrc"
         ".config/syncthingtray.ini"
+        ".config/nix/nix.conf"
       ];
     };
   };

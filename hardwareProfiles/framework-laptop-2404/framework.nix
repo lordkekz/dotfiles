@@ -37,5 +37,10 @@
     tmpfsSize = "50%";
   };
 
+  # Enable ZFS support, mainly for building images of ZFS-based servers
+  boot.supportedFilesystems = ["zfs"];
+  boot.zfs.forceImportRoot = false;
+  networking.hostId = "bb80a896";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
