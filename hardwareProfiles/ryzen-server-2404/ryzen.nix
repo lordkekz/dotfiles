@@ -24,6 +24,9 @@ in {
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["zfs"];
 
+  # This should enable the `amd_pstate` cpuidle driver, by default it ended up with `none`
+  boot.kernelParams = ["amd_pstate=active"];
+
   networking.hostId = "2e2e01d4";
   networking.useNetworkd = true;
   systemd.network = {
