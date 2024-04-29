@@ -80,6 +80,9 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+
+    # Walker, a Wayland-native runner
+    walker.url = "github:abenz1267/walker";
   };
 
   outputs = inputs @ {
@@ -190,6 +193,12 @@
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
         kekstop2304.modules = [personal hypr desktop-2015];
+        kekswork2404-hypr.modules = [
+          personal
+          hypr
+          framework-laptop-2404
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "hypr"))
+        ];
       };
 
       # PER-SYSTEM OUTPUTS
