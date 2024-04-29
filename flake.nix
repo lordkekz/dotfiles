@@ -81,6 +81,13 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
+    # Hyprland, a wayland tiling compositor
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprlock.url = "github:hyprwm/hyprlock";
+    hypridle.url = "github:hyprwm/hypridle";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+
     # Walker, a Wayland-native runner
     walker.url = "github:abenz1267/walker";
   };
@@ -171,6 +178,7 @@
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;
+          system = "x86_64-linux"; # FIXME for other architectures
         };
         channelName = "nixpkgs";
         system = "x86_64-linux";
