@@ -32,6 +32,14 @@ in {
             # virtiofs should also be possible but needs extra config for zfs
             # https://astro.github.io/microvm.nix/shares.html
           }
+          {
+            source = "/persist/longhorn/test_cluster";
+            mountPoint = "/wormount";
+            tag = "wormount";
+            proto = "9p";
+            # virtiofs should also be possible but needs extra config for zfs
+            # https://astro.github.io/microvm.nix/shares.html
+          }
         ];
 
         microvm.interfaces = [
