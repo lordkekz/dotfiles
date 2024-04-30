@@ -100,7 +100,7 @@ in {
         settings-default
         // {};
       inherit search;
-      desktopFile.enable = true;
+      desktopFile.enable = false;
       desktopFile.icon = "${inputs.self.outPath}/assets/Firefox_Homework_Icon_128x128.png";
     };
   };
