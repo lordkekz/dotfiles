@@ -34,7 +34,21 @@ args @ {
   ];
 
   # My system monitor of choice
-  programs.btop.enable = true;
+  programs.btop = {
+    enable = true;
+    settings = {
+      theme_background = false;
+      proc_filter_kernel = true;
+      cpu_graph_upper = "total";
+      cpu_graph_lower = "user"; # Also try "guest"
+      zfs_arc_cached = true;
+      # Disk display
+      only_physical = true;
+      use_fstab = false;
+      zfs_hide_datasets = true;
+      show_io_stat = true;
+    };
+  };
 
   # Another nice system monitor (command: btm)
   programs.bottom.enable = true;
