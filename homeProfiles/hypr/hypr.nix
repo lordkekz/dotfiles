@@ -14,14 +14,18 @@ args @ {
 }: let
   # The NixOS module applies some config to the package.
   # We just use that final package to avoid potential conflicts.
-  hyprlandPackageMaybeFromOsConfig = if args ? osConfig then args.osConfig.programs.hyprland.finalPackage else inputs.hyprland.packages.${system}.hyprland;
+  hyprlandPackageMaybeFromOsConfig =
+    if args ? osConfig
+    then args.osConfig.programs.hyprland.finalPackage
+    else inputs.hyprland.packages.${system}.hyprland;
 
   # A list of bindings which only exist if alacritty is enabled.
   alacrittyBinding =
     if config.programs.alacritty.enable
     then [
       "$mod, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
-      "$mod, A, exec, ${config.programs.alacritty.package}/bin/alacritty -e nu"]
+      "$mod, A, exec, ${config.programs.alacritty.package}/bin/alacritty -e nu"
+    ]
     else [];
 in {
   imports = [
