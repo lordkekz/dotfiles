@@ -37,6 +37,9 @@ in {
         ".cache/nix"
         ".cache/tealdeer"
         ".cache/thumbnails"
+        # Actually I'd rather only persist ".cache/JetBrains/IntelliJIdea2024.1/plugins" because it contains IdeaVim
+        # But I don't want to change it for every IntelliJ update.
+        ".cache/JetBrains"
         # Contains some KDE config and telemetry
         ".config/KDE"
         ".config/kde.org"
