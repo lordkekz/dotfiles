@@ -29,8 +29,12 @@ args @ {
 
     # Benchmarking
     geekbench
+    # disk benchmark
+    fio
     # Speedtest by Ookla
     ookla-speedtest
+    # S.M.A.R.T. tools; provides smartctl
+    smartmontools
   ];
 
   # A cat with wings
