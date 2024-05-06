@@ -50,9 +50,21 @@ args @ {
       # LSP
       plugins.lsp.enable = true;
       plugins.lsp.servers = {
+        # Bash
+        bashls.enable = true;
+        # C/C++
+        clangd.enable = true;
+        # Haskell
+        hls.enable = true;
+        # Java
+        java-language-server.enable = true;
+        # Nix
         nixd.enable = true;
         nushell.enable = true;
-        java-language-server.enable = true;
+        # Rust
+        rust-analyzer.enable = true;
+        # Python
+        ruff-lsp.enable = true;
       };
 
       plugins = {
