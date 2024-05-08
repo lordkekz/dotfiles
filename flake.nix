@@ -72,7 +72,7 @@
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
 
     # Plasma manager
-    plasma-manager.url = "github:pjones/plasma-manager";
+    plasma-manager.url = "github:pjones/plasma-manager/plasma-5";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
