@@ -73,13 +73,6 @@ args @ {
     };
   };
 
-  # Yazi is a TUI file manager
-  programs.yazi = {
-    enable = true;
-    enableNushellIntegration = true;
-    package = pkgs-unstable.yazi;
-  };
-
   # Atuin shell history
   programs.atuin = {
     enable = true;

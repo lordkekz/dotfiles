@@ -62,6 +62,9 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Yazi plugins, packaged by your's truly
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins";
+
     # Generate images etc. from NixOS configs
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
@@ -75,11 +78,6 @@
     plasma-manager.url = "github:pjones/plasma-manager/plasma-5";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
-
-    # Use sops-nix for secret management
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland";
