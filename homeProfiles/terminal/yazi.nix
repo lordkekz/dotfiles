@@ -20,10 +20,56 @@ args @ {
       show_hidden = true;
       sort_dir_first = true;
     };
-    keymap = {
-      manager.prepend_keymap = [
+    keymap = let
+      inherit (lib) concatLists attrValues genList;
+      inherit (builtins) toString;
+
+      keymap.tabs =
+        [
+          {
+            on = ["t" "t"];
+            run = "tab_create --current";
+            desc = "Create a new tab using the current path";
+          }
+          {
+            on = ["t" "x"];
+            run = "tab_close --current";
+            desc = "Close current tab";
+          }
+          {
+            on = ["t" "b"];
+            run = "tab_switch -1 --relative";
+            desc = "Switch to the previous tab";
+          }
+          {
+            on = ["t" "n"];
+            run = "tab_switch 1 --relative";
+            desc = "Switch to the next tab";
+          }
+        ]
+        ++ (genList (i: {
+            on = ["t" (toString (i + 1))];
+            run = "tab_switch ${toString i}";
+            desc = "Switch to tab ${toString (i + 1)}";
+          })
+          9);
+
+      keymap.relative-motions =
+        genList (i: {
+          on = [(toString (i + 1)) "<Space>"];
+          run = "plugin relative-motions --args=${toString (i + 1)}";
+          desc = "Move in relative steps";
+        })
+        9;
+
+      keymap.general = [
         {
-          on = ["l" "<Enter>"];
+          on = ["<Enter>"];
+          run = "plugin bypass --args=smart_enter";
+          desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory";
+        }
+        {
+          on = ["l"];
           run = "plugin bypass --args=smart_enter";
           desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory";
         }
@@ -33,15 +79,8 @@ args @ {
           desc = "Recursively enter parent directory, skipping parents with only a single subdirectory";
         }
       ];
-      manager.append_keymap =
-        builtins.genList (x: let
-          i = builtins.toString x;
-        in {
-          on = [i];
-          run = "plugin relative-motions --args=${i}";
-          desc = "Move in relative steps";
-        })
-        10;
+    in {
+      manager.prepend_keymap = concatLists (attrValues keymap);
     };
   };
 
@@ -52,7 +91,8 @@ args @ {
       '';
     }
     // (builtins.listToAttrs (lib.mapAttrsToList (k: v: {
-      name = "yazi/plugins/${k}.yazi";
-      value.source = v.outPath;
-    }) inputs.nix-yazi-plugins.packages.${system}));
+        name = "yazi/plugins/${k}.yazi";
+        value.source = v.outPath;
+      })
+      inputs.nix-yazi-plugins.packages.${system}));
 }
