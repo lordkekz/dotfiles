@@ -99,12 +99,6 @@ args @ {
     "electron-25.9.0" # Used by Obsidian, as of 2024-01-01
   ];
 
-  programs.texlive = {
-    enable = true;
-    extraPackages = tpkgs: {inherit (tpkgs) scheme-full;};
-  };
-  home.file.texmf.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/texmf";
-
   services.kdeconnect = {
     enable = true;
     indicator = true;
