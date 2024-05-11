@@ -36,7 +36,8 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:lordkekz/home-manager/my-release-23.11"; # Contains changes to yazi
+    #home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
@@ -98,6 +99,7 @@
     nixpkgs-stable,
     nixpkgs-unstable,
     nixos-generators,
+    nix-yazi-plugins,
     self,
     systems,
     ...
@@ -165,6 +167,7 @@
       # Channels are automatically generated from nixpkgs inputs
       # e.g the inputs which contain `legacyPackages` attribute are used.
       channelsConfig.allowUnfree = true;
+      sharedOverlays = [nix-yazi-plugins.overlays.default];
 
       # HOST DEFINITIONS
       hostDefaults = {

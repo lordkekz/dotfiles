@@ -56,7 +56,7 @@ args @ {
 
       keymap.relative-motions =
         genList (i: {
-          on = [(toString (i + 1)) "<Space>"];
+          on = [(toString (i + 1))];
           run = "plugin relative-motions --args=${toString (i + 1)}";
           desc = "Move in relative steps";
         })
@@ -82,17 +82,16 @@ args @ {
     in {
       manager.prepend_keymap = concatLists (attrValues keymap);
     };
+
+    plugins = with pkgs.yaziPlugins; {
+      inherit bypass relative-motions starship;
+    };
   };
 
-  xdg.configFile =
-    {
-      "yazi/init.lua".text = ''
-        require("starship"):setup()
-      '';
-    }
-    // (builtins.listToAttrs (lib.mapAttrsToList (k: v: {
-        name = "yazi/plugins/${k}.yazi";
-        value.source = v.outPath;
-      })
-      inputs.nix-yazi-plugins.packages.${system}));
+  xdg.configFile = {
+    "yazi/init.lua".text = ''
+      require("starship"):setup()
+      require("relative-motions"):setup({ show_numbers="relative_absolute", show_motion = true })
+    '';
+  };
 }
