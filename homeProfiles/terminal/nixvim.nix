@@ -70,8 +70,24 @@ args @ {
       };
 
       plugins = {
-        telescope = {
+        # Automatically save, e.g. for typst-live to work
+        auto-save = {
           enable = true;
+          condition = ''
+            function(buf)
+              local fn = vim.fn
+              local utils = require("auto-save.utils.data")
+              if fn.getbufvar(buf, "&modifiable") == 1 and
+                  utils.not_in(fn.getbufvar(buf, "&filetype"), { "typ" }) then
+                return true -- met condition(s), can save
+              end
+              return false -- can’t save end
+            end
+            '';
+        };
+        # TODO
+        telescope = {
+          enable = false;
           extensions = {
             file-browser.enable = true;
             frecency.enable = true;
