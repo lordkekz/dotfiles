@@ -188,6 +188,16 @@
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
       hosts = with nixosProfiles;
       with hardwareProfiles; {
+        worm.modules = [
+          homelab
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
+
+        live.modules = [
+          live-installer
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
+
         kekswork2312.modules = [personal kde framework-laptop-2312];
         kekswork2404.modules = [
           personal
