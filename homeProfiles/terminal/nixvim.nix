@@ -65,6 +65,8 @@ args @ {
         rust-analyzer.enable = true;
         # Python
         ruff-lsp.enable = true;
+        # Typst typsetting language
+        typst-lsp.enable = true;
       };
 
       plugins = {
@@ -115,6 +117,12 @@ args @ {
               end
             '';
           };
+        };
+        # Utilities for typst
+        typst-vim = {
+          enable = true;
+          # Doesn't auto-refresh
+          #settings.pdf_viewer = "firefox";
         };
       };
 
