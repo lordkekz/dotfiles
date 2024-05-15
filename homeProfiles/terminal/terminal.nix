@@ -24,9 +24,6 @@ args @ {
     tmatrix # Epic matrix effect
     du-dust # Disk usage visualizer (kind of like Filelight)
 
-    sops # Secret management
-    gh # GitHub CLI tool
-
     # Benchmarking
     geekbench
     # disk benchmark
@@ -35,6 +32,8 @@ args @ {
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
     smartmontools
+    # Interactive explorer for nix derivations and dependencies
+    nix-tree
   ];
 
   # A cat with wings
