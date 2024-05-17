@@ -81,11 +81,11 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Hyprland, a wayland tiling compositor
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprlock.url = "github:hyprwm/hyprlock";
-    hypridle.url = "github:hyprwm/hypridle";
-    hyprpaper.url = "github:hyprwm/hyprpaper";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
+    hyprland.url = "github:hyprwm/Hyprland/v0.39.1?submodules=1";
+    hyprlock.url = "github:hyprwm/hyprlock/v0.3.0?submodules=1";
+    hypridle.url = "github:hyprwm/hypridle/v0.1.2?submodules=1";
+    hyprpaper.url = "github:hyprwm/hyprpaper/v0.7.0?submodules=1";
+    hyprpicker.url = "github:hyprwm/hyprpicker/v0.2.0?submodules=1";
 
     # Walker, a Wayland-native runner
     walker.url = "github:abenz1267/walker";
