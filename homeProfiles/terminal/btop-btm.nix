@@ -16,6 +16,7 @@ args @ {
   programs.btop = {
     enable = true;
     settings = {
+      update_ms = 1000; # Docs recommend above 2000
       theme_background = false;
       proc_filter_kernel = true;
       cpu_graph_upper = "total";
