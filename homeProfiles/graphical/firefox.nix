@@ -11,6 +11,13 @@ args @ {
   config,
   ...
 }: let
+  # The NixOS module applies some config to the package.
+  # We just use that final package to avoid potential conflicts.
+  package =
+    if args ? osConfig
+    then args.osConfig.programs.firefox.finalPackage
+    else pkgs.firefox;
+
   settings-default = {
     # "browser.startup.homepage" = "https://duckduckgo.com";
     "browser.search.defaultenginename" = "DuckDuckGo";
