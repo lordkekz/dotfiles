@@ -1,4 +1,4 @@
-# My shortcuts for KDE Plasma
+# My theming for KDE Plasma
 args @ {
   inputs,
   outputs,

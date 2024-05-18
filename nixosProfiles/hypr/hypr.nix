@@ -26,8 +26,11 @@ in {
     settings = {
       default_session = {
         command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet --greeting "${greeting}" --time --asterisks
+          ${pkgs.greetd.tuigreet}/bin/tuigreet --sessions "/etc/greetd/environments" --greeting "${greeting}" --time --asterisks --user-menu
         '';
+        #command = ''
+        #  ${pkgs.greetd.tuigreet}/bin/tuigreet --sessions "/etc/greetd/environments" --greeting "${greeting}" --time --asterisks --user-menu --theme border=black;text=gray;prompt=green;time=orange;action=cyan;button=green;container=lightgray;input=red
+        #'';
         user = "greeter";
       };
     };

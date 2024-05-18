@@ -21,6 +21,22 @@ in {
     inputs.hyprpaper.homeManagerModules.default
   ];
 
+  home.packages = [
+    pkgs.libsForQt5.dolphin
+  ];
+
+  qt = {
+    enable = true;
+    style = {
+      package = pkgs.adwaita-qt;
+      name = "adwaita-dark";
+    };
+  };
+
+  gtk = {
+    #enable = true;
+  };
+
   services.dunst.enable = true;
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
