@@ -21,12 +21,9 @@ in {
     inputs.hyprpaper.homeManagerModules.default
   ];
 
-  home.packages = [
-    pkgs.libsForQt5.dolphin
-  ];
-
   qt = {
     enable = true;
+    platformTheme = "gtk3";
     style = {
       package = pkgs.adwaita-qt;
       name = "adwaita-dark";
@@ -34,7 +31,11 @@ in {
   };
 
   gtk = {
-    #enable = true;
+    enable = true;
+    theme = {
+      package = pkgs.gnome.gnome-themes-extra;
+      name = "Adwaita";
+    };
   };
 
   services.dunst.enable = true;

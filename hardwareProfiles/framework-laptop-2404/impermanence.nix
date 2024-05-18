@@ -120,7 +120,6 @@ in {
         "Games"
       ];
       files = [
-        ".config/mimeapps.list"
         ".config/powerdevilrc"
         ".config/powermanagementprofilesrc"
         ".config/syncthingtray.ini"
