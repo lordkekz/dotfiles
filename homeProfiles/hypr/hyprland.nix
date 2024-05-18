@@ -97,10 +97,10 @@ args @ {
 
   # https://wiki.hyprland.org/Configuring/Variables/#general
   general = {
-    gaps_in = 5;
-    gaps_out = 25;
+    gaps_in = 4;
+    gaps_out = 10;
     border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+    "col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
     "col.inactive_border" = "rgba(595959aa)";
     resize_on_border = true;
     layout = "master";
@@ -114,7 +114,7 @@ args @ {
 
     # Change transparency of focused and unfocused windows
     active_opacity = 1.0;
-    inactive_opacity = 1.0;
+    inactive_opacity = 0.9;
 
     drop_shadow = true;
     shadow_range = 4;

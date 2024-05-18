@@ -48,4 +48,6 @@ in {
       "DP-1,/home/hpreiser/Downloads/mike-yukhtenko-wfh8dDlNFOk-unsplash.jpg"
     ];
   };
+
+  services.network-manager-applet.enable = true;
 }

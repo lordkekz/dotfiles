@@ -1,5 +1,8 @@
 /* STOLEN FROM https://github.com/hajosattila/dotfiles/blob/main/style.css */
 
+@define-color theme_base_color rgba(43, 48, 59, 0.9);
+@define-color theme_text_color #f8f8f2;
+
 * { 
     all: unset;
     border: none;

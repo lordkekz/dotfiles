@@ -57,58 +57,58 @@ args @ {
           right = false;
         };
         margins = {
-          top = 20;
+          top = 0;
           bottom = 0;
-          end = 60;
+          end = 0;
           start = 0;
         };
-        list = {
-          height = 300;
-          margin_top = 10;
-          always_show = true;
-          hide_sub = false;
-        };
-        orientation = "vertical";
-        icons = {
-          theme = "";
-          hide = false;
-          size = 32;
-          image_height = 200;
-        };
-        modules = [
-          {
-            name = "runner";
-            prefix = ">";
-          }
-          {
-            name = "applications";
-            prefix = "";
-          }
-          {
-            name = "ssh";
-            prefix = "";
-            switcher_exclusive = false;
-          }
-          {
-            name = "finder";
-            prefix = "";
-            switcher_exclusive = false;
-          }
-          {
-            name = "commands";
-            prefix = "";
-            switcher_exclusive = false;
-          }
-          {
-            name = "websearch";
-            prefix = "?";
-          }
-          {
-            name = "switcher";
-            prefix = "/";
-          }
-        ];
       };
+      list = {
+        height = 300;
+        margin_top = 10;
+        always_show = true;
+        hide_sub = false;
+      };
+      orientation = "vertical";
+      icons = {
+        theme = "";
+        hide = false;
+        size = 32;
+        image_height = 200;
+      };
+      modules = [
+        {
+          name = "runner";
+          prefix = ">";
+        }
+        {
+          name = "applications";
+          prefix = "";
+        }
+        {
+          name = "ssh";
+          prefix = "";
+          switcher_exclusive = false;
+        }
+        {
+          name = "finder";
+          prefix = "";
+          switcher_exclusive = false;
+        }
+        {
+          name = "commands";
+          prefix = "";
+          switcher_exclusive = false;
+        }
+        {
+          name = "websearch";
+          prefix = "?";
+        }
+        {
+          name = "switcher";
+          prefix = "/";
+        }
+      ];
     };
 
     style = lib.readFile ./walker.css;
