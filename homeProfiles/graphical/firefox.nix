@@ -11,6 +11,9 @@ args @ {
   config,
   ...
 }: let
+  # The main nixpkgs channel; searches will be for this version
+  channel = pkgs.lib.trivial.release;
+
   # The NixOS module applies some config to the package.
   # We just use that final package to avoid potential conflicts.
   package =
@@ -50,7 +53,7 @@ args @ {
     force = true;
     default = "MyDuckDuckGo";
     privateDefault = default;
-    order = ["MyDuckDuckGo" "Google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options"];
+    order = ["MyDuckDuckGo" "Google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options" "Noogle Functions"];
     engines = {
       "MyDuckDuckGo" = {
         urls = [{template = "https://duckduckgo.com/?kae=t&k9=48f1ef&kaa=844ad2&kx=25ac86&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kav=1&t=ffab&q={searchTerms}";}];
@@ -66,19 +69,29 @@ args @ {
       "Google".metaData.hidden = true;
 
       "Nix Packages" = {
-        urls = [{template = "https://search.nixos.org/packages?type=packages&query={searchTerms}";}];
+        urls = [{template = "https://search.nixos.org/packages?channel=${channel}&query={searchTerms}";}];
         icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        definedAliases = ["@np"];
+        definedAliases = ["@np" "@nixpackages"];
       };
       "NixOS Options" = {
-        urls = [{template = "https://search.nixos.org/packages?type=packages&query={searchTerms}";}];
+        urls = [{template = "https://search.nixos.org/options?channel=${channel}&query={searchTerms}";}];
         icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        definedAliases = ["@no"];
+        definedAliases = ["@nc" "@nixconfig"];
+      };
+      "Nix Flakes" = {
+        urls = [{template = "https://search.nixos.org/flakes:q!
+        ?channel=${channel}&query={searchTerms}";}];
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = ["@nc" "@nixconfig"];
+      };
+      "Noogle Functions" = {
+        urls = [{template = "http://localhost:8013/q?term={searchTerms}";}];
+        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        definedAliases = ["@no" "@noogle"];
       };
       "NixOS Wiki" = {
         urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
         icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@nw" "@nixwiki"];
       };
       "MyNixOS" = {
@@ -92,6 +105,7 @@ args @ {
 in {
   programs.firefox = {
     enable = true;
+    inherit package;
     profiles."default" = {
       id = 0;
       isDefault = true;
