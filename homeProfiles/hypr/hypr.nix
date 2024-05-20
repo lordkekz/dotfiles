@@ -21,6 +21,10 @@ in {
     inputs.hyprpaper.homeManagerModules.default
   ];
 
+  home.packages = with pkgs; [
+    libsForQt5.kwalletmanager
+  ];
+
   qt = {
     enable = true;
     platformTheme = "gtk3";

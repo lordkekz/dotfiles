@@ -42,15 +42,15 @@ args @ {
   # FIXME use .desktop file
   bindFirefox = with config.programs.firefox;
     optional enable
-    "${vars.mod1}, F, exec, ${package}/bin/firefox";
+    "${vars.mod1}, W, exec, ${package}/bin/firefox";
 
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   bindWorkspaces = concatLists (genList (
       x: let
         ws = toString (x + 1);
       in [
-        "${vars.mod2}, ${ws}, workspace, ${ws}"
-        "${vars.mod3}, ${ws}, movetoworkspace, ${ws}"
+        "${vars.mod1}, ${ws}, workspace, ${ws}"
+        "${vars.mod2}, ${ws}, movetoworkspace, ${ws}"
       ]
     )
     10);
@@ -61,8 +61,8 @@ args @ {
     "${vars.mod1}, right, movefocus, r"
     "${vars.mod1}, up, movefocus, u"
     "${vars.mod1}, down, movefocus, d"
-    "${vars.mod1}, V, togglefloating"
-    "${vars.mod1}, X, killactive"
+    "${vars.mod1}, F, togglefloating"
+    "ALT, F4, killactive"
   ];
 
   # Plain, unconditional bindings
@@ -70,6 +70,7 @@ args @ {
     ", Print, exec, grimblast copy area"
     "ALT, SPACE, exec, ${vars.menu}"
     "${vars.mod1}, E, exec, ${vars.fileManager}"
+    "${vars.mod1}, R, exec, ${pkgs.obsidian}/bin/obsidian"
     "${vars.mod1}, BACKSPACE, exit"
   ];
 
@@ -83,8 +84,9 @@ args @ {
   ####### MONITORS AND UTILITIES #######
 
   exec-once = [
-    "${pkgs.hyprdim}/bin/hyprdim --no-dim-when-only --persist --ignore-leaving-special --dialog-dim"
-    "${config.programs.waybar.package}/bin/waybar"
+    "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
+    "${config.programs.waybar.package}/bin/waybar &"
+    "${pkgs.hyprdim}/bin/hyprdim --no-dim-when-only --persist --ignore-leaving-special --dialog-dim %"
   ];
 
   monitor = [

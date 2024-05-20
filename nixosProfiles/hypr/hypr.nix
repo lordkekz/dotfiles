@@ -33,6 +33,15 @@ in {
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    config = {
+      # Config for xdg-desktop-portal/portals.conf
+      common = {
+        preferred = "default=hyprland;gtk";
+      };
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   services.greetd = {
