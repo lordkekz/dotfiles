@@ -100,6 +100,12 @@ args @ {
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@nix"];
       };
+      "Arch Wiki" = {
+        urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
+        iconUpdateURL = "https://archlinux.org/static/logos/apple-touch-icon-144x144.38cf584757c3.png";
+        updateInterval = 24 * 60 * 60 * 1000; # every day
+        definedAliases = ["@arch"];
+      };
     };
   };
 in {
