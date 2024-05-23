@@ -47,7 +47,7 @@ args @ {
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   bindWorkspaces = concatLists (genList (
       x: let
-        ws = toString (x + 1);
+        ws = toString ((x + 1) - ((x + 1) / 10) * 10);
       in [
         "${vars.mod1}, ${ws}, workspace, ${ws}"
         "${vars.mod2}, ${ws}, movetoworkspace, ${ws}"
@@ -55,12 +55,20 @@ args @ {
     )
     10);
 
-  # Move focus with $mod1 + arrow keys
   bindWindowManagement = [
+    # Move focus with SUPER + Arrow Keys
     "${vars.mod1}, left, movefocus, l"
-    "${vars.mod1}, right, movefocus, r"
-    "${vars.mod1}, up, movefocus, u"
     "${vars.mod1}, down, movefocus, d"
+    "${vars.mod1}, up, movefocus, u"
+    "${vars.mod1}, right, movefocus, r"
+    # Switch window with SUPER + HJKL
+    "${vars.mod1}, H, movewindow, l"
+    "${vars.mod1}, J, movewindow, d"
+    "${vars.mod1}, K, movewindow, u"
+    "${vars.mod1}, L, movewindow, r"
+    # Cycle Window with ALT [+ SHIFT] + TAB
+    "ALT, TAB, cyclenext"
+    "ALT SHIFT, TAB, cyclenext, prev"
     "${vars.mod1}, F, togglefloating"
     "ALT, F4, killactive"
   ];
@@ -84,15 +92,18 @@ args @ {
   ####### MONITORS AND UTILITIES #######
 
   exec-once = [
-    "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
-    "${config.programs.waybar.package}/bin/waybar &"
-    "${pkgs.hyprdim}/bin/hyprdim --no-dim-when-only --persist --ignore-leaving-special --dialog-dim %"
+    #"${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
+    "pkill waybar; ${config.programs.waybar.package}/bin/waybar &"
+    "${pkgs.hyprdim}/bin/hyprdim --no-dim-when-only --persist --ignore-leaving-special --dialog-dim &"
+    "${pkgs.dex}/bin/dex -a &"
   ];
 
   monitor = [
-    "DP-2,preferred,auto,2"
-    "eDP-1,disable"
-    ",preferred,auto,1"
+    "eDP-1,preferred,0x0,1.6"
+    "DP-1,preferred,1410x0,2,vrr,1,bitdepth,10"
+    "DP-2,preferred,3330x0,1.6,vrr,1"
+    #"eDP-1,disable"
+    ",preferred,auto,auto,mirror,eDP-1"
   ];
 
   ####### LOOK AND FEEL #######
@@ -100,7 +111,7 @@ args @ {
   # https://wiki.hyprland.org/Configuring/Variables/#general
   general = {
     gaps_in = 4;
-    gaps_out = 10;
+    gaps_out = 4;
     border_size = 2;
     "col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
     "col.inactive_border" = "rgba(595959aa)";
@@ -126,8 +137,8 @@ args @ {
     # https://wiki.hyprland.org/Configuring/Variables/#blur
     blur = {
       enabled = true;
-      size = 3;
-      passes = 1;
+      size = 5;
+      passes = 3;
 
       vibrancy = 0.1696;
     };

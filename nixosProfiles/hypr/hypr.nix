@@ -18,6 +18,10 @@ in {
     inputs.hyprland.nixosModules.default
   ];
 
+  services.tlp.enable = true;
+  services.blueman.enable = true;
+  services.udisks2.enable = true;
+
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${system}.hyprland;
@@ -59,9 +63,17 @@ in {
     };
   };
 
+  # Unlock Kwallet when logging in with tuigreet
+  security.pam.services.login.enableKwallet = true;
+  security.pam.services.greetd.enableKwallet = true;
+
+  # Enable polkit from KDE for sudo prompt popups
   security.polkit.enable = true;
   environment.systemPackages = [
-    # Contains a systemd unit, so hopefully autostarts on its own
+    pkgs.libsForQt5.kwalletmanager
+
+    # These packages contain systemd units, so they should autostart just by adding them here
     pkgs.libsForQt5.polkit-kde-agent
+    pkgs.libsForQt5.kwallet-pam
   ];
 }
