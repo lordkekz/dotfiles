@@ -60,20 +60,29 @@ args @ {
 
       widgets = [
         "org.kde.plasma.appmenu"
+        #{
+        #  name = "org.kde.plasma.panelspacer";
+        #  config = {
+        #    General.expanding = "false";
+        #    General.length = "5";
+        #  };
+        #}
+        "org.kde.plasma.panelspacer"
+        #{
+        #  name = "org.kde.plasma.betterinlineclock";
+        #  config.Appearance = {
+        #    dateFormat = "isoDate";
+        #    fixedFont = "true";
+        #    fontSize = "14";
+        #    showSeconds = "true";
+        #  };
+        #}
         {
-          name = "org.kde.plasma.panelspacer";
-          config = {
-            General.expanding = "false";
-            General.length = "5";
-          };
-        }
-        {
-          name = "org.kde.plasma.betterinlineclock";
-          config = {
-            Appearance.dateFormat = "isoDate";
-            Appearance.fixedFont = "true";
-            Appearance.fontSize = "14";
-            Appearance.showSeconds = "true";
+          name = "org.kde.plasma.digitalclock";
+          config.Appearance = {
+            dateDisplayFormat = "BesideTime";
+            dateFormat = "isoDate";
+            showSeconds = "true";
           };
         }
         "org.kde.plasma.panelspacer"
