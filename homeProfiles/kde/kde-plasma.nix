@@ -63,6 +63,7 @@ args @ {
       "kdeglobals"."KFileDialog Settings"."View Style".value = "DetailTree";
       "kdeglobals"."KScreen"."ScaleFactor".value = 1.5;
       "kdeglobals"."KScreen"."ScreenScaleFactors".value = "eDP-1=1.5;";
+      "kdeglobals"."KScreen"."XwaylandClientsScale".value = false;
       "kdeglobals"."KShortcutsDialog Settings"."Dialog Size".value = "600,480";
       "kdeglobals"."WM"."activeBackground".value = "44,55,70";
       "kdeglobals"."WM"."activeBlend".value = "44,55,70";
