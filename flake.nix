@@ -32,13 +32,20 @@
 
     ## PACKAGES, CONFIGURATION AND APPLICATIONS ##
 
+    # Anyrun is a modern, wayland-native runner written in Rust.
+    anyrun.url = "github:anyrun-org/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
     # Hardware configs for known systems.
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:lordkekz/home-manager/my-release-23.11"; # Contains changes to yazi
+    home-manager.url = "github:lordkekz/home-manager?ref=my-release-23.11"; # Contains changes to yazi
     #home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Home manager unstable, because it contains some hypr* modules that aren't in 23.11
+    home-manager-unstable.url = "github:nix-community/home-manager";
 
     # microvm.nix
     microvm.url = "github:astro/microvm.nix";
@@ -80,6 +87,9 @@
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
+    # Stylix helps theme applications using base16
+    stylix.url = "github:danth/stylix?ref=release-23.11";
+
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland/v0.39.1?submodules=1";
     hyprlock.url = "github:hyprwm/hyprlock/v0.3.0?submodules=1";
@@ -99,7 +109,6 @@
     nixpkgs-stable,
     nixpkgs-unstable,
     nixos-generators,
-    nix-yazi-plugins,
     self,
     systems,
     ...
@@ -167,7 +176,13 @@
       # Channels are automatically generated from nixpkgs inputs
       # e.g the inputs which contain `legacyPackages` attribute are used.
       channelsConfig.allowUnfree = true;
-      sharedOverlays = [nix-yazi-plugins.overlays.default];
+      sharedOverlays = map (i: i.overlays.default) (with inputs; [
+        nix-yazi-plugins
+        hyprlock
+        hypridle
+        hyprpaper
+        hyprpicker
+      ]);
 
       # HOST DEFINITIONS
       hostDefaults = {

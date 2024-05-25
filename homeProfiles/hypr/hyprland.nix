@@ -29,7 +29,7 @@ args @ {
     mod2 = "SUPER SHIFT";
     mod3 = "SUPER CONTROL";
     fileManager = "dolphin";
-    menu = "walker";
+    menu = "anyrun";
   };
 
   # A list of bindings which only exist if alacritty is enabled.
@@ -113,8 +113,8 @@ args @ {
     gaps_in = 4;
     gaps_out = 4;
     border_size = 2;
-    "col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
-    "col.inactive_border" = "rgba(595959aa)";
+    #"col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
+    #"col.inactive_border" = "rgba(595959aa)";
     resize_on_border = true;
     layout = "master";
   };
@@ -132,7 +132,7 @@ args @ {
     drop_shadow = true;
     shadow_range = 4;
     shadow_render_power = 3;
-    "col.shadow" = "rgba(1a1a1aee)";
+    #"col.shadow" = "rgba(1a1a1aee)";
 
     # https://wiki.hyprland.org/Configuring/Variables/#blur
     blur = {
@@ -140,7 +140,7 @@ args @ {
       size = 5;
       passes = 3;
 
-      vibrancy = 0.1696;
+      popups = true;
     };
   };
 

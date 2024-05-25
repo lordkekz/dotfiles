@@ -63,6 +63,9 @@ in {
     };
   };
 
+  # Enable Hyprlock's pam module
+  security.pam.services.hyprlock = {};
+
   # Unlock Kwallet when logging in with tuigreet
   security.pam.services.login.enableKwallet = true;
   security.pam.services.greetd.enableKwallet = true;

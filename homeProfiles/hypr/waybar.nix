@@ -1,4 +1,4 @@
-# My config for Walker, a Wayland-Native runner.
+# My config for Waybar
 args @ {
   inputs,
   outputs,
@@ -45,6 +45,6 @@ in {
   programs.waybar = {
     enable = true;
     settings = {inherit mainBar;};
-    style = lib.readFile ./waybar.css;
+    #style = lib.readFile ./waybar.css;
   };
 }
