@@ -23,13 +23,23 @@ args @ {
     {}
     appDesktopNames;
 in {
-  home.file = mkAutostart [
-    "com.ulduzsoft.Birdtray"
-    "discord"
-    #"element-desktop"
-    #"obsidian"
-    #"org.telegram.desktop"
-    "signal-desktop"
-    # "syncthingtray" # starts automatically anyways; gives error if started before tray is available.
-  ];
+  home.file = mkAutostart (
+    [
+      "discord"
+      #"element-desktop"
+      #"obsidian"
+      #"org.telegram.desktop"
+      "signal-desktop"
+    ]
+    ++ (
+      if config.wayland.windowManager.hyprland.enable
+      then [
+        "thunderbird" # Birdtray is broken on Hyprland
+        "syncthingtray" # Unlike Plasmoid for KDE, the tray icon doesn't start on its own
+      ]
+      else [
+        "com.ulduzsoft.Birdtray"
+      ]
+    )
+  );
 }
