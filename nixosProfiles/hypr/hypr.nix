@@ -72,6 +72,10 @@ in {
 
   # Enable polkit from KDE for sudo prompt popups
   security.polkit.enable = true;
+
+  # Use KDE's ksshaskpass instead of pkgs.x11_ssh_askpass
+  programs.ssh.askPassword = "${pkgs.libsForQt5.ksshaskpass}/bin/ksshaskpass";
+
   environment.systemPackages = [
     pkgs.libsForQt5.kwalletmanager
 
