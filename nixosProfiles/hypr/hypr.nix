@@ -78,5 +78,6 @@ in {
     # These packages contain systemd units, so they should autostart just by adding them here
     pkgs.libsForQt5.polkit-kde-agent
     pkgs.libsForQt5.kwallet-pam
+    pkgs.libsForQt5.kwallet
   ];
 }

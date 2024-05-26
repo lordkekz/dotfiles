@@ -96,10 +96,16 @@ args @ {
   ####### MONITORS AND UTILITIES #######
 
   exec-once = [
-    #"${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
+    "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
+    "sleep 3 && ${pkgs.libsForQt5.kwallet-pam}/libexec/pam_kwallet_init&"
+  ];
+
+  exec = [
     "pkill waybar; ${config.programs.waybar.package}/bin/waybar &"
-    "${pkgs.hyprdim}/bin/hyprdim --no-dim-when-only --persist --ignore-leaving-special --dialog-dim &"
-    "${pkgs.dex}/bin/dex -a &"
+    "[workspace 10 silent] sleep 0 && thunderbird"
+    "[workspace 10 silent] sleep 1 && signal-desktop"
+    "[workspace 10 silent] sleep 2 && discord"
+    "[workspace 10 silent] pkill syncthingtray; sleep 3 && syncthingtray"
   ];
 
   monitor = [
@@ -198,6 +204,7 @@ in {
       inherit
         bind
         exec-once
+        exec
         monitor
         general
         master
