@@ -47,10 +47,14 @@ args @ {
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   bindWorkspaces = concatLists (genList (
       x: let
-        ws = toString ((x + 1) - ((x + 1) / 10) * 10);
+        key = toString x;
+        ws =
+          if x == 0
+          then "10"
+          else toString x;
       in [
-        "${vars.mod1}, ${ws}, workspace, ${ws}"
-        "${vars.mod2}, ${ws}, movetoworkspace, ${ws}"
+        "${vars.mod1}, ${key}, workspace, ${ws}"
+        "${vars.mod2}, ${key}, movetoworkspace, ${ws}"
       ]
     )
     10);
@@ -180,6 +184,12 @@ args @ {
 
     touchpad.natural_scroll = true;
   };
+
+  gestures = {
+    workspace_swipe = true;
+    workspace_swipe_fingers = 3;
+    workspace_swipe_distance = 200;
+  };
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -196,6 +206,7 @@ in {
         misc
         bindm
         input
+        gestures
         ;
     };
   };
