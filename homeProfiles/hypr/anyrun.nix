@@ -18,7 +18,7 @@ in {
 
   programs.anyrun = {
     enable = true;
-    package = anyrunPkgs.anyrun-with-all-plugins;
+    #package = anyrunPkgs.anyrun-with-all-plugins;
     config = {
       plugins = with anyrunPkgs; [
         applications
@@ -32,31 +32,89 @@ in {
         translate
         websearch
       ];
-      x = {fraction = 0.5;}; # centered
-      y = {fraction = 0.3;};
-      width = {fraction = 0.3;}; # fraction of screen
-      height = {absolute = 64;}; # pixels
+      x.fraction = 0.5; # centered
+      y.fraction = 0.3;
+      width.fraction = 0.3; # fraction of screen
+      height.absolute = 64; # pixels
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = false;
-      closeOnClick = false;
+      closeOnClick = true;
       showResultsImmediately = false;
       maxEntries = null;
     };
 
-    #extraCss = ''
-    #  .some_class {
-    #    background: red;
-    #  }
-    #'';
+    extraCss = builtins.readFile ./anyrun.css;
 
-    #extraConfigFiles."some-plugin.ron".text = ''
-    #  Config(
-    #    // for any other plugin
-    #    // this file will be put in ~/.config/anyrun/some-plugin.ron
-    #    // refer to docs of xdg.configFile for available options
-    #  )
-    #'';
+    extraConfigFiles."applications.ron".text = ''
+      Config(
+          // Also show the Desktop Actions defined in the desktop files, e.g. "New Window" from LibreWolf
+          desktop_actions: false,
+          max_entries: 5,
+          // The terminal used for running terminal based desktop entries, if left as `None` a static list of terminals is used
+          // to determine what terminal to use.
+          terminal: Some("alacritty"),
+      )
+    '';
+
+    extraConfigFiles."dictionary.ron".text = ''
+      Config(
+        prefix: ":def",
+        max_entries: 5,
+      )
+    '';
+
+    # FIXME package kidex using Nix, create home-manager module and use that
+    extraConfigFiles."kidex.ron".text = ''
+      Config(
+        max_entries: 5,
+      )
+    '';
+
+    extraConfigFiles."randr.ron".text = ''
+      Config(
+        prefix: ":dp",
+        max_entries: 5,
+      )
+    '';
+
+    # (rink calculator plugin doesn't have config)
+
+    extraConfigFiles."shell.ron".text = ''
+      Config(
+        prefix: ":sh",
+        // Override the shell used to launch the command
+        shell: "${config.programs.nushell.package}/bin/nu",
+      )
+    '';
+
+    extraConfigFiles."symbols.ron".text = ''
+      Config(
+        prefix: ":sym",
+        // Custom user defined symbols to be included along the unicode symbols
+        symbols: {
+          // "name": "text to be copied"
+          "shrug": "¯\\_(ツ)_/¯",
+        },
+        max_entries: 3,
+      )
+    '';
+
+    extraConfigFiles."translate.ron".text = ''
+      Config(
+        prefix: ":tl",
+        language_delimiter: " to ",
+        max_entries: 3,
+      )
+    '';
+
+    extraConfigFiles."websearch.ron".text = ''
+      Config(
+        prefix: "?",
+        // Can also define custom searches, see docs
+        engines: [ DuckDuckGo ],
+      )
+    '';
   };
 }
