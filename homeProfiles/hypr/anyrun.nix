@@ -33,13 +33,13 @@ in {
         websearch
       ];
       x.fraction = 0.5; # centered
-      y.fraction = 0.3;
+      y.fraction = 0.15;
       width.fraction = 0.3; # fraction of screen
-      height.absolute = 64; # pixels
+      height.absolute = 32; # pixels
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
-      hidePluginInfo = false;
+      hidePluginInfo = true;
       closeOnClick = true;
       showResultsImmediately = false;
       maxEntries = null;
