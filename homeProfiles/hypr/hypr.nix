@@ -20,8 +20,10 @@ in {
 
   home.packages = with pkgs; [
     libsForQt5.kwalletmanager
+    playerctl
   ];
 
+  services.playerctld.enable = true;
   services.dunst.enable = true;
   services.udiskie.enable = true;
   services.network-manager-applet.enable = true;
