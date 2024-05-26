@@ -11,23 +11,20 @@ args @ {
   lib,
   config,
   ...
-}: let
-  anyrunPkgs = inputs.anyrun.packages.${system};
-in {
+}: {
   imports = [inputs.anyrun.homeManagerModules.anyrun];
 
   programs.anyrun = {
     enable = true;
     #package = anyrunPkgs.anyrun-with-all-plugins;
     config = {
-      plugins = with anyrunPkgs; [
+      plugins = with pkgs.anyrunPlugins; [
         applications
         dictionary
         kidex
         randr
         rink
         shell
-        stdin
         symbols
         translate
         websearch
@@ -41,7 +38,7 @@ in {
       layer = "overlay";
       hidePluginInfo = true;
       closeOnClick = true;
-      showResultsImmediately = false;
+      showResultsImmediately = true;
       maxEntries = null;
     };
 

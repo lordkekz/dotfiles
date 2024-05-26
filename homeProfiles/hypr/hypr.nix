@@ -21,8 +21,10 @@ in {
   home.packages = with pkgs; [
     libsForQt5.kwalletmanager
     playerctl
+    wl-clipboard
   ];
 
+  services.cliphist.enable = true;
   services.playerctld.enable = true;
   services.dunst.enable = true;
   services.udiskie.enable = true;

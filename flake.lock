@@ -30,15 +30,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1713259062,
-        "narHash": "sha256-WTO84hUL8IlNuHDK2yOCeJ38EewFzGt5E0kzBjNWxa8=",
-        "owner": "anyrun-org",
+        "lastModified": 1716763317,
+        "narHash": "sha256-M3djFHKGyHmTn28Of58pYOzwMvBV+A5HCbUJhJb/94s=",
+        "owner": "lordkekz",
         "repo": "anyrun",
-        "rev": "f9d30e34fa4ccb2797c6becec37e8bcff6585d39",
+        "rev": "a3d66b223d1a65e9a3a0968aac268bf2060f1875",
         "type": "github"
       },
       "original": {
-        "owner": "anyrun-org",
+        "owner": "lordkekz",
+        "ref": "add-nix-overlay",
         "repo": "anyrun",
         "type": "github"
       }

@@ -33,7 +33,8 @@
     ## PACKAGES, CONFIGURATION AND APPLICATIONS ##
 
     # Anyrun is a modern, wayland-native runner written in Rust.
-    anyrun.url = "github:anyrun-org/anyrun";
+    anyrun.url = "github:lordkekz/anyrun?ref=add-nix-overlay";
+    #anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware configs for known systems.
@@ -182,6 +183,7 @@
         hypridle
         hyprpaper
         hyprpicker
+        anyrun
       ]);
 
       # HOST DEFINITIONS

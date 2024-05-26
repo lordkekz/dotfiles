@@ -29,7 +29,9 @@ args @ {
     mod2 = "SUPER SHIFT";
     mod3 = "SUPER CONTROL";
     fileManager = "dolphin";
-    menu = "anyrun";
+    anyrun = "${config.programs.anyrun.package}/bin/anyrun";
+    anyrun-stdin = "${vars.anyrun} --plugins ${pkgs.anyrunPlugins.stdin}/lib/libstdin.so";
+    cliphist = "${config.services.cliphist.package}/bin/cliphist";
   };
 
   # A list of bindings which only exist if alacritty is enabled.
@@ -80,10 +82,11 @@ args @ {
   # Plain, unconditional bindings
   bindGeneral = [
     ", Print, exec, grimblast copy area"
-    "ALT, SPACE, exec, ${vars.menu}"
+    "ALT, SPACE, exec, ${vars.anyrun}"
     "${vars.mod1}, E, exec, ${vars.fileManager}"
     "${vars.mod1}, R, exec, ${pkgs.obsidian}/bin/obsidian"
     "${vars.mod1}, BACKSPACE, exit"
+    "${vars.mod1}, V, exec, ${vars.cliphist} list | ${vars.anyrun-stdin} | ${vars.cliphist} decode | wl-copy"
   ];
 
   bind = concatLists [bindAlacritty bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
