@@ -91,11 +91,11 @@
     stylix.url = "github:danth/stylix?ref=release-23.11";
 
     # Hyprland, a wayland tiling compositor
-    hyprland.url = "github:hyprwm/Hyprland/v0.39.1?submodules=1";
-    hyprlock.url = "github:hyprwm/hyprlock/v0.3.0?submodules=1";
-    hypridle.url = "github:hyprwm/hypridle/v0.1.2?submodules=1";
-    hyprpaper.url = "github:hyprwm/hyprpaper/v0.7.0?submodules=1";
-    hyprpicker.url = "github:hyprwm/hyprpicker/v0.2.0?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1&submodules=1";
+    hyprlock.url = "github:hyprwm/hyprlock?ref=main&submodules=1"; #FIXME update with the next release
+    hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2&submodules=1";
+    hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.7.0&submodules=1";
+    hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0&submodules=1";
 
     # Walker, a Wayland-native runner
     walker.url = "github:abenz1267/walker";

@@ -12,37 +12,74 @@ args @ {
   config,
   ...
 }: let
+  inherit (lib) mapAttrsToList;
+
+  rs = num: builtins.toString (builtins.floor num);
+
+  monitors = {
+    "eDP-1" = 1.6;
+    "DP-1" = 2.0;
+    "DP-2" = 1.6;
+  };
+
+  mkInputField = monitor: scale: {
+    inherit monitor;
+    size = "${rs (300 * scale)}, ${rs (40 * scale)}";
+    position = "0, -${rs (80 * scale)}";
+    dots_center = true;
+    dots_size = 0.5; # Scale of input-field height, 0.2 - 0.8
+    dots_spacing = 0.5;
+    fade_on_empty = false;
+    fade_timeout = 10000; # Milliseconds before fade_on_empty is triggered.
+    font_color = "rgb(40, 40, 40)";
+    inner_color = "rgb(200, 200, 200)";
+    outer_color = "rgba(120, 120, 120, 0.9)";
+    outline_thickness = rs (1.5 * scale);
+    placeholder_text = "<i>Start typing...</i>";
+    fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+    capslock_color = "rgb(80, 128, 255)";
+  };
+
+  mkLabel = monitor: scale: {
+    inherit monitor;
+    text = "$TIME";
+    font_family = "Inter";
+    font_size = rs (150 * scale);
+
+    position = "0, ${rs (175 * scale)}";
+
+    valign = "center";
+    halign = "center";
+
+    shadow_passes = 3;
+    shadow_size = rs (3 * scale);
+  };
 in {
   programs.hyprlock = {
     enable = true;
     settings = {
       general = {
-        grace = 5;
+        grace = 0;
+        hide_cursor = true;
       };
 
       background = [
         {
-          path = "screenshot";
+          monitor = "";
+          path = toString config.stylix.image;
           blur_size = 5;
           blur_passes = 3;
-          blur_noise = 0.03;
+          noise = 0.075;
+          contrast = 0.9;
+          brightness = 0.9;
+          vibrancy = 0.3;
+          vibrancy_darkness = 0.0;
         }
       ];
 
-      input-field = [
-        {
-          size = "200, 50";
-          position = "0, -80";
-          monitor = "";
-          dots_center = true;
-          fade_on_empty = true;
-          #font_color = "rgb(202, 211, 245)";
-          #inner_color = "rgb(255, 255, 255, 35)";
-          #outer_color = "rgb(2)";
-          outline_thickness = 0;
-          placeholder_text = "";
-        }
-      ];
+      input-field = mapAttrsToList mkInputField monitors;
+
+      label = mapAttrsToList mkLabel monitors;
     };
   };
 }
