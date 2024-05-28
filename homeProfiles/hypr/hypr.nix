@@ -18,13 +18,48 @@ in {
     inputs.hyprland.homeManagerModules.default
   ];
 
-  home.packages = with pkgs; [
-    libsForQt5.kwalletmanager
+  home.packages = with pkgs;
+  with libsForQt5; [
+    kwalletmanager
     playerctl
     wl-clipboard
+    okular
+    gwenview
+    elisa
   ];
 
-  services.cliphist.enable = true;
+  programs.zathura = {
+    enable = true;
+    mappings = {
+    };
+    options = {
+    };
+  };
+
+  services.batsignal = {
+    enable = true;
+    extraArgs = [
+      # warning levels
+      "-w"
+      "25"
+      #"-W" "WARNING: Battery below 25%"
+      "-c"
+      "20"
+      #"-C" "CRITICAL: Battery below 20%"
+      "-d"
+      "15"
+      "-D"
+      "systemctl suspend"
+      # disable battery full level
+      "-f"
+      "0"
+    ];
+  };
+  services.cliphist = {
+    enable = true;
+    #allowImages = true;
+    #extraOptions = ...;
+  };
   services.playerctld.enable = true;
   services.dunst.enable = true;
   services.udiskie.enable = true;
