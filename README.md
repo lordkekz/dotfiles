@@ -6,6 +6,10 @@ You can see some things about this flake using these commands:
 - `nix flake show github:lordkekz/dotfiles` (Shows some outputs)
 - `nix search github:lordkekz/dotfiles` (Lists provided packages)
 
+## Stylix
+`nix run .#legacyPackages.x86_64-linux.homeConfigurations.hypr.activation-script -L -v --override-input stylix-image path:./assets/wallpaper-italy.jpg` to activate Hyprland config with different wallpaper.
+`sudo nixos-rebuild switch --flake .#kekswork2404-hypr -L -v --override-input stylix-image path:./assets/wallpaper-italy.jpg` to activate Hyprland config with different wallpaper.
+
 # Sather-K Compiler Halle (nix-based distribution)
 I've written a nix package/derivation for the [Sather-K Compiler Halle](https://swt.informatik.uni-halle.de/software/satherkhalle/), which has compatibility issues with modern versions of GCC (>=10) and Mono (>= 5 or 6). You can audit the derivation located in [pkgs/satk.nix](pkgs/satk.nix). It simply downloads the source code zip from the university website, builds it with GCC 4.8 and the GNU Multiple Precision Arithmetic Library (libgmp / GMP), and also adds a wrapper script to define needed environment variables and a workaround to a bug in Mono 4. Mono is automatically loaded as a runtime dependency.
 

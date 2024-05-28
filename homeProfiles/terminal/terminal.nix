@@ -12,7 +12,10 @@ args @ {
   config,
   ...
 }: {
-  imports = [homeProfiles.common];
+  imports = [
+    homeProfiles.common
+    inputs.nix-index-database.hmModules.nix-index
+  ];
 
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
@@ -35,6 +38,9 @@ args @ {
     # Interactive explorer for nix derivations and dependencies
     nix-tree
   ];
+
+  programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
 
   # A cat with wings
   programs.bat = {

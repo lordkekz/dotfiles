@@ -1048,6 +1048,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716772633,
+        "narHash": "sha256-Idcye44UW+EgjbjCoklf2IDF+XrehV6CVYvxR1omst4=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "ff80cb4a11bb87f3ce8459be6f16a25ac86eb2ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nix-vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1432,6 +1452,7 @@
         "hyprpicker": "hyprpicker",
         "impermanence": "impermanence",
         "microvm": "microvm",
+        "nix-index-database": "nix-index-database",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nix-yazi-plugins": "nix-yazi-plugins",
         "nixos-generators": "nixos-generators",
@@ -1444,6 +1465,7 @@
         "personal-data": "personal-data",
         "plasma-manager": "plasma-manager",
         "stylix": "stylix",
+        "stylix-image": "stylix-image",
         "systems": "systems_14",
         "walker": "walker"
       }
@@ -1492,6 +1514,19 @@
         "ref": "release-23.11",
         "repo": "stylix",
         "type": "github"
+      }
+    },
+    "stylix-image": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-5ScSMvBxoQciXlwVTOa1XTK/p2WZJYXFWvOHKmMpEFU=",
+        "path": "./assets/wallpaper-normandie.jpg",
+        "type": "path"
+      },
+      "original": {
+        "path": "./assets/wallpaper-normandie.jpg",
+        "type": "path"
       }
     },
     "systems": {

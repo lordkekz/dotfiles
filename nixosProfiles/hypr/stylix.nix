@@ -1,5 +1,5 @@
 # Use stylix system-wide
-{
+args @ {
   inputs,
   outputs,
   nixosProfiles,
@@ -17,7 +17,7 @@ in {
   ];
 
   stylix = {
-    image = ../../assets/wallpaper-normandie.jpg;
+    image = args.stylix-image;
     polarity = "dark"; # "light" "either" "dark"
     targets.plymouth.enable = false;
   };

@@ -2,6 +2,9 @@
   description = "A cookie jar full of flakes.";
 
   inputs = {
+    stylix-image.flake = false;
+    stylix-image.url = "path:./assets/wallpaper-normandie.jpg";
+
     ## PURE-NIX UTILITIES ##
 
     # Disko for declarative partitioning
@@ -59,6 +62,10 @@
 
     # A nixpkgs downstream which only contains the lib
     #nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+
+    # nix-index allows searching for binary names; nix-index-database contains a prebuilt db for nix-index.
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixVim distro for neovim
     nixvim.url = "github:nix-community/nixvim/main";
@@ -229,12 +236,15 @@
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
         kekstop2304.modules = [personal hypr desktop-2015];
-        kekswork2404-hypr.modules = [
-          personal
-          hypr
-          framework-laptop-2404
-          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "hypr"))
-        ];
+        kekswork2404-hypr = {
+          modules = [
+            personal
+            hypr
+            framework-laptop-2404
+            (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "hypr"))
+          ];
+          specialArgs = {inherit (inputs) stylix-image;};
+        };
       };
 
       # PER-SYSTEM OUTPUTS
@@ -252,6 +262,7 @@
             extraSpecialArgs = {
               inherit flake inputs outputs assets system pkgs-stable pkgs-unstable homeProfiles;
               inherit (inputs) personal-data;
+              inherit (inputs) stylix-image;
             };
             modules = [homeProfile] ++ (attrValues homeManagerModules);
           })

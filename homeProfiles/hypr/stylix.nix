@@ -17,7 +17,7 @@ args @ {
   ];
 
   stylix = {
-    image = ../../assets/wallpaper-normandie.jpg;
+    image = args.stylix-image;
     polarity = "dark";
     targets.alacritty.enable = false;
     targets.gtk.enable = true;
