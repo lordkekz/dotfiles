@@ -57,6 +57,7 @@ args @ {
       in [
         "${vars.mod1}, ${key}, workspace, ${ws}"
         "${vars.mod2}, ${key}, movetoworkspace, ${ws}"
+        "${vars.mod3}, ${key}, focusworkspaceoncurrentmonitor, ${ws}"
       ]
     )
     10);
@@ -75,13 +76,21 @@ args @ {
     # Cycle Window with ALT [+ SHIFT] + TAB
     "ALT, TAB, cyclenext"
     "ALT SHIFT, TAB, cyclenext, prev"
-    "${vars.mod1}, F, togglefloating"
     "ALT, F4, killactive"
+    # Floating with SUPER + F
+    "${vars.mod1}, F, togglefloating"
+    # Maximize with SUPER + ENTER
+    "${vars.mod1}, Return, fullscreen, 1"
+    # Fullscreen with SUPER + F11
+    "${vars.mod1}, F11, fullscreen, 0"
+    # "Fake" Fullscreen with SUPER + SHIFT + F11
+    # (doesn't tell the app that it's in fullscreen)
+    "${vars.mod2}, F11, fullscreen, 2"
   ];
 
   # Plain, unconditional bindings
   bindGeneral = [
-    ", Print, exec, grimblast copy area"
+    #"${vars.mod2}, S, exec, ${pkgs.grimblast}/bin/grimblast copy area"
     "ALT, SPACE, exec, ${vars.anyrun}"
     "${vars.mod1}, E, exec, ${vars.fileManager}"
     "${vars.mod1}, R, exec, ${pkgs.obsidian}/bin/obsidian"
@@ -98,17 +107,23 @@ args @ {
 
   ####### MONITORS AND UTILITIES #######
 
+  env = [
+    #"NAME,value"
+  ];
+
   exec-once = [
     "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
     "sleep 3 && ${pkgs.libsForQt5.kwallet-pam}/libexec/pam_kwallet_init&"
   ];
 
+  silentStartIfNotRunning = ws: sleep: name: "[workspace ${toString ws} silent] pgrep ${name} || sleep ${toString sleep} && ${name}";
+
   exec = [
-    "pkill waybar; ${config.programs.waybar.package}/bin/waybar &"
-    "[workspace 10 silent] sleep 0 && thunderbird"
-    "[workspace 10 silent] sleep 1 && signal-desktop"
-    "[workspace 10 silent] sleep 2 && discord"
-    "[workspace 10 silent] pkill syncthingtray; sleep 3 && syncthingtray"
+    (silentStartIfNotRunning 10 0 "discord")
+    (silentStartIfNotRunning 9 1 "thunderbird")
+    (silentStartIfNotRunning 8 2 "signal-desktop")
+    "systemctl --user restart waybar.service"
+    "pkill syncthingtray; syncthingtray --wait"
   ];
 
   monitor = [

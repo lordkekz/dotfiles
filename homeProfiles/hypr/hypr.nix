@@ -26,6 +26,7 @@ in {
     okular
     gwenview
     elisa
+    syncthingtray
   ];
 
   programs.zathura = {
@@ -55,6 +56,7 @@ in {
       "0"
     ];
   };
+
   services.cliphist = {
     enable = true;
     #allowImages = true;

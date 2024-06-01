@@ -15,7 +15,8 @@ args @ {
   mainBar = {
     layer = "top";
     position = "top";
-    height = 30;
+    height = 32;
+    reload_style_on_change = true;
 
     modules-left = [
       "hyprland/workspaces"
@@ -30,6 +31,7 @@ args @ {
       "hyprland/window"
     ];
     modules-right = [
+      "pulseaudio"
       "bluetooth"
       "backlight"
       "network"
@@ -40,11 +42,28 @@ args @ {
       "battery"
       "clock"
     ];
+
+    "pulseaudio" = {
+      on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+    };
+
+    "clock" = {
+      interval = 1;
+      format = "{:%F %T}"; # e.g. 2024-05-28 20:32:37
+    };
   };
 in {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = {inherit mainBar;};
     #style = lib.readFile ./waybar.css;
   };
+
+  # Make waybar restart in case of crashes; using `systemctl stop` still works tho
+  systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
+
+  # Make waybar wanted by home-manager's `tray.target`
+  systemd.user.services.waybar.Install.WantedBy = ["tray.target"];
+  systemd.user.services.waybar.Unit.PartOf = ["tray.target"];
 }
