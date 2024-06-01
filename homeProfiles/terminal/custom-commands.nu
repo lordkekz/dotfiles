@@ -40,3 +40,6 @@ def find-inpermanent (): path -> table {
   | to nuon' | from nuon
 }
 
+def nix-locate (name: string): string -> list<string> {
+  ^nix-locate --minimal $name | lines | where ($it | str substring 0..1) !~ "\\("
+}
