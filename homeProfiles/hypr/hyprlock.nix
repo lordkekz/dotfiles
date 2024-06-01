@@ -54,6 +54,18 @@ args @ {
     shadow_passes = 3;
     shadow_size = rs (3 * scale);
   };
+
+  mkBackground = monitor: scale: {
+    inherit monitor;
+    path = toString config.stylix.image;
+    blur_size = rs (2.5 * scale);
+    blur_passes = rs (1.5 * scale);
+    noise = 0.075;
+    contrast = 0.9;
+    brightness = 0.9;
+    vibrancy = 0.3;
+    vibrancy_darkness = 0.0;
+  };
 in {
   programs.hyprlock = {
     enable = true;
@@ -63,22 +75,8 @@ in {
         hide_cursor = true;
       };
 
-      background = [
-        {
-          monitor = "";
-          path = toString config.stylix.image;
-          blur_size = 5;
-          blur_passes = 3;
-          noise = 0.075;
-          contrast = 0.9;
-          brightness = 0.9;
-          vibrancy = 0.3;
-          vibrancy_darkness = 0.0;
-        }
-      ];
-
+      background = mapAttrsToList mkBackground monitors;
       input-field = mapAttrsToList mkInputField monitors;
-
       label = mapAttrsToList mkLabel monitors;
     };
   };
