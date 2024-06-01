@@ -770,6 +770,26 @@
         "type": "github"
       }
     },
+    "hyprcursor-phinger": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1717273151,
+        "narHash": "sha256-x9TyM5R27GcLO+YWwhSHCeE2c+T1V8Sqkk6hFYhKTqE=",
+        "owner": "lordkekz",
+        "repo": "hyprcursor-phinger",
+        "rev": "bf20a1dcb360ba369a646f27139e60a273f13d7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lordkekz",
+        "repo": "hyprcursor-phinger",
+        "type": "github"
+      }
+    },
     "hypridle": {
       "inputs": {
         "hyprlang": "hyprlang",
@@ -1445,6 +1465,7 @@
         "haumea": "haumea",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
+        "hyprcursor-phinger": "hyprcursor-phinger",
         "hypridle": "hypridle",
         "hyprland": "hyprland",
         "hyprlock": "hyprlock",

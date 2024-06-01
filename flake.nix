@@ -105,6 +105,11 @@
     hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.7.0&submodules=1";
     hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0&submodules=1";
 
+    # The phinger-cursor theme, but packaged as a SVG Hyprcursor theme
+    hyprcursor-phinger.url = "github:lordkekz/hyprcursor-phinger"; # Contains fix for XCursor fallback
+    #hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
+    hyprcursor-phinger.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     # Walker, a Wayland-native runner
     walker.url = "github:abenz1267/walker";
   };
