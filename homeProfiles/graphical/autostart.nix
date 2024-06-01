@@ -11,6 +11,8 @@ args @ {
   config,
   ...
 }: let
+  inherit (lib) optionals;
+
   mkAutostart = appDesktopNames:
     builtins.foldl' (autostartLinks: currentAppName:
       autostartLinks
@@ -25,21 +27,14 @@ args @ {
 in {
   home.file = mkAutostart (
     [
-      "discord"
       #"element-desktop"
       #"obsidian"
       #"org.telegram.desktop"
-      "signal-desktop"
     ]
-    ++ (
-      if config.wayland.windowManager.hyprland.enable
-      then [
-        "thunderbird" # Birdtray is broken on Hyprland
-        "syncthingtray" # Unlike Plasmoid for KDE, the tray icon doesn't start on its own
-      ]
-      else [
-        "com.ulduzsoft.Birdtray"
-      ]
-    )
+    ++ (optionals (! config.wayland.windowManager.hyprland.enable) [
+      "discord"
+      "com.ulduzsoft.Birdtray"
+      "signal-desktop"
+    ])
   );
 }
