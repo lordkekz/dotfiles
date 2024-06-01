@@ -56,4 +56,14 @@
       ];
     };
   };
+
+  # Configure power events
+  services.logind = {
+    powerKey = "suspend";
+    lidSwitch = "lock";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "lock";
+
+    #killUserProcesses = true; # breaks persistent tmux sessions
+  };
 }

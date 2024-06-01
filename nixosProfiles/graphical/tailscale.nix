@@ -11,7 +11,7 @@
   ...
 }: {
   services.tailscale = {
-    enable = true;
+    enable = false;
     useRoutingFeatures = "client";
     extraUpFlags = [
       # Allows access via routes to internal IPs advertised by other nodes. (gateway)
