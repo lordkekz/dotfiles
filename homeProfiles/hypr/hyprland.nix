@@ -86,6 +86,8 @@ args @ {
     "ALT, F4, killactive"
     # Floating with SUPER + F
     "${vars.mod1}, F, togglefloating"
+    "${vars.mod1}, F, resizeactive, exact 50% 50%"
+    "${vars.mod1}, F, centerwindow, 1"
     # Maximize with SUPER + ENTER
     "${vars.mod1}, Return, fullscreen, 1"
     # Fullscreen with SUPER + F11
