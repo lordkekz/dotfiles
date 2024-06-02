@@ -41,6 +41,13 @@ args @ {
       "${vars.mod1}, Z, exec, ${package}/bin/alacritty -e nu"
     ];
 
+  # A list of bindings which only exist if foot is enabled.
+  bindFoot = with config.programs.foot;
+    optionals enable [
+      "${vars.mod1}, T, exec, ${package}/bin/foot"
+      "${vars.mod1}, Z, exec, ${package}/bin/foot -e nu"
+    ];
+
   # FIXME use .desktop file
   bindFirefox = with config.programs.firefox;
     optional enable
@@ -98,7 +105,7 @@ args @ {
     "${vars.mod1}, V, exec, ${vars.cliphist} list | ${vars.anyrun-stdin} | ${vars.cliphist} decode | wl-copy"
   ];
 
-  bind = concatLists [bindAlacritty bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
+  bind = concatLists [bindAlacritty bindFoot bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
 
   bindm = [
     "${vars.mod1}, mouse:272, movewindow"

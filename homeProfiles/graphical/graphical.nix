@@ -45,6 +45,7 @@ args @ {
     # ProtonVPN switched to a new GTK which isn't packaged in 23.11
     pkgs-unstable.protonvpn-gui
     ookla-speedtest
+    brightnessctl
 
     # MULTIMEDIA
     elisa
