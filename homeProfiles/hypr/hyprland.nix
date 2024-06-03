@@ -44,8 +44,8 @@ args @ {
   # A list of bindings which only exist if foot is enabled.
   bindFoot = with config.programs.foot;
     optionals enable [
-      "${vars.mod1}, T, exec, ${package}/bin/foot"
-      "${vars.mod1}, Z, exec, ${package}/bin/foot -e nu"
+      "${vars.mod1}, U, exec, ${package}/bin/foot"
+      "${vars.mod1}, I, exec, ${package}/bin/foot -e nu"
     ];
 
   # FIXME use .desktop file
