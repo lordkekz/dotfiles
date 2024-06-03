@@ -62,7 +62,11 @@ args @ {
         nixd.enable = true;
         nushell.enable = true;
         # Rust
-        rust-analyzer.enable = true;
+        rust-analyzer = {
+          enable = true;
+          installRustc = true;
+          installCargo = true;
+        };
         # Python
         ruff-lsp.enable = true;
         # Typst typsetting language
