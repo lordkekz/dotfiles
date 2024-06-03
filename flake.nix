@@ -44,10 +44,10 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:lordkekz/home-manager?ref=feat/5478/yazi-plugins-suffix";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #home-manager.url = "github:nix-community/home-manager?ref=release-24.05";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    #home-manager.url = "github:lordkekz/home-manager?ref=feat/5478/yazi-plugins-suffix";
+    #home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager.url = "github:lordkekz/home-manager?ref=release-24.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
     microvm.url = "github:astro/microvm.nix";

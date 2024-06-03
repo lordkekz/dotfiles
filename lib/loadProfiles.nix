@@ -7,7 +7,7 @@
 }: let
   hl = flake.inputs.haumea.lib;
 
-  # mkImportModulesForProfiles :: set of module -> set of (set of module) -> module
+  # mkImportModulesForProfiles :: set of (set of module) -> module
   mkImportModulesForProfiles = lib.mapAttrs (n: v: {...}: {
     imports = lib.attrValues v;
   });

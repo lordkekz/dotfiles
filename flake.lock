@@ -647,20 +647,20 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1717440414,
-        "narHash": "sha256-cb25i9lpZALd7jq7Of5rKqKISjxkiUAOkBBK08bifco=",
+        "lastModified": 1717446061,
+        "narHash": "sha256-qkJOclfeLHZglvkWqM37Jv1caEZfx83rC9BelgPFWrY=",
         "owner": "lordkekz",
         "repo": "home-manager",
-        "rev": "e12612bbe31f41bc8db7c1761eba7a8afbbc312a",
+        "rev": "247da7b484e33c0b5c62ea89c80fc93daf65f282",
         "type": "github"
       },
       "original": {
         "owner": "lordkekz",
-        "ref": "feat/5478/yazi-plugins-suffix",
+        "ref": "release-24.05",
         "repo": "home-manager",
         "type": "github"
       }
