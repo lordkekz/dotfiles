@@ -9,6 +9,8 @@
 }: {
   ### BASIC NIX and NIXPKGS STUFF ###
 
+  nix.package = pkgs.nixVersions.latest;
+
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
   nix.registry =

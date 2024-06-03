@@ -44,19 +44,17 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:lordkekz/home-manager?ref=my-release-23.11"; # Contains changes to yazi
-    #home-manager.url = "github:nix-community/home-manager/release-23.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Home manager unstable, because it contains some hypr* modules that aren't in 23.11
-    home-manager-unstable.url = "github:nix-community/home-manager";
+    home-manager.url = "github:lordkekz/home-manager?ref=feat/5478/yazi-plugins-suffix";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #home-manager.url = "github:nix-community/home-manager?ref=release-24.05";
+    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nixpkgs
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-stable";
 
@@ -96,7 +94,8 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Stylix helps theme applications using base16
-    stylix.url = "github:danth/stylix?ref=release-23.11";
+    stylix.url = "github:danth/stylix?ref=master";
+    #stylix.url = "github:danth/stylix?ref=release-24.05"; # FIXME use this once branch gets created.
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1&submodules=1";

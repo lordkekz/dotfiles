@@ -12,7 +12,7 @@
 }: {
   # Enable Incus Linux containers
   virtualisation.incus = {
-    enable = true;
+    enable = false; # FIXME Incus on NixOS is unsupported using iptables. Set `networking.nftables.enable = true;`
     # Start when socket opened instead of at boot.
     socketActivation = true;
   };
