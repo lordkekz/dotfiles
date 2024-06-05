@@ -40,7 +40,7 @@ args @ {
     piper # Frontend to configure peripherals using ratbagd
     gsmartcontrol # GUI for smartctl
     # ProtonVPN switched to a new GTK which isn't packaged in 23.11
-    pkgs-unstable.protonvpn-gui
+    protonvpn-gui
     ookla-speedtest
     brightnessctl
 
@@ -76,9 +76,8 @@ args @ {
     # There is an unofficial whatsapp client: whatsapp-for-linux
 
     # PROGRAMMING
-    podman-desktop
-    docker-compose
     jetbrains-toolbox
+    jetbrains.idea-ultimate
     sqlitebrowser
     python312Full
     # vscodium
