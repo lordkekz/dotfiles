@@ -19,9 +19,6 @@ args @ {
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    # Nerdfonts
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
-
     # OFFICE
     obsidian # Markdown-based Notes
     libreoffice

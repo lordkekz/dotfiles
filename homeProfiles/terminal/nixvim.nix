@@ -15,6 +15,9 @@ args @ {
   ...
 }: let
   inherit (inputs) nixvim;
+  inherit (lib) filterAttrs;
+  inherit (builtins) match;
+
   nixvimLib = nixvim.lib.${system};
   nixvim' = nixvim.legacyPackages.${system};
   nvim = nixvim'.makeNixvimWithModule myNixvimConfigModule;
@@ -150,9 +153,9 @@ args @ {
         vim-numbertoggle
       ];
 
-      colorschemes = {
-        ayu.enable = true;
-        ayu.settings.mirage = true;
+      colorschemes.base16 = {
+        enable = true;
+        colorscheme = filterAttrs (n: v: (match "base0[[:xdigit:]]" n) == []) config.lib.stylix.colors.withHashtag;
       };
     };
   };

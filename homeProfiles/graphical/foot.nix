@@ -18,11 +18,6 @@ args @ {
       main = {
         shell = "${config.programs.tmux.package}/bin/tmux attach";
 
-        # Font rendering
-        # TODO use Stylix's settings to unify config with Alacritty
-        font = lib.mkForce "JetBrainsMono Nerd Font:size=13";
-        dpi-aware = lib.mkForce "yes";
-
         # Window options
         initial-window-mode = "maximized";
         pad = "4x4center"; #FIXME test this
@@ -43,9 +38,6 @@ args @ {
       mouse.hide-when-typing = "yes";
 
       touch = {};
-
-      # TODO use Stylix's settings to unify config with Alacritty
-      colors.alpha = lib.mkForce 0.95;
 
       # Try not to use client-side decorations
       csd.preferred = "server";

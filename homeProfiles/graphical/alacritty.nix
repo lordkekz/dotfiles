@@ -23,14 +23,10 @@ args @ {
           y = 4;
         };
         dynamic_padding = true;
-        opacity = 0.95; # TODO use Stylix
         blur = true;
         startup_mode = "Maximized";
       };
       scrolling.history = 10000;
-      # TODO use Stylix's settings to unify config with foot
-      font.normal.family = "JetBrainsMono Nerd Font";
-      font.size = 13;
 
       colors.transparent_background_colors = true;
 

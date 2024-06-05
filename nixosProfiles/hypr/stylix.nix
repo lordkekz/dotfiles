@@ -14,11 +14,10 @@ args @ {
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
+    ../../stylix-base.nix
   ];
 
   stylix = {
-    image = args.stylix-image;
-    polarity = "dark"; # "light" "either" "dark"
     targets.plymouth.enable = false;
   };
 }

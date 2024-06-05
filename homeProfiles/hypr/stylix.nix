@@ -14,12 +14,10 @@ args @ {
 }: {
   imports = [
     inputs.stylix.homeManagerModules.stylix
+    ../../stylix-base.nix
   ];
 
   stylix = {
-    image = args.stylix-image;
-    polarity = "dark";
-    targets.alacritty.enable = false;
     targets.gtk.enable = true;
   };
 }
