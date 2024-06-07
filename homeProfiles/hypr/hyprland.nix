@@ -70,6 +70,12 @@ args @ {
     10);
 
   bindWindowManagement = [
+    # Change master layout's orientation using SUPER + SHIFT + Arrow Keys
+    "${vars.mod2}, left,  layoutmsg, orientationleft"
+    "${vars.mod2}, down,  layoutmsg, orientationbottom"
+    "${vars.mod2}, up,    layoutmsg, orientationtop"
+    "${vars.mod2}, right, layoutmsg, orientationright"
+    "${vars.mod2}, SPACE, layoutmsg, orientationcenter"
     # Move focus with SUPER + Arrow Keys
     "${vars.mod1}, left, movefocus, l"
     "${vars.mod1}, down, movefocus, d"
@@ -80,6 +86,9 @@ args @ {
     "${vars.mod1}, J, movewindow, d"
     "${vars.mod1}, K, movewindow, u"
     "${vars.mod1}, L, movewindow, r"
+    # Roll Window (master layout) with SUPER [+ SHIFT] + TAB
+    "SUPER, TAB, layoutmsg, rollnext"
+    "SUPER SHIFT, TAB, layoutmsg, rollprev"
     # Cycle Window with ALT [+ SHIFT] + TAB
     "ALT, TAB, cyclenext"
     "ALT SHIFT, TAB, cyclenext, prev"
@@ -116,10 +125,6 @@ args @ {
 
   ####### MONITORS AND UTILITIES #######
 
-  env = [
-    #"NAME,value"
-  ];
-
   exec-once = [
     "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
     "sleep 3 && ${pkgs.libsForQt5.kwallet-pam}/libexec/pam_kwallet_init&"
@@ -143,6 +148,11 @@ args @ {
     ",preferred,auto,auto,mirror,eDP-1"
   ];
 
+  xwayland.force_zero_scaling = true;
+  env = [
+    "GDK_SCALE,2"
+  ];
+
   ####### LOOK AND FEEL #######
 
   # https://wiki.hyprland.org/Configuring/Variables/#general
@@ -156,7 +166,7 @@ args @ {
     layout = "master";
   };
 
-  master.orientation = "right";
+  master.orientation = "center";
 
   # https://wiki.hyprland.org/Configuring/Variables/#decoration
   decoration = {
@@ -234,6 +244,7 @@ in {
         exec-once
         exec
         monitor
+        xwayland
         general
         master
         decoration
