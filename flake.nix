@@ -89,7 +89,7 @@
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
 
     # Plasma manager
-    plasma-manager.url = "github:pjones/plasma-manager/plasma-5";
+    plasma-manager.url = "github:pjones/plasma-manager?ref=trunk";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
@@ -231,7 +231,7 @@
           personal
           kde
           framework-laptop-2404
-          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
+          #lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
         ];
         nasman2404.modules = [
           homelab

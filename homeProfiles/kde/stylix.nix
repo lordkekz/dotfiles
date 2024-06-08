@@ -1,4 +1,4 @@
-# My config for KDE Plasma 5
+# Stylix for home manager
 args @ {
   inputs,
   outputs,
@@ -13,11 +13,11 @@ args @ {
   ...
 }: {
   imports = [
-    homeProfiles.graphical
-    inputs.plasma-manager.homeManagerModules.plasma-manager
+    inputs.stylix.homeManagerModules.stylix
+    ../../stylix-base.nix
   ];
 
-  programs.plasma = {
-    enable = false;
+  stylix = {
+    targets.gtk.enable = true;
   };
 }

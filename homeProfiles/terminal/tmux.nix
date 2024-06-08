@@ -26,7 +26,7 @@ args @ {
       better-mouse-mode
       pain-control # Vim-Style hjkl bindings for switching panes
       mode-indicator # Can be used in status bar to indicate the current mode
-      power-theme # tmux-powerline
+      #power-theme # tmux-powerline
     ];
     extraConfig = ''
       # Improve chances that images work. See https://yazi-rs.github.io/docs/image-preview/#tmux-users

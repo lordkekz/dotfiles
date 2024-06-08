@@ -12,22 +12,22 @@
 }: {
   imports = [nixosProfiles.graphical];
 
-  # Enable the KDE Plasma 5 Desktop Environment.
-  services.xserver.displayManager = {
-    defaultSession = "plasmawayland";
+  # Enable the KDE Plasma 6 Desktop Environment.
+  services.displayManager = {
+    defaultSession = "plasma";
     sddm.enable = true;
-    sddm.wayland.enable = false;
+    sddm.wayland.enable = true;
   };
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable Flatpak with KDE
-  services.flatpak.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
-  xdg.portal.config.common.default = "kde";
+  services.flatpak.enable = false;
+  #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
+  #xdg.portal.config.common.default = "kde";
 
   environment.systemPackages = [
     # KDE Info Center dependencies
-    pkgs.plasma5Packages.plasma-thunderbolt
+    pkgs.kdePackages.plasma-thunderbolt
   ];
 
   # Disable fingerprint for lock screen auth, because passwords
