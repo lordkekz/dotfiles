@@ -12,7 +12,7 @@ args @ {
   config,
   ...
 }: {
-  programs.plasma.panels = [
+  programs.plasma.panels = if true then [] else [
     # Taskbar / Launcher at the Bottom
     {
       height = 48;

@@ -1,4 +1,5 @@
 # My theming for KDE Plasma
+# TODO Consolidate with Stylix, Hyprland, and figure out a dynamic ricing system.
 args @ {
   inputs,
   outputs,
@@ -14,7 +15,7 @@ args @ {
 }: {
   home.packages = [
     # Install theme package, so that its outputs will be in user share and plasma can find it.
-    pkgs.graphite-kde-theme
+    #pkgs.graphite-kde-theme
   ];
 
   # Style Apps using Qt
@@ -32,12 +33,12 @@ args @ {
   #xdg.configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
 
   # Tell plasma which style to use
-  programs.plasma.workspace = {
-    theme = "Graphite-nord-dark"; # Got the name using `plasma-apply-desktoptheme --list-themes`
-    colorScheme = "GraphiteNordDark";
-    cursorTheme = "Breeze_Snow";
-    lookAndFeel = "com.github.vinceliuice.Graphite-nord-dark";
-    #iconTheme = "Breeze Dark";
-    wallpaper = "${pkgs.graphite-kde-theme}/share/wallpapers/Graphite-nord-dark/contents/images/3840x2160.png";
-  };
+  #programs.plasma.workspace = {
+  #  theme = "Graphite-nord-dark"; # Got the name using `plasma-apply-desktoptheme --list-themes`
+  #  colorScheme = "GraphiteNordDark";
+  #  cursorTheme = "Breeze_Snow";
+  #  lookAndFeel = "com.github.vinceliuice.Graphite-nord-dark";
+  #  #iconTheme = "Breeze Dark";
+  #  wallpaper = "${pkgs.graphite-kde-theme}/share/wallpapers/Graphite-nord-dark/contents/images/3840x2160.png";
+  #};
 }
