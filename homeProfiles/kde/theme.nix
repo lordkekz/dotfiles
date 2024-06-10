@@ -19,11 +19,12 @@ args @ {
   ];
 
   # Style Apps using Qt
-  qt = {
-    enable = true;
-    platformTheme = "kde";
-    #style.name = "kvantum";
-  };
+  # FIXME this breaks on Plasma 6, see https://github.com/nix-community/home-manager/issues/5098
+  #qt = {
+  #  enable = true;
+  #  platformTheme = "kde";
+  #  #style.name = "kvantum";
+  #};
 
   # Tell kvantum which style to use
   #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''

@@ -231,7 +231,7 @@
           personal
           kde
           framework-laptop-2404
-          #lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
         ];
         nasman2404.modules = [
           homelab

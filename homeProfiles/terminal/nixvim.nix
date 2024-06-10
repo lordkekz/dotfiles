@@ -123,7 +123,7 @@ args @ {
         };
         # Highlight where the cursor jumps
         specs = {
-          enable = true;
+          enable = false;
           min_jump = 5;
           increment = 10;
           color = "white";

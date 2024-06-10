@@ -11,12 +11,13 @@ args @ {
   lib,
   config,
   ...
-}: {
+}:
+with lib; {
   programs.plasma.shortcuts = {
-    "kwin"."Window Maximize" = "Meta+Up";
-    "kwin"."Window Minimize" = "Meta+Down";
-    "kwin"."Window Quick Tile Top" = "Meta+Shift+Up";
-    "kwin"."Window Quick Tile Bottom" = "Meta+Shift+Down";
-    "org.kde.spectacle.desktop"."RectangularRegionScreenShot" = ["Meta+Shift+Print" "Meta+Shift+S"];
+    "kwin"."Window Maximize" = mkForce "Meta+Up";
+    "kwin"."Window Minimize" = mkForce "Meta+Down";
+    "kwin"."Window Quick Tile Top" = mkForce "Meta+Shift+Up";
+    "kwin"."Window Quick Tile Bottom" = mkForce "Meta+Shift+Down";
+    "org.kde.spectacle.desktop"."RectangularRegionScreenShot" = mkForce ["Meta+Shift+Print" "Meta+Shift+S"];
   };
 }
