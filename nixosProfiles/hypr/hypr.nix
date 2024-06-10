@@ -90,14 +90,14 @@ in {
   security.polkit.enable = true;
 
   # Use KDE's ksshaskpass instead of pkgs.x11_ssh_askpass
-  programs.ssh.askPassword = "${pkgs.libsForQt5.ksshaskpass}/bin/ksshaskpass";
+  programs.ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
 
   environment.systemPackages = [
-    pkgs.libsForQt5.kwalletmanager
+    pkgs.kdePackages.kwalletmanager
 
     # These packages contain systemd units, so they should autostart just by adding them here
-    pkgs.libsForQt5.polkit-kde-agent
-    pkgs.libsForQt5.kwallet-pam
-    pkgs.libsForQt5.kwallet
+    pkgs.kdePackages.polkit-kde-agent
+    pkgs.kdePackages.kwallet-pam
+    pkgs.kdePackages.kwallet
   ];
 }

@@ -126,8 +126,8 @@ args @ {
   ####### MONITORS AND UTILITIES #######
 
   exec-once = [
-    "${pkgs.libsForQt5.kwallet}/bin/kwalletd5 &"
-    "sleep 3 && ${pkgs.libsForQt5.kwallet-pam}/libexec/pam_kwallet_init&"
+    "${pkgs.kdePackages.kwallet}/bin/kwalletd5 &"
+    "sleep 3 && ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init&"
   ];
 
   silentStartIfNotRunning = ws: sleep: name: "[workspace ${toString ws} silent] pgrep ${name} || sleep ${toString sleep} && ${name}";

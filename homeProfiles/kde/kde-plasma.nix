@@ -1,4 +1,4 @@
-# My config for KDE Plasma 5
+# My config for KDE Plasma 6
 args @ {
   inputs,
   outputs,

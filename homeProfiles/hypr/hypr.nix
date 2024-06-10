@@ -19,7 +19,7 @@ in {
   ];
 
   home.packages = with pkgs;
-  with libsForQt5; [
+  with kdePackages; [
     kwalletmanager
     playerctl
     wl-clipboard

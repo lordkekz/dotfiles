@@ -24,14 +24,14 @@ args @ {
     libreoffice
     pdfarranger # https://github.com/pdfarranger/pdfarranger
     diff-pdf # https://github.com/vslavik/diff-pdf
-    libsForQt5.okular # KDE pdf viewer
+    kdePackages.okular # KDE pdf viewer
 
     # UTILITY
     tailscale-systray
     syncthingtray # It also has a plasmoid.
     anki # Spaced-repetition flashcards
-    libsForQt5.dolphin # KDE file explorer
-    libsForQt5.ark # KDE file archiver
+    kdePackages.dolphin # KDE file explorer
+    kdePackages.ark # KDE file archiver
     filezilla # FTP client
     filelight # A fancy directory size viewer by KDE
     meld # visual diff and merge tool
