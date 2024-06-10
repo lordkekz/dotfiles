@@ -16,8 +16,4 @@ args @ {
     inputs.stylix.homeManagerModules.stylix
     ../../stylix-base.nix
   ];
-
-  stylix = {
-    targets.gtk.enable = true;
-  };
 }
