@@ -18,14 +18,10 @@ in {
     inputs.hyprland.homeManagerModules.default
   ];
 
-  home.packages = with pkgs;
-  with kdePackages; [
+  home.packages = with pkgs; [
     kwalletmanager
     playerctl
     wl-clipboard
-    okular
-    gwenview
-    elisa
     syncthingtray
   ];
 

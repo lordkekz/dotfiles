@@ -51,7 +51,7 @@ args @ {
     audacity
     gimp
     (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
-    #microsoft-edge # In case I need chromium or want to access bing AI.
+    kdePackages.gwenview
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5

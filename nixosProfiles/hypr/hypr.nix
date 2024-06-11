@@ -96,7 +96,7 @@ in {
     pkgs.kdePackages.kwalletmanager
 
     # These packages contain systemd units, so they should autostart just by adding them here
-    pkgs.kdePackages.polkit-kde-agent
+    pkgs.kdePackages.polkit-kde-agent-1
     pkgs.kdePackages.kwallet-pam
     pkgs.kdePackages.kwallet
   ];
