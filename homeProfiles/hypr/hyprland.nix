@@ -127,7 +127,7 @@ args @ {
 
   exec-once = [
     "${pkgs.kdePackages.kwallet}/bin/kwalletd5 &"
-    "sleep 3 && ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init&"
+    "sleep 3 && ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init &"
   ];
 
   silentStartIfNotRunning = ws: sleep: name: "[workspace ${toString ws} silent] pgrep ${name} || sleep ${toString sleep} && ${name}";
@@ -141,16 +141,17 @@ args @ {
   ];
 
   monitor = [
-    "eDP-1,preferred,0x0,1.6"
-    "DP-1,preferred,1410x0,2,vrr,1,bitdepth,10"
-    "DP-2,preferred,3330x0,1.6,vrr,1"
-    #"eDP-1,disable"
+    "eDP-1, preferred, 0x0, 1.6"
+    #"DP-1, preferred, 1410x0, 2, vrr, 1, bitdepth, 10"
+    #"DP-2, preferred, 3330x0, 1.6, vrr, 1"
+    #"eDP-1, disable"
+    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535,preferred,auto,1.2,vrr,0"
     ",preferred,auto,auto,mirror,eDP-1"
   ];
 
   xwayland.force_zero_scaling = true;
   env = [
-    "GDK_SCALE,2"
+    "GDK_SCALE,1.2"
   ];
 
   ####### LOOK AND FEEL #######
@@ -166,7 +167,11 @@ args @ {
     layout = "master";
   };
 
-  master.orientation = "center";
+  # Config for master layout on superwide monitor (three-column)
+  master = {
+    orientation = "center";
+    always_center_master = true;
+  };
 
   # https://wiki.hyprland.org/Configuring/Variables/#decoration
   decoration = {
@@ -242,6 +247,7 @@ in {
       inherit
         bind
         exec-once
+        env
         exec
         monitor
         xwayland
