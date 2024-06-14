@@ -145,7 +145,7 @@ args @ {
     #"DP-1, preferred, 1410x0, 2, vrr, 1, bitdepth, 10"
     #"DP-2, preferred, 3330x0, 1.6, vrr, 1"
     #"eDP-1, disable"
-    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535,preferred,auto,1.2,vrr,0"
+    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535,preferred,auto,1.25,vrr,0"
     ",preferred,auto,auto,mirror,eDP-1"
   ];
 
