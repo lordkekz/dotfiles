@@ -20,9 +20,9 @@ args @ {
 
     modules-left = [
       "hyprland/workspaces"
-      "hyprland/submap"
+      #"hyprland/submap"
       #"hyprland/language" # KB language
-      "wlr/taskbar"
+      #"wlr/taskbar"
       #"user" # Username and uptime
       "tray"
     ];
@@ -57,13 +57,19 @@ in {
     enable = true;
     systemd.enable = true;
     settings = {inherit mainBar;};
-    #style = lib.readFile ./waybar.css;
+    style = lib.readFile ./waybar.css;
+  };
+
+  stylix.targets.waybar = {
+    enableLeftBackColors = false;
+    enableCenterBackColors = false;
+    enableRightBackColors = false;
   };
 
   # Make waybar restart in case of crashes; using `systemctl stop` still works tho
-  systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
+  #systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
 
   # Make waybar wanted by home-manager's `tray.target`
-  systemd.user.services.waybar.Install.WantedBy = ["tray.target"];
-  systemd.user.services.waybar.Unit.PartOf = ["tray.target"];
+  #systemd.user.services.waybar.Install.WantedBy = ["tray.target"];
+  #systemd.user.services.waybar.Unit.PartOf = ["tray.target"];
 }

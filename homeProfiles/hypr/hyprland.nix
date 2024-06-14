@@ -133,11 +133,11 @@ args @ {
   silentStartIfNotRunning = ws: sleep: name: "[workspace ${toString ws} silent] pgrep ${name} || sleep ${toString sleep} && ${name}";
 
   exec = [
+    "pkill waybar; waybar"
+    "pkill syncthingtray; syncthingtray --wait"
     (silentStartIfNotRunning 10 0 "discord")
     (silentStartIfNotRunning 9 1 "thunderbird")
     (silentStartIfNotRunning 8 2 "signal-desktop")
-    "systemctl --user restart waybar.service"
-    "pkill syncthingtray; syncthingtray --wait"
   ];
 
   monitor = [

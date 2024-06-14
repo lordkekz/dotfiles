@@ -3,6 +3,7 @@
   inputs,
   outputs,
   nixosProfiles,
+  personal-data,
   lib,
   config,
   pkgs,
@@ -20,8 +21,8 @@
 
   # Actual configuration
   services.syncthing = let
-    user = "hpreiser";
-    userHome = "/home/${user}";
+    user = personal-data.data.home.username;
+    userHome = config.users.users.${user}.home;
   in {
     enable = true;
     inherit user;
@@ -30,38 +31,6 @@
 
     overrideDevices = true; # overrides any devices added or deleted through the WebUI
     overrideFolders = true; # overrides any folders added or deleted through the WebUI
-    settings = {
-      devices = {
-        #"Vortex" = {id = "DMEUMG6-WZUGJUH-5CY4EFH-2NNPNHN-HQBFKYA-WTK7240-5H5FFNH-3KHKYQO";};
-        "KeksWork-Win11" = {id = "AZDY2X7-C6DWXZL-UY4X6BX-GFSXETR-VRGSLCI-KOYI43X-MQAKZBQ-VY4IUAH";};
-      };
-      folders = {
-        "Documents" = {
-          id = "a9t3y-uxeo6";
-          path = userHome + "/Documents"; # Which folder to add to Syncthing
-          devices = [
-            # "Vortex"
-            "KeksWork-Win11"
-          ];
-          # ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
-        };
-        "Bilder" = {
-          id = "jpcht-6wtcn";
-          path = userHome + "/Pictures";
-          devices = [
-            # "Vortex"
-            "KeksWork-Win11"
-          ];
-        };
-        "Musik" = {
-          id = "xligm-rbntn";
-          path = userHome + "/Music";
-          devices = [
-            # "Vortex"
-            "KeksWork-Win11"
-          ];
-        };
-      };
-    };
+    settings = personal-data.data.home.syncthing.settings userHome;
   };
 }

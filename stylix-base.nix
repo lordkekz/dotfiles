@@ -8,9 +8,12 @@
   ...
 }: {
   stylix = {
-    image = stylix-image;
+    #image = stylix-image;
+    image = config.lib.stylix.pixel "base00"; # Black background for OLED
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/tomorrow-night.yaml";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/da-one-black.yaml";
+
     polarity = "dark";
 
     targets.gtk.enable = true;
