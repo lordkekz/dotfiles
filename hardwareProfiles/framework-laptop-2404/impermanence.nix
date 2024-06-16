@@ -61,6 +61,7 @@ in {
     directories = [
       "/var/db/sudo/lectured"
 
+      "/var/lib/fprint"
       "/var/lib/cups"
       "/var/lib/incus"
       "/var/lib/libvirt"
