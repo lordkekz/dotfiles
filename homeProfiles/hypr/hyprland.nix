@@ -101,9 +101,12 @@ args @ {
     "${vars.mod1}, Return, fullscreen, 1"
     # Fullscreen with SUPER + F11
     "${vars.mod1}, F11, fullscreen, 0"
-    # "Fake" Fullscreen with SUPER + SHIFT + F11
+    # Fullscreen with SUPER + SHIFT + F11
     # (doesn't tell the app that it's in fullscreen)
     "${vars.mod2}, F11, fullscreen, 2"
+    # Fake-Fullscreen with SUPER + CONTROL + F11
+    # (tells the app that it's in fullscreen without actually doing fullscreen)
+    "${vars.mod3}, F11, fakefullscreen"
   ];
 
   # Plain, unconditional bindings
@@ -114,6 +117,7 @@ args @ {
     "${vars.mod1}, R, exec, ${pkgs.obsidian}/bin/obsidian"
     "${vars.mod1}, BACKSPACE, exit"
     "${vars.mod1}, V, exec, ${vars.cliphist} list | ${vars.anyrun-stdin} | ${vars.cliphist} decode | wl-copy"
+    "${vars.mod1}, B, exec, pkill -SIGUSR1 waybar"
   ];
 
   bind = concatLists [bindAlacritty bindFoot bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
@@ -145,7 +149,8 @@ args @ {
     #"DP-1, preferred, 1410x0, 2, vrr, 1, bitdepth, 10"
     #"DP-2, preferred, 3330x0, 1.6, vrr, 1"
     #"eDP-1, disable"
-    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535,preferred,auto,1.25,vrr,0"
+    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535, preferred, auto, 1.25, vrr, 0"
+    "desc:Philips Consumer Electronics Company 49M2C8900 1322131231233, preferred, auto, 1.25, vrr, 0"
     ",preferred,auto,auto,mirror,eDP-1"
   ];
 

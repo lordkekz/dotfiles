@@ -55,7 +55,7 @@ args @ {
 in {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     settings = {inherit mainBar;};
     style = lib.readFile ./waybar.css;
   };
