@@ -58,12 +58,6 @@ in {
       ExtensionSettings = {
         "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
 
-        # A Catpuccin theme
-        "{87adc190-0881-4325-8f33-166782c657e0}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4176958/catppuccin_muave_frappe-1.0.xpi";
-          installation_mode = "force_installed";
-        };
-
         # Privacy
         "uBlock0@raymondhill.net" = mkExt "ublock-origin";
         "uMatrix@raymondhill.net" = mkExt "umatrix";
@@ -81,6 +75,7 @@ in {
         "{531906d3-e22f-4a6c-a102-8057b88a1a63}" = mkExt "single-file";
         "extension@one-tab.com" = mkExt "onetab";
         "jetpack-extension@dashlane.com" = mkExt "dashlane";
+        "addon@darkreader.org" = mkExt "darkreader"; # Can also style titlebar black
 
         # Plasma integration is broken as of 2024-01-10.
         #"plasma-browser-integration@kde.org" = mkExt "plasma-integration";
