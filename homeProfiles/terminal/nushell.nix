@@ -56,6 +56,7 @@ args @ {
       lla = "ls -la";
       which = "which --all"; # Always list all matches
       gd = "cd ${dotfiles-dir}";
+      gr = "cd (git root)";
       hmSwitch = "home-manager switch -L -v --flake";
       hmDesk = "${hmSwitch} ${dotfiles-dir}#hpreiser@Desk";
       hmTerm = "${hmSwitch} ${dotfiles-dir}#hpreiser@Term";

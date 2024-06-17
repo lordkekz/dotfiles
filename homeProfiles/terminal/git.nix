@@ -38,6 +38,7 @@ in {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --all --graph'';
       ec = ''commit --allow-empty'';
       amend = ''commit --amend'';
+      root = ''rev-parse --show-toplevel'';
     };
     attributes = [
       # global .gitattributes
