@@ -140,8 +140,8 @@ args @ {
     "pkill waybar; waybar"
     "pkill syncthingtray; syncthingtray --wait"
     (silentStartIfNotRunning 10 0 "discord")
-    (silentStartIfNotRunning 9 1 "thunderbird")
-    (silentStartIfNotRunning 8 2 "signal-desktop")
+    (silentStartIfNotRunning 10 0 "thunderbird")
+    (silentStartIfNotRunning 10 0 "signal-desktop")
   ];
 
   monitor = [
@@ -149,8 +149,8 @@ args @ {
     #"DP-1, preferred, 1410x0, 2, vrr, 1, bitdepth, 10"
     #"DP-2, preferred, 3330x0, 1.6, vrr, 1"
     #"eDP-1, disable"
-    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535, preferred, auto, 1.25, vrr, 0"
-    "desc:Philips Consumer Electronics Company 49M2C8900 1322131231233, preferred, auto, 1.25, vrr, 0"
+    "desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535, highres, auto, 1.25, vrr, 0"
+    "desc:Philips Consumer Electronics Company 49M2C8900 1322131231233, highres, auto, 1.25, vrr, 0"
     ",preferred,auto,auto,mirror,eDP-1"
   ];
 
