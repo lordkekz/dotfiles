@@ -111,7 +111,7 @@ args @ {
 
   # Plain, unconditional bindings
   bindGeneral = [
-    #"${vars.mod2}, S, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+    "${vars.mod2}, S, exec, ${pkgs.grimblast}/bin/grimblast copy area"
     "ALT, SPACE, exec, ${vars.anyrun}"
     "${vars.mod1}, E, exec, ${vars.fileManager}"
     "${vars.mod1}, R, exec, ${pkgs.obsidian}/bin/obsidian"

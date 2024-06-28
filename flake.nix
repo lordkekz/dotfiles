@@ -99,10 +99,23 @@
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1&submodules=1";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.inputs.systems.follows = "systems";
     hyprlock.url = "github:hyprwm/hyprlock?ref=main&submodules=1"; #FIXME update with the next release
+    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
+    hyprlock.inputs.systems.follows = "systems";
     hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2&submodules=1";
+    hypridle.inputs.nixpkgs.follows = "nixpkgs";
+    hypridle.inputs.systems.follows = "systems";
     hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.6.0&submodules=1";
+    hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
+    #hyprpaper.inputs.systems.follows = "systems";
     hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0&submodules=1";
+    hyprpicker.inputs.nixpkgs.follows = "nixpkgs";
+    #hyprpicker.inputs.systems.follows = "systems";
+    hyprland-contrib.url = "github:hyprwm/contrib?ref=v0.1&submodules=1";
+    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
+    #hyprland-contrib.inputs.systems.follows = "systems";
 
     # The phinger-cursor theme, but packaged as a SVG Hyprcursor theme
     hyprcursor-phinger.url = "github:lordkekz/hyprcursor-phinger"; # Contains fix for XCursor fallback
@@ -190,10 +203,12 @@
       channelsConfig.allowUnfree = true;
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
         nix-yazi-plugins
+        hyprland
         hyprlock
         hypridle
         hyprpaper
         hyprpicker
+        hyprland-contrib
         anyrun
       ]);
 
