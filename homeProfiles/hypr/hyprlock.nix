@@ -29,8 +29,8 @@ args @ {
     dots_center = true;
     dots_size = 0.5; # Scale of input-field height, 0.2 - 0.8
     dots_spacing = 0.5;
-    fade_on_empty = false;
-    fade_timeout = 10000; # Milliseconds before fade_on_empty is triggered.
+    fade_on_empty = true;
+    fade_timeout = 1; # Milliseconds before fade_on_empty is triggered.
     font_color = "rgb(40, 40, 40)";
     inner_color = "rgb(200, 200, 200)";
     outer_color = "rgba(120, 120, 120, 0.9)";
@@ -57,7 +57,7 @@ args @ {
 
   mkBackground = monitor: scale: {
     inherit monitor;
-    path = toString config.stylix.image;
+    path = "/tmp/hyprlock-wallpaper.jpg";
     blur_size = rs (2.5 * scale);
     blur_passes = rs (1.5 * scale);
     noise = 0.075;
@@ -71,12 +71,12 @@ in {
     enable = true;
     settings = {
       general = {
-        grace = 0;
-        hide_cursor = true;
+        grace = 300;
+        hide_cursor = false;
       };
 
       background = mapAttrsToList mkBackground monitors;
-      input-field = mapAttrsToList mkInputField monitors;
+      #input-field = mapAttrsToList mkInputField monitors;
       label = mapAttrsToList mkLabel monitors;
     };
   };
