@@ -59,6 +59,7 @@ in {
     #extraOptions = ...;
   };
   services.playerctld.enable = true;
+  services.mpris-proxy.enable = true;
   services.dunst.enable = true;
   services.udiskie.enable = true;
   services.network-manager-applet.enable = true;
