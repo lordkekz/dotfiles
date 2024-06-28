@@ -53,11 +53,6 @@ in {
     ];
   };
 
-  services.cliphist = {
-    enable = true;
-    #allowImages = true;
-    #extraOptions = ...;
-  };
   services.playerctld.enable = true;
   services.mpris-proxy.enable = true;
   services.dunst.enable = true;
