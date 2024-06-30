@@ -134,14 +134,13 @@ args @ {
     "sleep 3 && ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init &"
   ];
 
-  silentStartIfNotRunning = ws: sleep: name: "[workspace ${toString ws} silent] pgrep ${name} || sleep ${toString sleep} && ${name}";
+  silentStartIfNotRunning = ws: sleep: name: ''[workspace ${toString ws} silent] pgrep -f ".*${lib.escapeRegex name}.*" || sleep ${toString sleep} && ${name}'';
 
   exec = [
     "pkill waybar; waybar"
-    "pkill syncthingtray; syncthingtray --wait"
-    (silentStartIfNotRunning 10 0 "discord")
-    (silentStartIfNotRunning 10 0 "thunderbird")
-    (silentStartIfNotRunning 10 0 "signal-desktop")
+    "pkill syncthingtray; sleep 2; syncthingtray --wait"
+    (silentStartIfNotRunning 10 2 "thunderbird")
+    (silentStartIfNotRunning 10 2 "signal-desktop")
   ];
 
   monitor = [
@@ -157,17 +156,18 @@ args @ {
   xwayland.force_zero_scaling = true;
   env = [
     "GDK_SCALE,1.2"
+    "QT_SCALE_FACTOR,1.2"
   ];
 
   ####### LOOK AND FEEL #######
 
   # https://wiki.hyprland.org/Configuring/Variables/#general
   general = {
-    gaps_in = 4;
-    gaps_out = 4;
-    border_size = 2;
+    gaps_in = 1;
+    gaps_out = 1;
+    border_size = 0;
     #"col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
-    #"col.inactive_border" = "rgba(595959aa)";
+    "col.inactive_border" = lib.mkForce "rgba(ffffff00)";#"rgba(595959aa)";
     resize_on_border = true;
     layout = "master";
   };
