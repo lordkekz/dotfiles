@@ -36,7 +36,8 @@ in {
       push.autoSetupRemote = true;
     };
     aliases = {
-      lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --all --graph'';
+      lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
+      lga = ''lg --all'';
       ec = ''commit --allow-empty'';
       amend = ''commit --amend'';
       root = ''rev-parse --show-toplevel'';
