@@ -22,6 +22,7 @@
     enable = true;
     dockerCompat = true;
     dockerSocket.enable = true;
+    extraPackages = [pkgs.podman-compose];
   };
 
   # Enable Waydroid to run Android apps
