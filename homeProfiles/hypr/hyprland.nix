@@ -127,6 +127,11 @@ args @ {
     "${vars.mod1}, mouse:273, resizewindow"
   ];
 
+  bindl = [
+    ",switch:on:Lid Switch,exec,hyprctl dispatch dpms off eDP-1"
+    ",switch:off:Lid Switch,exec,hyprctl dispatch dpms on eDP-1"
+  ];
+
   ####### MONITORS AND UTILITIES #######
 
   exec-once = [
@@ -167,7 +172,7 @@ args @ {
     gaps_out = 1;
     border_size = 0;
     #"col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
-    "col.inactive_border" = lib.mkForce "rgba(ffffff00)";#"rgba(595959aa)";
+    "col.inactive_border" = lib.mkForce "rgba(ffffff00)"; #"rgba(595959aa)";
     resize_on_border = true;
     layout = "master";
   };
@@ -262,6 +267,7 @@ in {
         animations
         misc
         bindm
+        bindl
         input
         gestures
         ;
