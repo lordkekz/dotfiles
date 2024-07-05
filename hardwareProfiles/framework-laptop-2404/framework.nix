@@ -46,11 +46,11 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   # Use old fw-ectool because newer versions seem broken on 12th gen intel
-  # FIXME somehow remove the current version from systemPackages, as the newer one gets linked instead of this
   environment.systemPackages = let
     oldpkgs = import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/f6348ff1c9260b94ff9e25a2b04020d12bc820a8.tar.gz";
       sha256 = "sha256:1i84qlfj4nf27zbbjngr6l8xb986k1ggy15c697601sp7r3x1sh5";
-    }) { inherit system; };
-  in [oldpkgs.fw-ectool];
+    }) {inherit system;};
+    hiPrioEctool = lib.hiPrio oldpkgs.fw-ectool;
+  in [hiPrioEctool];
 }
