@@ -288,6 +288,12 @@
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
+
+        vortex.modules = [
+          homelab
+          headless
+          vortex
+        ];
       };
 
       # PER-SYSTEM OUTPUTS
