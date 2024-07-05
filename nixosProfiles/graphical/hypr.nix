@@ -13,13 +13,10 @@
 }: let
   greeting = "Resistance is futile.";
 in {
-  imports = [
-    nixosProfiles.graphical
-    inputs.hyprland.nixosModules.default
-  ];
+  imports = [inputs.hyprland.nixosModules.default];
 
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       CPU_DRIVER_OPMODE_ON_AC = "active";
       CPU_DRIVER_OPMODE_ON_BAT = "passive";

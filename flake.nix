@@ -182,7 +182,14 @@
     nixosProfiles = lib.my.loadProfiles "nixos";
     hardwareProfiles = lib.my.loadProfiles "hardware";
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
-
+    mkSessions = system: {
+      config.multi-hm.sessions = {
+        kde.homeConfiguration = getHomeConfig system "kde";
+        kde.launchCommand = "startplasma-wayland";
+        hypr.homeConfiguration = getHomeConfig system "hypr";
+        hypr.launchCommand = "Hyprland";
+      };
+    };
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
       description = "A template to dynamically extend my dotfiles without forking them.";
@@ -231,39 +238,17 @@
       # declare hosts in flake.nix (hosts are defined by hostname, arch and profiles)
       hosts = with nixosProfiles;
       with hardwareProfiles; {
-        worm.modules = [
-          homelab
-          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
-        ];
-
         live.modules = [
           live-installer
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
 
-        kekswork2312.modules = [personal kde framework-laptop-2312];
         kekswork2404.modules = [
           personal
-          kde
+          graphical
           framework-laptop-2404
-          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "kde"))
+          (mkSessions "x86_64-linux")
         ];
-        nasman2404.modules = [
-          homelab
-          headless
-          ryzen-server-2404
-          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
-        ];
-        kekstop2304.modules = [personal hypr desktop-2015];
-        kekswork2404-hypr = {
-          modules = [
-            personal
-            hypr
-            framework-laptop-2404
-            (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "hypr"))
-          ];
-          specialArgs = {inherit (inputs) stylix-image;};
-        };
       };
 
       # PER-SYSTEM OUTPUTS

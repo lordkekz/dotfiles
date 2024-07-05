@@ -10,8 +10,6 @@
   pkgs-unstable,
   ...
 }: {
-  imports = [nixosProfiles.graphical];
-
   # Enable the KDE Plasma 6 Desktop Environment.
   services.displayManager = {
     defaultSession = "plasma";
