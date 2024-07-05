@@ -24,8 +24,16 @@ args @ {
     hyfetch
     fastfetch
 
-    tmatrix # Epic matrix effect
-    du-dust # Disk usage visualizer (kind of like Filelight)
+    # Terminal flexing
+    tmatrix
+    pipes-rs
+    cbonsai
+
+    # Disk usage visualizers
+    du-dust
+    duf
+    # Interactive explorer for nix derivations and dependencies
+    nix-tree
 
     # Benchmarking
     geekbench
@@ -35,8 +43,6 @@ args @ {
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
     smartmontools
-    # Interactive explorer for nix derivations and dependencies
-    nix-tree
   ];
 
   programs.nix-index.enable = true;
