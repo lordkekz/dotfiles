@@ -184,11 +184,18 @@
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
     mkSessions = system: {
       config.multi-hm.sessions = {
-        kde.homeConfiguration = getHomeConfig system "kde";
-        kde.launchCommand = "startplasma-wayland";
-        hypr.homeConfiguration = getHomeConfig system "hypr";
-        hypr.launchCommand = "Hyprland";
+        kde = {
+          homeConfiguration = getHomeConfig system "kde";
+          launchCommand = "startplasma-wayland";
+          displayName = "Plasma 6 (mutli-hm)";
+        };
+        hypr = {
+          homeConfiguration = getHomeConfig system "hypr";
+          launchCommand = "Hyprland";
+          displayName = "Hyprland (multi-hm)";
+        };
       };
+      config.services.displayManager.defaultSession = lib.mkForce "kde";
     };
     templates.dotfiles-extension = {
       path = ./templates/dotfiles-extension;
@@ -247,7 +254,10 @@
           personal
           graphical
           framework-laptop-2404
+          # Adds entries for graphical sessions which first activate a home configuration
           (mkSessions "x86_64-linux")
+          # Fallback so I get a decent tty experience without starting graphical session
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
       };
 

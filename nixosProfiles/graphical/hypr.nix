@@ -62,7 +62,7 @@ in {
   };
 
   services.greetd = {
-    enable = true;
+    enable = false;
     settings = {
       default_session = {
         command = ''

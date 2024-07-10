@@ -7,27 +7,37 @@
 with lib; let
   cfg = config.multi-hm.sessions;
   isHomeConfiguration = x: x ? activationPackage && isDerivation x.activationPackage;
+
   mkLaunchScript = name: value:
     pkgs.writeShellApplication {
       name = "launch-${name}";
       text = ''
         # Activate home-manager config
-        ${value.homeConfiguration.activationPackage}/activate
+        ${value.homeConfiguration.activationPackage}/activate -b backup
 
         # Launch the actual session
         ${value.launchCommand}
       '';
     };
-  mkDesktopFileForSession = {
-    name,
-    value,
-  }:
+
+  mkDesktopFileForSession = name: value:
     pkgs.makeDesktopItem {
-      name = "share/wayland-sessions/multi-hm-session-${name}";
-      desktopName = name;
-      exec = "${mkLaunchScript name value}";
+      # Path relative to $out/share/applications
+      name = "multi-hm-session-${name}";
+      desktopName = value.displayName;
+      exec = "${getExe (mkLaunchScript name value)}";
     };
-  desktopFiles = map mkDesktopFileForSession (attrsToList cfg);
+
+  mkLinkToDesktopFile = name: value: "ln -sT ${mkDesktopFileForSession name value}/share/applications/multi-hm-session-${name}.desktop $out/share/wayland-sessions/${name}.desktop";
+
+  wayland-sessions = pkgs.runCommandLocal "multi-hm-sessions" {passthru.providedSessions = attrNames cfg;} ''
+    mkdir -p "$out/share/xsessions" # Will not be populated because I don't use X11 anymore.
+    mkdir -p "$out/share/wayland-sessions"
+    ${pipe cfg [
+      (mapAttrsToList mkLinkToDesktopFile)
+      concatLines
+    ]}
+  '';
 in {
   options.multi-hm.sessions = mkOption {
     description = ''
@@ -48,10 +58,17 @@ in {
           '';
           type = str;
         };
+        options.displayName = mkOption {
+          description = ''
+            Session name to display in display manager.
+          '';
+          type = str;
+        };
       });
   };
 
   config = {
-    environment.systemPackages = desktopFiles;
+    services.displayManager.sessionPackages = [wayland-sessions];
+    environment.systemPackages = mapAttrsToList mkLaunchScript cfg;
   };
 }
