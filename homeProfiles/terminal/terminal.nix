@@ -43,6 +43,9 @@ args @ {
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
     smartmontools
+
+    # Misc
+    tree
   ];
 
   programs.nix-index.enable = true;

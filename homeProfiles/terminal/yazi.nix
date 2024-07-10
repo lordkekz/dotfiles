@@ -17,8 +17,12 @@ args @ {
     enableNushellIntegration = true;
     package = pkgs-unstable.yazi;
     settings = {
-      show_hidden = true;
-      sort_dir_first = true;
+      manager = {
+        show_hidden = true;
+        sort_dir_first = true;
+        linemode = "mtime";
+        scrolloff = 4;
+      };
     };
     keymap = let
       inherit (lib) concatLists attrValues genList;
