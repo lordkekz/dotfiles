@@ -2,9 +2,6 @@
   description = "A cookie jar full of flakes.";
 
   inputs = {
-    stylix-image.flake = false;
-    stylix-image.url = "path:./assets/wallpaper-normandie.jpg";
-
     ## PURE-NIX UTILITIES ##
 
     # Disko for declarative partitioning

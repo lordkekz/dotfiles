@@ -1389,7 +1389,6 @@
         "personal-data": "personal-data",
         "plasma-manager": "plasma-manager",
         "stylix": "stylix",
-        "stylix-image": "stylix-image",
         "systems": "systems_7",
         "walker": "walker"
       }
@@ -1437,19 +1436,6 @@
         "ref": "master",
         "repo": "stylix",
         "type": "github"
-      }
-    },
-    "stylix-image": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-5ScSMvBxoQciXlwVTOa1XTK/p2WZJYXFWvOHKmMpEFU=",
-        "path": "./assets/wallpaper-normandie.jpg",
-        "type": "path"
-      },
-      "original": {
-        "path": "./assets/wallpaper-normandie.jpg",
-        "type": "path"
       }
     },
     "systems": {
