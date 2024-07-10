@@ -168,11 +168,11 @@ args @ {
 
   # https://wiki.hyprland.org/Configuring/Variables/#general
   general = {
-    gaps_in = 1;
-    gaps_out = 1;
-    border_size = 0;
+    gaps_in = 4;
+    gaps_out = 2;
+    border_size = 2;
     #"col.active_border" = "rgba(33ccffff) rgba(cc33ccee) rgba(ff9900ee) -50deg";
-    "col.inactive_border" = lib.mkForce "rgba(ffffff00)"; #"rgba(595959aa)";
+    #"col.inactive_border" = lib.mkForce "rgba(ffffff00)"; #"rgba(595959aa)";
     resize_on_border = true;
     layout = "master";
   };
@@ -181,7 +181,13 @@ args @ {
   master = {
     orientation = "center";
     always_center_master = true;
+    no_gaps_when_only = false;
   };
+
+  windowrulev2 = [
+    # Hide border for fullscreened/maximized windows
+    "noborder,fullscreen:1"
+  ];
 
   # https://wiki.hyprland.org/Configuring/Variables/#decoration
   decoration = {
@@ -270,6 +276,7 @@ in {
         bindl
         input
         gestures
+        windowrulev2
         ;
     };
   };
