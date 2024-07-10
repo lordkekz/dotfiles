@@ -194,10 +194,6 @@
       };
       config.services.displayManager.defaultSession = lib.mkForce "kde";
     };
-    templates.dotfiles-extension = {
-      path = ./templates/dotfiles-extension;
-      description = "A template to dynamically extend my dotfiles without forking them.";
-    };
 
     # A set containing the paths of assets in ./assets directory
     assets = hl.load {
@@ -293,7 +289,7 @@
         # Output channels for easier debugging in nix repl
         inherit channels;
 
-        formatter = channels.nixpkgs.alejandra;
+        formatter = pkgs.alejandra;
       };
 
       # SYSTEMLESS OUTPUTS
@@ -306,6 +302,6 @@
       inherit homeManagerModules nixosModules;
 
       # export lib, templates, etc.
-      inherit lib templates assets;
+      inherit lib assets;
     };
 }
