@@ -73,8 +73,9 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Yazi plugins, packaged by your's truly
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins";
+    # Yazi plugins
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=yazi-v0.2.5";
+    nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 
     # Generate images etc. from NixOS configs
     nixos-generators.url = "github:nix-community/nixos-generators";

@@ -1143,19 +1143,22 @@
         "flake-utils": "flake-utils_5",
         "flake-utils-plus": "flake-utils-plus_2",
         "haumea": "haumea_2",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1715670011,
-        "narHash": "sha256-88Y9kzjy5ydAtpPENTWI/oA0iSDvhGfXyqpkkDQ0z5s=",
+        "lastModified": 1721115275,
+        "narHash": "sha256-CC0TcxudGY+v4MEsfKXCdwutBvIbfrF8pqJa7nhE+H4=",
         "owner": "lordkekz",
         "repo": "nix-yazi-plugins",
-        "rev": "020d66829a20e0e6b7b406bd462c18eccb1a2dd5",
+        "rev": "c124c7aad2fe8343c395a526d3ef6fbeae8ce153",
         "type": "github"
       },
       "original": {
         "owner": "lordkekz",
+        "ref": "yazi-v0.2.5",
         "repo": "nix-yazi-plugins",
         "type": "github"
       }
@@ -1233,22 +1236,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1715087517,
-        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1714912032,
         "narHash": "sha256-clkcOIkg8G4xuJh+1onLG4HPMpbtzdLv4rHxFzgsH9c=",
         "owner": "NixOS",
@@ -1263,7 +1250,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1710451336,
         "narHash": "sha256-pP86Pcfu3BrAvRO7R64x7hs+GaQrjFes+mEPowCfkxY=",
@@ -1421,7 +1408,7 @@
         "flake-compat": "flake-compat_5",
         "gnome-shell": "gnome-shell",
         "home-manager": "home-manager_3",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1717866166,
@@ -1567,7 +1554,7 @@
     "walker": {
       "inputs": {
         "flake-parts": "flake-parts_3",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1712590509,
