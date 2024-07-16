@@ -28,6 +28,7 @@ args @ {
     '';
   };
 in {
+  # General Git
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -55,5 +56,20 @@ in {
 
   programs.gpg = {
     enable = true;
+  };
+
+  # GitHub and stuff
+  programs.gh = {
+    enable = true;
+    # TODO maybe configure aliases
+    settings = {};
+    # TODO maybe add some extensions
+    extensions = [];
+  };
+  programs.gh-dash = {
+    enable = true;
+    settings = {
+      # TODO maybe configure PR sections etc.
+    };
   };
 }
