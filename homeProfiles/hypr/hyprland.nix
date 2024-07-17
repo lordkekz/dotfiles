@@ -118,6 +118,7 @@ args @ {
     "${vars.mod1}, BACKSPACE, exit"
     "${vars.mod1}, V, exec, ${vars.cliphist} list | ${vars.anyrun-stdin} | ${vars.cliphist} decode | wl-copy"
     "${vars.mod1}, B, exec, pkill -SIGUSR1 waybar"
+    "${vars.mod2}, B, exec, pkill waybar; waybar"
   ];
 
   bind = concatLists [bindAlacritty bindFoot bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
