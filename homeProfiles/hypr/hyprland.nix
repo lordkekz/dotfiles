@@ -185,6 +185,14 @@ args @ {
     no_gaps_when_only = false;
   };
 
+  workspace = [
+    # Two windows on superwide monitor => center them (3/4 width) using horizontal outer gaps
+    # Doesn't work because spaces aren't allowed in props of workspace selector:
+    #"m[desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535] w[2],gapsout:4 640"
+    #"m[desc:Philips Consumer Electronics Company 49M2C8900 1322131231233] w[2],gapsout:4 640"
+    "m[DP-1] w[2],gapsout:4 640"
+  ];
+
   windowrulev2 = [
     # Hide border for fullscreened/maximized windows
     "noborder,fullscreen:1"
@@ -278,6 +286,7 @@ in {
         input
         gestures
         windowrulev2
+        workspace
         ;
     };
   };
