@@ -5,17 +5,17 @@
     ## PURE-NIX UTILITIES ##
 
     # Disko for declarative partitioning
-    disko.url = "github:nix-community/disko/v1.5.0";
+    disko.url = "github:nix-community/disko?ref=v1.5.0";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Flake utils for stripping some boilerplate
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus?ref=v1.4.0";
     flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
     # Haumea for directory-defined attrset loading
-    haumea.url = "github:nix-community/haumea/v0.2.2";
+    haumea.url = "github:nix-community/haumea?ref=v0.2.2";
     haumea.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence
@@ -92,8 +92,7 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Stylix helps theme applications using base16
-    stylix.url = "github:danth/stylix?ref=master";
-    #stylix.url = "github:danth/stylix?ref=release-24.05"; # FIXME use this once branch gets created.
+    stylix.url = "github:danth/stylix?ref=release-24.05";
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1&submodules=1";
@@ -116,8 +115,7 @@
     #hyprland-contrib.inputs.systems.follows = "systems";
 
     # The phinger-cursor theme, but packaged as a SVG Hyprcursor theme
-    hyprcursor-phinger.url = "github:lordkekz/hyprcursor-phinger"; # Contains fix for XCursor fallback
-    #hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
+    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
     hyprcursor-phinger.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Walker, a Wayland-native runner

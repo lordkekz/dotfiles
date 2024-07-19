@@ -80,7 +80,7 @@ args @ {
         # Automatically save, e.g. for typst-live to work
         auto-save = {
           enable = true;
-          condition = ''
+          settings.condition = ''
             function(buf)
               local fn = vim.fn
               local utils = require("auto-save.utils.data")
@@ -123,22 +123,24 @@ args @ {
         };
         # Highlight where the cursor jumps
         specs = {
-          enable = false;
-          min_jump = 5;
-          increment = 10;
-          color = "white";
-          width = 10;
-          fader = {
-            # Set builtin to null to use custom fader
-            builtin = null;
-            # Fade from 0% to 100% opacity exponentially
-            custom = ''
-              function(blend, cnt)
-                if blend + math.floor(math.exp(cnt)) <= 100 then
-                  return 100 - blend - math.floor(math.exp(cnt))
-                else return nil end
-              end
-            '';
+          enable = true;
+          settings = {
+            min_jump = 5;
+            increment = 10;
+            color = "white";
+            width = 10;
+            fader = {
+              # Set builtin to null to use custom fader
+              builtin = null;
+              # Fade from 0% to 100% opacity exponentially
+              custom = ''
+                function(blend, cnt)
+                  if blend + math.floor(math.exp(cnt)) <= 100 then
+                    return 100 - blend - math.floor(math.exp(cnt))
+                  else return nil end
+                end
+              '';
+            };
           };
         };
         # Utilities for typst
