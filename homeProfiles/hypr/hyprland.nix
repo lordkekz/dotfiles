@@ -82,10 +82,10 @@ args @ {
     "${vars.mod1}, up, movefocus, u"
     "${vars.mod1}, right, movefocus, r"
     # Switch window with SUPER + HJKL
-    "${vars.mod1}, H, movewindow, l"
-    "${vars.mod1}, J, movewindow, d"
-    "${vars.mod1}, K, movewindow, u"
-    "${vars.mod1}, L, movewindow, r"
+    "${vars.mod1}, H, movewindoworgroup, l"
+    "${vars.mod1}, J, movewindoworgroup, d"
+    "${vars.mod1}, K, movewindoworgroup, u"
+    "${vars.mod1}, L, movewindoworgroup, r"
     # Roll Window (master layout) with SUPER [+ SHIFT] + TAB
     "SUPER, TAB, layoutmsg, rollnext"
     "SUPER SHIFT, TAB, layoutmsg, rollprev"
@@ -93,6 +93,11 @@ args @ {
     "ALT, TAB, cyclenext"
     "ALT SHIFT, TAB, cyclenext, prev"
     "ALT, F4, killactive"
+    # Group keybinds
+    "${vars.mod1}, G, togglegroup"
+    "${vars.mod2}, G, lockgroups, toggle"
+    "CONTROL ALT, TAB, changegroupactive, f"
+    "CONTROL ALT SHIFT, TAB, changegroupactive, b"
     # Floating with SUPER + F
     "${vars.mod1}, F, togglefloating"
     "${vars.mod1}, F, resizeactive, exact 50% 50%"
@@ -191,6 +196,8 @@ args @ {
     #"m[desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535] w[2],gapsout:4 640"
     #"m[desc:Philips Consumer Electronics Company 49M2C8900 1322131231233] w[2],gapsout:4 640"
     "m[DP-1] w[2],gapsout:4 640"
+    # FIXME make this `w[v2]` for 2 visible windows, once I get a newer version of Hyprland
+    "m[DP-1] w[g2],gapsout:4 640"
   ];
 
   windowrulev2 = [
