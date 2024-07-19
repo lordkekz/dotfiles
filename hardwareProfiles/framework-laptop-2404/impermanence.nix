@@ -122,6 +122,7 @@ in {
         "Games"
       ];
       files = [
+        ".config/gh/hosts.yml"
         ".config/powerdevilrc"
         ".config/powermanagementprofilesrc"
         ".config/syncthingtray.ini"

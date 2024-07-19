@@ -29,7 +29,7 @@ args @ {
     # UTILITY
     tailscale-systray
     syncthingtray # It also has a plasmoid.
-    anki # Spaced-repetition flashcards
+    anki-bin # Spaced-repetition flashcards
     kdePackages.dolphin # KDE file explorer
     kdePackages.ark # KDE file archiver
     filezilla # FTP client
