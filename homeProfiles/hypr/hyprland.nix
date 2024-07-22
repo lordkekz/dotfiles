@@ -12,8 +12,14 @@ args @ {
   config,
   ...
 }: let
-  inherit (lib) optional optionals concatLists genList;
-  inherit (builtins) toString;
+  inherit (lib) optional optionals concatLists genList escapeShellArg findFirst hasPrefix getExe;
+  inherit (builtins) toString readFile;
+
+  toggleLaptopScreen = pkgs.writeShellApplication {
+    name = "hyprland-toggle-laptop-screen";
+    runtimeInputs = [pkgs.jq];
+    text = readFile ./toggle-laptop-screen.sh;
+  };
 
   # The NixOS module applies some config to the package.
   # We just use that final package to avoid potential conflicts.
@@ -124,6 +130,9 @@ args @ {
     "${vars.mod1}, V, exec, ${vars.cliphist} list | ${vars.anyrun-stdin} | ${vars.cliphist} decode | wl-copy"
     "${vars.mod1}, B, exec, pkill -SIGUSR1 waybar"
     "${vars.mod2}, B, exec, pkill waybar; waybar"
+    "${vars.mod1}, M, exec, ${getExe toggleLaptopScreen} eDP-1 ${
+      escapeShellArg (findFirst (hasPrefix "eDP-1") "eDP-1,preferred,auto,auto" monitor)
+    }"
   ];
 
   bind = concatLists [bindAlacritty bindFoot bindFirefox bindWindowManagement bindGeneral bindWorkspaces];
