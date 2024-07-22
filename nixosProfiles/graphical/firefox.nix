@@ -109,6 +109,9 @@ in {
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
         "browser.download.autohideButton" = lock-false;
         "browser.firefox-view.feature-tour" = lock-value ''{"message":"FIREFOX_VIEW_FEATURE_TOUR","screen":"","complete":true}'';
+        # Always new tab for popup windows
+        "browser.link.open_newwindow" = lock-value 3;
+        "browser.link.open_newwindow.restriction" = lock-value 0;
 
         "dom.security.https_only_mode" = lock-true;
         "widget.use-xdg-desktop-portal.file-picker" = lock-value 1;
