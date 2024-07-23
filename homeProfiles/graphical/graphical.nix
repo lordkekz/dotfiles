@@ -114,7 +114,7 @@ args @ {
   };
 
   # Declaratively configure connection of virt-manager to libvirtd QEMU/KVM
-  # https://nixos.wiki/wiki/Virt-manager
+  # https://wiki.nixos.org/wiki/Virt-manager
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///system"];
