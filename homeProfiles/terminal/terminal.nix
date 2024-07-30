@@ -39,6 +39,8 @@ args @ {
     geekbench
     # disk benchmark
     fio
+    # network benchmark
+    iperf
     # Speedtest by Ookla
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
