@@ -160,7 +160,7 @@ args @ {
     "pkill waybar; waybar"
     "pkill syncthingtray; sleep 2; syncthingtray --wait"
     (silentStartIfNotRunning 10 2 "thunderbird")
-    (silentStartIfNotRunning 10 2 "signal-desktop")
+    (silentStartIfNotRunning 9 2 "signal-desktop")
   ];
 
   monitor = [
@@ -204,9 +204,9 @@ args @ {
     # Doesn't work because spaces aren't allowed in props of workspace selector:
     #"m[desc:Philips Consumer Electronics Company 49M2C8900 AU42411000535] w[2],gapsout:4 640"
     #"m[desc:Philips Consumer Electronics Company 49M2C8900 1322131231233] w[2],gapsout:4 640"
-    "m[DP-1] w[2],gapsout:4 640"
+    "m[DP-4] w[2],gapsout:4 640"
     # FIXME make this `w[v2]` for 2 visible windows, once I get a newer version of Hyprland
-    "m[DP-1] w[g2],gapsout:4 640"
+    "m[DP-4] w[g2],gapsout:4 640"
   ];
 
   windowrulev2 = [
