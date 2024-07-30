@@ -42,6 +42,9 @@ in {
       ec = ''commit --allow-empty'';
       amend = ''commit --amend'';
       root = ''rev-parse --show-toplevel'';
+      st = ''status'';
+      df = ''diff'';
+      ds = ''diff --staged'';
     };
     attributes = [
       # global .gitattributes
