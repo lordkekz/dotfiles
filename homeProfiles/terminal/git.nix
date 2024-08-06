@@ -45,6 +45,9 @@ in {
       st = ''status'';
       df = ''diff'';
       ds = ''diff --staged'';
+      fap = ''fetch -a -p'';
+      # Tip for multi-command aliases: https://stackoverflow.com/a/25915221
+      update = ''!git fap && git pull && git branch --no-color --list --format "%(refname:short)" --merged $1 | xargs git branch -dv && :'';
     };
     attributes = [
       # global .gitattributes
