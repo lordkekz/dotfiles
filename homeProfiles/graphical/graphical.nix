@@ -52,6 +52,7 @@ args @ {
     gimp
     (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
     kdePackages.gwenview
+    kdePackages.kdenlive # KDE video editor
 
     # GAMING AND WINE
     lutris # Open source gaming platform; use for GTA5
