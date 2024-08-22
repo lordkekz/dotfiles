@@ -73,7 +73,7 @@ args @ {
         # Python
         ruff-lsp.enable = true;
         # Typst typsetting language
-        typst-lsp.enable = true;
+        typst-lsp.enable = false; # FIXME fails for some reason, because "typst-lsp-0.13.0 is marked as broken", but it isn't marked as broken??
       };
 
       plugins = {
