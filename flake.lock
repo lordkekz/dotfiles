@@ -1136,11 +1136,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1721115275,
-        "narHash": "sha256-CC0TcxudGY+v4MEsfKXCdwutBvIbfrF8pqJa7nhE+H4=",
+        "lastModified": 1724363922,
+        "narHash": "sha256-AsOuKoNTTuTbLMQfllYVrt2YmIIhJdSo0TfcQDJvOkI=",
         "owner": "lordkekz",
         "repo": "nix-yazi-plugins",
-        "rev": "c124c7aad2fe8343c395a526d3ef6fbeae8ce153",
+        "rev": "00ed0d4363af5574c40c00067c83dabd17a08501",
         "type": "github"
       },
       "original": {

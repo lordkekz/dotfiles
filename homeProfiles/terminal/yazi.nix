@@ -82,19 +82,38 @@ args @ {
           run = "plugin bypass --args=reverse";
           desc = "Recursively enter parent directory, skipping parents with only a single subdirectory";
         }
+        {
+          on = ["c" "m"];
+          run = "plugin chmod";
+          desc = "Change permissions on selected files.";
+        }
+        {
+          on = ["i"];
+          run = "plugin --sync hide-preview";
+          desc = "Hide or show preview pane.";
+        }
+        {
+          on = ["I"];
+          run = "plugin --sync max-preview";
+          desc = "Maximize or restore preview.";
+        }
+        {
+          on = ["F"]; # overrides yazi builtin filter
+          run = "plugin smart-filter";
+          desc = "Smart Filter";
+        }
       ];
     in {
       manager.prepend_keymap = concatLists (attrValues keymap);
     };
 
-    plugins = with pkgs.yaziPlugins; {
-      inherit bypass relative-motions starship;
-    };
+    plugins = pkgs.yaziPlugins;
   };
 
   xdg.configFile = {
     "yazi/init.lua".text = ''
       require("starship"):setup()
+      require("full-border"):setup()
       require("relative-motions"):setup({ show_numbers="relative_absolute", show_motion = true })
     '';
   };

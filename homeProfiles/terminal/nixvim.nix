@@ -79,7 +79,7 @@ args @ {
       plugins = {
         # Automatically save, e.g. for typst-live to work
         auto-save = {
-          enable = true;
+          enable = false;
           settings.condition = ''
             function(buf)
               local fn = vim.fn
