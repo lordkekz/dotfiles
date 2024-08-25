@@ -75,7 +75,7 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=yazi-v0.2.5";
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=yazi-v0.3.1";
     #nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 

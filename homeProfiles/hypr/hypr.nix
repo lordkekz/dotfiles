@@ -19,7 +19,8 @@ in {
   ];
 
   home.packages = with pkgs; [
-    kwalletmanager
+    kdePackages.kwallet
+    kdePackages.kwalletmanager
     playerctl
     wl-clipboard
     syncthingtray
