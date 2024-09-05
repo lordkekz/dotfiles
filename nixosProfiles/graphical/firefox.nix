@@ -79,6 +79,12 @@ in {
 
         # Plasma integration is broken as of 2024-01-10.
         #"plasma-browser-integration@kde.org" = mkExt "plasma-integration";
+
+        # Zotero integration
+        "zotero@chnm.gmu.edu" = {
+          install_url = "https://www.zotero.org/download/connector/dl?browser=firefox";
+          installation_mode = "force_installed";
+        };
       };
 
       /*
