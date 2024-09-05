@@ -161,7 +161,7 @@ args @ {
     "pkill waybar; waybar"
     "pkill syncthingtray; sleep 2; syncthingtray --wait"
     (silentStartIfNotRunning 10 2 "thunderbird")
-    (silentStartIfNotRunning 9 2 "signal-desktop")
+    (silentStartIfNotRunning 9 2 "signal-desktop --password-store=kwallet6")
   ];
 
   monitor = [
