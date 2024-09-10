@@ -47,6 +47,10 @@
     home-manager.url = "github:lordkekz/home-manager?ref=release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Lix (correctness-focused fork of Nix)
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs";
+
     # microvm.nix
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
@@ -97,22 +101,22 @@
     stylix.url = "github:danth/stylix?ref=release-24.05";
 
     # Hyprland, a wayland tiling compositor
-    hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1&submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.systems.follows = "systems";
-    hyprlock.url = "github:hyprwm/hyprlock?ref=main&submodules=1"; #FIXME update with the next release
+    hyprlock.url = "github:hyprwm/hyprlock?ref=main"; #FIXME update with the next release
     hyprlock.inputs.nixpkgs.follows = "nixpkgs";
     hyprlock.inputs.systems.follows = "systems";
-    hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2&submodules=1";
+    hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2";
     hypridle.inputs.nixpkgs.follows = "nixpkgs";
     hypridle.inputs.systems.follows = "systems";
-    hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.6.0&submodules=1";
+    hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.6.0";
     hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
     #hyprpaper.inputs.systems.follows = "systems";
-    hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0&submodules=1";
+    hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0";
     hyprpicker.inputs.nixpkgs.follows = "nixpkgs";
     #hyprpicker.inputs.systems.follows = "systems";
-    hyprland-contrib.url = "github:hyprwm/contrib?ref=v0.1&submodules=1";
+    hyprland-contrib.url = "github:hyprwm/contrib?ref=v0.1";
     hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
     #hyprland-contrib.inputs.systems.follows = "systems";
 
@@ -132,6 +136,7 @@
     nixpkgs-stable,
     nixpkgs-unstable,
     nixos-generators,
+    lix-module,
     self,
     systems,
     ...
@@ -226,6 +231,7 @@
           (attrValues nixosModules)
           ++ [
             nixos-generators.nixosModules.all-formats
+            lix-module.nixosModules.default
           ];
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
