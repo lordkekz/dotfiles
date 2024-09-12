@@ -50,6 +50,11 @@
     home-manager.url = "github:lordkekz/home-manager?ref=release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Kubenix for declarative kubernetes manifests
+    kubenix.url = "github:hall/kubenix";
+    kubenix.inputs.nixpkgs.follows = "nixpkgs";
+    kubenix.inputs.systems.follows = "systems";
+
     # Lix (correctness-focused fork of Nix)
     lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
