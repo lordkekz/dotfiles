@@ -18,4 +18,9 @@ args @ {
 }: {
   hm = inputs.home-manager.packages.${system}.default;
   pm = inputs.plasma-manager.packages.${system}.default;
+  kn = inputs.kubenix.packages.${system}.default.override {
+    module = import ../kubernetes/cluster.nix;
+    # optional; pass custom values to the kubenix module
+    specialArgs = {flake = self;};
+  };
 }
