@@ -78,8 +78,10 @@ args @ {
     # There is an unofficial whatsapp client: whatsapp-for-linux
 
     # PROGRAMMING
+    ollama
     jetbrains-toolbox
     jetbrains.idea-ultimate
+    jetbrains.pycharm-professional
     sqlitebrowser
     python312Full
     # vscodium
