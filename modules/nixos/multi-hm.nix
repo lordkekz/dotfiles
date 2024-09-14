@@ -52,6 +52,7 @@ in {
     description = ''
       Sessions for which desktop entries should be created.
     '';
+    default = {};
     type = with types;
       attrsOf (submodule {
         options.homeConfiguration = mkOption {
