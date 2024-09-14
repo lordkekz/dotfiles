@@ -250,6 +250,13 @@
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
 
+        nasman2404.modules = [
+          homelab
+          headless
+          ryzen-server-2404
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
+
         kekswork2404.modules = [
           personal
           graphical
