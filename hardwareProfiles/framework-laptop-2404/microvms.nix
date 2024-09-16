@@ -71,6 +71,7 @@
     my-node-1 = fun "41" {
       services.k3s = {
         enable = true;
+        extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server";
         token = "<randomized common secret>";
         clusterInit = true;
@@ -79,6 +80,7 @@
     my-node-2 = fun "42" {
       config.services.k3s = {
         enable = true;
+        extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server"; # Or "agent" for worker only nodes
         token = "<randomized common secret>";
         serverAddr = "https://192.168.2.41:6443";
@@ -87,6 +89,7 @@
     my-node-3 = fun "43" {
       config.services.k3s = {
         enable = true;
+        extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server"; # Or "agent" for worker only nodes
         token = "<randomized common secret>";
         serverAddr = "https://192.168.2.41:6443";
