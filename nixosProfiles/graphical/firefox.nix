@@ -74,6 +74,7 @@ in {
         # Productivity & Features
         "{531906d3-e22f-4a6c-a102-8057b88a1a63}" = mkExt "single-file";
         "extension@one-tab.com" = mkExt "onetab";
+        "treestyletab@piro.sakura.ne.jp" = mkExt "tree-style-tab";
         "jetpack-extension@dashlane.com" = mkExt "dashlane";
         "addon@darkreader.org" = mkExt "darkreader"; # Can also style titlebar black
 

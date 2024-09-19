@@ -114,6 +114,7 @@ in {
         ".jdks" # JDKs downloaded by IntellIJ IDEA
         ".m2" # Local Maven Repo
         ".mozilla/firefox"
+        ".floorp"
         ".renpy"
         ".ssh"
         ".steam"
