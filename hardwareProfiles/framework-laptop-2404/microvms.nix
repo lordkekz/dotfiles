@@ -40,14 +40,33 @@
         ];
 
         networking.firewall.enable = false;
-        systemd.network.enable = true;
-        systemd.network.networks."20-lan" = {
-          matchConfig.Type = "ether";
-          networkConfig = {
-            Address = ["192.168.2.${id}/24"];
-            Gateway = "192.168.2.1";
-            DNS = ["192.168.2.1"];
-            DHCP = "no";
+        networking.networkmanager.enable = false;
+        networking.useDHCP = false;
+        systemd.network = {
+          enable = true;
+          networks."10-lan" = {
+            matchConfig.Name = "enp0s3";
+            networkConfig = {
+              Bridge = "vmbr0";
+            };
+          };
+
+          netdevs."vmbr0" = {
+            netdevConfig = {
+              Name = "vmbr0";
+              Kind = "bridge";
+            };
+          };
+
+          networks."10-lan-bridge" = {
+            matchConfig.Name = "vmbr0";
+            networkConfig = {
+              Address = ["192.168.2.${id}/24"];
+              Gateway = "192.168.2.1";
+              DNS = ["192.168.2.1"];
+              DHCP = "no";
+            };
+            linkConfig.RequiredForOnline = "routable";
           };
         };
 
@@ -73,7 +92,7 @@
         enable = true;
         extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server";
-        token = "<randomized common secret>";
+        token = "randomizedsecret";
         clusterInit = true;
       };
     };
@@ -82,7 +101,7 @@
         enable = true;
         extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server"; # Or "agent" for worker only nodes
-        token = "<randomized common secret>";
+        token = "randomizedsecret";
         serverAddr = "https://192.168.2.41:6443";
       };
     };
@@ -91,7 +110,7 @@
         enable = true;
         extraFlags = "--cluster-cidr 10.24.0.0/16";
         role = "server"; # Or "agent" for worker only nodes
-        token = "<randomized common secret>";
+        token = "randomizedsecret";
         serverAddr = "https://192.168.2.41:6443";
       };
     };
@@ -119,7 +138,7 @@
     networks."10-lan-bridge" = {
       matchConfig.Name = "br0";
       networkConfig = {
-        Address = ["192.168.2.115/24"];
+        Address = ["192.168.2.118/24"];
         Gateway = "192.168.2.1";
         DNS = ["192.168.2.1"];
         DHCP = "no";
