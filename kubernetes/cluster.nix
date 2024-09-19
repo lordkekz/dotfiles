@@ -11,61 +11,44 @@
   kubernetes.version = "1.30";
 
   kubernetes.resources = {
-    deployments.nginx.spec = {
-      replicas = 10;
-      selector.matchLabels.app = "nginx";
+    deployments.kube-bootcamp.spec = {
+      replicas = 100;
+      selector.matchLabels.app = "kube-bootcamp";
       template = {
-        metadata.labels.app = "nginx";
+        metadata.labels.app = "kube-bootcamp";
         spec = {
           securityContext.fsGroup = 1000;
-          containers.nginx = {
-            image = "nginx:1.25.1";
+          containers.kube-bootcamp = {
+            image = "gcr.io/google-samples/kubernetes-bootcamp:v1";
             imagePullPolicy = "IfNotPresent";
-            volumeMounts = {
-              "/etc/nginx".name = "config";
-              "/var/lib/html".name = "static";
-            };
-          };
-          volumes = {
-            config.configMap.name = "nginx-config";
-            static.configMap.name = "nginx-static";
+            ports = [
+              {
+                containerPort = 8080;
+                protocol = "TCP";
+              }
+            ];
           };
         };
       };
     };
 
-    configMaps = {
-      nginx-config.data."nginx.conf" = ''
-        user nginx nginx;
-        error_log /dev/stdout info;
-        pid /dev/null;
-        events {}
-        http {
-          access_log /dev/stdout;
-          server {
-            listen 80;
-            index index.html;
-            location / {
-              root /var/lib/html;
-            }
-          }
-        }
-      '';
-
-      nginx-static.data."index.html" = ''
-        <html><body><h1>Hello from NGINX</h1></body></html>
-      '';
-    };
-
-    services.nginx.spec = {
-      selector.app = "nginx";
+    services.kube-bootcamp.spec = {
+      selector.app = "kube-bootcamp";
       ports = [
         {
           name = "http";
           port = 80;
+          targetPort = 8080;
         }
       ];
+      externalIPs = [
+        "192.168.2.41"
+        "192.168.2.42"
+        "192.168.2.43"
+      ];
       type = "NodePort";
+      externalTrafficPolicy = "Cluster";
+      internalTrafficPolicy = "Cluster";
     };
   };
 }
