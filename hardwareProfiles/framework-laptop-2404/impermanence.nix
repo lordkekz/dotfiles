@@ -107,6 +107,7 @@ in {
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/zoxide" # Zoxide cd history
+        ".ollama"
         ".syncthing-folders" # Default folder for new synced folders
         ".gnupg"
         ".java/.userPrefs/jetbrains"
