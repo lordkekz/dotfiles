@@ -84,8 +84,8 @@ args @ {
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     sqlitebrowser
-    python312Full
-    python312Packages.pip
+    python311Full
+    python311Packages.pip
     # vscodium
     (vscode-with-extensions.override
       {
