@@ -16,6 +16,8 @@ args @ {
   programs.btop = {
     enable = true;
     settings = {
+      # Available values are "cpu mem net proc" and "gpu0" through "gpu5", separate values with whitespace.
+      shown_boxes = "cpu mem net";
       update_ms = 1000; # Docs recommend above 2000
       theme_background = false;
       proc_filter_kernel = true;
