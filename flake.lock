@@ -930,11 +930,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717446061,
-        "narHash": "sha256-qkJOclfeLHZglvkWqM37Jv1caEZfx83rC9BelgPFWrY=",
+        "lastModified": 1728312582,
+        "narHash": "sha256-c2WyLM7Lq6sQi2g7leVVXQWDLk5dmFZV4e7MObS+b3w=",
         "owner": "lordkekz",
         "repo": "home-manager",
-        "rev": "247da7b484e33c0b5c62ea89c80fc93daf65f282",
+        "rev": "a57c7007b735429cc2930708daa962a73ba03787",
         "type": "github"
       },
       "original": {
