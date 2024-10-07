@@ -48,6 +48,7 @@ args @ {
 
     # Misc
     tree
+    devenv
   ];
 
   programs.nix-index.enable = true;
@@ -99,5 +100,12 @@ args @ {
       search_mode = "fuzzy";
       secrets_filter = true;
     };
+  };
+
+  # Direnv per-directory development environments
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    silent = true;
   };
 }

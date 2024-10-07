@@ -4,6 +4,9 @@
   inputs = {
     ## PURE-NIX UTILITIES ##
 
+    # Devenv (for this repo's devShells)
+    devenv.url = "github:cachix/devenv";
+
     # Disko for declarative partitioning
     disko.url = "github:nix-community/disko?ref=v1.5.0";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -298,6 +301,12 @@
           loader = hl.loaders.default;
           # Make the default.nix's attrs directly children of lib
           transformer = hl.transformers.liftDefault;
+        };
+
+        # Dev shells
+        devShells.default = inputs.devenv.lib.mkShell {
+          inherit inputs pkgs;
+          modules = [./devenv.nix];
         };
 
         # Output channels for easier debugging in nix repl
