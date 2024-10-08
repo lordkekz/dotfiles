@@ -195,11 +195,11 @@
           launchCommand = "startplasma-wayland";
           displayName = "Plasma 6 (mutli-hm)";
         };
-        hypr = {
-          homeConfiguration = getHomeConfig system "hypr";
-          launchCommand = "Hyprland";
-          displayName = "Hyprland (multi-hm)";
-        };
+        #hypr = {
+        #  homeConfiguration = getHomeConfig system "hypr";
+        #  launchCommand = "Hyprland";
+        #  displayName = "Hyprland (multi-hm)";
+        #};
       };
       config.services.displayManager.defaultSession = lib.mkForce "kde";
     };
