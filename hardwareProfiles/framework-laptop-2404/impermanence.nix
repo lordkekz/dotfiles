@@ -29,6 +29,7 @@ in {
         ".config/nushell"
         ".config/VSCodium"
         ".local/share/kactivitymanagerd"
+        ".local/share/direnv/allow"
 
         ".cache/bat"
         ".cache/bookmarksrunner"
