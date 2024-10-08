@@ -25,7 +25,7 @@
     git --version | grep --color=auto "${pkgs.git.version}"
   '';
 
-  languages.python.enable = true;
+  #languages.python.enable = true;
   #languages.python.version = "3.12.5";
 
   languages.nix.enable = true;
