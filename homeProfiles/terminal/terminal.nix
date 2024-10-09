@@ -108,4 +108,5 @@ args @ {
     nix-direnv.enable = true;
     silent = true;
   };
+  programs.nushell.environmentVariables.DIRENV_LOG_FORMAT = "\"\"";
 }
