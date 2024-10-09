@@ -30,6 +30,8 @@ in {
         ".config/VSCodium"
         ".local/share/kactivitymanagerd"
         ".local/share/direnv/allow"
+        # Avoid re-indexing KDE's baloo file index
+        ".local/share/baloo"
 
         ".cache/bat"
         ".cache/bookmarksrunner"
