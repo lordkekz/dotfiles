@@ -3,7 +3,7 @@
 @define-color theme_base_color rgba(43, 48, 59, 0.9);
 @define-color theme_text_color #f8f8f2;
 
-* { 
+* {
     all: unset;
     border: none;
     border-radius: 4;
@@ -163,7 +163,7 @@ label:focus {
 }
 
 #tray {
-    background-color: transparent; 
+    background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 6px 10px;
 }
@@ -176,4 +176,3 @@ label:focus {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
 }
-

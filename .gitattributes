@@ -21,4 +21,3 @@
 *.tar.xz filter=lfs diff=lfs merge=lfs -text
 *.tar.Z filter=lfs diff=lfs merge=lfs -text
 *.tar.zst filter=lfs diff=lfs merge=lfs -text
-

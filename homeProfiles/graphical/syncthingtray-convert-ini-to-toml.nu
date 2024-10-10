@@ -6,4 +6,3 @@ let toml = $parsed | to toml;
 let nixVal = nix-instantiate --argstr "arg" ($toml) --eval --expr "{arg}: builtins.fromTOML arg";
 
 print $nixVal
-

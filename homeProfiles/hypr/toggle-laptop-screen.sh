@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # The name of the laptop's monitor, for example "eDP-1"
 laptop_monitor_name=$1
 laptop_monitor_enable_param=$2
@@ -23,4 +25,3 @@ else
       dunstify -t 5000 "I refuse to disable 'eDP-1'" "Because it's the last enabled monitor."
     fi
 fi
-
