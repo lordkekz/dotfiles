@@ -64,6 +64,7 @@ in {
   programs.git.difftastic = {
     enable = true;
     display = "side-by-side";
+    color = "always";
   };
 
   # For signing
