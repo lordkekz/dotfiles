@@ -60,6 +60,13 @@ in {
     };
   };
 
+  # Difftastic for structural diffs
+  programs.git.difftastic = {
+    enable = true;
+    display = "side-by-side";
+  };
+
+  # For signing
   programs.gpg = {
     enable = true;
   };
