@@ -35,5 +35,8 @@ args @ {
   # Another nice system monitor (command: btm)
   programs.bottom.enable = true;
 
-  home.packages = [pkgs.nvtopPackages.full];
+  home.packages = [
+    pkgs.nvtopPackages.full
+    pkgs.batmon
+  ];
 }
