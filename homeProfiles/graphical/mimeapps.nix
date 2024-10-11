@@ -25,6 +25,7 @@ args @ {
     yazi = ["yazi.desktop"];
     nvim = ["nvim.desktop"];
     firefox = ["firefox.desktop"];
+    floorp = ["floorp.desktop"];
     jetbrains-toolbox = ["jetbrains-toolbox.desktop"];
     signal = ["signal-desktop.desktop"];
     telegram = ["org.telegram.desktop.desktop"];
@@ -45,8 +46,8 @@ args @ {
     "text/calendar" = thunderbird;
     "text/plain" = codium ++ nvim;
     "x-scheme-handler/feed" = thunderbird;
-    "x-scheme-handler/http" = firefox;
-    "x-scheme-handler/https" = firefox;
+    "x-scheme-handler/http" = floorp ++ firefox;
+    "x-scheme-handler/https" = floorp ++ firefox;
     "x-scheme-handler/jetbrains" = jetbrains-toolbox;
     "x-scheme-handler/vscode" = codiumURL;
     "x-scheme-handler/mailto" = thunderbird;
