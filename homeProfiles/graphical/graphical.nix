@@ -89,7 +89,7 @@ args @ {
     # vscodium
     (vscode-with-extensions.override
       {
-        vscode = vscodium;
+        vscode = pkgs-unstable.vscodium;
         vscodeExtensions = with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
           jnoortheen.nix-ide
           thenuprojectcontributors.vscode-nushell-lang
@@ -97,6 +97,7 @@ args @ {
           #tecosaur.latex-utilities #their defaults are annoying
           james-yu.latex-workshop
           vscodevim.vim
+          ms-toolsai.jupyter
         ];
       })
   ];

@@ -78,7 +78,8 @@
     # see: https://github.com/msteen/nix-flake-override
 
     # Mirror of VSCode marketplace and Open VSX registry.
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # FIXME remove commit hash after upgrade to 24.11 or codium >= 1.94.0
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions?ref=5ea2b85a16c2d4b3c847854e7c8c188f3e0c6db";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
