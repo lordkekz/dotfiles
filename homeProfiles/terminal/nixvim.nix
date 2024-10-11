@@ -58,7 +58,8 @@ args @ {
         # C/C++
         clangd.enable = true;
         # Haskell
-        hls.enable = true;
+        # This unironically costs over 6GB
+        hls.enable = false;
         # Java
         java-language-server.enable = true;
         # Nix
@@ -73,7 +74,7 @@ args @ {
         # Python
         ruff-lsp.enable = true;
         # Typst typsetting language
-        typst-lsp.enable = false; # FIXME fails for some reason, because "typst-lsp-0.13.0 is marked as broken", but it isn't marked as broken??
+        typst-lsp.enable = true;
       };
 
       plugins = {
