@@ -27,6 +27,7 @@ args @ {
     diff-pdf # https://github.com/vslavik/diff-pdf
     kdePackages.okular # KDE pdf viewer
     floorp # browser based on Firefox
+    ausweisapp # cursed thing for taxes
 
     # UTILITY
     tailscale-systray
