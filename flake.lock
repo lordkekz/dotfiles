@@ -2070,7 +2070,8 @@
         "plasma-manager": "plasma-manager",
         "stylix": "stylix",
         "systems": "systems_9",
-        "walker": "walker"
+        "walker": "walker",
+        "worms-tex": "worms-tex"
       }
     },
     "spectrum": {
@@ -2307,6 +2308,22 @@
         "owner": "hyprwm",
         "repo": "wlroots-hyprland",
         "rev": "611a4f24cd2384378f6e500253983107c6656c64",
+        "type": "github"
+      }
+    },
+    "worms-tex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728579566,
+        "narHash": "sha256-EqVy971MatPoDChRqjm7RQg8kfaTekVU4zgS9NjY9zY=",
+        "owner": "lordkekz",
+        "repo": "worms.tex",
+        "rev": "f7a39b40c710e92380b18e6f9a7f373b46011dd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lordkekz",
+        "repo": "worms.tex",
         "type": "github"
       }
     },

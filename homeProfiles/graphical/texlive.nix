@@ -16,7 +16,7 @@ args @ {
     enable = true;
     extraPackages = tpkgs: {inherit (tpkgs) scheme-full;};
   };
-  home.file."texmf/tex/latex".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/r4c-meta/tex";
+  home.file."texmf/tex/latex".source = inputs.worms-tex.outPath;
 
   # Legacy texmf in Syncthing
   #home.file.texmf.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/texmf";

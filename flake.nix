@@ -130,6 +130,12 @@
 
     # Walker, a Wayland-native runner
     walker.url = "github:abenz1267/walker";
+
+    # Worms.tex contains my custom texmf stuff
+    worms-tex = {
+      url = "github:lordkekz/worms.tex";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
