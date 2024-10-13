@@ -83,6 +83,7 @@ in {
 
     users.${username} = {
       directories = [
+        ".config/AusweisApp"
         ".config/discord"
         ".config/Element"
         ".config/JetBrains"
@@ -122,6 +123,7 @@ in {
         ".ssh"
         ".steam"
         ".thunderbird" # Thunderbird profiles, not config
+        ".wine"
         "Desktop"
         "Downloads"
         "Games"
