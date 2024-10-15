@@ -27,6 +27,12 @@ args @ {
       fi
     '';
   };
+
+  git-update-script = pkgs.writeShellApplication {
+    name = "git-update-script";
+    runtimeInputs = [pkgs.git];
+    text = builtins.readFile ./git-update.bash;
+  };
 in {
   # General Git
   programs.git = {
@@ -38,16 +44,19 @@ in {
     };
     aliases = {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
+      lgd = ''log --pretty=format:"%cd %C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
       lga = ''lg --all'';
+      lgda = ''lgd --all'';
       ec = ''commit --allow-empty'';
       amend = ''commit --amend'';
       root = ''rev-parse --show-toplevel'';
       st = ''status'';
       df = ''diff'';
       ds = ''diff --staged'';
-      fap = ''fetch -a -p'';
+      # Fetch all remotes and prune remote-tracking refs (including tags)
+      fap = ''fetch -a -p -P'';
       # Tip for multi-command aliases: https://stackoverflow.com/a/25915221
-      update = ''!git fap && git pull && git branch --no-color --list --format "%(refname:short)" --merged $1 | xargs git branch -dv && :'';
+      update = ''!${git-update-script}/bin/git-update-script'';
     };
     attributes = [
       # global .gitattributes
