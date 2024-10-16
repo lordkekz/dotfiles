@@ -11,52 +11,55 @@
   imports = [inputs.disko.nixosModules.disko];
 
   disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = "/dev/vda";
-        content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              size = "512M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [
-                  "defaults"
-                  "umask=0077"
-                ];
-              };
+    disk.main = {
+      type = "disk";
+      device = "/dev/vda";
+      content = {
+        type = "gpt";
+        partitions = {
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
+          ESP = {
+            size = "512M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [
+                "defaults"
+                "umask=0077"
+              ];
             };
-            nixos = {
-              size = "100%";
-              content = {
-                type = "btrfs";
-                extraArgs = ["-f"];
-                subvolumes = {
-                  "/persist/ephemeral" = {
-                    mountpoint = "/persist/ephemeral";
-                    mountOptions = ["compress=zstd" "noatime"];
-                  };
-                  "/persist/local" = {
-                    mountpoint = "/persist/local";
-                    mountOptions = ["compress=zstd" "noatime"];
-                  };
-                  "/persist/roaming" = {
-                    mountpoint = "/persist/roaming";
-                    mountOptions = ["compress=zstd" "noatime"];
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = ["compress=zstd" "noatime"];
-                  };
-                  "/swap" = {
-                    mountpoint = "/.swapvol";
-                    swap.swapfile.size = "8G";
-                  };
+          };
+          nixos = {
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = ["-f"];
+              subvolumes = {
+                "/persist/ephemeral" = {
+                  mountpoint = "/persist/ephemeral";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                "/persist/local" = {
+                  mountpoint = "/persist/local";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                "/persist/roaming" = {
+                  mountpoint = "/persist/roaming";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                "/nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                "/swap" = {
+                  mountpoint = "/.swapvol";
+                  swap.swapfile.size = "8G";
                 };
               };
             };
