@@ -16,8 +16,7 @@
   networking.nat = {
     enable = true;
     enableIPv6 = true;
-    # Change this to the interface with upstream Internet access
     externalInterface = "eth0";
-    internalInterfaces = ["microvm"];
+    internalInterfaces = ["microvm-robot4care"];
   };
 }
