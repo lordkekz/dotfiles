@@ -22,7 +22,14 @@
   };
 
   networking.hostId = "f5bf3143";
-  networking.useNetworkd = true;
+  systemd.network.enable = true;
+  systemd.network.networks."10-lan" = {
+    matchConfig.Type = "ether";
+    networkConfig = {
+      IPv6AcceptRA = true;
+      DHCP = "yes";
+    };
+  };
 
   networking.nat = {
     enable = true;
