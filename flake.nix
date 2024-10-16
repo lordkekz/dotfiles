@@ -293,6 +293,7 @@
           homelab
           headless
           vortex
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
       };
 
