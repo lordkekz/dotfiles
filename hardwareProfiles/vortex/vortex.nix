@@ -22,14 +22,29 @@
   };
 
   networking.hostId = "f5bf3143";
-  systemd.network.enable = true;
-  systemd.network.networks."10-lan" = {
-    matchConfig.Type = "ether";
-    networkConfig = {
-      IPv6AcceptRA = true;
-      DHCP = "yes";
+
+  # do not use DHCP, as webtropia provisions IPs using cloud-init
+  networking.useDHCP = lib.mkForce false;
+
+  services.cloud-init = {
+    enable = true;
+    network.enable = true;
+
+    # not strictly needed, just for good measure
+    settings = {
+      #datasource_list = [""];
+      #datasource.DigitalOcean = {};
     };
   };
+
+  systemd.network.enable = true;
+  #systemd.network.networks."10-lan" = {
+  #  matchConfig.Type = "ether";
+  #  networkConfig = {
+  #    IPv6AcceptRA = true;
+  #    DHCP = "no";
+  #  };
+  #};
 
   networking.nat = {
     enable = true;
