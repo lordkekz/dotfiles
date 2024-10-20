@@ -39,7 +39,7 @@ args @ {
     "application/x-extension-ics" = thunderbird;
     "application/x-extension-rss" = thunderbird;
     "application/zip" = ark;
-    "application/pdf" = zathura ++ okular;
+    "application/pdf" = okular ++ zathura;
     "application/epub+zip" = zathura ++ okular;
     "inode/directory" = dolphin ++ yazi;
     "message/rfc822" = thunderbird;

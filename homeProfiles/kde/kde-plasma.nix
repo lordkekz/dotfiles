@@ -25,4 +25,29 @@ args @ {
     # An autotile script for Plasma 6 (even though it's still in libsForQt5)
     pkgs.libsForQt5.polonium
   ];
+
+  programs.okular = {
+    enable = true;
+    general = {
+      smoothScrolling = true;
+      showScrollbars = true;
+      openFileInTabs = true;
+      viewContinuous = true;
+      #viewMode = "Single"; # not sure what this does
+      zoomMode = "autoFit";
+      obeyDrm = false;
+      mouseMode = "Browse";
+    };
+    accessibility = {
+      highlightLinks = true;
+      changeColors = {
+        enable = true;
+        mode = "Inverted";
+      };
+    };
+    performance = {
+      enableTransparencyEffects = true;
+      memoryUsage = "Agressive";
+    };
+  };
 }
