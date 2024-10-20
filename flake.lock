@@ -1931,16 +1931,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1727917089,
-        "narHash": "sha256-XWNBGf8Z03sqA5/m99X6XTFbHGNuVx1gMaMQJbdDIrY=",
-        "owner": "pjones",
+        "lastModified": 1729457144,
+        "narHash": "sha256-hOyC5G5GgDUCnYKboi77T5eTwyQwpiXdsrkBt4IVcx0=",
+        "owner": "lordkekz",
         "repo": "plasma-manager",
-        "rev": "bc14b17bff1557de8f103172508f896a87bb9cdb",
+        "rev": "2c4de49a0245df873b68e72db2dd6b46f05170a8",
         "type": "github"
       },
       "original": {
-        "owner": "pjones",
-        "ref": "trunk",
+        "owner": "lordkekz",
+        "ref": "okluar-improve-accessibility",
         "repo": "plasma-manager",
         "type": "github"
       }

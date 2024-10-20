@@ -42,12 +42,12 @@ args @ {
       highlightLinks = true;
       changeColors = {
         enable = true;
-        mode = "Inverted";
+        mode = "InvertLuma";
       };
     };
     performance = {
       enableTransparencyEffects = true;
-      memoryUsage = "Agressive";
+      memoryUsage = "Aggressive";
     };
   };
 }
