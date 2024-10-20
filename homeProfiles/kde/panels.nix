@@ -39,8 +39,10 @@ args @ {
             General.launchers = [
               # Pinned apps
               "applications:org.kde.dolphin.desktop"
-              "applications:firefox.desktop"
-              "applications:Alacritty.desktop"
+              "applications:floorp.desktop"
+              #"applications:firefox.desktop"
+              "applications:org.codeberg.dnkl.foot.desktop"
+              #"applications:Alacritty.desktop"
               "applications:obsidian.desktop"
             ];
           };
