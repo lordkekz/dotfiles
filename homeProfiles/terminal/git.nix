@@ -45,6 +45,7 @@ in {
     aliases = {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
       lgd = ''log --pretty=format:"%cd %C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
+      lg-nosigned = ''log --pretty=format:"%C(cyan)@%an%Creset%C(auto) %h%d %s" --graph'';
       lga = ''lg --all'';
       lgda = ''lgd --all'';
       ec = ''commit --allow-empty'';
