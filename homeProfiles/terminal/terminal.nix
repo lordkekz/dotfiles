@@ -36,7 +36,7 @@ args @ {
     nix-tree
 
     # Benchmarking
-    geekbench
+    phoronix-test-suite
     # disk benchmark
     fio
     # network benchmark
