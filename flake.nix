@@ -278,6 +278,16 @@
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
+
+        keksjumbo2410.modules = [
+          personal
+          graphical
+          framework-laptop-2410
+          # Adds entries for graphical sessions which first activate a home configuration
+          (mkSessions "x86_64-linux")
+          # Fallback so I get a decent tty experience without starting graphical session
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
       };
 
       # PER-SYSTEM OUTPUTS
