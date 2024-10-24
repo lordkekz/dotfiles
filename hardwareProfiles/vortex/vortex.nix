@@ -25,26 +25,38 @@
 
   # do not use DHCP, as webtropia provisions IPs using cloud-init
   networking.useDHCP = lib.mkForce false;
-
   services.cloud-init = {
     enable = true;
     network.enable = true;
-
-    # not strictly needed, just for good measure
-    settings = {
-      #datasource_list = [""];
-      #datasource.DigitalOcean = {};
-    };
   };
 
   systemd.network.enable = true;
-  #systemd.network.networks."10-lan" = {
-  #  matchConfig.Type = "ether";
-  #  networkConfig = {
-  #    IPv6AcceptRA = true;
-  #    DHCP = "no";
-  #  };
-  #};
+  systemd.network.networks = {
+    "20-lan-ipv4" = {
+      matchConfig.Type = "ether";
+      #gateway = [ "81.30.159.105" ];
+      routes = [
+        {
+          routeConfig = {
+            Gateway = "81.30.159.105";
+            GatewayOnLink = "yes";
+          };
+        }
+      ];
+      #networkConfig = {
+      #  IPv6AcceptRA = true;
+      #  DHCP = "no";
+      #};
+    };
+    #"10-lan-ipv6" = {
+    #  matchConfig.Type = "ether";
+    #  gateway = [ "" ];
+    #  networkConfig = {
+    #    IPv6AcceptRA = true;
+    #    DHCP = "no";
+    #  };
+    #};
+  };
 
   networking.nat = {
     enable = true;
