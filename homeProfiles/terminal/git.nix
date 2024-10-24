@@ -11,6 +11,8 @@ args @ {
   config,
   ...
 }: let
+  inherit (lib) getExe;
+
   windows-gpg-path = "/mnt/c/Program Files (x86)/GnuPG/bin/gpg.exe";
 
   wsl-gpg-wrapper = pkgs.writeShellApplication {
@@ -57,7 +59,8 @@ in {
       # Fetch all remotes and prune remote-tracking refs (including tags)
       fap = ''fetch -a -p -P'';
       # Tip for multi-command aliases: https://stackoverflow.com/a/25915221
-      update = ''!${git-update-script}/bin/git-update-script'';
+      update = ''!${getExe git-update-script}'';
+      prole = "!${getExe pkgs-unstable.git-prole}";
     };
     attributes = [
       # global .gitattributes
