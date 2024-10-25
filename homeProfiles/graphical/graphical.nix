@@ -82,6 +82,7 @@ args @ {
     ollama
     jetbrains-toolbox
     jetbrains.idea-ultimate
+    jetbrains.rust-rover
     jetbrains.pycharm-professional
     sqlitebrowser
     python311Full
