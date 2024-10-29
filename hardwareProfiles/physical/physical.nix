@@ -19,6 +19,8 @@
       configurationLimit = 40;
       # Add an entry for Memtest86+ (the open source one)
       memtest86.enable = true;
+      # Add an entry for a UEFI shell
+      edk2-uefi-shell.enable = true;
     };
     efi.canTouchEfiVariables = true;
 
