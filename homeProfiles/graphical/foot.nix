@@ -20,14 +20,18 @@ args @ {
 
         # Window options
         initial-window-mode = "maximized";
-        pad = "4x4center"; #FIXME test this
+        pad = "4x4center";
+        resize-by-cells = "no"; # Allow window size to not be a multiple of cell size
+        resize-keep-grid = "no"; # Keep window dimensions when font size changes
       };
 
       bell = {
-        urgent = "no";
-        notify = "yes";
+        urgent = "yes";
+        notify = "yes"; # Does nothing because desktop-notifications.command is unset
         visual = "yes";
-        # command = ...; # TODO maybe configure command based on alacritty
+        # Play bell souhd. This is analogous to the command in alacritty.nix
+        command = "${pkgs.vlc}/bin/cvlc --play-and-exit ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/bell.oga";
+        command-focused = "yes";
       };
 
       scrollback.lines = 10000;
