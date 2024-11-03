@@ -59,7 +59,7 @@
     # Home manager
     #home-manager.url = "github:lordkekz/home-manager?ref=feat/5478/yazi-plugins-suffix";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.url = "github:lordkekz/home-manager?ref=release-24.05";
+    home-manager.url = "github:lordkekz/home-manager?ref=master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Lix (correctness-focused fork of Nix)
@@ -73,7 +73,7 @@
     # Nixpkgs
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.follows = "nixpkgs-stable";
+    nixpkgs.follows = "nixpkgs-unstable";
 
     # A nixpkgs downstream which only contains the lib
     #nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
@@ -109,14 +109,13 @@
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
 
     # Plasma manager
-    #plasma-manager.url = "github:pjones/plasma-manager?ref=trunk";
-    plasma-manager.url = "github:lordkekz/plasma-manager?ref=okluar-improve-accessibility"; #FIXME after PR is merged
+    plasma-manager.url = "github:pjones/plasma-manager?ref=trunk";
     #plasma-manager.url = "/home/hpreiser/git/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Stylix helps theme applications using base16
-    stylix.url = "github:danth/stylix?ref=release-24.05";
+    stylix.url = "github:danth/stylix?ref=master";
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
