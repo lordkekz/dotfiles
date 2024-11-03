@@ -35,15 +35,13 @@
     tmpfsSize = "50%";
   };
 
-  # Add an entry for Windows 11's Boot Manager.
-  # Somehow it got installed into NixOS's ESP.
-  # But that turns out to be required, see:
-  # https://wiki.archlinux.org/title/Systemd-boot#Boot_from_another_disk
-  boot.loader.systemd-boot.extraEntries."Win11.conf" = ''
-    title Win11
-    efi /EFI/Microsoft/Boot/bootmgfw.efi
-    sort-key _Win11
-  '';
+  boot.loader.systemd-boot.rebootForBitlocker = true;
+  boot.loader.timeout = lib.mkForce null; # Wait for input indefinitely
+  boot.loader.systemd-boot.windows."11-pro" = {
+    title = "Windows 11 Pro";
+    efiDeviceHandle = "FS1";
+    sortKey = "a_windows";
+  };
 
   # Enable ZFS support, mainly for building images of ZFS-based servers
   boot.supportedFilesystems = ["zfs"];
