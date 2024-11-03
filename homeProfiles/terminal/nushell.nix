@@ -45,8 +45,8 @@ args @ {
     '';
     environmentVariables = {
       # Make neovim the default editor
-      EDITOR = "nvim";
-      VISUAL = "nvim";
+      EDITOR = ''"nvim"'';
+      VISUAL = ''"nvim"'';
     };
     shellAliases = let
       dotfiles-dir = "~/git/dotfiles";

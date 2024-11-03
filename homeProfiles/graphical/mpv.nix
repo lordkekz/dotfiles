@@ -14,9 +14,10 @@ args @ {
   programs.mpv = {
     enable = true;
     # Overriden to add support for sixel graphics in terminal
-    package =
-      pkgs.wrapMpv
-      (pkgs.mpv-unwrapped.override {sixelSupport = true;})
-      {youtubeSupport = true;};
+    package = pkgs.mpv-unwrapped.wrapper {
+      mpv = pkgs.mpv-unwrapped.override {sixelSupport = true;};
+
+      youtubeSupport = true;
+    };
   };
 }

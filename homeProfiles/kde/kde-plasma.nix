@@ -23,7 +23,7 @@ args @ {
 
   home.packages = [
     # An autotile script for Plasma 6 (even though it's still in libsForQt5)
-    pkgs.libsForQt5.polonium
+    pkgs.polonium
   ];
 
   programs.okular = {
