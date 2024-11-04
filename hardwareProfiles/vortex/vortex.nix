@@ -32,7 +32,7 @@
 
   systemd.network.enable = true;
   systemd.network.networks = {
-    "20-lan-ipv4" = {
+    "05-lan-ipv4" = {
       matchConfig.Type = "ether";
       #gateway = [ "81.30.159.105" ];
       routes = [
