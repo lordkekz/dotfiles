@@ -33,7 +33,7 @@
   systemd.network.enable = true;
   systemd.network.networks = {
     "05-lan-ipv4" = {
-      matchConfig.Type = "ether";
+      matchConfig.Name = "eth0";
       #gateway = [ "81.30.159.105" ];
       routes = [
         {
