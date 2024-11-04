@@ -33,7 +33,7 @@
   systemd.network.enable = true;
   systemd.network.networks = {
     "05-lan-ipv4" = {
-      matchConfig.Name = "eth0";
+      matchConfig.Name = "enp0s18";
       #gateway = [ "81.30.159.105" ];
       routes = [
         {
@@ -43,10 +43,11 @@
           };
         }
       ];
-      #networkConfig = {
-      #  IPv6AcceptRA = true;
-      #  DHCP = "no";
-      #};
+      networkConfig = {
+        IPv6AcceptRA = true;
+        DHCP = "no";
+        Address = "85.114.138.64";
+      };
     };
     #"10-lan-ipv6" = {
     #  matchConfig.Type = "ether";
