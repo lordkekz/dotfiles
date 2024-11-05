@@ -40,5 +40,8 @@
   boot.zfs.forceImportRoot = false;
   networking.hostId = "1be6942e";
 
+  # Required for secrets
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJod+kYj/kZCsudSwK1Q2aEZGukQUixQ4KFVblD8zuQ hpreiser@keksjumbo2410";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

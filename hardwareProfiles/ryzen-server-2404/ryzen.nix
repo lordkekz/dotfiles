@@ -18,6 +18,9 @@ in {
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # Required for secrets
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6H3eQC9k3dK5Bdd1IeEINvsXao6p5sSqcBWF/9d6Qw hpreiser@nasman2404";
+
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "uas" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];

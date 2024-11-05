@@ -21,6 +21,9 @@
     efiInstallAsRemovable = true;
   };
 
+  # Required for secrets
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAaGoNO2VY46hVJ4uhlMg+/B38aOCeubw/Zc15X2ExX hpreiser@vortex";
+
   networking.hostId = "f5bf3143";
 
   # do not use DHCP, as webtropia provisions IPs using cloud-init

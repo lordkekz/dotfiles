@@ -43,6 +43,9 @@
   boot.zfs.forceImportRoot = false;
   networking.hostId = "bb80a896";
 
+  # Required for secrets
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO47IEdA84D66Pu3af+lv9Xfzwk7e9xNlgNaGAQ3muJo hpreiser@kekswork2404";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   # Use old fw-ectool because newer versions seem broken on 12th gen intel
