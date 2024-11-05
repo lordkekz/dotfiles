@@ -50,6 +50,7 @@ in {
       "/var/lib/tailscale"
 
       "/var/lib/nixos"
+      "/etc/ssh"
     ];
     files = [
       "/etc/machine-id"
