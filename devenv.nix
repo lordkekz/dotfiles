@@ -47,5 +47,9 @@
     black.enable = true;
   };
 
+  packages = [
+    pkgs.agenix-rekey
+  ];
+
   # See full reference at https://devenv.sh/reference/options/
 }

@@ -36,6 +36,18 @@
 
     ## PACKAGES, CONFIGURATION AND APPLICATIONS ##
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs = {
+      systems.follows = "systems";
+      nixpkgs.follows = "nixpkgs";
+      home-manager.follows = "home-manager";
+    };
+    agenix-rekey.url = "github:oddlama/agenix-rekey";
+    agenix-rekey.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+
     # Anyrun is a modern, wayland-native runner written in Rust.
     anyrun.url = "github:lordkekz/anyrun?ref=add-nix-overlay";
     #anyrun.url = "github:anyrun-org/anyrun";
@@ -147,8 +159,6 @@
     nixpkgs,
     nixpkgs-stable,
     nixpkgs-unstable,
-    nixos-generators,
-    lix-module,
     self,
     systems,
     ...
@@ -235,16 +245,20 @@
         hyprpicker
         hyprland-contrib
         anyrun
+        agenix
+        agenix-rekey
       ]);
 
       # HOST DEFINITIONS
       hostDefaults = {
         modules =
           (attrValues nixosModules)
-          ++ [
+          ++ (with inputs; [
             nixos-generators.nixosModules.all-formats
             lix-module.nixosModules.default
-          ];
+            agenix.nixosModules.default
+            agenix-rekey.nixosModules.default
+          ]);
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles;
           inherit (inputs) personal-data;
@@ -342,6 +356,21 @@
       };
 
       # SYSTEMLESS OUTPUTS
+
+      # Expose the necessary information in your flake so agenix-rekey
+      # knows where it has too look for secrets and paths.
+      #
+      # Make sure that the pkgs passed here comes from the same nixpkgs version as
+      # the pkgs used on your hosts in `nixosConfigurations`, otherwise the rekeyed
+      # derivations will not be found!
+      agenix-rekey = inputs.agenix-rekey.configure {
+        userFlake = self;
+        nodes = {
+          inherit (self.nixosConfigurations) kekswork2404 keksjumbo2410 nasman2404 vortex;
+        };
+        # Example for colmena:
+        # inherit ((colmena.lib.makeHive self.colmena).introspect (x: x)) nodes;
+      };
 
       # export homeProfiles and nixosProfiles but not hardwareProfiles
       profiles.nixos = nixosProfiles;
