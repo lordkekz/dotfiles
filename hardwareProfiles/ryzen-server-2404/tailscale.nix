@@ -1,4 +1,4 @@
-# My Tailscale config.
+# Tailscale config.
 {
   inputs,
   outputs,
@@ -6,13 +6,11 @@
   lib,
   config,
   pkgs,
-  pkgs-stable,
-  pkgs-unstable,
   ...
 }: {
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "client";
+    useRoutingFeatures = "both";
     extraUpFlags = [
       # Allows access via routes to internal IPs advertised by other nodes. (gateway)
       "--accept-routes"
