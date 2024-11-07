@@ -49,6 +49,7 @@
 
   packages = [
     pkgs.agenix-rekey
+    pkgs.deploy-rs
   ];
 
   # See full reference at https://devenv.sh/reference/options/
