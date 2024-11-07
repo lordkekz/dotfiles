@@ -4,6 +4,13 @@
   inputs = {
     ## PURE-NIX UTILITIES ##
 
+    # Deploy using deploy-rs because it allows us to build nixosConfigurations normally
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      utils.inputs.systems.follows = "systems";
+    };
+
     # Devenv (for this repo's devShells)
     devenv.url = "github:cachix/devenv";
 
@@ -371,6 +378,25 @@
         # Example for colmena:
         # inherit ((colmena.lib.makeHive self.colmena).introspect (x: x)) nodes;
       };
+
+      # Deployments
+      deploy.nodes.vortex = {
+        hostname = "vortex.lkekz.de";
+        profiles.system = {
+          user = inputs.personal-data.data.lab.username;
+          path = inputs.deploy-rs.lib."x86_64-linux".activate.nixos self.nixosConfigurations.vortex;
+        };
+      };
+      deploy.nodes.nasman2404 = {
+        hostname = "nasman2404.lkekz.de";
+        profiles.system = {
+          user = inputs.personal-data.data.lab.username;
+          path = inputs.deploy-rs.lib."x86_64-linux".activate.nixos self.nixosConfigurations.nasman2404;
+        };
+      };
+
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
 
       # export homeProfiles and nixosProfiles but not hardwareProfiles
       profiles.nixos = nixosProfiles;
