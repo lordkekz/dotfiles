@@ -37,7 +37,6 @@
   systemd.network.networks = {
     "05-lan-ipv4" = {
       matchConfig.Name = "enp0s18";
-      #gateway = [ "81.30.159.105" ];
       routes = [
         {
           routeConfig = {
@@ -47,9 +46,25 @@
         }
       ];
       networkConfig = {
-        IPv6AcceptRA = true;
+        IPv6AcceptRA = false;
         DHCP = "no";
         Address = "85.114.138.64";
+      };
+    };
+    "05-lan-ipv6" = {
+      matchConfig.Name = "enp0s19";
+      routes = [
+        {
+          routeConfig = {
+            Gateway = "2001:4ba0:cafe:babe::a105";
+            GatewayOnLink = "yes";
+          };
+        }
+      ];
+      networkConfig = {
+        IPv6AcceptRA = false;
+        DHCP = "no";
+        Address = "2001:4ba0:cafe:1132::1/128";
       };
     };
     #"10-lan-ipv6" = {
@@ -63,7 +78,7 @@
   };
 
   networking.nat = {
-    enable = true;
+    enable = false;
     enableIPv6 = true;
     externalInterface = "eth0";
     internalInterfaces = ["microvm-robot4care"];
