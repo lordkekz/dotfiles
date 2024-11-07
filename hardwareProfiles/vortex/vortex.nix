@@ -49,6 +49,7 @@
         IPv6AcceptRA = false;
         DHCP = "no";
         Address = "85.114.138.64";
+        DNS = "8.8.8.8";
       };
     };
     "05-lan-ipv6" = {
@@ -65,6 +66,7 @@
         IPv6AcceptRA = false;
         DHCP = "no";
         Address = "2001:4ba0:cafe:1132::1/128";
+        DNS = "2001:4860:4860::8888";
       };
     };
     #"10-lan-ipv6" = {
