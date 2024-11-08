@@ -59,8 +59,26 @@ in {
         users.groups.users = {};
 
         nix.settings.experimental-features = ["nix-command" "flakes"];
+        nix.package = pkgs.lix;
 
         systemd.network.enable = true;
+
+        # Globally enable git.
+        programs.git.enable = true;
+        programs.git.lfs.enable = true;
+
+        environment.systemPackages = with pkgs; [
+          fastfetch
+          du-dust
+          duf
+          nix-tree
+          bat
+          nushell
+          tealdeer
+          yazi
+          neovim
+          btop
+        ];
 
         systemd.network.networks."20-lan" = {
           matchConfig.Type = "ether";
