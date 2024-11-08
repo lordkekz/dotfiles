@@ -21,6 +21,8 @@
     efiInstallAsRemovable = true;
   };
 
+  nix.settings.trusted-users = ["hpreiser"];
+
   # Required for secrets
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAaGoNO2VY46hVJ4uhlMg+/B38aOCeubw/Zc15X2ExX hpreiser@vortex";
 
