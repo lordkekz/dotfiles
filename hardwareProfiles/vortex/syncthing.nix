@@ -9,6 +9,7 @@
   ...
 }: {
   services.syncthing = {
+    enable = true;
     key = config.age.secrets.syncthing-key.path;
     cert = config.age.secrets.syncthing-cert.path;
     inherit (personal-data.data.lab.syncthing.settings) devices folders;
