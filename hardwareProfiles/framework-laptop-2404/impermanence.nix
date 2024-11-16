@@ -124,6 +124,7 @@ in {
         ".steam"
         ".thunderbird" # Thunderbird profiles, not config
         ".wine"
+        ".zotero"
         "Desktop"
         "Downloads"
         "Games"
@@ -151,6 +152,7 @@ in {
         "Pictures"
         "Szechuan Sauce"
         "Videos"
+        "Zotero"
       ];
     };
   };
