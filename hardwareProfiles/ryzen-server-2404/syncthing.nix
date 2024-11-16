@@ -10,6 +10,8 @@
 }: {
   services.syncthing = {
     enable = true;
+    guiAddress = "192.168.188.40:8384";
+    user = "acme"; # FIXME this is a hack because of permissions issues.
     key = config.age.secrets.syncthing-key.path;
     cert = config.age.secrets.syncthing-cert.path;
     inherit (personal-data.data.lab.syncthing.settings) devices folders;
