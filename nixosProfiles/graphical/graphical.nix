@@ -54,6 +54,22 @@
         } # KDE Connect
       ];
     };
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+    search = [
+      "hepr.me"
+      "fritz.box"
+      "halosaur-wahoo.ts.net"
+    ];
+  };
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = [""];
+    fallbackDns = []; # Refuse non-DoH DNS
+    dnsovertls = "true";
   };
 
   # Configure power events
