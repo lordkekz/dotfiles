@@ -7,10 +7,7 @@
   pkgs,
   modulesPath,
   ...
-}: let
-  lan-interface = "enp*s0";
-  main-bridge = "br0";
-in {
+}: {
   imports = [
     hardwareProfiles.physical
 
@@ -34,37 +31,31 @@ in {
   networking.useNetworkd = true;
   systemd.network = {
     enable = true;
-
-    # Primary bridge interface to be attach MicroVMs to LAN
-    netdevs.${main-bridge}.netdevConfig = {
+    netdevs."10-microvm".netdevConfig = {
       Kind = "bridge";
-      Name = main-bridge;
+      Name = "microvm";
     };
+    networks."11-microvm" = {
+      matchConfig.Name = "vm-*";
+      # Attach to the bridge that was configured above
+      networkConfig.Bridge = "microvm";
+    };
+    networks."10-microvm" = {
+      matchConfig.Name = "microvm";
+      addresses = [
+        {
+          # FIXME we probably want to use either DHCP here or set static IPs + gateway in each microvm
+          addressConfig.Address = "10.0.0.1/24";
+        }
+      ];
+    };
+  };
 
-    # Connect the bridge ports to the bridge
-    networks."10-lan" = {
-      matchConfig.Name = [lan-interface "vm-*"];
-      networkConfig.Bridge = main-bridge;
-      linkConfig.RequiredForOnline = "enslaved";
-    };
-
-    # Configure the bridge for its desired function
-    networks."10-lan-bridge" = {
-      matchConfig.Name = main-bridge;
-      bridgeConfig = {};
-      # Disable address autoconfig when no IP configuration is required
-      #networkConfig.LinkLocalAddressing = "no";
-      networkConfig = {
-        # start a DHCP Client for IPv4 Addressing/Routing
-        DHCP = "ipv4";
-        # accept Router Advertisements for Stateless IPv6 Autoconfiguraton (SLAAC)
-        IPv6AcceptRA = true;
-      };
-      linkConfig = {
-        # or "routable" with IP addresses configured
-        RequiredForOnline = "carrier";
-      };
-    };
+  # Provide microvms with internet using NAT
+  networking.nat = {
+    enable = true;
+    externalInterface = "enp3s0";
+    internalInterfaces = ["microvm"];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

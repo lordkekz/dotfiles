@@ -41,7 +41,7 @@ in {
     };
   };
 
-  # Persistent local data, e.g. Settings, Downloads folder, Browser data, Flatpaks
+  # Persistent local data
   fileSystems."/persist/local".neededForBoot = true;
   environment.persistence."/persist/local" = {
     hideMounts = true;
