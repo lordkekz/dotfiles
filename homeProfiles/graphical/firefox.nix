@@ -106,6 +106,12 @@ args @ {
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@arch"];
       };
+      "Google Scholar" = {
+        urls = [{template = "https://scholar.google.com/scholar?q={searchTerms}";}];
+        iconUpdateURL = "https://scholar.google.com/favicon.ico";
+        updateInterval = 24 * 60 * 60 * 1000; # every day
+        definedAliases = ["@gs"];
+      };
     };
   };
 in {
