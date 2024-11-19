@@ -21,6 +21,7 @@ args @ {
   home.packages = with pkgs; [
     # OFFICE
     obsidian # Markdown-based Notes
+    pandoc
     pkgs-unstable.zotero
     libreoffice
     pdfarranger # https://github.com/pdfarranger/pdfarranger
