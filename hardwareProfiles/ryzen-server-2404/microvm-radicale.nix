@@ -32,7 +32,7 @@
         server.hosts = ["0.0.0.0:5232"];
         auth = {
           type = "htpasswd";
-          htpasswd_filename = pkgs.writeText personal-data.data.home.radicale.usersFile;
+          htpasswd_filename = "${pkgs.writeText "radicale-users" personal-data.data.home.radicale.usersFile}";
           htpasswd_encryption = "autodetect";
         };
         storage = {
