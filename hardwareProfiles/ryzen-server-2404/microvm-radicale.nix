@@ -39,14 +39,14 @@
           filesystem_folder = "/persist/radicale-collections";
           hook = lib.getExe (pkgs.writeShellApplication {
             name = "radicale-changes-hook-git";
-            runtimeInputs = [pkgs.gitMinimal];
+            runtimeInputs = [pkgs.gitMinimal pkgs.coreutils];
             text = ''
-              if [ ! -f .gitignore]; then
+              if [ ! -f .gitignore ]; then
                 cat >.gitignore <<EOL
-                .Radicale.cache
-                .Radicale.lock
-                .Radicale.tmp-*
-                EOL
+              .Radicale.cache
+              .Radicale.lock
+              .Radicale.tmp-*
+              EOL
               fi
 
               # Make sure that there's a git repo
@@ -58,7 +58,9 @@
 
               # Add & Commit changes
               git add -A
-              git diff --cached --quiet || git commit -m "Changes by \"%(user)s\""
+              STAGED_FILES=$(git diff --staged --name-only)
+              STAGED_FILES_COUNT=$(echo "$STAGED_FILES" | wc -l)
+              git diff --cached --quiet || git commit -m "Changes in $STAGED_FILES_COUNT files."
             '';
           });
         };
