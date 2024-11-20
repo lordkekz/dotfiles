@@ -37,6 +37,30 @@
         };
         storage = {
           filesystem_folder = "/persist/radicale-collections";
+          hook = lib.getExe (pkgs.writeShellApplication {
+            name = "radicale-changes-hook-git";
+            runtimeInputs = [pkgs.gitMinimal];
+            text = ''
+              if [ ! -f .gitignore]; then
+                cat >.gitignore <<EOL
+                .Radicale.cache
+                .Radicale.lock
+                .Radicale.tmp-*
+                EOL
+              fi
+
+              # Make sure that there's a git repo
+              git init
+
+              # Configure git repo
+              git config --local user.name "radicale"
+              git config --local user.email "radicale@caldav.hepr.me"
+
+              # Add & Commit changes
+              git add -A
+              git diff --cached --quiet || git commit -m "Changes by \"%(user)s\""
+            '';
+          });
         };
       };
     };
