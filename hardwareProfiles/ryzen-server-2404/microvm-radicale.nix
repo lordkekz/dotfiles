@@ -8,15 +8,12 @@
   ...
 }: {
   microvm.vms.radicale.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {vmName = "radicale";})];
-
-    systemd.network.networks."20-lan" = {
-      matchConfig.Type = "ether";
-      networkConfig = {
-        Address = "10.0.0.12/24";
-        Gateway = "10.0.0.1";
-      };
-    };
+    imports = [
+      (import ./__microvmBaseConfig.nix {
+        vmName = "radicale";
+        vmId = "12";
+      })
+    ];
 
     microvm.shares = [
       {

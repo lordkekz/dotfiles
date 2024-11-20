@@ -8,15 +8,12 @@
   ...
 }: {
   microvm.vms.syncit.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {vmName = "syncit";})];
-
-    systemd.network.networks."20-lan" = {
-      matchConfig.Type = "ether";
-      networkConfig = {
-        Address = "10.0.0.11/24";
-        Gateway = "10.0.0.1";
-      };
-    };
+    imports = [
+      (import ./__microvmBaseConfig.nix {
+        vmName = "syncit";
+        vmId = "11";
+      })
+    ];
 
     microvm.shares = [
       {

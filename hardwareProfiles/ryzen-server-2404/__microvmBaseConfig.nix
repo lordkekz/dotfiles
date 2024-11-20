@@ -1,4 +1,7 @@
-{vmName}: {
+{
+  vmName,
+  vmId,
+}: {
   config,
   pkgs,
   ...
@@ -8,9 +11,17 @@
     {
       type = "tap";
       id = "vm-${vmName}";
-      mac = "02:00:00:00:00:01"; # FIXME make this unique for each microvm
+      mac = "02:00:00:00:00:${vmId}";
     }
   ];
+
+  systemd.network.networks."20-lan" = {
+    matchConfig.Type = "ether";
+    networkConfig = {
+      Address = "10.0.0.${vmId}/24";
+      Gateway = "10.0.0.1";
+    };
+  };
 
   # SSH Plumbing
   services.openssh = {
