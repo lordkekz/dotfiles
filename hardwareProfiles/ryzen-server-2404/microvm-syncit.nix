@@ -39,8 +39,8 @@
       user = "root";
       group = "root";
 
-      #dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
-      #configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
+      dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
+      configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
 
       guiAddress = "10.0.0.11:8384";
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
