@@ -100,6 +100,8 @@ args @ {
           james-yu.latex-workshop
           vscodevim.vim
           ms-toolsai.jupyter
+          ms-python.python
+          ms-python.black-formatter
         ];
       })
   ];
