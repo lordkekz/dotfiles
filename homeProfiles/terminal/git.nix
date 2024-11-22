@@ -30,6 +30,11 @@ args @ {
     '';
   };
 
+  git-sc-script = pkgs.writeShellApplication {
+    name = "git-update-script";
+    runtimeInputs = [pkgs.git];
+    text = builtins.readFile ./git-switch-create.bash;
+  };
   git-update-script = pkgs.writeShellApplication {
     name = "git-update-script";
     runtimeInputs = [pkgs.git];
@@ -54,9 +59,11 @@ in {
       amend = ''commit --amend'';
       root = ''rev-parse --show-toplevel'';
       st = ''status'';
+      sc = ''!${getExe git-sc-script}'';
       df = ''diff'';
       ds = ''diff --staged'';
       # Fetch all remotes and prune remote-tracking refs (including tags)
+      # Used by git-update-script
       fap = ''fetch -a -p -P'';
       # Tip for multi-command aliases: https://stackoverflow.com/a/25915221
       update = ''!${getExe git-update-script}'';
