@@ -8,7 +8,7 @@
     devenv.url = "github:cachix/devenv";
 
     # Disko for declarative partitioning
-    disko.url = "github:nix-community/disko?ref=v1.5.0";
+    disko.url = "github:nix-community/disko?ref=v1.9.0";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Flake utils for stripping some boilerplate
@@ -57,23 +57,21 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    #home-manager.url = "github:lordkekz/home-manager?ref=feat/5478/yazi-plugins-suffix";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.url = "github:lordkekz/home-manager?ref=master";
+    home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Lix (correctness-focused fork of Nix)
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
-    microvm.url = "github:astro/microvm.nix";
+    microvm.url = "github:astro/microvm.nix?ref=main";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nixpkgs
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.follows = "nixpkgs-unstable";
+    nixpkgs.follows = "nixpkgs-stable";
 
     # A nixpkgs downstream which only contains the lib
     #nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
@@ -90,13 +88,11 @@
     # see: https://github.com/msteen/nix-flake-override
 
     # Mirror of VSCode marketplace and Open VSX registry.
-    # FIXME remove commit hash after upgrade to 24.11 or codium >= 1.94.0
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions?ref=5ea2b85a16c2d4b3c847854e7c8c188f3e0c6db";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions?ref=master";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=yazi-v0.3.1";
-    #nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins";
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 
     # Generate images etc. from NixOS configs
