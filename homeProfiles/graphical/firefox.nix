@@ -22,10 +22,6 @@ args @ {
     else pkgs.firefox;
 
   settings-default = {
-    # "browser.startup.homepage" = "https://duckduckgo.com";
-    "browser.search.defaultenginename" = "DuckDuckGo";
-    "browser.search.order.1" = "DuckDuckGo";
-
     "signon.rememberSignons" = false;
     "browser.aboutConfig.showWarning" = false;
     "browser.compactmode.show" = true;
@@ -40,7 +36,7 @@ args @ {
     "mousewheel.default.delta_multiplier_x" = 75; # Default was 100
     "mousewheel.default.delta_multiplier_y" = 75; # Default was 100
     "mousewheel.default.delta_multiplier_z" = 75; # Default was 100
-    "general.smootScroll" = true;
+    "general.smoothScroll" = true;
 
     # Force showing the system titlebar decoration
     "browser.tabs.inTitlebar" = 0;
