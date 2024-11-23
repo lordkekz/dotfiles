@@ -34,6 +34,10 @@
   pre-commit.hooks = {
     # Misc
     shellcheck.enable = true;
+    prettier = {
+      enable = true;
+      excludes = ["flake\\.lock"];
+    };
     trim-trailing-whitespace.enable = true;
     end-of-file-fixer.enable = true;
 
