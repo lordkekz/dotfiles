@@ -31,17 +31,10 @@
       "unified-extensions-button",
       "plasma-browser-integration_kde_org-browser-action"
     ],
-    "toolbar-menubar": [
-      "menubar-items"
-    ],
+    "toolbar-menubar": ["menubar-items"],
     "TabsToolbar": [],
-    "vertical-tabs": [
-      "tabbrowser-tabs"
-    ],
-    "PersonalToolbar": [
-      "import-button",
-      "personal-bookmarks"
-    ]
+    "vertical-tabs": ["tabbrowser-tabs"],
+    "PersonalToolbar": ["import-button", "personal-bookmarks"]
   },
   "seen": [
     "save-to-pocket-button",

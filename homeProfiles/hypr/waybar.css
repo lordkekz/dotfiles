@@ -4,26 +4,26 @@
 @define-color theme_text_color #f8f8f2;
 
 * {
-    all: unset;
-    border: none;
-    border-radius: 4;
-    font-family: JetBrains Mono;
-    font-size: 16px;
-    min-height: 0;
+  all: unset;
+  border: none;
+  border-radius: 4;
+  font-family: JetBrains Mono;
+  font-size: 16px;
+  min-height: 0;
 }
 
 window#waybar {
-    background: @theme_base_color;
-    background-color: transparent; /* rgba(43, 48, 59, 0.9); */
-    border-bottom: 0px solid rgba(100, 114, 125, 0.5);
-    color: @theme_text_color;
-    transition-property: background-color;
-    transition-duration: .5s;
-    border-radius: 0;
+  background: @theme_base_color;
+  background-color: transparent; /* rgba(43, 48, 59, 0.9); */
+  border-bottom: 0px solid rgba(100, 114, 125, 0.5);
+  color: @theme_text_color;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  border-radius: 0;
 }
 
 window#waybar.hidden {
-    opacity: 0;
+  opacity: 0;
 }
 
 tooltip {
@@ -36,46 +36,45 @@ tooltip label {
 }
 
 #workspaces button {
-    background-color: transparent;
-    border: 1px solid transparent;
-    color: #f8f8f2;
-    padding: 0px 4px;
-    margin: 4px 2px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #f8f8f2;
+  padding: 0px 4px;
+  margin: 4px 2px;
 }
 
 /* FIXME DELETE AFTER FIXING DUMB STYLIX CSS */
 .modules-left #workspaces button {
-    border: 1px solid transparent;
+  border: 1px solid transparent;
 }
 
-
 #workspaces button:hover {
-    background-color: rgba(100, 114, 125, 0.5);
+  background-color: rgba(100, 114, 125, 0.5);
 }
 
 #workspaces button.focused,
 #workspaces button.active {
-    background-color: rgba(100, 114, 125, 0.6);
-    border: 1px solid rgba(248, 248, 242, 0.4);
+  background-color: rgba(100, 114, 125, 0.6);
+  border: 1px solid rgba(248, 248, 242, 0.4);
 }
 
 /* FIXME DELETE AFTER FIXING DUMB STYLIX CSS */
 .modules-left #workspaces button.focused,
 .modules-left #workspaces button.active {
-    border: 1px solid rgba(248, 248, 242, 0.6);
+  border: 1px solid rgba(248, 248, 242, 0.6);
 }
 
 #workspaces button.visible {
-    background-color: rgba(100, 114, 125, 0.3);
-    border: 1px solid rgba(248, 248, 242, 0.2);
+  background-color: rgba(100, 114, 125, 0.3);
+  border: 1px solid rgba(248, 248, 242, 0.2);
 }
 
 #workspaces button.empty {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+  background-color: #eb4d4b;
 }
 
 #clock,
@@ -94,85 +93,86 @@ tooltip label {
 #custom-notification,
 #sway-scratchpad,
 #mpd {
-    padding: 0 6px;
-    margin: 4px 2px;
-    color: #f8f8f2;
+  padding: 0 6px;
+  margin: 4px 2px;
+  color: #f8f8f2;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+  margin: 0 4px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+  margin-right: 0;
 }
 
-#battery.charging, #battery.plugged {
-    /*
+#battery.charging,
+#battery.plugged {
+  /*
     color: #ffffff;
     background-color: #26A65B;
     */
-    color: #26A65B;
+  color: #26a65b;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 #cpu {
-    color: #f1fa8c;
+  color: #f1fa8c;
 }
 
 #network.disconnected {
-    background-color: #ff5555;
-    color: #282a36;
+  background-color: #ff5555;
+  color: #282a36;
 }
 
 #pulseaudio.muted {
-    background-color: #44475a;
-    color: #f8f8f2;
+  background-color: #44475a;
+  color: #f8f8f2;
 }
 
 #temperature.critical {
-    background-color: #ff5555;
-    color: #282a36;
+  background-color: #ff5555;
+  color: #282a36;
 }
 
 #tray {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 10px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
 }
