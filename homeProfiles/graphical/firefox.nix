@@ -50,7 +50,7 @@ args @ {
     "sidebar.verticalTabs" = true;
     "sidebar.visibility" = "always-show";
     "sidebar.animation.enabled" = true;
-    "sidebar.animation.duration-ms" = 2000;
+    "sidebar.animation.duration-ms" = 200;
 
     # Disable annoying titlebar results
     "browser.urlbar.suggest.history" = false;
