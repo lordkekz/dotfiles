@@ -48,6 +48,9 @@ in {
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+      url."git@github.com".insteadOf = "github";
+      url."git@gitlab.com".insteadOf = "gitlab";
+      url."git@git.hepr.me".insteadOf = "hepr";
     };
     aliases = {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
@@ -62,6 +65,8 @@ in {
       sc = ''!${getExe git-sc-script}'';
       df = ''diff'';
       ds = ''diff --staged'';
+      dfr = ''diff --no-ext-diff'';
+      dsr = ''diff --no-ext-diff --staged'';
       # Fetch all remotes and prune remote-tracking refs (including tags)
       # Used by git-update-script
       fap = ''fetch -a -p -P'';
