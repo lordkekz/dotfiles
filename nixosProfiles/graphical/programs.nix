@@ -29,4 +29,10 @@
 
   # Enable ratbagd to configure peripherals with piper
   services.ratbagd.enable = true;
+
+  # Enable ollama service
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+  };
 }
