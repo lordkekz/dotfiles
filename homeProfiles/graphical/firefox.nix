@@ -43,7 +43,14 @@ args @ {
     "general.smootScroll" = true;
 
     # Force showing the system titlebar decoration
-    "browser.tabs.inTitlebar" = false;
+    "browser.tabs.inTitlebar" = 0;
+
+    # Configure revamped sidebar and vertical tabs
+    "sidebar.revamp" = true;
+    "sidebar.verticalTabs" = true;
+    "sidebar.visibility" = "always-show";
+    "sidebar.animation.enabled" = true;
+    "sidebar.animation.duration-ms" = 2000;
 
     # Disable annoying titlebar results
     "browser.urlbar.suggest.history" = false;
