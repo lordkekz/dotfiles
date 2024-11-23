@@ -61,7 +61,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Lix (correctness-focused fork of Nix)
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
