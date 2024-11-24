@@ -26,6 +26,9 @@ args @ {
     "browser.aboutConfig.showWarning" = false;
     "browser.compactmode.show" = true;
 
+    # Restore previous session
+    "browser.startup.page" = 3;
+
     # Disable caching requests to disk; enable and expand in-memory caching.
     "browser.cache.memory.enable" = true;
     "browser.cache.memory.capacity" = -1; # Unlimited
