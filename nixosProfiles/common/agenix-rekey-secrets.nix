@@ -26,5 +26,5 @@
     agePlugins = [pkgs.age-plugin-fido2-hmac];
   };
 
-  age.identityPaths = ["/home/hpreiser/.ssh/id_ed25519"];
+  age.identityPaths = ["/persist/local/home/hpreiser/.ssh/id_ed25519"];
 }
