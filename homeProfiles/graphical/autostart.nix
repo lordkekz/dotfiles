@@ -18,7 +18,7 @@ args @ {
       autostartLinks
       // {
         "autostart-${currentAppName}" = {
-          target = "${config.home.homeDirectory}/.config/autostart/${currentAppName}.desktop";
+          target = ".config/autostart/${currentAppName}.desktop";
           source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/applications/${currentAppName}.desktop";
         };
       })
