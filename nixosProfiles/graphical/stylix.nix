@@ -19,5 +19,6 @@ in {
 
   stylix = {
     targets.plymouth.enable = false;
+    targets.gtk.enable = true;
   };
 }

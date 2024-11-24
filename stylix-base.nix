@@ -18,8 +18,6 @@
 
     polarity = "dark";
 
-    targets.gtk.enable = true;
-
     fonts = let
       nerdfonts = pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Arimo" "Tinos"];};
     in {

@@ -17,5 +17,5 @@ args @ {
     ../../stylix-base.nix
   ];
 
-  stylix.targets.kde.enable = true;
+  # There are some specific activations in graphical homeProfiles (e.g. KDE)
 }

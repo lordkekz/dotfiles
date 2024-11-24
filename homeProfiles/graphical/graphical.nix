@@ -18,6 +18,9 @@ args @ {
   # Make fonts from font packages available
   fonts.fontconfig.enable = true;
 
+  # Enable Stylix GTK here so terminal homeConfig isn't affected
+  stylix.targets.gtk.enable = true;
+
   home.packages = with pkgs; [
     # OFFICE
     obsidian # Markdown-based Notes

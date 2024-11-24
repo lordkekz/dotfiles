@@ -17,6 +17,9 @@ args @ {
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
+  # Enable here because it fails activation elsewhere
+  stylix.targets.kde.enable = true;
+
   programs.plasma = {
     enable = true;
   };
