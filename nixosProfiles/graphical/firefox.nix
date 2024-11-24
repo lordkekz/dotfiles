@@ -77,6 +77,7 @@ in {
         #"treestyletab@piro.sakura.ne.jp" = mkExt "tree-style-tab";
         "jetpack-extension@dashlane.com" = mkExt "dashlane";
         "addon@darkreader.org" = mkExt "darkreader"; # Can also style titlebar black
+        "FirefoxColor@mozilla.com" = mkExt "firefox-color";
 
         # Plasma integration is broken as of 2024-01-10.
         #"plasma-browser-integration@kde.org" = mkExt "plasma-integration";
