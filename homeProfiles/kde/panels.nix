@@ -41,7 +41,7 @@ args @ {
               "applications:org.kde.dolphin.desktop"
               "applications:floorp.desktop"
               #"applications:firefox.desktop"
-              "applications:org.codeberg.dnkl.foot.desktop"
+              "applications:foot.desktop"
               #"applications:Alacritty.desktop"
               "applications:obsidian.desktop"
             ];
