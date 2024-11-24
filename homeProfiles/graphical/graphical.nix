@@ -29,7 +29,6 @@ args @ {
     libreoffice
     pdfarranger # https://github.com/pdfarranger/pdfarranger
     diff-pdf # https://github.com/vslavik/diff-pdf
-    floorp # browser based on Firefox
     ausweisapp # cursed thing for taxes
 
     # UTILITY
