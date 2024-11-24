@@ -2,17 +2,17 @@
   "placements": {
     "widget-overflow-fixed-list": [],
     "unified-extensions-area": [
+      "umatrix_raymondhill_net-browser-action",
+      "ublock0_raymondhill_net-browser-action",
       "sponsorblocker_ajay_app-browser-action",
       "dearrow_ajay_app-browser-action",
+      "enhancerforyoutube_maximerf_addons_mozilla_org-browser-action",
+      "extension_one-tab_com-browser-action",
       "jid1-mnnxcxisbpnsxq_jetpack-browser-action",
       "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action",
       "_531906d3-e22f-4a6c-a102-8057b88a1a63_-browser-action",
-      "_580efa7d-66f9-474d-857a-8e2afc6b1181_-browser-action",
-      "_c5f935cf-9b17-4b85-bed8-9277861b4116_-browser-action",
-      "_b9db16a4-6edc-47ec-a1f4-b86292ed211d_-browser-action",
-      "enhancerforyoutube_maximerf_addons_mozilla_org-browser-action",
-      "addon_darkreader_org-browser-action",
-      "zotero_chnm_gmu_edu-browser-action"
+      "_dccd64f0-f884-496c-af8b-1a66330e1a67_-browser-action",
+      "_b9db16a4-6edc-47ec-a1f4-b86292ed211d_-browser-action"
     ],
     "nav-bar": [
       "sidebar-button",
@@ -24,48 +24,17 @@
       "downloads-button",
       "history-panelmenu",
       "jetpack-extension_dashlane_com-browser-action",
-      "ublock0_raymondhill_net-browser-action",
-      "umatrix_raymondhill_net-browser-action",
-      "_dccd64f0-f884-496c-af8b-1a66330e1a67_-browser-action",
-      "extension_one-tab_com-browser-action",
-      "unified-extensions-button",
-      "plasma-browser-integration_kde_org-browser-action"
+      "zotero_chnm_gmu_edu-browser-action",
+      "addon_darkreader_org-browser-action",
+      "unified-extensions-button"
     ],
     "toolbar-menubar": ["menubar-items"],
     "TabsToolbar": [],
     "vertical-tabs": ["tabbrowser-tabs"],
     "PersonalToolbar": ["import-button", "personal-bookmarks"]
   },
-  "seen": [
-    "save-to-pocket-button",
-    "developer-button",
-    "jetpack-extension_dashlane_com-browser-action",
-    "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action",
-    "extension_one-tab_com-browser-action",
-    "ublock0_raymondhill_net-browser-action",
-    "dearrow_ajay_app-browser-action",
-    "_531906d3-e22f-4a6c-a102-8057b88a1a63_-browser-action",
-    "_580efa7d-66f9-474d-857a-8e2afc6b1181_-browser-action",
-    "_c5f935cf-9b17-4b85-bed8-9277861b4116_-browser-action",
-    "umatrix_raymondhill_net-browser-action",
-    "sponsorblocker_ajay_app-browser-action",
-    "jid1-mnnxcxisbpnsxq_jetpack-browser-action",
-    "_dccd64f0-f884-496c-af8b-1a66330e1a67_-browser-action",
-    "_b9db16a4-6edc-47ec-a1f4-b86292ed211d_-browser-action",
-    "plasma-browser-integration_kde_org-browser-action",
-    "enhancerforyoutube_maximerf_addons_mozilla_org-browser-action",
-    "addon_darkreader_org-browser-action",
-    "zotero_chnm_gmu_edu-browser-action"
-  ],
-  "dirtyAreaCache": [
-    "nav-bar",
-    "PersonalToolbar",
-    "toolbar-menubar",
-    "TabsToolbar",
-    "unified-extensions-area",
-    "widget-overflow-fixed-list",
-    "vertical-tabs"
-  ],
+  "seen": [],
+  "dirtyAreaCache": [],
   "currentVersion": 20,
   "newElementCount": 5
 }

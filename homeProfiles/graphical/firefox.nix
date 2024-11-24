@@ -44,6 +44,10 @@ args @ {
     # Force showing the system titlebar decoration
     "browser.tabs.inTitlebar" = 0;
 
+    # Define ui layout
+    "browser.uiCustomization.horizontalTabstrip" = "[]";
+    "browser.uiCustomization.state" = builtins.readFile ./firefox-uiCustomization.json;
+
     # Configure revamped sidebar and vertical tabs
     "sidebar.revamp" = true;
     "sidebar.verticalTabs" = true;
