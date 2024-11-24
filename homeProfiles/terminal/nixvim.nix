@@ -72,7 +72,7 @@ args @ {
           installCargo = true;
         };
         # Python
-        ruff-lsp.enable = true;
+        ruff.enable = true;
         # Typst typsetting language
         typst-lsp.enable = true;
       };
