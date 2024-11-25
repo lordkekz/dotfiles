@@ -111,7 +111,11 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Stylix helps theme applications using base16
-    stylix.url = "github:danth/stylix?ref=master";
+    #stylix.url = "/home/hpreiser/git/stylix";
+    stylix.url = "github:lordkekz/stylix?ref=fix-plasma-activation"; # FIXME switch back to upstream once merged
+    #stylix.url = "github:danth/stylix?ref=master";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.home-manager.follows = "home-manager";
 
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
