@@ -25,9 +25,13 @@ args @ {
   };
 
   home.packages = [
-    # An autotile script for Plasma 6 (even though it's still in libsForQt5)
+    # An autotile script for Plasma 6
     pkgs.polonium
   ];
+
+  # The NixOS's firefox package sets this in the wrapper, but my home-manager firefox package takes
+  # precedence and ignores it if not explicitly set
+  programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
 
   programs.okular = {
     enable = true;

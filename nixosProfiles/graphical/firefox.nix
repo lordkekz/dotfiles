@@ -79,8 +79,8 @@ in {
         "addon@darkreader.org" = mkExt "darkreader"; # Can also style titlebar black
         "FirefoxColor@mozilla.com" = mkExt "firefox-color";
 
-        # Plasma integration is broken as of 2024-01-10.
-        #"plasma-browser-integration@kde.org" = mkExt "plasma-integration";
+        # Plasma integration
+        "plasma-browser-integration@kde.org" = mkExt "plasma-integration";
 
         # Zotero integration
         "zotero@chnm.gmu.edu" = {
