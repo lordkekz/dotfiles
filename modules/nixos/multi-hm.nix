@@ -15,14 +15,7 @@ with lib; let
         # Activate home-manager config
         log_file=/tmp/home-manager-activation-${name}.log
         { ${value.homeConfiguration.activationPackage}/activate -b backup | tee "$log_file"; } ||
-        {
-          echo "FAILED TO ACTIVATE!!!" | tee -a "$log_file";
-          {
-            sleep 5;
-            rm ~/.gtkrc-2.0;
-            ${value.homeConfiguration.activationPackage}/activate -b backup2 | tee -a "$log_file";
-          } &
-        }
+        { echo "FAILED TO ACTIVATE!!!" | tee -a "$log_file"; }
 
         # Launch the actual session
         ${value.launchCommand}
