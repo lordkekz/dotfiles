@@ -26,7 +26,7 @@ in {
 
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = false;
+    settings.PermitRootLogin = "no";
     # require public key authentication for better security
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
