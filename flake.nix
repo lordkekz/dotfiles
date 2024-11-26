@@ -205,7 +205,7 @@
     homeProfiles = lib.my.loadProfiles "home";
     nixosProfiles = lib.my.loadProfiles "nixos";
     hardwareProfiles = lib.my.loadProfiles "hardware";
-    workloadProfiles = lib.my.loadProfiles "workload";
+    workloadProfiles = lib.my.loadProfiles.loadModulesOfProfiles "workload";
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
     mkSessions = system: {
       config.multi-hm.sessions = {
