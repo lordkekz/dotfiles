@@ -278,7 +278,6 @@
 
         nasman2404.modules = [
           homelab
-          headless
           ryzen-server-2404
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
@@ -305,7 +304,6 @@
 
         vortex.modules = [
           homelab
-          headless
           vortex
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
