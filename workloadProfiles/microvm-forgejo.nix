@@ -52,9 +52,12 @@ in {
           # You need to specify this to remove the port from URLs in the web UI.
           ROOT_URL = "https://${domain}/";
           HTTP_PORT = 8000;
+          SSH_PORT = 2222;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = true;
+        # FIXME maybe activate this, not sure if it works with reverse proxy setup
+        session.COOKIE_SECURE = false;
       };
     };
   };
