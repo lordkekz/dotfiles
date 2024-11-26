@@ -15,14 +15,6 @@
       debug
       auto_https disable_certs
     '';
-    virtualHosts."syncit.hepr.me".extraConfig = ''
-      tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-      reverse_proxy http://10.0.0.11:8384
-    '';
-    virtualHosts."caldav.hepr.me".extraConfig = ''
-      tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-      reverse_proxy http://10.0.0.12:5232
-    '';
   };
   networking.firewall.allowedTCPPorts = [80 443];
 }

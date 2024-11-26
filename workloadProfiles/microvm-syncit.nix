@@ -7,6 +7,11 @@
   personal-data,
   ...
 }: {
+  services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.11:8384
+  '';
+
   microvm.vms.syncit.config = {config, ...}: {
     imports = [
       (import ./__microvmBaseConfig.nix {

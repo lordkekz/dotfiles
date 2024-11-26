@@ -205,6 +205,7 @@
     homeProfiles = lib.my.loadProfiles "home";
     nixosProfiles = lib.my.loadProfiles "nixos";
     hardwareProfiles = lib.my.loadProfiles "hardware";
+    workloadProfiles = lib.my.loadProfiles "workload";
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
     mkSessions = system: {
       config.multi-hm.sessions = {
@@ -259,7 +260,7 @@
             agenix-rekey.nixosModules.default
           ]);
         specialArgs = {
-          inherit inputs outputs assets nixosProfiles hardwareProfiles;
+          inherit inputs outputs assets nixosProfiles hardwareProfiles workloadProfiles;
           inherit (inputs) personal-data;
           system = "x86_64-linux"; # FIXME for other architectures
         };
@@ -374,6 +375,7 @@
       # export homeProfiles and nixosProfiles but not hardwareProfiles
       profiles.nixos = nixosProfiles;
       profiles.home = homeProfiles;
+      profiles.workload = workloadProfiles;
 
       # export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
       inherit homeManagerModules nixosModules;
