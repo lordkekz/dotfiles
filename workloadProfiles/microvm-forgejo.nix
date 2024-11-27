@@ -17,6 +17,14 @@ in {
     reverse_proxy http://10.0.0.13:8000
   '';
 
+  networking.nat.forwardPorts = [
+    {
+      proto = "tcp";
+      sourcePort = 22;
+      destination = "10.0.0.13:2222";
+    }
+  ];
+
   microvm.vms.forgejo.config = {config, ...}: {
     imports = [
       (import ./__microvmBaseConfig.nix {
@@ -51,7 +59,9 @@ in {
           DOMAIN = domain;
           # You need to specify this to remove the port from URLs in the web UI.
           ROOT_URL = "https://${domain}/";
+          PROTOCOL = "http";
           HTTP_PORT = 8000;
+          HTTP_ADDR = "0.0.0.0";
           SSH_PORT = 2222;
         };
         # You can temporarily allow registration to create an admin user.
