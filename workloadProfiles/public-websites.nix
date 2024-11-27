@@ -33,6 +33,7 @@
           HTML 200
     '';
   };
+
   services.caddy.virtualHosts."luna.r4c.hepr.me".extraConfig = ''
     tls /var/lib/acme/r4c.hepr.me/cert.pem /var/lib/acme/r4c.hepr.me/key.pem
     reverse_proxy http://localhost:8001 {
@@ -44,6 +45,7 @@
     tls /var/lib/acme/r4c.hepr.me/cert.pem /var/lib/acme/r4c.hepr.me/key.pem
     reverse_proxy http://localhost:9001
   '';
+
   services.caddy.virtualHosts."robi.r4c.hepr.me".extraConfig = ''
     tls /var/lib/acme/r4c.hepr.me/cert.pem /var/lib/acme/r4c.hepr.me/key.pem
     reverse_proxy http://localhost:8002 {
@@ -55,4 +57,6 @@
     tls /var/lib/acme/r4c.hepr.me/cert.pem /var/lib/acme/r4c.hepr.me/key.pem
     reverse_proxy http://localhost:9002
   '';
+
+  networking.firewall.allowedTCPPorts = [9090];
 }
