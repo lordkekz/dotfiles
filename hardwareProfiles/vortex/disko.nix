@@ -10,6 +10,8 @@
 }: {
   imports = [inputs.disko.nixosModules.disko];
 
+  boot.tmp.useTmpfs = lib.mkForce false;
+
   disko.devices = {
     disk.main = {
       type = "disk";
@@ -41,6 +43,10 @@
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
+                persist-root = {
+                  mountpoint = "/";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
                 persist-ephemeral = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];
@@ -66,14 +72,6 @@
           };
         };
       };
-    };
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "size=50%"
-        "defaults"
-        "mode=755"
-      ];
     };
   };
 }
