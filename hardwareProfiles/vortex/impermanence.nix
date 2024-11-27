@@ -20,6 +20,7 @@ in {
     directories = [
       "/var/log"
       "/var/lib/systemd/coredump"
+      "/var/lib/acme"
     ];
     files = [
     ];
