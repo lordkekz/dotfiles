@@ -8,6 +8,7 @@
   pkgs,
   ...
 }: {
+  users.groups.acme = {};
   services.caddy = {
     enable = true;
     group = "acme";
