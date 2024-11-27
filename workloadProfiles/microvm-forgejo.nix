@@ -44,7 +44,7 @@ in {
       }
     ];
 
-    networking.firewall.allowedTCPPorts = [22 80 2222];
+    networking.firewall.allowedTCPPorts = [22 8000 2222];
 
     services.forgejo = {
       enable = true;
