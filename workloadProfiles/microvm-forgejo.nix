@@ -73,6 +73,12 @@ in {
         service.DISABLE_REGISTRATION = true;
         # FIXME maybe activate this, not sure if it works with reverse proxy setup
         session.COOKIE_SECURE = false;
+        # Workaround for crash on 9p mount, see:
+        # https://github.com/go-gitea/gitea/issues/8566#issuecomment-745723498
+        # TODO maybe use `bleve` but move the index to a non-persistent directory
+        # Especially because `db` doesn't support code indexing:
+        # https://github.com/go-gitea/gitea/issues/8566#issuecomment-753418689
+        indexer.ISSUE_INDEXER_TYPE = "db";
       };
     };
   };
