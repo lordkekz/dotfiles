@@ -10,6 +10,8 @@
 }: {
   imports = [inputs.disko.nixosModules.disko];
 
+  boot.tmp.useTmpfs = lib.mkForce false;
+
   disko.devices = {
     disk.main = {
       type = "disk";
@@ -41,6 +43,10 @@
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
+                "/persist/tmp" = {
+                  mountpoint = "/tmp";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
                 "/persist/ephemeral" = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];
