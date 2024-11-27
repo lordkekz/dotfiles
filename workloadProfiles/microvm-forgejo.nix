@@ -17,6 +17,7 @@ in {
     reverse_proxy http://10.0.0.13:8000
   '';
 
+  networking.firewall.allowedTCPPorts = [22];
   networking.nat.forwardPorts = [
     {
       proto = "tcp";
@@ -55,6 +56,9 @@ in {
       # Enable support for Git Large File Storage
       lfs.enable = true;
       settings = {
+        DEFAULT = {
+          RUN_MODE = "dev";
+        };
         server = {
           DOMAIN = domain;
           # You need to specify this to remove the port from URLs in the web UI.
@@ -63,6 +67,7 @@ in {
           HTTP_PORT = 8000;
           HTTP_ADDR = "0.0.0.0";
           SSH_PORT = 2222;
+          START_SSH_SERVER = true;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = true;
