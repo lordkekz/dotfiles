@@ -9,7 +9,8 @@
   ...
 }: let
   cloudflare = domain: {
-    domain = "*.${domain}";
+    inherit domain;
+    extraDomainNames = ["*.${domain}"];
     dnsProvider = "cloudflare";
     # location of your CLOUDFLARE_DNS_API_TOKEN=[value]
     # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
