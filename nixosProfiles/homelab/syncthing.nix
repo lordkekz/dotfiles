@@ -17,6 +17,12 @@
     inherit (personal-data.data.lab.syncthing.settings) devices folders;
   };
 
-  age.secrets.syncthing-key.rekeyFile = "${inputs.self.outPath}/secrets/syncthing-${config.system.name}-key.pem.age";
-  age.secrets.syncthing-cert.rekeyFile = "${inputs.self.outPath}/secrets/syncthing-${config.system.name}-cert.pem.age";
+  age.secrets.syncthing-key = {
+    rekeyFile = "${inputs.self.outPath}/secrets/syncthing-${config.system.name}-key.pem.age";
+    owner = "acme";
+  };
+  age.secrets.syncthing-cert = {
+    rekeyFile = "${inputs.self.outPath}/secrets/syncthing-${config.system.name}-cert.pem.age";
+    owner = "acme";
+  };
 }
