@@ -43,8 +43,8 @@
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
-                "/persist/tmp" = {
-                  mountpoint = "/tmp";
+                "/persist/root" = {
+                  mountpoint = "/";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
                 "/persist/ephemeral" = {
@@ -72,14 +72,6 @@
           };
         };
       };
-    };
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "size=50%"
-        "defaults"
-        "mode=755"
-      ];
     };
   };
 }
