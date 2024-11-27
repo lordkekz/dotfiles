@@ -22,6 +22,7 @@ in {
     defaults.email = "info@lkekz.de";
     certs = {
       "hepr.me" = cloudflare "hepr.me";
+      "r4c.hepr.me" = cloudflare "r4c.hepr.me";
       "solux.cc" = cloudflare "solux.cc";
     };
   };

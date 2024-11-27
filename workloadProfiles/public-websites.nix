@@ -23,7 +23,7 @@
   services.caddy.virtualHosts."r4c.hepr.me" = {
     serverAliases = ["www.r4c.hepr.me"];
     extraConfig = ''
-      tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+      tls /var/lib/acme/r4c.hepr.me/cert.pem /var/lib/acme/r4c.hepr.me/key.pem
         header Content-Type text/html
         respond <<HTML
           <html>
