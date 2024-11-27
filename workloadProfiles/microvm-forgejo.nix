@@ -8,13 +8,14 @@
   ...
 }: let
   domain = "git.hepr.me";
+  internalIP = "10.0.0.13";
 in {
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     request_body {
       max_size 1GB
     }
-    reverse_proxy http://10.0.0.13:8000
+    reverse_proxy http://${internalIP}:8000
   '';
 
   networking.firewall.allowedTCPPorts = [22];
@@ -22,7 +23,7 @@ in {
     {
       proto = "tcp";
       sourcePort = 22;
-      destination = "10.0.0.13:2222";
+      destination = "${internalIP}:2222";
     }
   ];
 
@@ -60,14 +61,18 @@ in {
           RUN_MODE = "dev";
         };
         server = {
+          # HTTP settings
           DOMAIN = domain;
-          # You need to specify this to remove the port from URLs in the web UI.
-          ROOT_URL = "https://${domain}/";
+          ROOT_URL = "https://${domain}/"; # Displayed in UI
           PROTOCOL = "http";
           HTTP_PORT = 8000;
-          HTTP_ADDR = "0.0.0.0";
-          SSH_PORT = 2222;
+          HTTP_ADDR = internalIP;
+
+          # SSH settings
           START_SSH_SERVER = true;
+          SSH_PORT = 22; # Displayed in UI
+          SSH_LISTEN_PORT = 2222;
+          SSH_LISTEN_HOST = internalIP;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = true;
