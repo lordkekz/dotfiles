@@ -59,4 +59,12 @@
   '';
 
   networking.firewall.allowedTCPPorts = [9090];
+
+  # Enable podman containers
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+    extraPackages = [pkgs.podman-compose];
+  };
 }
