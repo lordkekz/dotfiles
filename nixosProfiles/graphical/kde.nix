@@ -26,6 +26,7 @@
   environment.systemPackages = [
     # KDE Info Center dependencies
     pkgs.kdePackages.plasma-thunderbolt
+    pkgs.dmidecode
   ];
 
   # Disable fingerprint for lock screen auth, because passwords
