@@ -14,6 +14,7 @@
   user = "forgejo";
   group = "forgejo";
   unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
+  hostConfig = config;
 in {
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -82,7 +83,7 @@ in {
     # See https://wiki.nixos.org/wiki/Forgejo#Ensure_users
     systemd.services.forgejo.preStart = let
       adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
-      passwordFile = config.age.secrets.cloudflare-token.path;
+      passwordFile = hostConfig.age.secrets.cloudflare-token.path;
       inherit (inputs.personal-data.data.home.git) userName userEmail; # Note, Forgejo doesn't allow creation of an account named "admin"
     in ''
       ${adminCmd} create --admin --email "${userEmail}" --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
