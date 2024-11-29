@@ -78,5 +78,18 @@ in {
         indexer.ISSUE_INDEXER_TYPE = "db";
       };
     };
+
+    # See https://wiki.nixos.org/wiki/Forgejo#Ensure_users
+    systemd.services.forgejo.preStart = let
+      adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
+      passwordFile = config.age.secrets.cloudflare-token.path;
+      inherit (inputs.personal-data.data.home.git) userName userEmail; # Note, Forgejo doesn't allow creation of an account named "admin"
+    in ''
+      ${adminCmd} create --admin --email "${userEmail}" --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
+      ## uncomment this line to change an admin user which was already created
+      ${adminCmd} change-password --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
+    '';
   };
+
+  age.secrets.forgejo-password.rekeyFile = "${inputs.self.outPath}/secrets/forgejo-password.age";
 }
