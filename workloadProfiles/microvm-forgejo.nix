@@ -38,6 +38,15 @@ in {
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
 
+    microvm.shares = [
+      {
+        mountPoint = hostConfig.age.secrets.forgejo-password.path;
+        source = hostConfig.age.secrets.forgejo-password.path;
+        tag = "microvm-forgejo-secret";
+        securityModel = "mapped";
+      }
+    ];
+
     services.forgejo = {
       enable = true;
 
@@ -83,7 +92,7 @@ in {
     # See https://wiki.nixos.org/wiki/Forgejo#Ensure_users
     systemd.services.forgejo.preStart = let
       adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
-      passwordFile = hostConfig.age.secrets.cloudflare-token.path;
+      passwordFile = hostConfig.age.secrets.forgejo-password.path;
       inherit (inputs.personal-data.data.home.git) userName userEmail; # Note, Forgejo doesn't allow creation of an account named "admin"
     in ''
       ${adminCmd} create --admin --email "${userEmail}" --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
