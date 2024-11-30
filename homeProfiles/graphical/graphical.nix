@@ -108,10 +108,6 @@ args @ {
       })
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0" # Used by Obsidian, as of 2024-01-01
-  ];
-
   services.kdeconnect = {
     enable = true;
     indicator = true;
