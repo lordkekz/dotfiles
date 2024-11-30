@@ -111,6 +111,7 @@ args @ {
   services.kdeconnect = {
     enable = true;
     indicator = true;
+    package = pkgs.kdePackages.kdeconnect-kde; # FIXME remove this once home-manager defaults to Qt6 version
   };
 
   programs.obs-studio = {
