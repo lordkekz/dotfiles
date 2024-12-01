@@ -15,6 +15,7 @@
   group = "forgejo";
   unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
   hostConfig = config;
+  microvmSecretsDir = "/run/agenix-microvm-forgejo";
 in {
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -40,8 +41,8 @@ in {
 
     microvm.shares = [
       {
-        mountPoint = hostConfig.age.secrets.forgejo-password.path;
-        source = hostConfig.age.secrets.forgejo-password.path;
+        mountPoint = microvmSecretsDir;
+        source = microvmSecretsDir;
         tag = "microvm-forgejo-secret";
         securityModel = "mapped";
       }
@@ -101,5 +102,11 @@ in {
     '';
   };
 
-  age.secrets.forgejo-password.rekeyFile = "${inputs.self.outPath}/secrets/forgejo-password.age";
+  age.secrets.forgejo-password = {
+    rekeyFile = "${inputs.self.outPath}/secrets/forgejo-password.age";
+    path = "${microvmSecretsDir}/forgejo-password";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    owner = "microvm";
+    group = "kvm";
+  };
 }
