@@ -41,23 +41,23 @@
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
-                "/persist/ephemeral" = {
+                persist-ephemeral = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
-                "/persist/local" = {
+                persist-local = {
                   mountpoint = "/persist/local";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
-                "/persist/roaming" = {
+                persist-roaming = {
                   mountpoint = "/persist/roaming";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
-                "/nix" = {
+                nix = {
                   mountpoint = "/nix";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
-                "/swap" = {
+                swap = {
                   mountpoint = "/.swapvol";
                   swap.swapfile.size = "8G";
                 };
