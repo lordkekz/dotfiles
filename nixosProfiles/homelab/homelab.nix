@@ -21,7 +21,7 @@ in {
     description = fullName;
     inherit hashedPassword;
     openssh.authorizedKeys.keys = publicKeys;
-    extraGroups = ["wheel" "libvirtd" "lxd" "incus-admin"];
+    extraGroups = ["wheel" "systemd-journal"];
   };
 
   services.openssh = {
