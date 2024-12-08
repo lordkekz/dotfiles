@@ -14,7 +14,6 @@ in {
   imports = [inputs.impermanence.nixosModules.impermanence];
   fileSystems."/".neededForBoot = true;
   fileSystems."/nix".neededForBoot = true;
-  fileSystems."/persist".neededForBoot = true;
 
   # Persistent but ephemeral data, e.g. logs, VMs and containers, caches
   fileSystems."/persist/ephemeral".neededForBoot = true;
@@ -46,6 +45,7 @@ in {
   environment.persistence."/persist/local" = {
     hideMounts = true;
     directories = [
+      "/etc/ssh"
       "/var/db/sudo/lectured"
 
       "/var/lib/incus"

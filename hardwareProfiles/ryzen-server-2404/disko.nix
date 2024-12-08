@@ -8,16 +8,22 @@
   modulesPath,
   ...
 }: let
-  pool-name = "venus";
-  blank-snapshot = "${pool-name}@blank";
+  pool-name = "ares";
+  root-subvol = "root";
+  blank-snapshot = "${pool-name}/${root-subvol}@blank";
 in {
   imports = [inputs.disko.nixosModules.disko];
+
+  # Rollback subvolume "root" right after device nodes are initialized
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r ${blank-snapshot}
+  '';
 
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21JNXAGA47804H";
+        device = "/dev/disk/by-id/nvme-Lexar_SSD_NQ790_4TB_PJ6841R000312P220Q";
         content = {
           type = "gpt";
           partitions = {
@@ -53,19 +59,17 @@ in {
           compression = "zstd";
           "com.sun:auto-snapshot" = "false";
         };
-        mountpoint = "/";
-        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
-        preMountHook = "zfs rollback -r ${blank-snapshot}";
 
         datasets = {
+          ${root-subvol} = {
+            type = "zfs_fs";
+            mountpoint = "/";
+            postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
+            options."com.sun:auto-snapshot" = "false";
+          };
           nix = {
             type = "zfs_fs";
             mountpoint = "/nix";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          persist = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
             options."com.sun:auto-snapshot" = "false";
           };
           persist-ephemeral = {
@@ -76,25 +80,7 @@ in {
           persist-local = {
             type = "zfs_fs";
             mountpoint = "/persist/local";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          persist-longhorn-test_cluster = {
-            type = "zfs_volume";
-            size = "100G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/persist/longhorn/test_cluster";
-            };
-          };
-          persist-longhorn-prod_cluster = {
-            type = "zfs_volume";
-            size = "100G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/persist/longhorn/prod_cluster";
-            };
+            options."com.sun:auto-snapshot" = "false";
           };
         };
       };
