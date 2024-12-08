@@ -33,7 +33,7 @@
   users.users.mario = {
     isNormalUser = true;
     password = "hihiaha";
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "systemd-journal"];
   };
   users.groups.users = {};
 
@@ -69,6 +69,12 @@
       proto = "9p";
       # virtiofs should also be possible but needs extra config for zfs
       # https://astro.github.io/microvm.nix/shares.html
+    }
+    {
+      mountPoint = "/persist";
+      source = "/persist/local/vm-${vmName}";
+      tag = "microvm-${vmName}-persist";
+      securityModel = "mapped";
     }
   ];
 }

@@ -7,6 +7,8 @@
   personal-data,
   ...
 }: let
+  vmName = "forgejo";
+  vmId = "13";
   domain = "git.hepr.me";
   internalIP = "10.0.0.13";
 in {
@@ -27,22 +29,9 @@ in {
     }
   ];
 
+  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.forgejo.config = {config, ...}: {
-    imports = [
-      (import ./__microvmBaseConfig.nix {
-        vmName = "forgejo";
-        vmId = "13";
-      })
-    ];
-
-    microvm.shares = [
-      {
-        mountPoint = "/persist";
-        source = "/persist/local/microvm-forgejo";
-        tag = "microvm-forgejo-persist";
-        securityModel = "mapped";
-      }
-    ];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
 

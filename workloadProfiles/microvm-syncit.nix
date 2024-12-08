@@ -6,28 +6,18 @@
   pkgs,
   personal-data,
   ...
-}: {
+}: let
+  vmName = "syncit";
+  vmId = "11";
+in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.11:8384
   '';
 
+  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.syncit.config = {config, ...}: {
-    imports = [
-      (import ./__microvmBaseConfig.nix {
-        vmName = "syncit";
-        vmId = "11";
-      })
-    ];
-
-    microvm.shares = [
-      {
-        mountPoint = "/persist";
-        source = "/persist/local/microvm-syncit";
-        tag = "microvm-syncit-persist";
-        securityModel = "mapped";
-      }
-    ];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 
     networking.firewall.allowedTCPPorts = [22000 8384];
     networking.firewall.allowedUDPPorts = [22000 21027];

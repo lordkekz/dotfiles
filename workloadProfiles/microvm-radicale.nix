@@ -6,28 +6,18 @@
   pkgs,
   personal-data,
   ...
-}: {
+}: let
+  vmName = "radicale";
+  vmId = "12";
+in {
   services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.12:5232
   '';
 
+  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.radicale.config = {config, ...}: {
-    imports = [
-      (import ./__microvmBaseConfig.nix {
-        vmName = "radicale";
-        vmId = "12";
-      })
-    ];
-
-    microvm.shares = [
-      {
-        mountPoint = "/persist";
-        source = "/persist/local/microvm-radicale";
-        tag = "microvm-radicale-persist";
-        securityModel = "mapped";
-      }
-    ];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 
     networking.firewall.allowedTCPPorts = [5232];
 
