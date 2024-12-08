@@ -59,6 +59,7 @@ in {
 
           # SSH settings
           START_SSH_SERVER = true;
+          BUILTIN_SSH_SERVER_USER = "git";
           SSH_PORT = 22; # Displayed in UI
           SSH_LISTEN_PORT = 2222;
           SSH_LISTEN_HOST = internalIP;
@@ -75,5 +76,10 @@ in {
         indexer.ISSUE_INDEXER_TYPE = "db";
       };
     };
+
+    # Make sure the forgejo user can access the persistent data
+    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
+    # Better to chown them at each start of the VM so the files can be touched from the host without worry
+    systemd.services.forgejo.preStart = "+chown -R forgejo:forgejo /persist";
   };
 }

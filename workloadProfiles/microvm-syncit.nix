@@ -24,12 +24,12 @@ in {
 
     services.syncthing = let
       persistentFolder = "/persist";
-      fullSettings = personal-data.data.home.syncthing.settings persistentFolder;
+      personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
     in {
       enable = true;
 
-      user = "root";
-      group = "root";
+      user = "syncthing";
+      group = "syncthing";
 
       dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
       configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
@@ -37,10 +37,15 @@ in {
       guiAddress = "10.0.0.11:8384";
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings.devices = fullSettings.devices;
-      settings.folders = {
-        inherit (fullSettings.folders) Documents;
+      settings = lib.recursiveUpdate personalSettings {
+        folders."Handy Kamera".enable = true;
       };
     };
+
+    # Make sure the syncthing user can access the config and synced directories
+    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
+    # Better to chown them at each start of the VM so the files can be touched from the host without worry
+    systemd.services.syncthing.preStart = "+chown -R syncthing:syncthing /persist";
+    systemd.services.syncthing-init.preStart = "+chown -R syncthing:syncthing /persist";
   };
 }

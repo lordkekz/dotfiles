@@ -31,7 +31,7 @@ in {
           htpasswd_encryption = "autodetect";
         };
         storage = {
-          filesystem_folder = "/persist/radicale-collections";
+          filesystem_folder = "/persist";
           hook = lib.getExe (pkgs.writeShellApplication {
             name = "radicale-changes-hook-git";
             runtimeInputs = [pkgs.gitMinimal pkgs.coreutils];
@@ -61,5 +61,10 @@ in {
         };
       };
     };
+
+    # Make sure the radicale user can access the persistent data
+    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
+    # Better to chown them at each start of the VM so the files can be touched from the host without worry
+    systemd.services.radicale.preStart = "+chown -R radicale:radicale /persist";
   };
 }
