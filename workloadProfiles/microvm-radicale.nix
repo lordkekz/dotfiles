@@ -15,7 +15,7 @@ in {
     reverse_proxy http://10.0.0.12:5232
   '';
 
-  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
+  systemd.services."microvm@${vmName}".preStart = "+mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.radicale.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 

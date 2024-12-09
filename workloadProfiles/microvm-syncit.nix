@@ -15,7 +15,7 @@ in {
     reverse_proxy http://10.0.0.11:8384
   '';
 
-  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
+  systemd.services."microvm@${vmName}".preStart = "+mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.syncit.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 

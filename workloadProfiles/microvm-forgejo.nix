@@ -29,7 +29,7 @@ in {
     }
   ];
 
-  systemd.services."microvm@${vmName}".preStart = "mkdir -p /persist/local/vm-${vmName}";
+  systemd.services."microvm@${vmName}".preStart = "+mkdir -p /persist/local/vm-${vmName}";
   microvm.vms.forgejo.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
 
