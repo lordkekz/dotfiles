@@ -15,8 +15,15 @@ in {
   imports = [inputs.disko.nixosModules.disko];
 
   # Rollback subvolume "root" right after device nodes are initialized
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
+  boot.initrd.postMountCommands = lib.mkAfter ''
+    echo "Rollback of ${root-subvol} for impermanence..."
+    echo "$ zpool list"
+    zpool list
+    echo "$ zfs list"
+    zfs list
+    echo "$ zfs rollback -r ${blank-snapshot}"
     zfs rollback -r ${blank-snapshot}
+    echo "End of rollback script."
   '';
 
   disko.devices = {
