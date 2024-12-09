@@ -8,7 +8,7 @@
   modulesPath,
   ...
 }: let
-  pool-name = "ares";
+  pool-name = "artemis";
   root-subvol = "root";
   blank-snapshot = "${pool-name}/${root-subvol}@blank";
 in {
@@ -63,8 +63,7 @@ in {
         type = "zpool";
         mode = "";
         rootFsOptions = {
-          compression = "zstd";
-          "com.sun:auto-snapshot" = "false";
+          canmount = "off";
         };
 
         datasets = {
