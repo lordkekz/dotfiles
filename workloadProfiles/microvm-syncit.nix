@@ -9,6 +9,9 @@
 }: let
   vmName = "syncit";
   vmId = "11";
+  user = "syncthing";
+  group = "syncthing";
+  unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -16,7 +19,7 @@ in {
   '';
 
   microvm.vms.syncit.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [22000 8384];
     networking.firewall.allowedUDPPorts = [22000 21027];
@@ -26,9 +29,7 @@ in {
       personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
     in {
       enable = true;
-
-      user = "syncthing";
-      group = "syncthing";
+      inherit user group;
 
       dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
       configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
@@ -40,11 +41,5 @@ in {
         folders."Handy Kamera".enable = true;
       };
     };
-
-    # Make sure the syncthing user can access the config and synced directories
-    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
-    # Better to chown them at each start of the VM so the files can be touched from the host without worry
-    systemd.services.syncthing.preStart = "+chown -R syncthing:syncthing /persist";
-    systemd.services.syncthing-init.preStart = "+chown -R syncthing:syncthing /persist";
   };
 }

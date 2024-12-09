@@ -11,6 +11,9 @@
   vmId = "13";
   domain = "git.hepr.me";
   internalIP = "10.0.0.13";
+  user = "forgejo";
+  group = "forgejo";
+  unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
 in {
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -30,7 +33,7 @@ in {
   ];
 
   microvm.vms.forgejo.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
 
@@ -75,10 +78,5 @@ in {
         indexer.ISSUE_INDEXER_TYPE = "db";
       };
     };
-
-    # Make sure the forgejo user can access the persistent data
-    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
-    # Better to chown them at each start of the VM so the files can be touched from the host without worry
-    systemd.services.forgejo.preStart = "+chown -R forgejo:forgejo /persist";
   };
 }

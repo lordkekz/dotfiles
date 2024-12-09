@@ -1,6 +1,9 @@
 {
   vmName,
   vmId,
+  user,
+  group,
+  unitsAfterPersist,
 }: {
   config,
   pkgs,
@@ -77,4 +80,22 @@
       securityModel = "mapped";
     }
   ];
+
+  # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
+  # Better to chown them at each start of the VM so the files can be touched from the host without worry
+  systemd.services.init-persist-permissions = {
+    enableStrictShellChecks = true;
+    script = ''
+      echo "chowning /persist for ${user}:${group}"
+      if chown -Rc "${user}:${group}" /persist; then
+        echo "chown done"
+      else
+        echo "chown failed"
+      fi
+    '';
+    wantedBy = ["multi-user.target"] ++ unitsAfterPersist;
+    before = unitsAfterPersist;
+    wants = ["fs.target"];
+    after = ["fs.target"];
+  };
 }

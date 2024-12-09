@@ -9,6 +9,9 @@
 }: let
   vmName = "radicale";
   vmId = "12";
+  user = "radicale";
+  group = "radicale";
+  unitsAfterPersist = ["radicale.service"];
 in {
   services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -16,7 +19,7 @@ in {
   '';
 
   microvm.vms.radicale.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [5232];
 
@@ -60,10 +63,5 @@ in {
         };
       };
     };
-
-    # Make sure the radicale user can access the persistent data
-    # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
-    # Better to chown them at each start of the VM so the files can be touched from the host without worry
-    systemd.services.radicale.preStart = "+chown -R radicale:radicale /persist";
   };
 }
