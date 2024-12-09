@@ -16,7 +16,7 @@
   ];
 
   # Required for secrets
-  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOQr2o65WM22z2c3nyY9DYTxSlfO5UH6jUgc33TlDBRR root@nasman2404";
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC8hRwBv9JkDKcSaP1bwwz61MLzB5RFt3IkiM+IjP+vR root@nasman2404";
   age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
   services.openssh.ports = [4286];
 
