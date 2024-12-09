@@ -28,7 +28,7 @@ in {
 
   disko.devices = {
     disk = {
-      main = {
+      "${pool-name}1" = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-Lexar_SSD_NQ790_4TB_PJ6841R000312P220Q";
         content = {
