@@ -17,7 +17,7 @@
 
   # Required for secrets
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOQr2o65WM22z2c3nyY9DYTxSlfO5UH6jUgc33TlDBRR root@nasman2404";
-  age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
   services.openssh.ports = [4286];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "uas" "usb_storage" "usbhid" "sd_mod"];
