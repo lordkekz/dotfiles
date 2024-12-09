@@ -9,22 +9,40 @@
   ...
 }: let
   pool-name = "artemis";
-  root-subvol = "root";
-  blank-snapshot = "${pool-name}/${root-subvol}@blank";
+  root-dataset = "root";
+  blank-snapshot = "${pool-name}/${root-dataset}@blank";
 in {
   imports = [inputs.disko.nixosModules.disko];
 
-  # Rollback subvolume "root" right after device nodes are initialized
-  boot.initrd.postMountCommands = lib.mkAfter ''
-    echo "Rollback of ${root-subvol} for impermanence..."
-    echo "$ zpool list"
-    zpool list
-    echo "$ zfs list"
-    zfs list
-    echo "$ zfs rollback -r ${blank-snapshot}"
-    zfs rollback -r ${blank-snapshot}
-    echo "End of rollback script."
-  '';
+  # Rollback root dataset *before it gets mounted*
+  # If you rollback after persist gets mounted inside root,
+  # the rollback will also apply to persist
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback ZFS datasets to a pristine state";
+    serviceConfig.Type = "oneshot";
+    unitConfig.DefaultDependencies = "no";
+    wantedBy = [
+      "initrd.target"
+    ];
+    after = [
+      "zfs-import-zroot.service"
+    ];
+    before = [
+      "sysroot.mount"
+    ];
+    path = with pkgs; [
+      zfs
+    ];
+    script = ''
+      set -ex
+      echo "$ zpool list"
+      zpool list
+      echo "$ zfs list"
+      zfs list
+      echo "$ zfs rollback -r ${blank-snapshot}"
+      zfs rollback -r ${blank-snapshot} && echo "rollback complete"
+    '';
+  };
 
   disko.devices = {
     disk = {
@@ -67,7 +85,7 @@ in {
         };
 
         datasets = {
-          ${root-subvol} = {
+          ${root-dataset} = {
             type = "zfs_fs";
             mountpoint = "/";
             postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
