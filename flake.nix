@@ -65,7 +65,8 @@
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
-    microvm.url = "github:astro/microvm.nix?ref=main";
+    #microvm.url = "github:astro/microvm.nix?ref=main";
+    microvm.url = "github:lordkekz/microvm.nix?ref=initialize-shares-permissions"; # FIXME update after merge
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nixpkgs
