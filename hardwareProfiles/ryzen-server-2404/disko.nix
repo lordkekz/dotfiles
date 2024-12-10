@@ -11,6 +11,11 @@
   pool-name = "artemis";
   root-dataset = "root";
   blank-snapshot = "${pool-name}/${root-dataset}@blank";
+  options = {
+    "xattr" = "sa";
+    "acltype" = "posixacl";
+    "com.sun:auto-snapshot" = "false";
+  };
 in {
   imports = [inputs.disko.nixosModules.disko];
 
@@ -80,31 +85,33 @@ in {
       ${pool-name} = {
         type = "zpool";
         mode = "";
-        rootFsOptions = {
-          canmount = "off";
-        };
+        rootFsOptions =
+          options
+          // {
+            canmount = "off";
+          };
 
         datasets = {
           ${root-dataset} = {
             type = "zfs_fs";
             mountpoint = "/";
             postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
           nix = {
             type = "zfs_fs";
             mountpoint = "/nix";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
           persist-ephemeral = {
             type = "zfs_fs";
             mountpoint = "/persist/ephemeral";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
           persist-local = {
             type = "zfs_fs";
             mountpoint = "/persist/local";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
         };
       };
