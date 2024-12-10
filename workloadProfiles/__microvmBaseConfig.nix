@@ -71,8 +71,8 @@
     {
       source = "/nix/store";
       mountPoint = "/nix/.ro-store";
-      tag = "ro-store";
-      proto = "9p";
+      tag = "microvm-${vmName}-ro-store";
+      proto = "virtiofs";
       # virtiofs should also be possible but needs extra config for zfs
       # https://astro.github.io/microvm.nix/shares.html
     }
@@ -80,6 +80,7 @@
       mountPoint = "/persist";
       source = "/persist/local/vm-${vmName}";
       tag = "microvm-${vmName}-persist";
+      proto = "virtiofs";
       securityModel = "mapped";
     }
   ];
@@ -96,8 +97,11 @@
         echo "chown failed"
       fi
     '';
+    # oneshot services count as "activating" until script exits, afterwards "inactive (dead)".
+    serviceConfig.Type = "oneshot";
+    serviceConfig.RemainAfterExit = "no";
     wantedBy = ["multi-user.target"] ++ unitsAfterPersist;
-    before = unitsAfterPersist;
+    before = ["multi-user.target"] ++ unitsAfterPersist;
     wants = ["fs.target"];
     after = ["fs.target"];
   };
