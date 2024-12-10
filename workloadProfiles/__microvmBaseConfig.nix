@@ -9,6 +9,9 @@
   pkgs,
   ...
 }: {
+  microvm.mem = 3072; # This can't be exactly 2GiB because QEMU hangs otherwise
+  microvm.vcpu = 4;
+
   systemd.network.enable = true;
   microvm.interfaces = [
     {
