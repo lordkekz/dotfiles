@@ -67,6 +67,17 @@
 
   # It is highly recommended to share the host's nix-store
   # with the VMs to prevent building huge images.
+  #
+  # Note that some shares are on virtiofs and some are on 9p.
+  # I did some benchmarks as of 2024-12-10:
+  # - nasman2404 on host    gets 3070MiB/s and 800k IOPS when reading,
+  #                                              similar when writing
+  # - microvm with 9p       gets  360MiB/s and  90k IOPS when reading,
+  #                               300MiB/s and  75k IOPS when writing
+  # - microvm with virtiofs gets 1500MiB/s and 380k IOPS when reading,
+  #                         only   77MiB/s and  20k IOPS when writing (!)
+  # Thus, I'm using virtiofs for the read-only /nix shares and 9p for the
+  # more evenly read-write /persist shares.
   microvm.shares = [
     {
       source = "/nix/store";
@@ -80,7 +91,7 @@
       mountPoint = "/persist";
       source = "/persist/local/vm-${vmName}";
       tag = "microvm-${vmName}-persist";
-      proto = "virtiofs";
+      proto = "9p";
       securityModel = "mapped";
     }
   ];
