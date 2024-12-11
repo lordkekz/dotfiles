@@ -27,6 +27,7 @@ in {
     services.syncthing = let
       persistentFolder = "/persist";
       personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
+      overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_:_: {rescanIntervalS = 86400;}) personalSettings.folders;
     in {
       enable = true;
       inherit user group;
@@ -37,9 +38,7 @@ in {
       guiAddress = "10.0.0.11:8384";
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings = lib.recursiveUpdate personalSettings {
-        folders."Handy Kamera".enable = true;
-      };
+      settings = lib.foldl lib.recursiveUpdate personalSettings [{folders."Handy Kamera".enable = true;} overrideRescanIntervalForEachFolder];
     };
   };
 }
