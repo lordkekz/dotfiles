@@ -27,7 +27,8 @@ args @ {
       # Disk display
       only_physical = true;
       use_fstab = false;
-      zfs_hide_datasets = true;
+      zfs_hide_datasets = false;
+      disks_filter = "/ /persist/ephemeral /persist/local /persist/roaming";
       show_io_stat = true;
     };
   };
