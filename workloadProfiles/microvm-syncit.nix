@@ -18,7 +18,7 @@ in {
     reverse_proxy http://10.0.0.11:8384
   '';
 
-  microvm.vms.syncit.config = {config, ...}: {
+  microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [22000 8384];

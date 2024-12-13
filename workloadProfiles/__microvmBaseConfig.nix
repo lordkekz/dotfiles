@@ -76,23 +76,24 @@
   #                               300MiB/s and  75k IOPS when writing
   # - microvm with virtiofs gets 1500MiB/s and 380k IOPS when reading,
   #                         only   77MiB/s and  20k IOPS when writing (!)
-  # Thus, I'm using virtiofs for the read-only /nix shares and 9p for the
-  # more evenly read-write /persist shares.
+  # - microvm with volume   gets 1500MiB/s and 360k IOPS when reading,
+  #                              2850MiB/s and 750k IOPS when writing
+  # Thus, I'm using virtiofs for the read-only /nix shares but volumes
+  # for the read-write persistent directories.
   microvm.shares = [
     {
       source = "/nix/store";
       mountPoint = "/nix/.ro-store";
       tag = "microvm-${vmName}-ro-store";
       proto = "virtiofs";
-      # virtiofs should also be possible but needs extra config for zfs
-      # https://astro.github.io/microvm.nix/shares.html
     }
+  ];
+
+  microvm.volumes = [
     {
       mountPoint = "/persist";
-      source = "/persist/local/vm-${vmName}";
-      tag = "microvm-${vmName}-persist";
-      proto = "9p";
-      securityModel = "mapped";
+      image = "/dev/zvol/artemis/microvm-${vmName}";
+      autoCreate = false;
     }
   ];
 

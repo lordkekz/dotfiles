@@ -34,7 +34,7 @@ in {
     }
   ];
 
-  microvm.vms.forgejo.config = {config, ...}: {
+  microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
