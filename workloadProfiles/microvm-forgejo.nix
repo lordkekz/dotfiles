@@ -14,6 +14,7 @@
   user = "forgejo";
   group = "forgejo";
   unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
+  persistentSizeInGiB = 100;
   hostConfig = config;
   microvmSecretsDir = "/run/agenix-microvm-forgejo";
 in {
@@ -35,7 +36,7 @@ in {
   ];
 
   microvm.vms.forgejo.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist persistentSizeInGiB;})];
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
 

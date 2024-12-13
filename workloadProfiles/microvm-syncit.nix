@@ -12,6 +12,7 @@
   user = "syncthing";
   group = "syncthing";
   unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
+  persistentSizeInGiB = 600;
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -19,7 +20,7 @@ in {
   '';
 
   microvm.vms.syncit.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist persistentSizeInGiB;})];
 
     networking.firewall.allowedTCPPorts = [22000 8384];
     networking.firewall.allowedUDPPorts = [22000 21027];

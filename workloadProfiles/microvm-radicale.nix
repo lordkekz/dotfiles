@@ -12,6 +12,7 @@
   user = "radicale";
   group = "radicale";
   unitsAfterPersist = ["radicale.service"];
+  persistentSizeInGiB = 20;
 in {
   services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -19,7 +20,7 @@ in {
   '';
 
   microvm.vms.radicale.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist persistentSizeInGiB;})];
 
     networking.firewall.allowedTCPPorts = [5232];
 
