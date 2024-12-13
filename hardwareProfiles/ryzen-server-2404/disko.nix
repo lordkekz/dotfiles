@@ -113,6 +113,33 @@ in {
             mountpoint = "/persist/local";
             inherit options;
           };
+          # The zvol definitions here are untested!
+          # I couldn't be bothered to reinstall the
+          # server to test it.
+          microvm-syncit = {
+            type = "zfs_volume";
+            size = "600G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
+          microvm-forgejo = {
+            type = "zfs_volume";
+            size = "100G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
+          microvm-radicale = {
+            type = "zfs_volume";
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
         };
       };
     };
