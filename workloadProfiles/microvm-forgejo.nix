@@ -44,7 +44,7 @@ in {
         mountPoint = microvmSecretsDir;
         source = microvmSecretsDir;
         tag = "microvm-forgejo-secret";
-        securityModel = "mapped";
+        securityModel = "mapped"; # This approach requires manual chown because we can't initialize owner inside guest
       }
     ];
 
@@ -106,6 +106,7 @@ in {
     rekeyFile = "${inputs.self.outPath}/secrets/forgejo-password.age";
     path = "${microvmSecretsDir}/forgejo-password";
     symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for forgejo user
     owner = "microvm";
     group = "kvm";
   };
