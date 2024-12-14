@@ -65,7 +65,8 @@
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
-    microvm.url = "github:astro/microvm.nix?ref=main";
+    #microvm.url = "github:astro/microvm.nix?ref=main";
+    microvm.url = "github:lordkekz/microvm.nix?ref=initialize-shares-permissions"; # FIXME update after merge
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nixpkgs
@@ -205,6 +206,7 @@
     homeProfiles = lib.my.loadProfiles "home";
     nixosProfiles = lib.my.loadProfiles "nixos";
     hardwareProfiles = lib.my.loadProfiles "hardware";
+    workloadProfiles = lib.my.loadProfiles.loadModulesOfProfiles "workload";
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
     mkSessions = system: {
       config.multi-hm.sessions = {
@@ -259,7 +261,7 @@
             agenix-rekey.nixosModules.default
           ]);
         specialArgs = {
-          inherit inputs outputs assets nixosProfiles hardwareProfiles;
+          inherit inputs outputs assets nixosProfiles hardwareProfiles workloadProfiles;
           inherit (inputs) personal-data;
           system = "x86_64-linux"; # FIXME for other architectures
         };
@@ -277,7 +279,6 @@
 
         nasman2404.modules = [
           homelab
-          headless
           ryzen-server-2404
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
@@ -304,7 +305,6 @@
 
         vortex.modules = [
           homelab
-          headless
           vortex
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
@@ -374,6 +374,7 @@
       # export homeProfiles and nixosProfiles but not hardwareProfiles
       profiles.nixos = nixosProfiles;
       profiles.home = homeProfiles;
+      profiles.workload = workloadProfiles;
 
       # export generic homeManagerModules and nixosModules (e.g. patched versions to be upstreamed)
       inherit homeManagerModules nixosModules;

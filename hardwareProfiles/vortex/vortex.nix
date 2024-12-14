@@ -2,12 +2,15 @@
   inputs,
   outputs,
   hardwareProfiles,
+  personal-data,
   lib,
   config,
   pkgs,
   modulesPath,
   ...
-}: {
+}: let
+  inherit (personal-data.data) lab;
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -25,6 +28,17 @@
 
   # Required for secrets
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAaGoNO2VY46hVJ4uhlMg+/B38aOCeubw/Zc15X2ExX hpreiser@vortex";
+
+  # Make SSH server only listen on tailscale network
+  services.openssh.listenAddresses = [
+    {
+      addr = lab.tailscale.machines.vortex.ip;
+      port = 22;
+    }
+  ];
+  # Only open firewall for tailscale interface
+  services.openssh.openFirewall = false;
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [22];
 
   networking.hostId = "f5bf3143";
 

@@ -14,7 +14,6 @@ in {
   imports = [inputs.impermanence.nixosModules.impermanence];
   fileSystems."/".neededForBoot = true;
   fileSystems."/nix".neededForBoot = true;
-  fileSystems."/persist".neededForBoot = true;
 
   # Persistent but ephemeral data, e.g. logs, VMs and containers, caches
   fileSystems."/persist/ephemeral".neededForBoot = true;
@@ -56,6 +55,10 @@ in {
     ];
     files = [
       "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
     ];
 
     users.${username} = {

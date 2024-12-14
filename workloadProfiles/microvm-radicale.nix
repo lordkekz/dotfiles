@@ -6,23 +6,20 @@
   pkgs,
   personal-data,
   ...
-}: {
-  microvm.vms.radicale.config = {config, ...}: {
-    imports = [
-      (import ./__microvmBaseConfig.nix {
-        vmName = "radicale";
-        vmId = "12";
-      })
-    ];
+}: let
+  vmName = "radicale";
+  vmId = "12";
+  user = "radicale";
+  group = "radicale";
+  unitsAfterPersist = ["radicale.service"];
+in {
+  services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.12:5232
+  '';
 
-    microvm.shares = [
-      {
-        mountPoint = "/persist";
-        source = "/persist/local/microvm-radicale";
-        tag = "microvm-radicale-persist";
-        securityModel = "mapped";
-      }
-    ];
+  microvm.vms.${vmName}.config = {config, ...}: {
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [5232];
 
@@ -36,7 +33,7 @@
           htpasswd_encryption = "autodetect";
         };
         storage = {
-          filesystem_folder = "/persist/radicale-collections";
+          filesystem_folder = "/persist";
           hook = lib.getExe (pkgs.writeShellApplication {
             name = "radicale-changes-hook-git";
             runtimeInputs = [pkgs.gitMinimal pkgs.coreutils];

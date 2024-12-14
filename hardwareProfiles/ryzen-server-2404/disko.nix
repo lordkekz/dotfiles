@@ -8,16 +8,52 @@
   modulesPath,
   ...
 }: let
-  pool-name = "venus";
-  blank-snapshot = "${pool-name}@blank";
+  pool-name = "artemis";
+  root-dataset = "root";
+  blank-snapshot = "${pool-name}/${root-dataset}@blank";
+  options = {
+    "xattr" = "sa";
+    "acltype" = "posixacl";
+    "com.sun:auto-snapshot" = "false";
+  };
 in {
   imports = [inputs.disko.nixosModules.disko];
 
+  # Rollback root dataset *before it gets mounted*
+  # If you rollback after persist gets mounted inside root,
+  # the rollback will also apply to persist
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback ZFS datasets to a pristine state";
+    serviceConfig.Type = "oneshot";
+    unitConfig.DefaultDependencies = "no";
+    wantedBy = [
+      "initrd.target"
+    ];
+    after = [
+      "zfs-import-zroot.service"
+    ];
+    before = [
+      "sysroot.mount"
+    ];
+    path = with pkgs; [
+      zfs
+    ];
+    script = ''
+      set -ex
+      echo "$ zpool list"
+      zpool list
+      echo "$ zfs list"
+      zfs list
+      echo "$ zfs rollback -r ${blank-snapshot}"
+      zfs rollback -r ${blank-snapshot} && echo "rollback complete"
+    '';
+  };
+
   disko.devices = {
     disk = {
-      main = {
+      "${pool-name}1" = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21JNXAGA47804H";
+        device = "/dev/disk/by-id/nvme-Lexar_SSD_NQ790_4TB_PJ6841R000312P220Q";
         content = {
           type = "gpt";
           partitions = {
@@ -49,51 +85,59 @@ in {
       ${pool-name} = {
         type = "zpool";
         mode = "";
-        rootFsOptions = {
-          compression = "zstd";
-          "com.sun:auto-snapshot" = "false";
-        };
-        mountpoint = "/";
-        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
-        preMountHook = "zfs rollback -r ${blank-snapshot}";
+        rootFsOptions =
+          options
+          // {
+            canmount = "off";
+          };
 
         datasets = {
+          ${root-dataset} = {
+            type = "zfs_fs";
+            mountpoint = "/";
+            postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blank-snapshot}$' || zfs snapshot ${blank-snapshot}";
+            inherit options;
+          };
           nix = {
             type = "zfs_fs";
             mountpoint = "/nix";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          persist = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
           persist-ephemeral = {
             type = "zfs_fs";
             mountpoint = "/persist/ephemeral";
-            options."com.sun:auto-snapshot" = "false";
+            inherit options;
           };
           persist-local = {
             type = "zfs_fs";
             mountpoint = "/persist/local";
-            options."com.sun:auto-snapshot" = "true";
+            inherit options;
           };
-          persist-longhorn-test_cluster = {
+          # The zvol definitions here are untested!
+          # I couldn't be bothered to reinstall the
+          # server to test it.
+          microvm-syncit = {
             type = "zfs_volume";
-            size = "100G";
+            size = "600G";
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/persist/longhorn/test_cluster";
             };
           };
-          persist-longhorn-prod_cluster = {
+          microvm-forgejo = {
             type = "zfs_volume";
             size = "100G";
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/persist/longhorn/prod_cluster";
+            };
+          };
+          microvm-radicale = {
+            type = "zfs_volume";
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
             };
           };
         };
