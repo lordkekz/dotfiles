@@ -114,15 +114,6 @@ args @ {
     package = pkgs.kdePackages.kdeconnect-kde; # FIXME remove this once home-manager defaults to Qt6 version
   };
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-pipewire-audio-capture
-      obs-vkcapture
-      input-overlay
-    ];
-  };
-
   # Declaratively configure connection of virt-manager to libvirtd QEMU/KVM
   # https://wiki.nixos.org/wiki/Virt-manager
   dconf.settings = {

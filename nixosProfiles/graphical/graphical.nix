@@ -36,6 +36,18 @@
     #media-session.enable = true;
   };
 
+  # Configure OBS with virtual camera (needs kernel module)
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+      obs-vkcapture
+      obs-backgroundremoval
+      input-overlay
+    ];
+    enableVirtualCamera = true;
+  };
+
   # Enable networking
   networking = {
     networkmanager.enable = true;
