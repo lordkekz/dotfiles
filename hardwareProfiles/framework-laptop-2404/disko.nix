@@ -57,7 +57,7 @@
                       mountpoint = "/persist/roaming";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
-                    nix-store = {
+                    nix = {
                       mountpoint = "/nix";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
