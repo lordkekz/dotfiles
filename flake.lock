@@ -672,6 +672,24 @@
         "type": "github"
       }
     },
+    "flake-utils_9": {
+      "inputs": {
+        "systems": "systems_11"
+      },
+      "locked": {
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "flakey-profile": {
       "locked": {
         "lastModified": 1712898590,
@@ -1506,18 +1524,17 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1732366073,
-        "narHash": "sha256-rTWuZ7yr3JeCcmeWgbgsribsxyN5TH14vzZrsB869WA=",
-        "owner": "lordkekz",
-        "repo": "nix-yazi-plugins",
-        "rev": "064746e112746ddce3527a77d4524c2447672754",
-        "type": "github"
+        "lastModified": 1734215907,
+        "narHash": "sha256-dVfdVcMEHnAejgbrfxsHJwNJaExvRpZ+fT2TBXM68KI=",
+        "ref": "refs/heads/haennes/main",
+        "rev": "b7f2a6fd440b37f947f9ff8e3e403e595bc0e620",
+        "revCount": 25,
+        "type": "git",
+        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
       },
       "original": {
-        "owner": "lordkekz",
-        "ref": "main",
-        "repo": "nix-yazi-plugins",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
       }
     },
     "nixos-generators": {
@@ -1667,6 +1684,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1729265718,
+        "narHash": "sha256-4HQI+6LsO3kpWTYuVGIzhJs1cetFcwT7quWCk/6rqeo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ccc0c2126893dd20963580b6478d1a10a4512185",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1839,7 +1872,29 @@
         "stylix": "stylix",
         "systems": "systems_10",
         "walker": "walker",
-        "worms-tex": "worms-tex"
+        "worms-tex": "worms-tex",
+        "yazi": "yazi"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "yazi",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729391507,
+        "narHash": "sha256-as0I9xieJUHf7kiK2a9znDsVZQTFWhM1pLivII43Gi0=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "784981a9feeba406de38c1c9a3decf966d853cca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "spectrum": {
@@ -1920,6 +1975,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_11": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
@@ -2196,6 +2266,27 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "yazi": {
+      "inputs": {
+        "flake-utils": "flake-utils_9",
+        "nixpkgs": "nixpkgs_6",
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1733833155,
+        "narHash": "sha256-YKP+9EfLiXbVivKWWL+arx+2Ek+XydS2VjGy3DncD8s=",
+        "owner": "sxyazi",
+        "repo": "yazi",
+        "rev": "22757199f93336b6df960397433b0eb6714e1172",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sxyazi",
+        "ref": "v0.4.1",
+        "repo": "yazi",
         "type": "github"
       }
     }

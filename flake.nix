@@ -93,8 +93,13 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
+    #nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
+    nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Yazi flake
+    yazi.url = "github:sxyazi/yazi?ref=v0.4.1";
+    #yazi.inputs.nixpkgs.follows = "nixpkgs-unstable"; # FIXME there's an infinite recursion as of 2024-12-15
 
     # Generate images etc. from NixOS configs
     nixos-generators.url = "github:nix-community/nixos-generators";
@@ -238,6 +243,7 @@
       # e.g the inputs which contain `legacyPackages` attribute are used.
       channelsConfig.allowUnfree = true;
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
+        yazi
         nix-yazi-plugins
         hyprland
         hyprlock
