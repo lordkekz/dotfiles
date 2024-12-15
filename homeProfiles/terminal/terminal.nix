@@ -45,6 +45,8 @@ args @ {
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
     smartmontools
+    # Mobile shell that stays connected after sleep
+    mosh
 
     # Misc
     tree
