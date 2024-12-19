@@ -12,6 +12,7 @@
   user = "radicale";
   group = "radicale";
   unitsAfterPersist = ["radicale.service"];
+  microvmSecretsDir = "/run/agenix-microvm-radicale";
 in {
   services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -22,6 +23,15 @@ in {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
 
     networking.firewall.allowedTCPPorts = [5232];
+
+    microvm.shares = [
+      {
+        mountPoint = microvmSecretsDir;
+        source = microvmSecretsDir;
+        tag = "microvm-radicale-secret";
+        securityModel = "mapped"; # This approach requires manual chown because we can't initialize owner inside guest
+      }
+    ];
 
     services.radicale = {
       enable = true;
@@ -36,7 +46,7 @@ in {
           filesystem_folder = "/persist";
           hook = lib.getExe (pkgs.writeShellApplication {
             name = "radicale-changes-hook-git";
-            runtimeInputs = [pkgs.gitMinimal pkgs.coreutils];
+            runtimeInputs = [pkgs.gitMinimal pkgs.coreutils pkgs.systemdMinimal];
             text = ''
               if [ ! -f .gitignore ]; then
                 cat >.gitignore <<EOL
@@ -58,10 +68,22 @@ in {
               STAGED_FILES=$(git diff --staged --name-only)
               STAGED_FILES_COUNT=$(echo "$STAGED_FILES" | wc -l)
               git diff --cached --quiet || git commit -m "Changes in $STAGED_FILES_COUNT files."
+
+              # Push changes to forgejo
+              git push "https://bot-radicale-push:$(cat ${microvmSecretsDir}/radicale-git-token)@git.hepr.me/the-family/Calendars.git" main
             '';
           });
         };
       };
     };
+  };
+
+  age.secrets.radicale-git-token = {
+    rekeyFile = "${inputs.self.outPath}/secrets/radicale-git-token.age";
+    path = "${microvmSecretsDir}/radicale-git-token";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for radicale user
+    owner = "microvm";
+    group = "kvm";
   };
 }
