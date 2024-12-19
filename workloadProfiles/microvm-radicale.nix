@@ -70,7 +70,7 @@ in {
               git diff --cached --quiet || git commit -m "Changes in $STAGED_FILES_COUNT files."
 
               # Push changes to forgejo
-              git push "https://bot-radicale-push:$(cat ${microvmSecretsDir}/radicale-git-token)@git.hepr.me/the-family/Calendars.git" main
+              git push "https://bot-radicale-push:$(cat ${microvmSecretsDir}/radicale-git-token)@git.hepr.me/the-family/Calendars.git" HEAD:main
             '';
           });
         };
