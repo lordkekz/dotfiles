@@ -14,6 +14,7 @@
   user = "forgejo";
   group = "forgejo";
   unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
+  pathsToChown = ["/persist" microvmSecretsDir];
   hostConfig = config;
   microvmSecretsDir = "/run/agenix-microvm-forgejo";
 in {
@@ -35,7 +36,7 @@ in {
   ];
 
   microvm.vms.${vmName}.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
     networking.firewall.allowedTCPPorts = [22 8000 2222];
 
@@ -44,7 +45,7 @@ in {
         mountPoint = microvmSecretsDir;
         source = microvmSecretsDir;
         tag = "microvm-forgejo-secret";
-        securityModel = "mapped"; # This approach requires manual chown because we can't initialize owner inside guest
+        securityModel = "mapped";
       }
     ];
 

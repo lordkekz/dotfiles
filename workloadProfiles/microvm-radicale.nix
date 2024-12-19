@@ -12,6 +12,7 @@
   user = "radicale";
   group = "radicale";
   unitsAfterPersist = ["radicale.service"];
+  pathsToChown = ["/persist" microvmSecretsDir];
   microvmSecretsDir = "/run/agenix-microvm-radicale";
 in {
   services.caddy.virtualHosts."caldav.hepr.me".extraConfig = ''
@@ -20,7 +21,7 @@ in {
   '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
     networking.firewall.allowedTCPPorts = [5232];
 
@@ -29,7 +30,7 @@ in {
         mountPoint = microvmSecretsDir;
         source = microvmSecretsDir;
         tag = "microvm-radicale-secret";
-        securityModel = "mapped"; # This approach requires manual chown because we can't initialize owner inside guest
+        securityModel = "mapped";
       }
     ];
 

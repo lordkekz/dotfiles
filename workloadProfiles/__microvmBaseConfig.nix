@@ -4,7 +4,9 @@
   user,
   group,
   unitsAfterPersist,
+  pathsToChown,
 }: {
+  lib,
   config,
   pkgs,
   ...
@@ -99,16 +101,18 @@
 
   # This is probably only needed on first boot to set the xargs due to 9p mount mode "mapped"
   # Better to chown them at each start of the VM so the files can be touched from the host without worry
-  systemd.services.init-persist-permissions = {
+  systemd.services.init-permissions = {
     enableStrictShellChecks = true;
-    script = ''
-      echo "chowning /persist for ${user}:${group}"
-      if chown -Rc "${user}:${group}" /persist; then
-        echo "chown done"
-      else
-        echo "chown failed"
-      fi
-    '';
+    script =
+      lib.concatMapStrings (path: ''
+        echo "chowning '${path}' for ${user}:${group}"
+        if chown -Rc "${user}:${group}" '${path}'; then
+          echo "chown done"
+        else
+          echo "chown failed"
+        fi
+      '')
+      pathsToChown;
     # oneshot services count as "activating" until script exits, afterwards "inactive (dead)".
     serviceConfig.Type = "oneshot";
     serviceConfig.RemainAfterExit = "no";

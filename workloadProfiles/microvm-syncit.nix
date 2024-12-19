@@ -12,6 +12,7 @@
   user = "syncthing";
   group = "syncthing";
   unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
+  pathsToChown = ["/persist"];
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -19,7 +20,7 @@ in {
   '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
     networking.firewall.allowedTCPPorts = [22000 8384];
     networking.firewall.allowedUDPPorts = [22000 21027];
