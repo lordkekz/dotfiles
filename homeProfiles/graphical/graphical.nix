@@ -48,6 +48,7 @@ args @ {
     protonvpn-gui
     ookla-speedtest
     brightnessctl
+    wl-clipboard-rs
 
     # MULTIMEDIA
     elisa
