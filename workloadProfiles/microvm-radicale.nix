@@ -57,7 +57,7 @@ in {
               fi
 
               # Make sure that there's a git repo
-              git init
+              git init --initial-branch "main"
 
               # Configure git repo
               git config --local user.name "radicale"
