@@ -124,6 +124,20 @@ in {
               format = "ext4";
             };
           };
+          microvm-syncit-cc = {
+            type = "zfs_volume";
+            size = "300G";
+            content = {
+              type = "btrfs";
+            };
+          };
+          microvm-syncit-hs = {
+            type = "zfs_volume";
+            size = "300G";
+            content = {
+              type = "btrfs";
+            };
+          };
           microvm-forgejo = {
             type = "zfs_volume";
             size = "100G";

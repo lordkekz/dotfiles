@@ -8,7 +8,9 @@
 }: {
   imports = [
     inputs.microvm.nixosModules.host
-    workloadProfiles.microvm-syncit
+    workloadProfiles.microvm-syncit-cc
+    workloadProfiles.microvm-syncit-ho
+    workloadProfiles.microvm-syncit-hs
     workloadProfiles.microvm-radicale
     workloadProfiles.microvm-forgejo
   ];
