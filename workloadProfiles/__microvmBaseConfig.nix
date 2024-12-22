@@ -5,6 +5,7 @@
   group,
   unitsAfterPersist,
   pathsToChown,
+  fsType ? "ext4",
 }: {
   lib,
   config,
@@ -96,6 +97,7 @@
       mountPoint = "/persist";
       image = "/dev/zvol/artemis/microvm-${vmName}";
       autoCreate = false;
+      inherit fsType;
     }
   ];
 
