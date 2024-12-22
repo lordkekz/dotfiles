@@ -69,6 +69,13 @@
     microvm.url = "github:lordkekz/microvm.nix?ref=initialize-shares-permissions"; # FIXME update after merge
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Tmux status bar configured in Rust
+    #muxbar.url = "github:Dlurak/muxbar";
+    muxbar.url = "github:lordkekz/muxbar"; # FIXME Update once PR gets merged
+    muxbar.inputs.devenv.follows = "devenv";
+    muxbar.inputs.nixpkgs.follows = "nixpkgs";
+    muxbar.inputs.systems.follows = "systems";
+
     # Nixpkgs
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";

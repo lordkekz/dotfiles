@@ -52,8 +52,19 @@ args @ {
       # if-shell '[[ -n "$SSH_CLIENT" ]]' "set -g status off"
 
       # Configure matryoshka plugin
-      set -g @matryoshka_status_style_option 'status-style'
-      set -g @matryoshka_inactive_status_style 'bg=0,fg=238'
+      # FIXME for some reason this isn't applied
+      set -g @matryoshka_status_style_option 'status-left'
+      set -g @matryoshka_inactive_status_style '#[fg=blue] #S #[bg=black,fg=cyan,bold=true] $(tmux show-environment MATRYOSHKA_COUNTER | cut -d = -f 2) '
+
+      # Use muxbar status bar
+      set -g status-interval 1
+      set -g status-style 'bg=black'
+      set -g status-left '#[fg=blue] #S '
+      set -g status-right-length 200
+      set -g status-right '#(${lib.getExe inputs.muxbar.packages.${system}.muxbar})'
+
+      set -g window-status-format "#[default]#I: #W "
+      set -g window-status-current-format "#[fg=brightyellow]#[bg=brightyellow,fg=black] #I: #W #[default]#[fg=brightyellow] "
     '';
   };
 }
