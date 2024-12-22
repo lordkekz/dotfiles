@@ -29,6 +29,9 @@
   # This should enable the `amd_pstate` cpuidle driver, by default it ended up with `none`
   boot.kernelParams = ["amd_pstate=active"];
 
+  # btrfs tools are for some reason not always included if there is no btrfs filesystem in config
+  environment.systemPackages = [pkgs.btrfs-progs];
+
   networking.hostId = "2e2e01d4";
   networking.useNetworkd = true;
   systemd.network = {
