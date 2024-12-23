@@ -50,6 +50,8 @@ in {
     enableStrictShellChecks = true;
     script =
       ''
+        export PATH=${pkgs.zfs}/bin:$PATH
+
         ${builtins.readFile ./backup-lib.bash}
 
         echo "####################################"
@@ -62,7 +64,7 @@ in {
         echo "Making backup of microvm volumes to zpool orion!"
       ''
       + (concatMapStrings (vmName: ''
-          backup_volume artemis orion/backups ${vmName}
+          backup_volume artemis orion/backups microvm-${vmName}
         '')
         vmNames);
     serviceConfig = {
