@@ -44,6 +44,8 @@ in {
     after = ["zfs-import.target"];
   };
 
+  # Use zfs snapshots and zfs send/recv for backups
+  # Inspired by: https://xai.sh/2018/08/27/zfs-incremental-backups.html
   systemd.services.microvm-zvol-backup = {
     enableStrictShellChecks = true;
     script =
@@ -53,13 +55,16 @@ in {
         echo "####################################"
         echo "Creating snapshot for zpool artemis!"
         new_snap_name=$(date +%Y-%m-%d-%H%M-autobackup)
-        create_snapshot artemis "$new_snap_name"
+        create_recursive_snapshot artemis "$new_snap_name"
         destroy_unwanted_snapshot artemis/root "$new_snap_name"
 
         echo "################################################"
         echo "Making backup of microvm volumes to zpool orion!"
       ''
-      + (concatMapStrings (vmName: "backup_volume artemis orion/backups ${vmName}") vmNames);
+      + (concatMapStrings (vmName: ''
+          backup_volume artemis orion/backups ${vmName}
+        '')
+        vmNames);
     serviceConfig = {
       Type = "oneshot";
       User = "root";
