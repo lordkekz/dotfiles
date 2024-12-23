@@ -5,7 +5,12 @@
   pkgs,
   workloadProfiles,
   ...
-}: {
+}: let
+  inherit (lib) attrNames length concatMapStrings;
+  vmNames = attrNames config.microvm.vms;
+  vmCount = length vmNames;
+  vmUnits = map (vm: "microvm@${vm}.service") vmNames;
+in {
   imports = [
     inputs.microvm.nixosModules.host
     workloadProfiles.microvm-syncit-cc
@@ -17,12 +22,7 @@
 
   # This is probably only needed on first boot, but this
   # ensures that vms can access the volumes in any case
-  systemd.services.microvm-zvol-chown = let
-    inherit (lib) attrNames length concatMapStrings;
-    vmNames = attrNames config.microvm.vms;
-    vmCount = length vmNames;
-    vmUnits = map (vm: "microvm@${vm}.service") vmNames;
-  in {
+  systemd.services.microvm-zvol-chown = {
     enableStrictShellChecks = true;
     script =
       (concatMapStrings (vmName: ''
@@ -40,6 +40,29 @@
     serviceConfig.RemainAfterExit = "no";
     wantedBy = ["multi-user.target"] ++ vmUnits;
     before = ["multi-user.target"] ++ vmUnits;
+    wants = ["zfs-import.target"];
+    after = ["zfs-import.target"];
+  };
+
+  systemd.services.microvm-zvol-backup = {
+    enableStrictShellChecks = true;
+    script =
+      ''
+        ${builtins.readFile ./backup-lib.sh}
+
+        echo "####################################"
+        echo "Creating snapshot for zpool artemis!"
+        new_snap_name=$(date +%Y-%m-%d-%H%M-autobackup)
+        create_snapshot artemis "$new_snap_name"
+        destroy_unwanted_snapshot artemis/root "$new_snap_name"
+
+        echo "################################################"
+        echo "Making backup of microvm volumes to zpool orion!"
+      ''
+      + (concatMapStrings (vmName: "backup_volume artemis orion/backups ${vmName}") vmNames);
+    # oneshot services count as "activating" until script exits, afterwards "inactive (dead)".
+    serviceConfig.Type = "oneshot";
+    serviceConfig.RemainAfterExit = "no";
     wants = ["zfs-import.target"];
     after = ["zfs-import.target"];
   };
