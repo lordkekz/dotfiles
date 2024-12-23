@@ -48,7 +48,7 @@ in {
     enableStrictShellChecks = true;
     script =
       ''
-        ${builtins.readFile ./backup-lib.sh}
+        ${builtins.readFile ./backup-lib.bash}
 
         echo "####################################"
         echo "Creating snapshot for zpool artemis!"
@@ -60,9 +60,11 @@ in {
         echo "Making backup of microvm volumes to zpool orion!"
       ''
       + (concatMapStrings (vmName: "backup_volume artemis orion/backups ${vmName}") vmNames);
-    # oneshot services count as "activating" until script exits, afterwards "inactive (dead)".
-    serviceConfig.Type = "oneshot";
-    serviceConfig.RemainAfterExit = "no";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+    startAt = "5:12"; # Runs daily in the early morning when there is no traffic
     wants = ["zfs-import.target"];
     after = ["zfs-import.target"];
   };
