@@ -22,8 +22,11 @@ in {
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
-    networking.firewall.allowedTCPPorts = [22000 8384];
-    networking.firewall.allowedUDPPorts = [22000 21027];
+    networking.firewall.interfaces = {
+      "vm-${vmName}-proxy".allowedTCPPorts = [22 8384];
+      "vm-${vmName}-vpn".allowedTCPPorts = [22000];
+      "vm-${vmName}-vpn".allowedUDPPorts = [22000 21027];
+    };
 
     services.syncthing = let
       persistentFolder = "/persist";

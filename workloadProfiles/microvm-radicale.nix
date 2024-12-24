@@ -23,7 +23,10 @@ in {
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
-    networking.firewall.allowedTCPPorts = [5232];
+    networking.firewall.interfaces = {
+      "vm-${vmName}-proxy".allowedTCPPorts = [22 5232];
+      "vm-${vmName}-vpn".allowedTCPPorts = [];
+    };
 
     microvm.shares = [
       {
@@ -37,7 +40,7 @@ in {
     services.radicale = {
       enable = true;
       settings = {
-        server.hosts = ["0.0.0.0:5232"];
+        server.hosts = ["10.0.0.${vmId}:5232"];
         auth = {
           type = "htpasswd";
           htpasswd_filename = "${pkgs.writeText "radicale-users" personal-data.data.home.radicale.usersFile}";

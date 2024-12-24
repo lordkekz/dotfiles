@@ -20,16 +20,28 @@
   microvm.interfaces = [
     {
       type = "tap";
-      id = "vm-${vmName}";
+      id = "vm-${vmName}-proxy";
       mac = "02:00:00:00:00:${vmId}";
+    }
+    {
+      type = "tap";
+      id = "vm-${vmName}-vpn";
+      mac = "02:00:00:00:01:${vmId}";
     }
   ];
 
-  systemd.network.networks."20-lan" = {
+  systemd.network.networks."20-lan-proxy" = {
     matchConfig.Type = "ether";
     networkConfig = {
       Address = "10.0.0.${vmId}/24";
       Gateway = "10.0.0.1";
+    };
+  };
+  systemd.network.networks."20-lan-vpn" = {
+    matchConfig.Type = "ether";
+    networkConfig = {
+      Address = "100.80.60.${vmId}/24";
+      Gateway = "100.80.60.1";
     };
   };
 

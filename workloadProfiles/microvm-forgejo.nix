@@ -38,7 +38,10 @@ in {
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
 
-    networking.firewall.allowedTCPPorts = [22 8000 2222];
+    networking.firewall.interfaces = {
+      "vm-${vmName}-proxy".allowedTCPPorts = [22 2222 8000];
+      "vm-${vmName}-vpn".allowedTCPPorts = [];
+    };
 
     microvm.shares = [
       {

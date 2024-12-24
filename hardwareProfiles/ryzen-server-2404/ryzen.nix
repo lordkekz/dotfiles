@@ -34,32 +34,36 @@
 
   networking.hostId = "2e2e01d4";
   networking.useNetworkd = true;
-  systemd.network = {
-    enable = true;
-    netdevs."10-microvm".netdevConfig = {
-      Kind = "bridge";
-      Name = "microvm";
+  systemd.network = let
+    networks = variant: gateway: {
+      netdevs."10-microvm-${variant}".netdevConfig = {
+        Kind = "bridge";
+        Name = "microvm-${variant}";
+      };
+      networks."11-microvm-${variant}" = {
+        matchConfig.Name = "vm-*-${variant}";
+        # Attach to the bridge that was configured above
+        networkConfig.Bridge = "microvm-${variant}";
+      };
+      networks."10-microvm-${variant}" = {
+        matchConfig.Name = "microvm-${variant}";
+        addresses = [{addressConfig.Address = "${gateway}/24";}];
+      };
     };
-    networks."11-microvm" = {
-      matchConfig.Name = "vm-*";
-      # Attach to the bridge that was configured above
-      networkConfig.Bridge = "microvm";
-    };
-    networks."10-microvm" = {
-      matchConfig.Name = "microvm";
-      addresses = [{addressConfig.Address = "10.0.0.1/24";}];
-    };
-  };
+  in
+    (networks "proxy" "10.0.0.1")
+    // (networks "vpn" "100.80.60.1")
+    // {enable = true;};
 
   # Provide microvms with internet using NAT
   networking.nat = {
     enable = true;
     externalInterface = "enp3s0";
-    internalInterfaces = ["microvm"];
+    internalInterfaces = ["microvm-proxy"];
   };
 
   # Allow direct communication between Tailscale devices and VMs
-  services.tailscale.extraSetFlags = ["--advertise-routes=10.0.0.0/24"];
+  services.tailscale.extraSetFlags = ["--advertise-routes=100.80.60.0/24"];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
