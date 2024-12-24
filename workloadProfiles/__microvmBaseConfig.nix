@@ -10,6 +10,7 @@
   lib,
   config,
   pkgs,
+  personal-data,
   ...
 }: {
   microvm.mem = 3072; # This can't be exactly 2GiB because QEMU hangs otherwise
@@ -41,7 +42,7 @@
   };
   users.users.mario = {
     isNormalUser = true;
-    password = "hihiaha";
+    inherit (personal-data.data.lab.microvm) hashedPassword;
     extraGroups = ["wheel" "systemd-journal"];
   };
   users.groups.users = {};
