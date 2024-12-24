@@ -56,6 +56,7 @@
     // {enable = true;};
 
   # Provide microvms with internet using NAT
+  networking.nftables.enable = true;
   networking.nat = {
     enable = true;
     externalInterface = "enp3s0";

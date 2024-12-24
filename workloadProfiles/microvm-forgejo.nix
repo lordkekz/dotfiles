@@ -27,13 +27,14 @@ in {
   '';
 
   networking.firewall.allowedTCPPorts = [22];
-  networking.nat.forwardPorts = [
-    {
-      proto = "tcp";
-      sourcePort = 22;
-      destination = "${internalIP}:2222";
+  networking.nftables.ruleset = ''
+    table ip nat {
+      chain PREROUTING {
+        type nat hook prerouting priority dstnat; policy accept;
+        tcp dport 22 dnat to 10.0.0.${vmId}:2222
+      }
     }
-  ];
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit vmName vmId user group unitsAfterPersist pathsToChown;})];
