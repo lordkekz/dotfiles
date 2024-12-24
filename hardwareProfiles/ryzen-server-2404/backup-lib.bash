@@ -24,18 +24,18 @@ backup_volume() {
   echo "latest in source: $source_snap"
   if [[ -z "$source_snap" ]]; then
     echo "WTF: source with no snap"
-    exit 1
+    return 1
   fi
 
   if zfs list -H -t volume,fs -o name | grep -qxF "${target_volume}"; then
     target_snap=$(zfs list -H -t snapshot -o name "${target_volume}" | tail -n1)
     echo "latest in target: $target_snap"
-    source_snap_name=${target_snap#"$target_volume"}
+    source_snap_name=${source_snap#"$source_volume"}
     target_snap_name=${target_snap#"$target_volume"}
 
     if [[ "$source_snap_name" == "$target_snap_name" ]]; then
       echo "Target already has up-to-date snapshot!"
-      exit 0
+      return 0
     fi
 
     echo $ zfs send -RI "${target_snap_name}" "${source_snap}" \| zfs receive -Fvu "${target_volume}"
