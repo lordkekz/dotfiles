@@ -1,4 +1,5 @@
 {
+  personal-data,
   vmName,
   vmId,
   user,
@@ -10,7 +11,6 @@
   lib,
   config,
   pkgs,
-  personal-data,
   ...
 }: {
   microvm.mem = 3072; # This can't be exactly 2GiB because QEMU hangs otherwise
