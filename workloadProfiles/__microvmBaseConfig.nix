@@ -31,14 +31,14 @@
   ];
 
   systemd.network.networks."20-lan-a" = {
-    matchConfig.Type = "ether";
+    matchConfig.MACAddress = "02:00:00:00:00:${vmId}";
     networkConfig = {
       Address = "10.0.0.${vmId}/24";
       Gateway = "10.0.0.1";
     };
   };
   systemd.network.networks."20-lan-b" = {
-    matchConfig.Type = "ether";
+    matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
     networkConfig = {
       Address = "100.80.60.${vmId}/24";
       Gateway = "100.80.60.1";
