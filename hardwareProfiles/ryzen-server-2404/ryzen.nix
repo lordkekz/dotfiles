@@ -50,17 +50,21 @@
         addresses = [{addressConfig.Address = "${gateway}/24";}];
       };
     };
+    recursiveUpdateList = lib.foldl lib.recursiveUpdate;
   in
-    (networks "proxy" "10.0.0.1")
-    // (networks "vpn" "100.80.60.1")
-    // {enable = true;};
+    recursiveUpdateList {enable = true;} [
+      # Use for proxy -> backend connections, e.g. Web UI
+      (networks "a" "10.0.0.1")
+      # Use for direct connections, e.g. Syncthing traffic
+      (networks "b" "100.80.60.1")
+    ];
 
   # Provide microvms with internet using NAT
   networking.nftables.enable = true;
   networking.nat = {
     enable = true;
     externalInterface = "enp3s0";
-    internalInterfaces = ["microvm-proxy"];
+    internalInterfaces = ["microvm-a"];
   };
 
   # Allow direct communication between Tailscale devices and VMs

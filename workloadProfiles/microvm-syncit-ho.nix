@@ -23,9 +23,11 @@ in {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-proxy".allowedTCPPorts = [22 8384];
-      "vm-${vmName}-vpn".allowedTCPPorts = [22000];
-      "vm-${vmName}-vpn".allowedUDPPorts = [22000 21027];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384];
+      "vm-${vmName}-b" = {
+        allowedTCPPorts = [22000];
+        allowedUDPPorts = [22000 21027];
+      };
     };
 
     services.syncthing = let
