@@ -11,7 +11,7 @@
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";
-    extraUpFlags = [
+    extraSetFlags = [
       # Allows access via routes to internal IPs advertised by other nodes. (gateway)
       "--accept-routes"
     ];

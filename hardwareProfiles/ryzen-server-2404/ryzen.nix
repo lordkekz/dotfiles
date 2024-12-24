@@ -58,5 +58,8 @@
     internalInterfaces = ["microvm"];
   };
 
+  # Allow direct communication between Tailscale devices and VMs
+  services.tailscale.extraSetFlags = ["--advertise-routes=10.0.0.0/24"];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
