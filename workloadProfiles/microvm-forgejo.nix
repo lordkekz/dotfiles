@@ -101,9 +101,20 @@ in {
       passwordFile = hostConfig.age.secrets.forgejo-password.path;
       inherit (inputs.personal-data.data.home.git) userName userEmail; # Note, Forgejo doesn't allow creation of an account named "admin"
     in ''
-      ${adminCmd} create --admin --email "${userEmail}" --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
-      ## uncomment this line to change an admin user which was already created
-      ${adminCmd} change-password --username "${userName}" --password "$(tr -d '\n' < ${passwordFile})" || true
+      # Create the admin user
+      # This may fail if the user already exists, which is fine.
+      ${adminCmd} create --admin \
+        --email "${userEmail}" \
+        --username "${userName}" \
+        --password "$(tr -d '\n' < ${passwordFile})" \
+        --must-change-password=false \
+        || true
+      # Set the password for the admin user
+      # The user should exist at this point, if not, it's an error.
+      ${adminCmd} change-password \
+        --username "${userName}" \
+        --password "$(tr -d '\n' < ${passwordFile})" \
+        --must-change-password=false
     '';
   };
 
