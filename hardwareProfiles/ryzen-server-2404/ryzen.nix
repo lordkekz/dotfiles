@@ -56,7 +56,7 @@
       # Use for proxy -> backend connections, e.g. Web UI
       (networks "a" "10.0.0.1")
       # Use for direct connections, e.g. Syncthing traffic
-      (networks "b" "100.80.60.1")
+      (networks "b" "100.80.64.1")
     ];
 
   # Provide microvms with internet using NAT
@@ -68,7 +68,7 @@
   };
 
   # Allow direct communication between Tailscale devices and VMs
-  services.tailscale.extraSetFlags = ["--advertise-routes=100.80.60.0/24"];
+  services.tailscale.extraSetFlags = ["--advertise-routes=100.80.64.0/20"];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
