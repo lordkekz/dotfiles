@@ -113,6 +113,11 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
     nixos-generators.inputs.nixlib.follows = "nixpkgs";
 
+    # Simple NixOS mailserver
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
+    nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixos-mailserver.inputs.nixpkgs-24_11.follows = "nixpkgs-stable";
+
     # NixOS-WSL
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";

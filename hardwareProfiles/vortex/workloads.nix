@@ -6,7 +6,8 @@
   workloadProfiles,
   ...
 }: {
-  imports = [
-    workloadProfiles.public-websites
+  imports = with workloadProfiles; [
+    public-websites
+    mailserver
   ];
 }
