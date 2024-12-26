@@ -33,6 +33,7 @@ in {
   # Rollback root dataset *before it gets mounted*
   # If you rollback after persist gets mounted inside root,
   # the rollback will also apply to persist
+  boot.initrd.systemd.enable = true;
   boot.initrd.systemd.services.rollback = {
     description = "Rollback ZFS datasets to a pristine state";
     serviceConfig.Type = "oneshot";
@@ -41,7 +42,7 @@ in {
       "initrd.target"
     ];
     after = [
-      "zfs-import-zroot.service"
+      "zfs-import-${pool-name}.service"
     ];
     before = [
       "sysroot.mount"
@@ -51,11 +52,8 @@ in {
     ];
     script = ''
       set -ex
-      echo "$ zpool list"
       zpool list
-      echo "$ zfs list"
       zfs list
-      echo "$ zfs rollback -r ${blank-snapshot}"
       zfs rollback -r ${blank-snapshot} && echo "rollback complete"
     '';
   };
