@@ -16,6 +16,17 @@
     "acltype" = "posixacl";
     "com.sun:auto-snapshot" = "false";
   };
+
+  # Orion HDDs are commented out because they are not needed for disko-install
+  orion-hdd-template = {
+    type = "disk";
+    content.type = "gpt";
+    content.partitions.zfs = {
+      size = "100%";
+      content.type = "zfs";
+      content.pool = "orion";
+    };
+  };
 in {
   imports = [inputs.disko.nixosModules.disko];
 
@@ -80,6 +91,10 @@ in {
           };
         };
       };
+      # Orion HDDs are commented out because they are not needed for disko-install
+      #"orion1" = orion-hdd-template // {device = "/dev/disk/by-id/ata-TOSHIBA_MG10ACA20TE_Z2F0A1HGF4MJ";};
+      #"orion2" = orion-hdd-template // {device = "/dev/disk/by-id/ata-TOSHIBA_MG10ACA20TE_Z2F0A1GZF4MJ";};
+      #"orion3" = orion-hdd-template // {device = "/dev/disk/by-id/ata-TOSHIBA_MG10ACA20TE_Z2F0A1HDF4MJ";};
     };
     zpool = {
       ${pool-name} = {
@@ -153,6 +168,18 @@ in {
               type = "filesystem";
               format = "ext4";
             };
+          };
+        };
+      };
+
+      orion = {
+        type = "zpool";
+        datasets = {
+          # Dataset containing backups from artemis pool
+          backups = {
+            type = "zfs_fs";
+            mountpoint = "/orion/backups";
+            inherit options;
           };
         };
       };
