@@ -17,6 +17,10 @@
     # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
     environmentFile = config.age.secrets.cloudflare-token.path;
   };
+  http = domain: {
+    inherit domain;
+    webroot = "/var/lib/acme";
+  };
 in {
   security.acme = {
     acceptTerms = true;
@@ -25,8 +29,13 @@ in {
       "hepr.me" = cloudflare "hepr.me";
       "r4c.hepr.me" = cloudflare "r4c.hepr.me";
       "solux.cc" = cloudflare "solux.cc";
+      "vortex.lkekz.de" = http "vortex.lkekz.de";
     };
   };
+
+  services.caddy.virtualHosts.":80/.well-known/acme-challenge/*".extraConfig = ''
+    root * /var/lib/acme/.well-known/acme-challenge
+  '';
 
   age.secrets.cloudflare-token.rekeyFile = "${inputs.self.outPath}/secrets/cloudflare-token.age";
 }
