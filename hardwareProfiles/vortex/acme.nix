@@ -33,8 +33,16 @@ in {
     };
   };
 
-  services.caddy.virtualHosts.":80/.well-known/acme-challenge/*".extraConfig = ''
-    root * /var/lib/acme/.well-known/acme-challenge
+  services.caddy.virtualHosts."vortex.lkekz.de".hostName = "vortex.lkekz.de:80";
+  services.caddy.virtualHosts."vortex.lkekz.de".extraConfig = ''
+    handle_path /.well-known/acme-challenge/* {
+      root /var/lib/acme/.well-known/acme-challenge
+      file_server
+    }
+
+    handle {
+      respond "Not Found" 404
+    }
   '';
 
   age.secrets.cloudflare-token.rekeyFile = "${inputs.self.outPath}/secrets/cloudflare-token.age";
