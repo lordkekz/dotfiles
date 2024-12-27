@@ -41,6 +41,10 @@
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
+                persist-mail = {
+                  mountpoint = "/persist/mail";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
                 persist-ephemeral = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];
