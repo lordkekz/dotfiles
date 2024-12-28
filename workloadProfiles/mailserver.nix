@@ -15,7 +15,7 @@
     domains = [
       "heinrich-preiser.de"
       "hepr.me"
-      #"git.hepr.me"
+      "git.hepr.me"
     ];
 
     virusScanning = true;
