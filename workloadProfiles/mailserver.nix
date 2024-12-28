@@ -22,6 +22,11 @@
     hierarchySeparator = "/";
     useFsLayout = true;
 
+    fullTextSearch = {
+      enable = true;
+      memoryLimit = 1500; # MiB
+    };
+
     # Put all persistent data in its own subvolume for easy backups
     mailDirectory = "/persist/mail/vmail";
     sieveDirectory = "/persist/mail/sieve";
@@ -30,7 +35,6 @@
 
     inherit (personal-data.data.lab.mailserver) loginAccounts;
 
-    # TODO test this or maybe use "manual"
     certificateScheme = "acme";
   };
 }
