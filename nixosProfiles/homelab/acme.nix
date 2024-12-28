@@ -26,6 +26,7 @@ in {
     acceptTerms = true;
     defaults.email = "info@lkekz.de";
     certs = {
+      "heinrich-preiser.de" = cloudflare "heinrich-preiser.de";
       "hepr.me" = cloudflare "hepr.me";
       "r4c.hepr.me" = cloudflare "r4c.hepr.me";
       "solux.cc" = cloudflare "solux.cc";
@@ -33,8 +34,21 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."vortex.lkekz.de".hostName = "vortex.lkekz.de:80";
+  services.caddy.virtualHosts."vortex.lkekz.de-http".hostName = "vortex.lkekz.de:80";
   services.caddy.virtualHosts."vortex.lkekz.de".extraConfig = ''
+    handle_path /.well-known/acme-challenge/* {
+      root /var/lib/acme/.well-known/acme-challenge
+      file_server
+    }
+
+    handle {
+      respond "Not Found" 404
+    }
+  '';
+  services.caddy.virtualHosts."vortex.lkekz.de-https".hostName = "vortex.lkekz.de:443";
+  services.caddy.virtualHosts."vortex.lkekz.de-https".extraConfig = ''
+    tls /var/lib/acme/vortex.lkekz.de/cert.pem /var/lib/acme/vortex.lkekz.de/key.pem
+
     handle_path /.well-known/acme-challenge/* {
       root /var/lib/acme/.well-known/acme-challenge
       file_server
