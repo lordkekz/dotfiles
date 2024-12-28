@@ -27,6 +27,11 @@
       memoryLimit = 1500; # MiB
     };
 
+    # If enabled, this files messages to e.g. name+topic@hepr.me in a folder named "topic".
+    # That's cool, but it allows senders to create new folders, and these don't appear immediately in Thunderbird.
+    # TODO figure out how to fix that
+    lmtpSaveToDetailMailbox = "no";
+
     # Put all persistent data in its own subvolume for easy backups
     mailDirectory = "/persist/mail/vmail";
     sieveDirectory = "/persist/mail/sieve";
