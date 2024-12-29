@@ -42,11 +42,11 @@ args @ {
 
       # Only show status bar if there is more then one window
       # adapted from: https://schauderbasis.de/posts/hide_tmux_status_bar_if_its_not_needed/
-      if "[ #{session_windows} -gt 1 ]" "set status on" "set -g status off"
-      set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on"'
-      set-hook -g after-kill-pane       'if "[ #{session_windows} -lt 2 ]" "set status off"'
-      set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
-      set-hook -g window-layout-changed 'if "[ #{session_windows} -lt 2 ]" "set status off"'
+      if "[ #{session_windows} -gt 1 ]" "set status on" "set status off"
+      set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on" "set status off"'
+      set-hook -g after-kill-pane       'if "[ #{session_windows} -gt 1 ]" "set status on" "set status off"'
+      set-hook -g pane-exited           'if "[ #{session_windows} -gt 1 ]" "set status on" "set status off"'
+      set-hook -g window-layout-changed 'if "[ #{session_windows} -gt 1 ]" "set status on" "set status off"'
 
       # Disable statusbar for ssh or mosh sessions
       # if-shell '[[ -n "$SSH_CLIENT" ]]' "set -g status off"
