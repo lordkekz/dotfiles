@@ -125,7 +125,7 @@
 
     # Stylix helps theme applications using base16
     #stylix.url = "/home/hpreiser/git/stylix";
-    stylix.url = "github:lordkekz/stylix?ref=fix-plasma-activation"; # FIXME switch back to upstream once merged
+    stylix.url = "github:lordkekz/stylix?ref=release-24.11"; # FIXME switch back to upstream once merged
     #stylix.url = "github:danth/stylix?ref=master";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
