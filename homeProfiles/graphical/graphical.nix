@@ -49,6 +49,7 @@ args @ {
     ookla-speedtest
     brightnessctl
     wl-clipboard-rs
+    clipqr
 
     # MULTIMEDIA
     elisa
