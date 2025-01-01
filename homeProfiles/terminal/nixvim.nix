@@ -61,12 +61,12 @@ args @ {
         # This unironically costs over 6GB
         hls.enable = false;
         # Java
-        java-language-server.enable = true;
+        java_language_server.enable = true;
         # Nix
         nixd.enable = true;
         nushell.enable = true;
         # Rust
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installRustc = true;
           installCargo = true;
@@ -74,7 +74,7 @@ args @ {
         # Python
         ruff.enable = true;
         # Typst typsetting language
-        typst-lsp.enable = true;
+        typst_lsp.enable = true;
       };
 
       plugins = {
