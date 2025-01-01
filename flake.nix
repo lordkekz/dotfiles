@@ -72,7 +72,6 @@
     # Tmux status bar configured in Rust
     #muxbar.url = "github:Dlurak/muxbar";
     muxbar.url = "github:lordkekz/muxbar"; # FIXME Update once PR gets merged
-    muxbar.inputs.devenv.follows = "devenv";
     muxbar.inputs.nixpkgs.follows = "nixpkgs";
     muxbar.inputs.systems.follows = "systems";
 
