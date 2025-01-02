@@ -2101,11 +2101,11 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1735518261,
-        "narHash": "sha256-iThdNePRIiWWdKmi3m+JL32jBcsAuAb3b0hY/+5hLGM=",
+        "lastModified": 1735856830,
+        "narHash": "sha256-qZRQPBOM9tSNnbphKjrqStx6q4DBAPWjSijlbK2GfGA=",
         "owner": "lordkekz",
         "repo": "stylix",
-        "rev": "b232f2b39015a2b030a32654826d200b4a67f3d2",
+        "rev": "e1671dcb25a6646ffc9f95de1ead716b2b71547a",
         "type": "github"
       },
       "original": {
