@@ -74,7 +74,7 @@ args @ {
         # Python
         ruff.enable = true;
         # Typst typsetting language
-        typst_lsp.enable = true;
+        tinymist.enable = true;
       };
 
       plugins = {
