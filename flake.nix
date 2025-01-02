@@ -43,10 +43,7 @@
       home-manager.follows = "home-manager";
     };
     agenix-rekey.url = "github:oddlama/agenix-rekey";
-    agenix-rekey.inputs = {
-      nixpkgs.follows = "nixpkgs";
-      flake-utils.follows = "flake-utils";
-    };
+    agenix-rekey.inputs.nixpkgs.follows = "nixpkgs";
 
     # Anyrun is a modern, wayland-native runner written in Rust.
     anyrun.url = "github:lordkekz/anyrun?ref=add-nix-overlay";
