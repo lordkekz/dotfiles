@@ -27,8 +27,12 @@ args @ {
       better-mouse-mode
       pain-control # Vim-Style hjkl bindings for switching panes
       mode-indicator # Can be used in status bar to indicate the current mode
-      outputs.packages.${system}.tmux-matryoshka
-      #power-theme # tmux-powerline
+      {
+        plugin = outputs.packages.${system}.tmux-matryoshka;
+        extraConfig = ''
+          set -g @matryoshka_inactive_status_style 'fg=white,bg=#282828'
+        '';
+      }
     ];
     extraConfig = ''
       # ============================================= #
@@ -51,20 +55,19 @@ args @ {
       # Disable statusbar for ssh or mosh sessions
       # if-shell '[[ -n "$SSH_CLIENT" ]]' "set -g status off"
 
-      # Configure matryoshka plugin
-      # FIXME for some reason this isn't applied
-      set -g @matryoshka_status_style_option 'status-left'
-      set -g @matryoshka_inactive_status_style '#[fg=blue] #S #[bg=black,fg=cyan,bold=true] $(tmux show-environment MATRYOSHKA_COUNTER | cut -d = -f 2) '
-
       # Use muxbar status bar
       set -g status-interval 1
-      set -g status-style 'bg=black'
+      set -g status-style 'fg=#c8c8c8,bg=black'
       set -g status-left '#[fg=blue] #S '
       set -g status-right-length 200
       set -g status-right '#(${lib.getExe inputs.muxbar.packages.${system}.muxbar})'
 
       set -g window-status-format "#[default]#I: #W "
-      set -g window-status-current-format "#[fg=brightyellow]#[bg=brightyellow,fg=black] #I: #W #[default]#[fg=brightyellow] "
+      set -g window-status-current-format "#[default,fg=brightyellow]#[bg=brightyellow,fg=black] #I: #W #[default,fg=brightyellow] "
+
+      # Override tinted-tmux using only second-darkest color, which is gray on da-one-black from stylix.
+      set -g window-status-style "fg=#c8c8c8"
+      set -g window-status-current-style ""
     '';
   };
 }
