@@ -1,5 +1,4 @@
-# Generate ACME certs for my domains
-# FIXME remove this pls
+# Each host generates its own certificates for domains supporting dns-01 challenge
 {
   inputs,
   outputs,
@@ -17,10 +16,6 @@
     # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
     environmentFile = config.age.secrets.cloudflare-token.path;
   };
-  http = domain: {
-    inherit domain;
-    webroot = "/var/lib/acme";
-  };
 in {
   security.acme = {
     acceptTerms = true;
@@ -30,34 +25,8 @@ in {
       "hepr.me" = cloudflare "hepr.me";
       "r4c.hepr.me" = cloudflare "r4c.hepr.me";
       "solux.cc" = cloudflare "solux.cc";
-      "vortex.lkekz.de" = http "vortex.lkekz.de";
     };
   };
-
-  services.caddy.virtualHosts."vortex.lkekz.de-http".hostName = "vortex.lkekz.de:80";
-  services.caddy.virtualHosts."vortex.lkekz.de".extraConfig = ''
-    handle_path /.well-known/acme-challenge/* {
-      root /var/lib/acme/.well-known/acme-challenge
-      file_server
-    }
-
-    handle {
-      respond "Not Found" 404
-    }
-  '';
-  services.caddy.virtualHosts."vortex.lkekz.de-https".hostName = "vortex.lkekz.de:443";
-  services.caddy.virtualHosts."vortex.lkekz.de-https".extraConfig = ''
-    tls /var/lib/acme/vortex.lkekz.de/cert.pem /var/lib/acme/vortex.lkekz.de/key.pem
-
-    handle_path /.well-known/acme-challenge/* {
-      root /var/lib/acme/.well-known/acme-challenge
-      file_server
-    }
-
-    handle {
-      respond "Not Found" 404
-    }
-  '';
 
   age.secrets.cloudflare-token.rekeyFile = "${inputs.self.outPath}/secrets/cloudflare-token.age";
 }
