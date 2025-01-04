@@ -52,8 +52,8 @@
     "20-lan-b" = {
       matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
       networkConfig = {
-        Address = "100.80.64.${vmId}/24";
-        Gateway = "100.80.64.1";
+        #Address = "100.80.64.${vmId}/24";
+        #Gateway = "100.80.64.1";
       };
     };
   };
