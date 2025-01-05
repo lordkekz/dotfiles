@@ -82,8 +82,16 @@ in {
           SSH_LISTEN_PORT = 2222;
           SSH_LISTEN_HOST = internalIP;
         };
-        # You can temporarily allow registration to create an admin user.
-        service.DISABLE_REGISTRATION = true;
+        service = {
+          # Users must be created by an admin
+          DISABLE_REGISTRATION = true;
+          # Allow sending notifications per email
+          # (users can still choose whether to receive mails)
+          ENABLE_NOTIFY_MAIL = true;
+          # Disable basic auth using password
+          # Still allows tokens (like GitLab and GitHub)
+          ENABLE_BASIC_AUTHENTICATION = false;
+        };
         # FIXME maybe activate this, not sure if it works with reverse proxy setup
         session.COOKIE_SECURE = true;
         # Workaround for crash on 9p mount, see:
@@ -95,7 +103,7 @@ in {
 
         # Email (outgoing)
         # You can send a test email from the web UI at:
-        # Profile Picture > Site Administration > Configuration >  Mailer Configuration 
+        # Profile Picture > Site Administration > Configuration >  Mailer Configuration
         mailer = {
           ENABLED = true;
           PROTOCOL = "smtps";
@@ -118,7 +126,7 @@ in {
           USERNAME = "forgejo@git.hepr.me";
         };
       };
-      
+
       # Just like settings, but the values are loaded from file paths
       secrets = {
         mailer.PASSWD = hostConfig.age.secrets.forgejo-email-password.path;
