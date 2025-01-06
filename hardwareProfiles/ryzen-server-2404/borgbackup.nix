@@ -5,6 +5,9 @@
   pkgs,
   ...
 }: {
+  # The Borg Backup module from nixpkgs creates the directory, creates a borg user and configures
+  # the ssh keys for the user (but restricts it to run `borg serve` via ssh)
+  # Note: It does *not* run its own ssh server, so the borg client needs to use the regular sshd too
   services.borgbackup.repos = {
     orion-backups-borg = {
       authorizedKeys = [
