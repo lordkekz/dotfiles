@@ -44,6 +44,8 @@ in {
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 
+    microvm.mem = lib.mkForce 3072; # MiB, needed for large pushes etc.
+
     microvm.shares = [
       {
         mountPoint = microvmSecretsDir;

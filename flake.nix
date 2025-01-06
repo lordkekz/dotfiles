@@ -88,6 +88,11 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Nix-minecraft allows declarative minecraft servers with plugins
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
+    nix-minecraft.inputs.flake-utils.follows = "flake-utils";
+
     # NixVim distro for neovim
     nixvim.url = "github:nix-community/nixvim/main";
     #nixvim.url = "github:lordkekz/nixvim/main";
@@ -257,6 +262,7 @@
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
         yazi
         nix-yazi-plugins
+        nix-minecraft
         hyprland
         hyprlock
         hypridle
