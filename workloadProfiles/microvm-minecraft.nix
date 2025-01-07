@@ -70,20 +70,23 @@
 in {
   services.caddy.virtualHosts."mcp.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    reverse_proxy http://10.0.0.${vmId}:8001
+    reverse_proxy http://10.0.0.${vmId}:8002
   '';
   services.caddy.virtualHosts."mcs.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    reverse_proxy http://10.0.0.${vmId}:8002
+    reverse_proxy http://10.0.0.${vmId}:8001
   '';
 
   networking.firewall.allowedTCPPorts = [25565 25566];
+  networking.firewall.allowedUDPPorts = [25565 25566];
   networking.nftables.ruleset = ''
     table ip nat {
       chain PREROUTING {
         type nat hook prerouting priority dstnat; policy accept;
         tcp dport 25565 dnat to 10.0.0.${vmId}:25565
+        udp dport 25565 dnat to 10.0.0.${vmId}:25565
         tcp dport 25566 dnat to 10.0.0.${vmId}:25566
+        udp dport 25566 dnat to 10.0.0.${vmId}:25566
       }
     }
   '';
@@ -98,7 +101,10 @@ in {
     microvm.mem = lib.mkForce 6144; # MiB
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [8001 8002 25565 25566];
+      "vm-${vmName}-a" = {
+        allowedTCPPorts = [8001 8002 25565 25566];
+        allowedUDPPorts = [25565 25566];
+      };
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 

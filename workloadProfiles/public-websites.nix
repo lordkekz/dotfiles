@@ -10,7 +10,8 @@
   services.caddy.virtualHosts."heinrich-preiser.de" = {
     serverAliases = ["www.heinrich-preiser.de"];
     extraConfig = ''
-      tls /var/lib/acme/heinrich-preiser.de/cert.pem /var/lib/acme/heinrich-preiser.de/key.pem header Content-Type text/html
+      tls /var/lib/acme/heinrich-preiser.de/cert.pem /var/lib/acme/heinrich-preiser.de/key.pem
+      header Content-Type text/html
       respond <<HTML
         <html>
           <head><title>heinrich-preiser.de</title></head>
