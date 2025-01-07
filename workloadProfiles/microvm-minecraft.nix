@@ -69,6 +69,9 @@ in {
           white-list = true;
           gamemode = "survival";
           difficulty = "normal";
+          simulation-distance = 10;
+          view-distance = 32;
+          pause-when-empty-seconds = 1;
         };
         whitelist = {
           "LordKekz" = "e98caca4-c4d6-42d2-88f0-d37dd965d365";
