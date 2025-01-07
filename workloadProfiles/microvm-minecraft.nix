@@ -107,16 +107,16 @@ in {
       eula = true;
       openFirewall = true;
       dataDir = "/persist";
-      servers.public = lib.recursiveUpdate (serverConfig "public" 25565 8001) {
+      servers.survival2 = lib.recursiveUpdate (serverConfig "survival2" 25565 8001) {
+        whitelist."UrsulaUnke" = "b5bee075-5a0d-4c63-9c8f-9c5c230f0da3";
+      };
+      servers.public = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
         whitelist = {
           "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
           "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
           "MerklingenRitter" = "8dbccbec-4cc5-44e6-af7c-760fef8168e3";
           "Nalsai" = "2bb1bfd9-7872-44ee-8865-e950a59f5bcc";
         };
-      };
-      servers.survival2 = lib.recursiveUpdate (serverConfig "survival2" 25566 8002) {
-        whitelist."UrsulaUnke" = "b5bee075-5a0d-4c63-9c8f-9c5c230f0da3";
       };
     };
   };
