@@ -39,6 +39,8 @@
       # This avoids runtime downloads of server jar
       "cache/mojang_${minecraftVersion}.jar" = paperServer.vanillaJar;
 
+      # TODO build CoreProtect from Git and install it here
+
       # BlueMap plugin generates a 3D browser map of minecraft worlds
       "plugins/bluemap.jar" = pkgs.fetchurl {
         url = "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v5.5/bluemap-5.5-paper.jar";
@@ -50,8 +52,8 @@
       "plugins/BlueMap/storages" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/storages";
       "plugins/BlueMap/core.conf" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/core.conf";
       "plugins/BlueMap/webapp.conf" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/webapp.conf";
-      "plugins/BlueMap/webserver.conf" = pkgs.runCommand ''
-        sed "s#^port: .*$#port: ${webport}#" ${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/webserver.conf> $out
+      "plugins/BlueMap/webserver.conf" = pkgs.runCommand "minecraft-server-${name}-webserver.conf" {} ''
+        sed 's#^port: .*$#port: ${builtins.toString webport}#' ${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/webserver.conf > $out
       '';
     };
     files = {
@@ -105,7 +107,14 @@ in {
       eula = true;
       openFirewall = true;
       dataDir = "/persist";
-      servers.public = lib.recursiveUpdate (serverConfig "public" 25565 8001) {};
+      servers.public = lib.recursiveUpdate (serverConfig "public" 25565 8001) {
+        whitelist = {
+          "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
+          "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
+          "MerklingenRitter" = "8dbccbec-4cc5-44e6-af7c-760fef8168e3";
+          "Nalsai" = "2bb1bfd9-7872-44ee-8865-e950a59f5bcc";
+        };
+      };
       servers.survival2 = lib.recursiveUpdate (serverConfig "survival2" 25566 8002) {
         whitelist."UrsulaUnke" = "b5bee075-5a0d-4c63-9c8f-9c5c230f0da3";
       };
