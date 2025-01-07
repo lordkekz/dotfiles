@@ -1,7 +1,9 @@
 {
   inputs,
+  outputs,
   lib,
   config,
+  system,
   pkgs,
   workloadProfiles,
   ...
@@ -14,16 +16,17 @@
   # PUBLIC MINECRAFT SERVER RUNS ON NASMAN (but forward ports on vortex)
   networking.firewall.allowedTCPPorts = [25565];
   networking.firewall.allowedUDPPorts = [25565];
-  networking.nftables.ruleset = ''
-    table ip nat {
-      chain PREROUTING {
-        type nat hook prerouting priority dstnat; policy accept;
-        tcp dport 25565 dnat to 100.80.80.2:25566
-        udp dport 25565 dnat to 100.80.80.2:25566
-      }
-    }
-  '';
-  # Public mal URL: map.hepr.me, internal map URL: mcp.hepr.me
+
+  # Tailscale doesn't seem to like nftables's NAT when the target is another Tailscale node
+  # This service runs a simple TCP proxy to forward connections through Tailscale.
+  systemd.services.minecraft-tcp-proxy = {
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+    description = "Simple TCP proxy to forward port 25565 to minecraft server over Tailscale";
+    script = lib.getExe outputs.packages.${system}.tcp-proxy;
+  };
+
+  # Public map URL: map.hepr.me, internal map URL: mcp.hepr.me
   services.caddy.virtualHosts."map.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy https://mcp.hepr.me {

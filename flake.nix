@@ -76,6 +76,10 @@
     muxbar.inputs.nixpkgs.follows = "nixpkgs";
     muxbar.inputs.systems.follows = "systems";
 
+    # Naersk for easily building Rust packages
+    naersk.url = "github:nix-community/naersk";
+    naersk.inputs.nixpkgs.follows = "nixpkgs";
+
     # Nixpkgs
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";

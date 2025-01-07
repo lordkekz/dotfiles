@@ -1563,6 +1563,26 @@
         "type": "github"
       }
     },
+    "naersk_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1736269059,
+        "narHash": "sha256-VaZlkrcfZOl85fz3o+GnNv+FkMG4RtnZA1eVa6v2TJs=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "38a563a865a0218d9f30f14333327aafc40eea75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
     "nix": {
       "inputs": {
         "flake-compat": [
@@ -2102,6 +2122,7 @@
         "lix-module": "lix-module",
         "microvm": "microvm",
         "muxbar": "muxbar",
+        "naersk": "naersk_2",
         "nix-index-database": "nix-index-database",
         "nix-minecraft": "nix-minecraft",
         "nix-vscode-extensions": "nix-vscode-extensions",
