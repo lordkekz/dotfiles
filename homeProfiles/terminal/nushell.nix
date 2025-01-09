@@ -44,9 +44,9 @@ args @ {
       #printf $'(ansi blue_bold)extraLogin(ansi reset) '
     '';
     environmentVariables = {
-      # Make neovim the default editor
-      EDITOR = ''nvim'';
-      VISUAL = ''nvim'';
+      # Make helix the default editor
+      EDITOR = ''hx'';
+      VISUAL = ''hx'';
     };
     shellAliases = let
       dotfiles-dir = "~/git/dotfiles";
