@@ -18,7 +18,7 @@ args @ {
       bash-language-server
       jdt-language-server
       yaml-language-server
-      vscode-langservers-extracted # contains LSPs for HTML,CSS,JSON,ESLint,Markdown
+      vscode-langservers-extracted # contains LSPs for HTML,CSS,JSON
       marksman # Markdown LSP
     ];
     ignores = [];
@@ -46,6 +46,7 @@ args @ {
         other-lines = "error";
       };
     };
+    settings.theme = "stylix-customized";
     themes.stylix-customized = {
       # Get the default values from the stylix config
       inherits = "stylix";
@@ -66,6 +67,13 @@ args @ {
         bg = "base0E";
       };
 
+      # This one is a bonus: the matching element (like a bracket) will be underlined
+      # I somehow lose track which cursor is mine and which is just a highlight...
+      "ui.cursor.match" = {
+        fg = "base0A";
+        modifiers = ["underlined"];
+      };
+
       # This will become the color of the selections
       "ui.selection" = {
         fg = "base05";
@@ -77,11 +85,9 @@ args @ {
         bg = "base04";
       };
 
-      # This one is a bonus: the matching element (like a bracket) will be underlined
-      # I somehow lose track which cursor is mine and which is just a highlight...
-      "ui.cursor.match" = {
-        fg = "base0A";
-        modifiers = ["underlined"];
+      # Make line length rulers darker
+      "ui.virtual.ruler" = {
+        fg = "#141414";
       };
 
       # Make comments much more muted instead of sticking out
