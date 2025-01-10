@@ -27,6 +27,7 @@ args @ {
   home.packages = [
     # An autotile script for Plasma 6
     pkgs.polonium
+    inputs.kwin-effects-forceblur.packages.${system}.default
   ];
 
   # The NixOS's firefox package sets this in the wrapper, but my home-manager firefox package takes

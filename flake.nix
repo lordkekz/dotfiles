@@ -57,6 +57,11 @@
     home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Kwin effect to force blur of transparent windows
+    kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur?ref=v1.3.4";
+    kwin-effects-forceblur.inputs.nixpkgs.follows = "nixpkgs";
+    kwin-effects-forceblur.inputs.utils.follows = "flake-utils";
+
     # Lix (correctness-focused fork of Nix)
     lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";

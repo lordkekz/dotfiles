@@ -1432,6 +1432,30 @@
         "type": "github"
       }
     },
+    "kwin-effects-forceblur": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734735306,
+        "narHash": "sha256-if2h0aozdrXRf+DdwQFX0LfHD/ObTmMFJTJiASQIdeA=",
+        "owner": "taj-ny",
+        "repo": "kwin-effects-forceblur",
+        "rev": "4c85e117f32a7ff5fe82e710c6f29811c59b16b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "taj-ny",
+        "ref": "v1.3.4",
+        "repo": "kwin-effects-forceblur",
+        "type": "github"
+      }
+    },
     "libgit2": {
       "flake": false,
       "locked": {
@@ -2022,6 +2046,7 @@
         "hyprpaper": "hyprpaper",
         "hyprpicker": "hyprpicker",
         "impermanence": "impermanence",
+        "kwin-effects-forceblur": "kwin-effects-forceblur",
         "lix-module": "lix-module",
         "microvm": "microvm",
         "muxbar": "muxbar",
