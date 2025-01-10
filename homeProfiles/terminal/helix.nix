@@ -46,7 +46,7 @@ args @ {
         other-lines = "error";
       };
     };
-    settings.theme = "stylix-customized";
+    settings.theme = lib.mkForce "stylix-customized";
     themes.stylix-customized = {
       # Get the default values from the stylix config
       inherits = "stylix";
