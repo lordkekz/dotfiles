@@ -46,6 +46,48 @@ args @ {
         other-lines = "error";
       };
     };
-    # Theming is done by stylix automatically
+    themes.stylix-customized = {
+      # Get the default values from the stylix config
+      inherits = "stylix";
+
+      # This applies to non-string keys in Nix
+      "variable.other.member" = {
+        fg = "base0C";
+      };
+
+      # This will become the cursor of the selections
+      "ui.cursor" = {
+        fg = "base00";
+        bg = "base09"; # usually it is base0A, but that will be the primary now
+      };
+      # This is the color of the primary cursor, i.e., the one you always see
+      "ui.cursor.primary" = {
+        fg = "base00";
+        bg = "base0E";
+      };
+
+      # This will become the color of the selections
+      "ui.selection" = {
+        fg = "base05";
+        bg = "base03";
+      };
+      # This is the color of the primary/inline selection where the primary cursor is now
+      "ui.selection.primary" = {
+        fg = "base00";
+        bg = "base04";
+      };
+
+      # This one is a bonus: the matching element (like a bracket) will be underlined
+      # I somehow lose track which cursor is mine and which is just a highlight...
+      "ui.cursor.match" = {
+        fg = "base0A";
+        modifiers = ["underlined"];
+      };
+
+      # Make comments much more muted instead of sticking out
+      "comment" = {
+        fg = "base03";
+      };
+    };
   };
 }
