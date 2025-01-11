@@ -260,14 +260,22 @@
       "kglobalshortcutsrc"."org_kde_powerdevil"."_k_friendly_name" = "Energieverwaltung";
       "kglobalshortcutsrc"."plasmashell"."_k_friendly_name" = "plasmashell";
       "kwalletrc"."Wallet"."First Use" = false;
-      "kwinrc"."Desktops"."Id_1" = "8f5777e2-0ff5-4bda-86ed-f4454d43ede6";
-      "kwinrc"."Desktops"."Number" = 1;
-      "kwinrc"."Desktops"."Rows" = 1;
-      "kwinrc"."Tiling"."padding" = 4;
-      "kwinrc"."Tiling/0626cecc-6902-56f7-8054-5113613952ad"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
-      "kwinrc"."Tiling/5d8e9069-af28-5c3d-8eac-773fc4481e44"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
-      "kwinrc"."Tiling/65ce05ad-c803-5a55-9d86-8e67f0f4031e"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
-      "kwinrc"."Xwayland"."Scale" = 1.95;
+      "kwinrc" = {
+        "Desktops"."Id_1" = "8f5777e2-0ff5-4bda-86ed-f4454d43ede6";
+        "Desktops"."Number" = 1;
+        "Desktops"."Rows" = 1;
+        "Effect-blurplus" = {
+          "BlurStrength" = 8; # min 1, max 15
+          "NoiseStrength" = 4; # min 0, max 14
+          "WindowClasses" = "foot";
+        };
+        "Plugins"."forceblurEnabled" = true;
+        "Tiling"."padding" = 4;
+        "Tiling/0626cecc-6902-56f7-8054-5113613952ad"."tiles" = ''{"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}'';
+        "Tiling/5d8e9069-af28-5c3d-8eac-773fc4481e44"."tiles" = ''{"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}'';
+        "Tiling/65ce05ad-c803-5a55-9d86-8e67f0f4031e"."tiles" = ''{"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}'';
+        "Xwayland"."Scale" = 1.95;
+      };
       "plasma-localerc"."Formats"."LANG" = "de_DE.UTF-8";
     };
   };
