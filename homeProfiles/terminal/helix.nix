@@ -87,7 +87,7 @@ args @ {
 
       # Make line length rulers darker
       "ui.virtual.ruler" = {
-        fg = "#141414";
+        bg = "#141414";
       };
 
       # Make comments much more muted instead of sticking out
