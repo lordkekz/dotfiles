@@ -12,13 +12,21 @@
 in {
   services.caddy.virtualHosts."live-admin.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    rewrite * /admin/{path}
-    reverse_proxy :${builtins.toString port} {
-      header_up Host {upstream_hostport}
+
+    @external not client_ip 100.80.81.0/24
+    handle @external {
+      respond "" 200
+    }
+
+    handle {
+      reverse_proxy :${builtins.toString port} {
+        header_up Host {upstream_hostport}
+      }
     }
   '';
   services.caddy.virtualHosts."live.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+
     handle /admin* {
       respond "Not Found" 404
     }
