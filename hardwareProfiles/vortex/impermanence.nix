@@ -52,6 +52,8 @@ in {
 
       "/var/lib/nixos"
       "/etc/ssh"
+
+      "/var/lib/owncast" # this config doesn't need backups but isn't reproducible
     ];
     files = [
       "/etc/machine-id"
