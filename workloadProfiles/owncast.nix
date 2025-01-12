@@ -10,16 +10,29 @@
   port = 8800;
   rtmp-port = 1935; # default
 in {
-  services.caddy.virtualHosts."live.hepr.me".extraConfig = ''
+  services.caddy.virtualHosts."live-admin.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    basic_auth {
-      ${lib.concatLines (lib.attrValues (lib.mapAttrs
-      (user: pw: "${user} ${pw}")
-      personal-data.data.lab.owncast.users))}
-    }
+    rewrite * /admin/{path}
     reverse_proxy :${builtins.toString port} {
       header_up Host {upstream_hostport}
-      header_up X-Forwarded-User {http.auth.user.id}
+    }
+  '';
+  services.caddy.virtualHosts."live.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    handle /admin* {
+      respond "Not Found" 404
+    }
+
+    handle {
+      basic_auth {
+        ${lib.concatLines (lib.attrValues (lib.mapAttrs
+      (user: pw: "${user} ${pw}")
+      personal-data.data.lab.owncast.users))}
+      }
+      reverse_proxy :${builtins.toString port} {
+        header_up Host {upstream_hostport}
+        header_up X-Forwarded-User {http.auth.user.id}
+      }
     }
   '';
 
