@@ -39,7 +39,50 @@
       # This avoids runtime downloads of server jar
       "cache/mojang_${minecraftVersion}.jar" = paperServer.vanillaJar;
 
-      # TODO build CoreProtect from Git and install it here
+      # Build CoreProtect from git to support latest minecraft
+      "plugins/coreprotect.jar" = pkgs.maven.buildMavenPackage {
+        pname = "CoreProtect";
+        version = "unstable-2024-12-10";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "PlayPro";
+          repo = "CoreProtect";
+          rev = "b3db65d07d129e77f13b433e4d29729d4a971651";
+          hash = "sha256-zHOKVXHMJ0WEpWdBWCYXzN4hGBhp9s2EaoLUWivMTlc=";
+        };
+        mvnHash = "sha256-CA4pUj2N2QIYeUkfbUJEEmFZA+EGNzX2ecfPm1aVpGI=";
+
+        configurePhase = ''
+          sed -i 's#<project.branch></project.branch>#<project.branch>development</project.branch>#' pom.xml
+        '';
+
+        installPhase = ''
+          find | grep -iE "coreprotect.*jar"
+          mv -v target/CoreProtect-22.4.jar "$out"
+        '';
+      };
+
+      # Adds a proper /ping command
+      "plugins/cleanping.jar" = pkgs.fetchurl {
+        url = "https://github.com/frafol/CleanPing/releases/download/dev-build/CleanPing.jar";
+        hash = "sha256-N8Fgy+dbamKfOkfTIDmRfRW0W790dPW/HaaKx5q6300=";
+      };
+
+      # Essentials plugin for stuff like /seen /ping and whatnot
+      "plugins/essentialsx-core.jar" = pkgs.fetchurl {
+        url = "https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar";
+        hash = "sha256-gC6jC9pGDKRZfoGJJYFpM8EjsI2BJqgU+sKNA6Yb9UI=";
+      };
+
+      # Allow newer and older clients to connect
+      "plugins/viaversion.jar" = pkgs.fetchurl {
+        url = "https://hangarcdn.papermc.io/plugins/ViaVersion/ViaVersion/versions/5.2.1/PAPER/ViaVersion-5.2.1.jar";
+        hash = "sha256-yaWqtqxikpaiwdeyfANzu6fp3suSF8ePmJXs9dN4H8g=";
+      };
+      "plugins/viabackwards.jar" = pkgs.fetchurl {
+        url = "https://hangarcdn.papermc.io/plugins/ViaVersion/ViaBackwards/versions/5.2.1/PAPER/ViaBackwards-5.2.1.jar";
+        hash = "sha256-p7xmdGLXjzdTkdQgbOjBuf/V/jSEbP5TzE0bBSA9IXM=";
+      };
 
       # BlueMap plugin generates a 3D browser map of minecraft worlds
       "plugins/bluemap.jar" = pkgs.fetchurl {
