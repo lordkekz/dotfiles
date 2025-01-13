@@ -166,21 +166,20 @@ in {
         whitelist."UrsulaUnke" = "b5bee075-5a0d-4c63-9c8f-9c5c230f0da3";
       };
       servers.public = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
-        enable = false;
         whitelist = {
           "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
           "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
           "MerklingenRitter" = "8dbccbec-4cc5-44e6-af7c-760fef8168e3";
           "Nalsai" = "2bb1bfd9-7872-44ee-8865-e950a59f5bcc";
         };
-      };
-      servers.skyblock = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
         symlinks = {
           "plugins/iridium-skyblock.jar" = ../assets/IridiumSkyblock-4.1.0-B5.2.jar;
+
           "plugins/fastasyncworldedit.jar" = pkgs.fetchurl {
             url = "https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.12.3/FastAsyncWorldEdit-Paper-2.12.3.jar";
             hash = "sha256-b0xybeKRNUzDHyDxI5ONDYIqIT7KuDUASh7tQzPWCUc=";
           };
+
           # Drop-in replacement for Vault API
           # https://github.com/TheNextLvl-net/service-io
           # Alternative: https://hangar.papermc.io/TNE/VaultUnlocked or https://github.com/TheNewEconomy/VaultUnlockedAPI
@@ -188,12 +187,6 @@ in {
             url = "https://hangarcdn.papermc.io/plugins/TheNextLvl/ServiceIO/versions/2.2.0/PAPER/service-io-2.2.0-all.jar";
             hash = "sha256-9a5XYm90ZQhpnyjHelQ9AaiNPlgmJDe0AQxJaue9dW0=";
           };
-        };
-        whitelist = {
-          "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
-          "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
-          "MerklingenRitter" = "8dbccbec-4cc5-44e6-af7c-760fef8168e3";
-          "Nalsai" = "2bb1bfd9-7872-44ee-8865-e950a59f5bcc";
         };
       };
     };
