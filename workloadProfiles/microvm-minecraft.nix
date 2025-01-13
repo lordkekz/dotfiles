@@ -62,6 +62,12 @@
         '';
       };
 
+      # Dependency for a lot of stuff
+      "plugins/placeholder-api.jar" = pkgs.fetchurl {
+        url = "https://hangarcdn.papermc.io/plugins/HelpChat/PlaceholderAPI/versions/2.11.6/PAPER/PlaceholderAPI-2.11.6.jar";
+        hash = "sha256-v+oPI12p6dV2V3IVrLUMdLuBIuA9zZiDFbYRRce2Fyc=";
+      };
+
       # Adds a proper /ping command
       "plugins/cleanping.jar" = pkgs.fetchurl {
         url = "https://github.com/frafol/CleanPing/releases/download/dev-build/CleanPing.jar";
@@ -160,6 +166,32 @@ in {
         whitelist."UrsulaUnke" = "b5bee075-5a0d-4c63-9c8f-9c5c230f0da3";
       };
       servers.public = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
+        enable = false;
+        whitelist = {
+          "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
+          "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
+          "MerklingenRitter" = "8dbccbec-4cc5-44e6-af7c-760fef8168e3";
+          "Nalsai" = "2bb1bfd9-7872-44ee-8865-e950a59f5bcc";
+        };
+      };
+      servers.skyblock = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
+        symlinks = {
+          "plugins/iridium-skyblock.jar" = pkgs.fetchurl {
+            url = "https://hangarcdn.papermc.io/plugins/IridiumDevelopment/IridiumSkyblock/versions/4.0.9.1/PAPER/IridiumSkyblock-4.0.9.1.jar";
+            hash = "sha256-qGsMzJJ5tfVSB/5YtFlZuS/Mo6sISWrKd4d4/FKrlKQ=";
+          };
+          "plugins/fastasyncworldedit.jar" = pkgs.fetchurl {
+            url = "https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.12.3/FastAsyncWorldEdit-Paper-2.12.3.jar";
+            hash = "sha256-b0xybeKRNUzDHyDxI5ONDYIqIT7KuDUASh7tQzPWCUc=";
+          };
+          # Drop-in replacement for Vault API
+          # https://github.com/TheNextLvl-net/service-io
+          # Alternative: https://hangar.papermc.io/TNE/VaultUnlocked or https://github.com/TheNewEconomy/VaultUnlockedAPI
+          "plugins/service-io.jar" = pkgs.fetchurl {
+            url = "https://hangarcdn.papermc.io/plugins/TheNextLvl/ServiceIO/versions/2.2.0/PAPER/service-io-2.2.0-all.jar";
+            hash = "sha256-9a5XYm90ZQhpnyjHelQ9AaiNPlgmJDe0AQxJaue9dW0=";
+          };
+        };
         whitelist = {
           "Leron44" = "26d8bea8-3661-4332-85b8-9a0cc1f6ac23";
           "Spyridon99" = "dfbaaa76-5889-4537-ae54-747d29689c16";
