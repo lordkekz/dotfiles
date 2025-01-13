@@ -176,10 +176,7 @@ in {
       };
       servers.skyblock = lib.recursiveUpdate (serverConfig "public" 25566 8002) {
         symlinks = {
-          "plugins/iridium-skyblock.jar" = pkgs.fetchurl {
-            url = "https://hangarcdn.papermc.io/plugins/IridiumDevelopment/IridiumSkyblock/versions/4.0.9.1/PAPER/IridiumSkyblock-4.0.9.1.jar";
-            hash = "sha256-qGsMzJJ5tfVSB/5YtFlZuS/Mo6sISWrKd4d4/FKrlKQ=";
-          };
+          "plugins/iridium-skyblock.jar" = ../assets/IridiumSkyblock-4.1.0-B5.2.jar;
           "plugins/fastasyncworldedit.jar" = pkgs.fetchurl {
             url = "https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.12.3/FastAsyncWorldEdit-Paper-2.12.3.jar";
             hash = "sha256-b0xybeKRNUzDHyDxI5ONDYIqIT7KuDUASh7tQzPWCUc=";
