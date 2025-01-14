@@ -174,6 +174,7 @@ in {
         };
         symlinks = {
           "plugins/iridium-skyblock.jar" = ../assets/IridiumSkyblock-4.1.0-B5.2.jar;
+          "plugins/IridiumSkyblock/missions.yml" = ../assets/minecraft-iridium-configs/missions.yml;
 
           "plugins/fastasyncworldedit.jar" = pkgs.fetchurl {
             url = "https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.12.3/FastAsyncWorldEdit-Paper-2.12.3.jar";
