@@ -797,7 +797,7 @@ missions:
         item:
           material: "WOODEN_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -828,7 +828,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
@@ -853,7 +853,7 @@ missions:
         item:
           material: "STONE_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -884,7 +884,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
@@ -909,7 +909,7 @@ missions:
         item:
           material: "IRON_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -940,7 +940,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
@@ -965,7 +965,7 @@ missions:
         item:
           material: "GOLDEN_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -996,7 +996,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
@@ -1021,7 +1021,7 @@ missions:
         item:
           material: "DIAMOND_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -1052,7 +1052,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
@@ -1077,7 +1077,7 @@ missions:
         item:
           material: "NETHERITE_AXE"
           amount: 1
-          displayName: "&9&lGirls und Brustpanzer!"
+          displayName: "&9&lGear Up!"
           headData: null
           headOwner: null
           headOwnerUUID: null
@@ -1108,7 +1108,7 @@ missions:
           item:
             material: "DIAMOND"
             amount: 1
-            displayName: "&9&lGirls und Brustpanzer Reward"
+            displayName: "&9&lGear Up Reward"
             headData: null
             headOwner: null
             headOwnerUUID: null
