@@ -715,7 +715,7 @@ missions:
             - "&9&l* &7$1000"
           slot: null
         missions:
-          - "MINE:LOSTONE_OR_COBBLE:1000"
+          - "MINE:STONE_OR_COBBLE:1000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
         reward:
           item:
@@ -763,7 +763,7 @@ missions:
             - "&9&l* &7$1000"
           slot: null
         missions:
-          - "MINE:LOSTONE_OR_COBBLE:100000"
+          - "MINE:STONE_OR_COBBLE:100000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
         reward:
           item:
