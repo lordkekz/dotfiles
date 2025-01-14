@@ -422,7 +422,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOGS:10"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -470,7 +470,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOGS:100"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -518,7 +518,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOGS:100000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -566,7 +566,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOGS:100000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -617,7 +617,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:STONE_OR_COBBLE:10"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -665,7 +665,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LSTONE_OR_COBBLE:100"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -713,7 +713,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOSTONE_OR_COBBLE:1000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -761,7 +761,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "MINE:LOSTONE_OR_COBBLE:100000"
         completeSound: "ENTITY_PLAYER_LEVELUP"
@@ -815,7 +815,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:IRON_HELMET:1"
           - "CRAFT:IRON_CHESTPLATE:1"
@@ -869,7 +869,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:GOLDEN_HELMET:1"
           - "CRAFT:GOLDEN_CHESTPLATE:1"
@@ -923,7 +923,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:LEATHER_HELMET:1"
           - "CRAFT:LEATHER_CHESTPLATE:1"
@@ -977,7 +977,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:DIAMOND_HELMET:1"
           - "CRAFT:DIAMOND_CHESTPLATE:1"
@@ -1031,7 +1031,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:NETHERITE_HELMET:1"
           - "CRAFT:NETHERITE_CHESTPLATE:1"
@@ -1085,7 +1085,7 @@ missions:
             - "&9&lRewards"
             - "&9&l* &75 Island Crystals"
             - "&9&l* &7$1000"
-          slot: 0
+          slot: null
         missions:
           - "CRAFT:NETHERITE_HELMET:1"
           - "CRAFT:NETHERITE_CHESTPLATE:1"
