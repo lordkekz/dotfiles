@@ -20,6 +20,7 @@ args @ {
       yaml-language-server
       vscode-langservers-extracted # contains LSPs for HTML,CSS,JSON
       marksman # Markdown LSP
+      texlab
     ];
     ignores = [];
     languages = {};
