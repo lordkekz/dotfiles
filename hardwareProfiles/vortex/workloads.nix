@@ -16,7 +16,7 @@
 
   # PUBLIC MINECRAFT SERVER RUNS ON NASMAN (but forward ports on vortex)
   networking.firewall.allowedTCPPorts = [25565];
-  networking.firewall.allowedUDPPorts = [25565];
+  #networking.firewall.allowedUDPPorts = [25565]; # not yet supported by custom tcp proxy
 
   # Tailscale doesn't seem to like nftables's NAT when the target is another Tailscale node
   # This service runs a simple TCP proxy to forward connections through Tailscale.
