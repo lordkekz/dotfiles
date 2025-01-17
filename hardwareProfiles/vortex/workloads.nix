@@ -11,7 +11,7 @@
   imports = with workloadProfiles; [
     public-websites
     mailserver
-    owncast
+    # owncast # Currently unused; disable to minimize attack surface
   ];
 
   # PUBLIC MINECRAFT SERVER RUNS ON NASMAN (but forward ports on vortex)
