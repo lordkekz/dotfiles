@@ -44,7 +44,7 @@ in {
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 
-    microvm.mem = lib.mkForce 3072; # MiB, needed for large pushes etc.
+    microvm.balloonMem = lib.mkForce 2048; # MiB, needed for large pushes etc.
 
     microvm.shares = [
       {

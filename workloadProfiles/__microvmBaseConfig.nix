@@ -13,7 +13,8 @@
   pkgs,
   ...
 }: {
-  microvm.mem = 1536; # This can't be exactly 2GiB because QEMU hangs otherwise
+  microvm.mem = 512; # This can't be exactly 2GiB because QEMU hangs otherwise
+  microvm.balloonMem = 1024;
   microvm.vcpu = 4;
 
   systemd.network.enable = true;

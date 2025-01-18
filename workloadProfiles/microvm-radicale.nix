@@ -28,8 +28,6 @@ in {
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 
-    microvm.mem = lib.mkForce 1024; # MiB
-
     microvm.shares = [
       {
         mountPoint = microvmSecretsDir;
