@@ -1681,11 +1681,10 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1737324592,
-        "narHash": "sha256-Wtu2QVJtjiwTzCCHjsH6GdQqzgU5zNTj0nbj8aWRBWs=",
-        "ref": "refs/heads/wip",
-        "rev": "b9c15ed3b7061acb7213f93af6cba4a440d444ca",
-        "revCount": 68,
+        "dirtyRev": "c18cdbf290b5881c7a8d84f52889d9b26e7b8439-dirty",
+        "dirtyShortRev": "c18cdbf-dirty",
+        "lastModified": 1737389267,
+        "narHash": "sha256-XRNR+GJQNNAMuXcCcp/a6sxfZ4RLLITmbfPUXS2sSpg=",
         "type": "git",
         "url": "file:///home/hpreiser/git/nix-yazi-plugins"
       },

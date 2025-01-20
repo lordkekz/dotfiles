@@ -12,7 +12,7 @@ args @ {
   config,
   ...
 }: {
-  imports = [inputs.nix-yazi-plugins.packages.${system}.homeManagerModules.default];
+  imports = [inputs.nix-yazi-plugins.legacyPackages.${system}.homeManagerModules.default];
 
   programs.yazi = {
     enable = true;
@@ -38,9 +38,10 @@ args @ {
         jump-to-char.enable = true; # I don't use this normally
         relative-motions = {
           enable = true;
-          # FIXME uncomment once this gets added in PR
-          # settings.show_numbers = "relative_absolute";
-          # settings.show_motion = true;
+          # Settings passed at plugin setup
+          show_numbers = "relative_absolute";
+          show_motion = true;
+          only_motions = false;
         };
         smart-filter.enable = true; # 'F' replaces yazi builtin
         starship.enable = true;
