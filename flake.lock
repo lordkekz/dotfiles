@@ -1681,18 +1681,17 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1735511552,
-        "narHash": "sha256-SCa+e+Iw923KmC7UJR/v61GMfTILucgCpjxbsbjGBNg=",
-        "owner": "lordkekz",
-        "repo": "nix-yazi-plugins",
-        "rev": "505536399cab575b3baa6cfb7bba39edfd38bf5d",
-        "type": "github"
+        "lastModified": 1737324592,
+        "narHash": "sha256-Wtu2QVJtjiwTzCCHjsH6GdQqzgU5zNTj0nbj8aWRBWs=",
+        "ref": "refs/heads/wip",
+        "rev": "b9c15ed3b7061acb7213f93af6cba4a440d444ca",
+        "revCount": 68,
+        "type": "git",
+        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
       },
       "original": {
-        "owner": "lordkekz",
-        "ref": "main",
-        "repo": "nix-yazi-plugins",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
       }
     },
     "nixos-generators": {
