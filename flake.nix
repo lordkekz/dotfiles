@@ -106,7 +106,7 @@
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi flake
-    yazi.url = "github:sxyazi/yazi?ref=v0.4.1";
+    yazi.url = "github:sxyazi/yazi?ref=v0.4.2";
     #yazi.inputs.nixpkgs.follows = "nixpkgs-unstable"; # FIXME there's an infinite recursion as of 2024-12-15
 
     # Generate images etc. from NixOS configs

@@ -18,7 +18,6 @@ args @ {
     enable = true;
     enableNushellIntegration = true;
     # This is overridden by overlay from yazi flake
-    package = inputs.yazi.packages.${system}.yazi;
     settings = {
       manager = {
         show_hidden = true;
@@ -29,13 +28,15 @@ args @ {
     };
     yaziPlugins = {
       enable = true;
+      yaziBasePackage = pkgs.yazi;
       plugins = {
         bypass.enable = true;
         chmod.enable = true;
+        # fg.enable = true; # I don't use this normally
         full-border.enable = true;
         max-preview.enable = true; # 'R' to maximize
         hide-preview.enable = true; # 'T' to hide
-        jump-to-char.enable = true; # I don't use this normally
+        # jump-to-char.enable = true; # I don't use this normally
         relative-motions = {
           enable = true;
           # Settings passed at plugin setup
