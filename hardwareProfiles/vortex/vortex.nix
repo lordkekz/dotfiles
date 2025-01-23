@@ -55,10 +55,8 @@ in {
       matchConfig.Name = "enp0s18";
       routes = [
         {
-          routeConfig = {
-            Gateway = "81.30.159.105";
-            GatewayOnLink = "yes";
-          };
+          Gateway = "81.30.159.105";
+          GatewayOnLink = "yes";
         }
       ];
       networkConfig = {
@@ -72,10 +70,8 @@ in {
       matchConfig.Name = "enp0s19";
       routes = [
         {
-          routeConfig = {
-            Gateway = "2001:4ba0:cafe:babe::a105";
-            GatewayOnLink = "yes";
-          };
+          Gateway = "2001:4ba0:cafe:babe::a105";
+          GatewayOnLink = "yes";
         }
       ];
       networkConfig = {

@@ -18,6 +18,7 @@ in {
     workloadProfiles.microvm-syncit-hs
     workloadProfiles.microvm-radicale
     workloadProfiles.microvm-forgejo
+    workloadProfiles.microvm-minecraft
   ];
 
   # This is probably only needed on first boot, but this

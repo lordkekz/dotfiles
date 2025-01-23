@@ -24,6 +24,8 @@ in {
     extraGroups = ["wheel" "systemd-journal"];
   };
 
+  networking.nftables.enable = true;
+
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";

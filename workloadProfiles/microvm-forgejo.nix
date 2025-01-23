@@ -44,6 +44,8 @@ in {
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 
+    microvm.balloonMem = lib.mkForce 2048; # MiB, needed for large pushes etc.
+
     microvm.shares = [
       {
         mountPoint = microvmSecretsDir;
@@ -65,7 +67,7 @@ in {
       lfs.enable = true;
       settings = {
         DEFAULT = {
-          RUN_MODE = "dev";
+          RUN_MODE = "prod";
         };
         server = {
           # HTTP settings
@@ -82,16 +84,55 @@ in {
           SSH_LISTEN_PORT = 2222;
           SSH_LISTEN_HOST = internalIP;
         };
-        # You can temporarily allow registration to create an admin user.
-        service.DISABLE_REGISTRATION = true;
+        service = {
+          # Users must be created by an admin
+          DISABLE_REGISTRATION = true;
+          # Allow sending notifications per email
+          # (users can still choose whether to receive mails)
+          ENABLE_NOTIFY_MAIL = true;
+          # Disable basic auth using password
+          # Still allows tokens (like GitLab and GitHub)
+          ENABLE_BASIC_AUTHENTICATION = false;
+        };
         # FIXME maybe activate this, not sure if it works with reverse proxy setup
-        session.COOKIE_SECURE = false;
+        session.COOKIE_SECURE = true;
         # Workaround for crash on 9p mount, see:
         # https://github.com/go-gitea/gitea/issues/8566#issuecomment-745723498
         # TODO maybe use `bleve` but move the index to a non-persistent directory
         # Especially because `db` doesn't support code indexing:
         # https://github.com/go-gitea/gitea/issues/8566#issuecomment-753418689
         indexer.ISSUE_INDEXER_TYPE = "db";
+
+        # Email (outgoing)
+        # You can send a test email from the web UI at:
+        # Profile Picture > Site Administration > Configuration >  Mailer Configuration
+        mailer = {
+          ENABLED = true;
+          PROTOCOL = "smtps";
+          SMTP_ADDR = "vortex.lkekz.de";
+          SMTP_PORT = 465;
+          FROM = "forgejo@git.hepr.me";
+          USER = "forgejo@git.hepr.me";
+        };
+
+        # Email (incoming)
+        # This can be used for anonymous commiter emails or replying to notifications
+        "email.incoming" = {
+          ENABLED = true;
+          REPLY_TO_ADDRESS = "%{token}@git.hepr.me";
+          HOST = "vortex.lkekz.de";
+          PORT = 993;
+          USE_TLS = true;
+          MAILBOX = "INBOX";
+          DELETE_HANDLED_MESSAGE = false;
+          USERNAME = "forgejo@git.hepr.me";
+        };
+      };
+
+      # Just like settings, but the values are loaded from file paths
+      secrets = {
+        mailer.PASSWD = hostConfig.age.secrets.forgejo-email-password.path;
+        "email.incoming".PASSWORD = hostConfig.age.secrets.forgejo-email-password.path;
       };
     };
 
@@ -121,6 +162,15 @@ in {
   age.secrets.forgejo-password = {
     rekeyFile = "${inputs.self.outPath}/secrets/forgejo-password.age";
     path = "${microvmSecretsDir}/forgejo-password";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for forgejo user
+    owner = "microvm";
+    group = "kvm";
+  };
+
+  age.secrets.forgejo-email-password = {
+    rekeyFile = "${inputs.self.outPath}/secrets/forgejo-email-password.age";
+    path = "${microvmSecretsDir}/forgejo-email-password";
     symlink = false; # Required since the vm can't see the target if it's a symlink
     mode = "600"; # Allow the VM's root to chown it for forgejo user
     owner = "microvm";

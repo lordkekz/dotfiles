@@ -13,7 +13,8 @@
   pkgs,
   ...
 }: {
-  microvm.mem = 3072; # This can't be exactly 2GiB because QEMU hangs otherwise
+  microvm.mem = 512; # This can't be exactly 2GiB because QEMU hangs otherwise
+  microvm.balloonMem = 1024;
   microvm.vcpu = 4;
 
   systemd.network.enable = true;
@@ -52,8 +53,8 @@
     "20-lan-b" = {
       matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
       networkConfig = {
-        Address = "100.80.64.${vmId}/24";
-        Gateway = "100.80.64.1";
+        #Address = "100.80.64.${vmId}/24";
+        #Gateway = "100.80.64.1";
       };
     };
   };

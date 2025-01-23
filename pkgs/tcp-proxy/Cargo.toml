@@ -1,0 +1,11 @@
+[package]
+name = "tcp-proxy"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4"
+
+[[bin]]
+name = "tcp-proxy"
+path = "tcp-proxy.rs"

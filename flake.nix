@@ -77,6 +77,10 @@
     muxbar.inputs.nixpkgs.follows = "nixpkgs";
     muxbar.inputs.systems.follows = "systems";
 
+    # Naersk for easily building Rust packages
+    naersk.url = "github:nix-community/naersk";
+    naersk.inputs.nixpkgs.follows = "nixpkgs";
+
     # Nixpkgs
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -88,6 +92,11 @@
     # nix-index allows searching for binary names; nix-index-database contains a prebuilt db for nix-index.
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nix-minecraft allows declarative minecraft servers with plugins
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
+    nix-minecraft.inputs.flake-utils.follows = "flake-utils";
 
     # NixVim distro for neovim
     nixvim.url = "github:nix-community/nixvim/main";
@@ -113,6 +122,11 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
     nixos-generators.inputs.nixlib.follows = "nixpkgs";
+
+    # Simple NixOS mailserver
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
+    nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixos-mailserver.inputs.nixpkgs-24_11.follows = "nixpkgs-stable";
 
     # NixOS-WSL
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
@@ -253,6 +267,7 @@
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
         yazi
         nix-yazi-plugins
+        nix-minecraft
         hyprland
         hyprlock
         hypridle

@@ -1,5 +1,4 @@
-# Generate ACME certs for my domains
-# FIXME remove this pls
+# Generate ACME certs for http-only domains
 {
   inputs,
   outputs,
@@ -9,24 +8,35 @@
   pkgs,
   ...
 }: let
-  cloudflare = domain: {
+  http = domain: {
     inherit domain;
-    extraDomainNames = ["*.${domain}"];
-    dnsProvider = "cloudflare";
-    # location of your CLOUDFLARE_DNS_API_TOKEN=[value]
-    # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
-    environmentFile = config.age.secrets.cloudflare-token.path;
+    webroot = "/var/lib/acme";
   };
 in {
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "info@lkekz.de";
-    certs = {
-      "hepr.me" = cloudflare "hepr.me";
-      "r4c.hepr.me" = cloudflare "r4c.hepr.me";
-      "solux.cc" = cloudflare "solux.cc";
-    };
-  };
+  security.acme.certs."vortex.lkekz.de" = http "vortex.lkekz.de";
 
-  age.secrets.cloudflare-token.rekeyFile = "${inputs.self.outPath}/secrets/cloudflare-token.age";
+  services.caddy.virtualHosts."vortex.lkekz.de-http".hostName = "vortex.lkekz.de:80";
+  services.caddy.virtualHosts."vortex.lkekz.de".extraConfig = ''
+    handle_path /.well-known/acme-challenge/* {
+      root /var/lib/acme/.well-known/acme-challenge
+      file_server
+    }
+
+    handle {
+      respond "Not Found" 404
+    }
+  '';
+  services.caddy.virtualHosts."vortex.lkekz.de-https".hostName = "vortex.lkekz.de:443";
+  services.caddy.virtualHosts."vortex.lkekz.de-https".extraConfig = ''
+    tls /var/lib/acme/vortex.lkekz.de/cert.pem /var/lib/acme/vortex.lkekz.de/key.pem
+
+    handle_path /.well-known/acme-challenge/* {
+      root /var/lib/acme/.well-known/acme-challenge
+      file_server
+    }
+
+    handle {
+      respond "Not Found" 404
+    }
+  '';
 }
