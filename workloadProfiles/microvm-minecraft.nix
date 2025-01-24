@@ -21,7 +21,7 @@
     enable = true;
     autoStart = true; # TODO this may be a default
     restart = "always"; # TODO this may be a default
-    jvmOpts = "-Xmx2G";
+    jvmOpts = "-Xmx3G";
     package = paperServer;
     serverProperties = {
       motd = "NixOS Minecraft Server: ${name}";
@@ -147,7 +147,7 @@ in {
     ];
 
     microvm.vcpu = lib.mkForce 10;
-    microvm.balloonMem = lib.mkForce 4608; # MiB
+    microvm.balloonMem = lib.mkForce 7680; # MiB => total max of 8GiB memory
 
     networking.firewall.interfaces = {
       "vm-${vmName}-a" = {
