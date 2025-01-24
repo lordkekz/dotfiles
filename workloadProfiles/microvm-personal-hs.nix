@@ -7,15 +7,15 @@
   personal-data,
   ...
 }: let
-  vmName = "syncit-cc";
-  vmId = "14";
+  vmName = "personal-hs";
+  vmId = "15";
   user = "syncthing";
   group = "syncthing";
   unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
   pathsToChown = ["/persist"];
   fsType = "btrfs";
 in {
-  services.caddy.virtualHosts."syncit-cc.hepr.me".extraConfig = ''
+  services.caddy.virtualHosts."syncit-hs.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.${vmId}:8384
   '';
@@ -33,7 +33,7 @@ in {
 
     services.syncthing = let
       persistentFolder = "/persist";
-      personalSettings = personal-data.data.home.syncthing.otherUsers.cc.settings;
+      personalSettings = personal-data.data.home.syncthing.otherUsers.hs.settings;
     in {
       enable = true;
       inherit user group;
