@@ -48,37 +48,52 @@ in {
         };
         storage = {
           filesystem_folder = "/persist";
-          hook = lib.getExe (pkgs.writeShellApplication {
-            name = "radicale-changes-hook-git";
-            runtimeInputs = [pkgs.gitMinimal pkgs.coreutils pkgs.systemdMinimal];
-            text = ''
-              if [ ! -f .gitignore ]; then
-                cat >.gitignore <<EOL
-              .Radicale.cache
-              .Radicale.lock
-              .Radicale.tmp-*
-              EOL
-              fi
-
-              # Make sure that there's a git repo
-              git init --initial-branch "main"
-
-              # Configure git repo
-              git config --local user.name "radicale"
-              git config --local user.email "radicale@caldav.hepr.me"
-
-              # Add & Commit changes
-              git add -A
-              STAGED_FILES=$(git diff --staged --name-only)
-              STAGED_FILES_COUNT=$(echo "$STAGED_FILES" | wc -l)
-              git diff --cached --quiet || git commit -m "Changes in $STAGED_FILES_COUNT files."
-
-              # Push changes to forgejo
-              git push "https://bot-radicale-push:$(cat ${microvmSecretsDir}/radicale-git-token)@git.hepr.me/the-family/Calendars.git" HEAD:main
-            '';
-          });
+          # hook = ...;
         };
       };
+    };
+
+    systemd.services.radicale-git-push = let
+      radicaleSettings = config.services.radicale.settings;
+      radicaleUnit = config.systemd.services.radicale;
+    in {
+      requires = ["network.target"];
+      serviceConfig = {
+        inherit (radicaleUnit.serviceConfig) User Group ReadWritePaths;
+      };
+      enableStrictShellChecks = true;
+      path = [pkgs.gitMinimal pkgs.coreutils];
+      script = ''
+        cd "${radicaleSettings.storage.filesystem_folder}" || exit 1
+
+        # Make sure there's a .gitignore
+        if [ ! -f .gitignore ]; then
+          cat >.gitignore <<EOL
+        .Radicale.cache
+        .Radicale.lock
+        .Radicale.tmp-*
+        EOL
+        fi
+
+        # Make sure that there's a git repo
+        git init --initial-branch "main"
+
+        # Configure git repo
+        git config --local user.name "radicale"
+        git config --local user.email "radicale@caldav.hepr.me"
+
+        # Add & Commit changes
+        git add -A
+        STAGED_FILES=$(git diff --staged --name-only)
+        STAGED_FILES_COUNT=$(echo "$STAGED_FILES" | wc -l)
+        git diff --cached --quiet || git commit -m "Changes in $STAGED_FILES_COUNT files. \
+
+        $STAGED_FILES"
+
+        # Push changes to forgejo
+        git push "https://bot-radicale-push:$(cat ${microvmSecretsDir}/radicale-git-token)@git.hepr.me/the-family/Calendars.git" HEAD:main
+      '';
+      startAt = "minutely";
     };
   };
 
