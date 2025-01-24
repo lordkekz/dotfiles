@@ -18,6 +18,10 @@ in {
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.${vmId}:8384
   '';
+  services.caddy.virtualHosts."music.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.${vmId}:4533
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
@@ -25,7 +29,7 @@ in {
     microvm.balloonMem = lib.mkForce 2048; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [22 8384];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533];
       "vm-${vmName}-b" = {
         allowedTCPPorts = [22000];
         allowedUDPPorts = [22000 21027];
@@ -47,6 +51,23 @@ in {
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = lib.foldl lib.recursiveUpdate personalSettings [{folders."Handy Kamera".enable = true;} overrideRescanIntervalForEachFolder];
+    };
+
+    services.navidrome = {
+      enable = true;
+      group = "syncthing";
+      settings = {
+        BaseUrl = "https://music.hepr.me";
+        Address = "10.0.0.${vmId}";
+        Port = 4533;
+
+        MusicFolder = "/persist/Music"; # The "Music" syncthing folder
+        DataFolder = "/persist/.navidrome"; # Folder to store app data (DB)
+        CacheFolder = "/tmp/navidrome-cache"; # Folder to store cache (transcoding etc.)
+        EnableInsightsCollector = true; # Send anonymouse usage statistics
+
+        EnableSharing = true; # Experimentally allows to share links of songs
+      };
     };
   };
 }
