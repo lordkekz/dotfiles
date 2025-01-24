@@ -24,11 +24,11 @@
       id = "vm-${vmName}-a";
       mac = "02:00:00:00:00:${vmId}";
     }
-    {
-      type = "tap";
-      id = "vm-${vmName}-b";
-      mac = "02:00:00:00:01:${vmId}";
-    }
+    # {
+    #   type = "tap";
+    #   id = "vm-${vmName}-b";
+    #   mac = "02:00:00:00:01:${vmId}";
+    # }
   ];
 
   systemd.network.links = {
@@ -36,10 +36,10 @@
       matchConfig.MACAddress = "02:00:00:00:00:${vmId}";
       linkConfig.Name = "vm-${vmName}-a";
     };
-    "10-rename-lan-b" = {
-      matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
-      linkConfig.Name = "vm-${vmName}-b";
-    };
+    # "10-rename-lan-b" = {
+    #   matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
+    #   linkConfig.Name = "vm-${vmName}-b";
+    # };
   };
 
   systemd.network.networks = {
@@ -50,13 +50,13 @@
         Gateway = "10.0.0.1";
       };
     };
-    "20-lan-b" = {
-      matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
-      networkConfig = {
-        #Address = "100.80.64.${vmId}/24";
-        #Gateway = "100.80.64.1";
-      };
-    };
+    # "20-lan-b" = {
+    #   matchConfig.MACAddress = "02:00:00:00:01:${vmId}";
+    #   networkConfig = {
+    #     Address = "100.80.64.${vmId}/24";
+    #     Gateway = "100.80.64.1";
+    #   };
+    # };
   };
 
   # SSH Plumbing
