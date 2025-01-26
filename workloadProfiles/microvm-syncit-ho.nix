@@ -20,7 +20,20 @@ in {
   '';
   services.caddy.virtualHosts."music.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    reverse_proxy http://10.0.0.${vmId}:4533
+
+    @allowed path /api/* /share/*
+    handle @allowed {
+      reverse_proxy http://10.0.0.${vmId}:4533 {
+        @error status 404
+        handle_response @error {
+          redir https://hepr.me/
+        }
+      }
+    }
+
+    handle {
+      redir https://hepr.me/
+    }
   '';
   services.caddy.virtualHosts."nd.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
