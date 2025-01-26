@@ -52,9 +52,10 @@ args @ {
     clipqr
 
     # MULTIMEDIA
-    elisa
+    feishin # For music streaming
+    elisa # For local music playback
+    jellyfin-media-player # For streaming anything except music
     vlc
-    jellyfin-media-player
     audacity
     gimp
     (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
