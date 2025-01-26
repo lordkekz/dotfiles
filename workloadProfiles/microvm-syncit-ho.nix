@@ -22,6 +22,10 @@ in {
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.${vmId}:4533
   '';
+  services.caddy.virtualHosts."nd.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.${vmId}:4533
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
@@ -55,9 +59,8 @@ in {
 
     services.navidrome = {
       enable = true;
-      group = "syncthing";
       settings = {
-        BaseUrl = "https://music.hepr.me";
+        BaseUrl = "https://nd.hepr.me";
         Address = "10.0.0.${vmId}";
         Port = 4533;
 
@@ -66,6 +69,11 @@ in {
         CacheFolder = "/tmp/navidrome-cache"; # Folder to store cache (transcoding etc.)
         EnableInsightsCollector = true; # Send anonymouse usage statistics
 
+        # Enabling this would risk a RCE vulnerability
+        # (It's also not needed with the NixOS module)
+        EnableTranscodingConfig = false;
+
+        ShareURL = "https://music.hepr.me";
         EnableSharing = true; # Experimentally allows to share links of songs
       };
     };
