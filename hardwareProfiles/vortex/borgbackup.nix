@@ -11,7 +11,7 @@
       passphrasePath = config.age.secrets.borgbackup-passphrase-orion.path;
       identityPath = config.age.secrets.borgbackup-key-vortex.path;
       knownHostsPath = pkgs.writeText "borgbackup-to-nasman-orion-known_hosts" ''
-        ${personal-data.data.lab.hosts.nasman.key}
+        [nasman2404]:4286 ${personal-data.data.lab.hosts.nasman.key}
       '';
     in {
       paths = [
