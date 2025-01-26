@@ -45,6 +45,6 @@
   # Forward caldav.hepr.me to nasman, but use the same SNI matcher for both nasman and vortex.
   services.caddy.virtualHosts."music.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-    reverse_proxy https://nd.hepr.me
+    reverse_proxy https://nasman.hepr.me
   '';
 }
