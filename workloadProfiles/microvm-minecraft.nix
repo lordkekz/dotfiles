@@ -97,12 +97,12 @@
       };
 
       # Link BlueMap configs from this repo
-      "plugins/BlueMap/maps" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/maps";
-      "plugins/BlueMap/storages" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/storages";
-      "plugins/BlueMap/core.conf" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/core.conf";
-      "plugins/BlueMap/webapp.conf" = "${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/webapp.conf";
+      "plugins/BlueMap/maps" = ../assets/minecraft-bluemap-default-configs/maps;
+      "plugins/BlueMap/storages" = ../assets/minecraft-bluemap-default-configs/storages;
+      "plugins/BlueMap/core.conf" = ../assets/minecraft-bluemap-default-configs/core.conf;
+      "plugins/BlueMap/webapp.conf" = ../assets/minecraft-bluemap-default-configs/webapp.conf;
       "plugins/BlueMap/webserver.conf" = pkgs.runCommand "minecraft-server-${name}-webserver.conf" {} ''
-        sed 's#^port: .*$#port: ${builtins.toString webport}#' ${inputs.self.outPath}/assets/minecraft-bluemap-default-configs/webserver.conf > $out
+        sed 's#^port: .*$#port: ${builtins.toString webport}#' ${../assets/minecraft-bluemap-default-configs/webserver.conf} > $out
       '';
     };
     files = {
