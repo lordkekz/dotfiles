@@ -27,7 +27,8 @@ in {
   nix.settings.trusted-users = ["hpreiser"];
 
   # Required for secrets
-  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAaGoNO2VY46hVJ4uhlMg+/B38aOCeubw/Zc15X2ExX hpreiser@vortex";
+  age.rekey.hostPubkey = personal-data.data.lab.hosts.vortex.key;
+  age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
 
   # Make SSH server only listen on tailscale network
   services.openssh.listenAddresses = [
@@ -47,6 +48,8 @@ in {
   services.cloud-init = {
     enable = true;
     network.enable = true;
+    # Don't delete SSH host key on every boot
+    settings.ssh_deletekeys = false;
   };
 
   systemd.network.enable = true;

@@ -2081,11 +2081,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735422866,
-        "narHash": "sha256-eIYj7XMT1aOgerhIY4A6dkfgbT3pqUVPybAiv/zlDxQ=",
+        "lastModified": 1737849899,
+        "narHash": "sha256-X7XkB2lrEmoJl9eYVUGU2Tm/ZQGixjpQ8ejPNipG2+k=",
         "owner": "lordkekz",
         "repo": "personal-data",
-        "rev": "e06a904ec7cc1cecd4684b6c54a3af51dba51b1c",
+        "rev": "158b6cb21bda3315c6f940cc199f9efa88609468",
         "type": "github"
       },
       "original": {

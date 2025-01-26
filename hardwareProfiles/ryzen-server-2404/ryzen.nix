@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  personal-data,
   hardwareProfiles,
   lib,
   config,
@@ -16,7 +17,7 @@
   ];
 
   # Required for secrets
-  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC8hRwBv9JkDKcSaP1bwwz61MLzB5RFt3IkiM+IjP+vR root@nasman2404";
+  age.rekey.hostPubkey = personal-data.data.lab.hosts.nasman.key;
   age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
   services.openssh.ports = [4286]; # This is used in many places; make sure to find/replace when changing
 
