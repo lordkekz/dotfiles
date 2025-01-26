@@ -1,12 +1,19 @@
 {
   inputs,
+  personal-data,
   lib,
   config,
   pkgs,
   ...
 }: {
   services.borgbackup.jobs = {
-    backup-to-nasman-orion = {
+    backup-to-nasman-orion = let
+      passphrasePath = config.age.secrets.borgbackup-passphrase-orion.path;
+      identityPath = config.age.secrets.borgbackup-key-vortex.path;
+      knownHostsPath = pkgs.writeText "borgbackup-to-nasman-orion-known_hosts" ''
+        ${personal-data.data.lab.hosts.nasman.key}
+      '';
+    in {
       paths = [
         "/persist/mail"
       ];
@@ -14,9 +21,9 @@
       repo = "borg@nasman2404:.";
       encryption = {
         mode = "repokey";
-        passCommand = "cat ${config.age.secrets.borgbackup-passphrase-orion.path}";
+        passCommand = "cat ${passphrasePath}";
       };
-      environment.BORG_RSH = "ssh -p 4286 -i ${config.age.secrets.borgbackup-key-vortex.path}";
+      environment.BORG_RSH = "ssh -p 4286 -i ${identityPath} -o 'UserKnownHostsFile=${knownHostsPath}'";
       compression = "auto,lzma";
       startAt = "daily";
     };
