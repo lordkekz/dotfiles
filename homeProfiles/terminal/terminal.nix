@@ -34,6 +34,7 @@ args @ {
     duf
     # Interactive explorer for nix derivations and dependencies
     nix-tree
+    nix-output-monitor
 
     # Benchmarking
     phoronix-test-suite
@@ -52,6 +53,8 @@ args @ {
     tree
     devenv
   ];
+
+  programs.nh.enable = true; # Enable yet another nix helper
 
   programs.nix-index.enable = true;
   programs.nix-index-database.comma.enable = true;
