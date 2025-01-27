@@ -9,16 +9,12 @@
 }: let
   vmName = "syncit-ho";
   vmId = "11";
-  # Ownership layout is now too complicated for the base config:
-  # Syncthing folders to be owned by syncthing, navidrome by navidrome,
-  # maloja by maloja, and the Music folder by syncthing:navidrome
-  # Workaround: Just set it up manually.
-  # FIXME Figure out some way to make ownerships declarative again
-  user = "maloja";
-  group = "maloja";
-  unitsAfterPersist = ["podman-maloja.service"];
-  pathsToChown = ["${microvmSecretsDir}"];
   microvmSecretsDir = "/run/agenix-microvm-syncit-ho";
+
+  # Syncthing config
+  persistentFolder = "/persist";
+  personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
+  overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_:_: {rescanIntervalS = 86400;}) personalSettings.folders;
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -51,17 +47,55 @@ in {
   '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
-    imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
+    imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId;})];
 
     microvm.balloonMem = lib.mkForce 2048; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 42010];
       "vm-${vmName}-b" = {
         allowedTCPPorts = [22000];
         allowedUDPPorts = [22000 21027];
       };
     };
+
+    chown-paths =
+      [
+        {
+          path = "/persist/.config/syncthing";
+          user = "syncthing";
+          group = "syncthing";
+        }
+        {
+          path = "/persist/.maloja";
+          user = "maloja";
+          group = "maloja";
+        }
+        {
+          path = "/persist/.navidrome";
+          user = "navidrome";
+          group = "navidrome";
+        }
+        {
+          path = "/persist/.syncthing-folders";
+          user = "syncthing";
+          group = "syncthing";
+        }
+        {
+          path = microvmSecretsDir;
+          user = "maloja";
+          group = "maloja";
+        }
+      ]
+      ++ lib.mapAttrsToList (n: v: {
+        inherit (v) path;
+        user = "syncthing";
+        group =
+          if n == "Musik"
+          then "navidrome"
+          else "syncthing";
+      })
+      personalSettings.folders;
 
     microvm.shares = [
       {
@@ -72,13 +106,8 @@ in {
       }
     ];
 
-    services.syncthing = let
-      persistentFolder = "/persist";
-      personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
-      overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_:_: {rescanIntervalS = 86400;}) personalSettings.folders;
-    in {
+    services.syncthing = {
       enable = true;
-      inherit user group;
 
       dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
       configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
@@ -131,12 +160,14 @@ in {
           "MALOJA_NAME" = "Keks";
         };
         environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
+        # user = "maloja:maloja";
       };
     };
-    systemd.services."podman-maloja-scrobble".serviceConfig = {
-      User = "maloja";
-      Group = "maloja";
+    users.users.maloja = {
+      isSystemUser = true;
+      group = "maloja";
     };
+    users.groups.maloja = {};
   };
 
   age.secrets.maloja-password = {
