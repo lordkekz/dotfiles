@@ -12,7 +12,8 @@
   user = "syncthing";
   group = "syncthing";
   unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
-  pathsToChown = ["/persist"];
+  pathsToChown = ["/persist" microvmSecretsDir];
+  microvmSecretsDir = "/run/agenix-microvm-syncit-ho";
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -39,6 +40,10 @@ in {
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.${vmId}:4533
   '';
+  services.caddy.virtualHosts."scrobble.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.${vmId}:42010
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
@@ -52,6 +57,15 @@ in {
         allowedUDPPorts = [22000 21027];
       };
     };
+
+    microvm.shares = [
+      {
+        mountPoint = microvmSecretsDir;
+        source = microvmSecretsDir;
+        tag = "microvm-radicale-secret";
+        securityModel = "mapped";
+      }
+    ];
 
     services.syncthing = let
       persistentFolder = "/persist";
@@ -90,5 +104,32 @@ in {
         EnableSharing = true; # Experimentally allows to share links of songs
       };
     };
+
+    virtualisation.oci-containers = {
+      backend = "podman";
+      containers.maloja-scrobble = {
+        imageFile = pkgs.dockerTools.pullImage {
+          imageName = "krateng/maloja";
+          imageDigest = "sha256:034896ea414f903153933a3d555082d6bbaec40b4703d0baf6aaf9d1285c6144";
+          sha256 = "0c83ixfaaw924ib0i81ijpvyb35z5q2mdyb0ra7abl67sahgamlq";
+          finalImageName = "krateng/maloja";
+          finalImageTag = "latest";
+        };
+        image = "krateng/maloja";
+        ports = ["42010"];
+        volumes = ["/persist/.maloja:/mjldata"];
+        environment."MALOJA_DATA_DIRECTORY" = "/mjldata";
+        environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
+      };
+    };
+  };
+
+  age.secrets.maloja-password = {
+    rekeyFile = "${inputs.self.outPath}/secrets/maloja-password.age";
+    path = "${microvmSecretsDir}/maloja-password.env";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for radicale user
+    owner = "microvm";
+    group = "kvm";
   };
 }
