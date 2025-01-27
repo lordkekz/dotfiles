@@ -52,6 +52,7 @@ in {
       url."git@gitlab.com".insteadOf = "gitlab";
       url."git@git.hepr.me".insteadOf = "hepr";
       url."git@gitlab.informatik.uni-halle.de".insteadOf = ["uni-gitlab" "uni"];
+      url."git@gitlab.informatik.uni-halle.de:".insteadOf = ["https://gitlab.informatik.uni-halle.de/"];
     };
     aliases = {
       lg = ''log --pretty=format:"%C(cyan)@%an%Creset%C(dim)[%Creset%C(green bold)%G?%Creset%C(dim)]%Creset%C(auto) %h%d %s" --graph'';
