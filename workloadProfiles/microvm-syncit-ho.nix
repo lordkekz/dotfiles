@@ -9,10 +9,15 @@
 }: let
   vmName = "syncit-ho";
   vmId = "11";
-  user = "syncthing";
-  group = "syncthing";
-  unitsAfterPersist = ["syncthing.service" "syncthing-init.service"];
-  pathsToChown = ["/persist" microvmSecretsDir];
+  # Ownership layout is now too complicated for the base config:
+  # Syncthing folders to be owned by syncthing, navidrome by navidrome,
+  # maloja by maloja, and the Music folder by syncthing:navidrome
+  # Workaround: Just set it up manually.
+  # FIXME Figure out some way to make ownerships declarative again
+  user = "maloja";
+  group = "maloja";
+  unitsAfterPersist = ["podman-maloja.service"];
+  pathsToChown = ["${microvmSecretsDir}"];
   microvmSecretsDir = "/run/agenix-microvm-syncit-ho";
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
@@ -62,7 +67,7 @@ in {
       {
         mountPoint = microvmSecretsDir;
         source = microvmSecretsDir;
-        tag = "microvm-radicale-secret";
+        tag = "microvm-syncit-ho-secret";
         securityModel = "mapped";
       }
     ];
@@ -127,6 +132,10 @@ in {
         };
         environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
       };
+    };
+    systemd.services."podman-maloja-scrobble".serviceConfig = {
+      User = "maloja";
+      Group = "maloja";
     };
   };
 
