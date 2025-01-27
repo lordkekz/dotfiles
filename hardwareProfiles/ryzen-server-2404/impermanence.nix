@@ -46,11 +46,7 @@ in {
     hideMounts = true;
     directories = [
       "/var/db/sudo/lectured"
-
-      "/var/lib/incus"
-      "/var/lib/libvirt"
       "/var/lib/tailscale"
-
       "/var/lib/nixos"
     ];
     files = [

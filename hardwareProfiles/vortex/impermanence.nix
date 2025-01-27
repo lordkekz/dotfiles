@@ -45,18 +45,16 @@ in {
     hideMounts = true;
     directories = [
       "/var/db/sudo/lectured"
-
-      "/var/lib/incus"
-      "/var/lib/libvirt"
       "/var/lib/tailscale"
-
       "/var/lib/nixos"
-      "/etc/ssh"
-
       "/var/lib/owncast" # this config doesn't need backups but isn't reproducible
     ];
     files = [
       "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
     ];
 
     users.${username} = {
