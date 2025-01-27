@@ -131,7 +131,7 @@ in {
         EnableInsightsCollector = true; # Send anonymouse usage statistics
 
         ListenBrainz.Enabled = true;
-        ListenBrainz.BaseURL = "https://scrobble.hepr.me/apis/listenbrainz";
+        ListenBrainz.BaseURL = "https://scrobble.hepr.me/apis/listenbrainz/1/";
 
         # Enabling this would risk a RCE vulnerability
         # (It's also not needed with the NixOS module)
@@ -141,6 +141,10 @@ in {
         EnableSharing = true; # Experimentally allows to share links of songs
       };
     };
+    systemd.services.navidrome.serviceConfig.BindReadOnlyPaths = [
+      # "/etc/static/resolv.conf"
+      "/run/systemd/resolve/stub-resolv.conf"
+    ];
 
     virtualisation.oci-containers = {
       backend = "podman";
