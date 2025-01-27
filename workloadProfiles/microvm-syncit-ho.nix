@@ -96,6 +96,9 @@ in {
         CacheFolder = "/tmp/navidrome-cache"; # Folder to store cache (transcoding etc.)
         EnableInsightsCollector = true; # Send anonymouse usage statistics
 
+        ListenBrainz.Enabled = true;
+        ListenBrainz.BaseURL = "https://scrobble.hepr.me/apis/listenbrainz";
+
         # Enabling this would risk a RCE vulnerability
         # (It's also not needed with the NixOS module)
         EnableTranscodingConfig = false;
@@ -118,7 +121,10 @@ in {
         image = "krateng/maloja";
         ports = ["42010"];
         volumes = ["/persist/.maloja:/mjldata"];
-        environment."MALOJA_DATA_DIRECTORY" = "/mjldata";
+        environment = {
+          "MALOJA_DATA_DIRECTORY" = "/mjldata";
+          "MALOJA_NAME" = "Keks";
+        };
         environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
       };
     };
