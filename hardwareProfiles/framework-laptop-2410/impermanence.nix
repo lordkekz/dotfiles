@@ -86,6 +86,7 @@ in {
         ".config/AusweisApp"
         ".config/discord"
         ".config/Element"
+        ".config/feishin"
         ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
