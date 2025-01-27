@@ -16,6 +16,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  nix.settings.trusted-users = ["hpreiser"];
+
   # Required for secrets
   age.rekey.hostPubkey = personal-data.data.lab.hosts.nasman.key;
   age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
