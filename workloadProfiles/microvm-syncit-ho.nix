@@ -153,21 +153,23 @@ in {
           finalImageTag = "latest";
         };
         image = "krateng/maloja";
-        ports = ["42010"];
+        ports = ["42010:42010"];
         volumes = ["/persist/.maloja:/mjldata"];
         environment = {
           "MALOJA_DATA_DIRECTORY" = "/mjldata";
           "MALOJA_NAME" = "Keks";
+          "PUID" = "835";
+          "PGID" = "835";
         };
         environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
-        # user = "maloja:maloja";
       };
     };
     users.users.maloja = {
       isSystemUser = true;
       group = "maloja";
+      uid = 835; # Just some UID
     };
-    users.groups.maloja = {};
+    users.groups.maloja.gid = 835; # Just some GID
   };
 
   age.secrets.maloja-password = {
