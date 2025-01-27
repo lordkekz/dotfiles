@@ -11,14 +11,15 @@
   vmCount = length vmNames;
   vmUnits = map (vm: "microvm@${vm}.service") vmNames;
 in {
-  imports = [
+  imports = with workloadProfiles; [
     inputs.microvm.nixosModules.host
-    workloadProfiles.microvm-syncit-cc
-    workloadProfiles.microvm-syncit-ho
-    workloadProfiles.microvm-syncit-hs
-    workloadProfiles.microvm-radicale
-    workloadProfiles.microvm-forgejo
-    workloadProfiles.microvm-minecraft
+    microvm-syncit-cc
+    microvm-syncit-ho
+    microvm-syncit-hs
+    microvm-radicale
+    microvm-forgejo
+    microvm-minecraft
+    robots
   ];
 
   # This is probably only needed on first boot, but this
