@@ -167,6 +167,14 @@ in {
               format = "ext4";
             };
           };
+          microvm-cctv = {
+            type = "zfs_volume";
+            size = "100G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
         };
       };
 
