@@ -19,6 +19,7 @@ in {
     microvm-radicale
     microvm-forgejo
     microvm-minecraft
+    microvm-cctv
     robots
   ];
 
