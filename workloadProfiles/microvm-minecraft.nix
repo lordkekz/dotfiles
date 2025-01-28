@@ -195,6 +195,11 @@ in {
             hash = "sha256-G6MwUA+JUDJRkbpwvOC4PnR0k+XuCvcIJnDDXFF3oy4=";
           };
 
+          "plugins/luckperms.jar" = pkgs.fetchurl {
+            url = "https://download.luckperms.net/1570/bukkit/loader/LuckPerms-Bukkit-5.4.153.jar";
+            hash = "sha256-khfiyxhjDK1yVYqcu2/LDkxK7bZd/mm449T3ShXP/vs=";
+          };
+
           # Drop-in replacement for Vault API
           # https://github.com/TheNextLvl-net/service-io
           # Alternative: https://hangar.papermc.io/TNE/VaultUnlocked or https://github.com/TheNewEconomy/VaultUnlockedAPI
