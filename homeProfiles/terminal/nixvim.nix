@@ -163,5 +163,6 @@ args @ {
     };
   };
 in {
-  home.packages = [nvim];
+  # WARN This makes the entire file dead code. But it cuts down eval time and warnings :)
+  # home.packages = [nvim];
 }
