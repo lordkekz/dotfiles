@@ -190,6 +190,11 @@ in {
             hash = "sha256-Lh73k4g9iRFpDMtfi5OJMG9blauRXwZ4df8zt87Ep+g=";
           };
 
+          "plugins/chunky.jar" = pkgs.fetchurl {
+            url = "https://hangarcdn.papermc.io/plugins/pop4959/Chunky/versions/1.4.28/PAPER/Chunky-Bukkit-1.4.28.jar";
+            hash = "sha256-G6MwUA+JUDJRkbpwvOC4PnR0k+XuCvcIJnDDXFF3oy4=";
+          };
+
           # Drop-in replacement for Vault API
           # https://github.com/TheNextLvl-net/service-io
           # Alternative: https://hangar.papermc.io/TNE/VaultUnlocked or https://github.com/TheNewEconomy/VaultUnlockedAPI
