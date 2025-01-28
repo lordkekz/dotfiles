@@ -43,6 +43,9 @@ in {
   '';
   services.caddy.virtualHosts."scrobble.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    request_body {
+      max_size 10MB
+    }
     reverse_proxy http://10.0.0.${vmId}:42010
   '';
 
