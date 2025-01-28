@@ -33,7 +33,7 @@
   boot.kernelParams = ["amd_pstate=active"];
 
   # btrfs tools are for some reason not always included if there is no btrfs filesystem in config
-  environment.systemPackages = [pkgs.btrfs-progs];
+  environment.systemPackages = with pkgs; [e2fsprogs btrfs-progs];
 
   networking.hostId = "2e2e01d4";
   networking.useNetworkd = true;
