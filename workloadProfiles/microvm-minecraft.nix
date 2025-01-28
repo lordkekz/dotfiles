@@ -181,6 +181,15 @@ in {
             hash = "sha256-b0xybeKRNUzDHyDxI5ONDYIqIT7KuDUASh7tQzPWCUc=";
           };
 
+          "plugins/multiverse-core.jar" = pkgs.fetchurl {
+            url = "https://hangarcdn.papermc.io/plugins/Multiverse/Multiverse-Core/versions/4.3.14/PAPER/multiverse-core-4.3.14.jar";
+            hash = "sha256-J2MOl8aGEvLM0a9ykFVSjiKIeSPM5vbOzDTkVYPlrhE=";
+          };
+          "plugins/multiverse-inventories.jar" = pkgs.fetchurl {
+            url = "https://hangarcdn.papermc.io/plugins/Multiverse/Multiverse-Inventories/versions/4.2.6/PAPER/multiverse-inventories-4.2.6.jar";
+            hash = "sha256-Lh73k4g9iRFpDMtfi5OJMG9blauRXwZ4df8zt87Ep+g=";
+          };
+
           # Drop-in replacement for Vault API
           # https://github.com/TheNextLvl-net/service-io
           # Alternative: https://hangar.papermc.io/TNE/VaultUnlocked or https://github.com/TheNewEconomy/VaultUnlockedAPI
