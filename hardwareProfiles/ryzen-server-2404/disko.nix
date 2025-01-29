@@ -187,8 +187,25 @@ in {
             mountpoint = "/orion/backups";
             inherit options;
           };
+
+          # Dataset for Frigate NVR
+          frigate = {
+            type = "zfs_fs";
+            mountpoint = "/var/lib/frigate";
+            inherit options;
+          };
         };
       };
+    };
+
+    # Also used by frigate
+    nodev."/tmp/cache" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=25%"
+        "defaults"
+        "mode=755"
+      ];
     };
   };
 }
