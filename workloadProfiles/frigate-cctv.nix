@@ -40,6 +40,23 @@
         retain.days = 30;
         retain.mode = "all";
       };
+      # detectors.ov = {
+      #   type = "openvino";
+      #   device = "GPU";
+      # };
+      # # FIXME see https://docs.frigate.video/configuration/object_detectors#ssdlite-mobilenet-v2
+      # model = {
+      #   width = 300;
+      #   height = 300;
+      #   input_tensor = "nhwc";
+      #   input_pixel_format = "bgr";
+      #   # FIXME build converted OpenVINO model, see:
+      #   # https://github.com/blakeblackshear/frigate/blob/dev/docker/main/Dockerfile#L55
+      #   # https://github.com/blakeblackshear/frigate/blob/dev/docker/main/requirements-ov.txt
+      #   # https://github.com/blakeblackshear/frigate/blob/dev/docker/main/build_ov_model.py
+      #   # path = ...;
+      #   labelmap_path = "${config.services.frigate.package}/share/frigate/coco_91cl_bkgr.txt";
+      # };
     };
     hostname = "frigate.hepr.me";
   };
