@@ -199,7 +199,7 @@ in {
     };
 
     # Also used by frigate
-    nodev."/tmp/cache" = {
+    nodev."/var/cache/frigate" = {
       fsType = "tmpfs";
       mountOptions = [
         "size=25%"
