@@ -161,10 +161,41 @@ in {
         };
         image = "krateng/maloja";
         ports = ["42010:42010"];
-        volumes = ["/persist/.maloja:/mjldata"];
+        volumes = let
+          maloja-config = {
+            name = "Keks";
+            # Use album info from latest scrobble
+            # Options: first, last, majority
+            # Default: first
+            album_information_trust = "last";
+            invalid_artists = ["[Unknown Artist]" "Unknown Artist" "Spotify" "Unbekannter Künstler"];
+            remove_from_title = ["(Original Mix)" "(Radio Edit)" "(Album Version)" "(Explicit Version)" "(Bonus Track)" "(Live)"];
+            # Default is missing the simple comma
+            delimiters_formal = ["," ";" "/" "|" "␝" "␞" "␟"];
+            parse_remix_artists = true;
+            show_play_number_on_tiles = true;
+            timezone = 1; # UTC+1 Berlin
+          };
+          maloja-config-file = pkgs.writeText "maloja-settings.yml" (lib.generators.toYAML {} maloja-config);
+
+          maloja-rules = lib.concatMapStringsSep "\n" (lib.concatStringsSep "\t") [
+            ["replaceartist" "Galactikraken" "Jonathan Young"]
+          ];
+          maloja-rules-file = pkgs.writeText "maloja-rules.tsv" maloja-rules;
+        in [
+          "/persist/.maloja:/mjldata"
+          # Maloja uses a INI-like config by default:
+          # - Python's ConfigParser is used for getting a dict
+          # - Python's AST package is used for converting the strings to values
+          # e.g. the following line would parse but I'm not willing to use it:
+          # invalid_artists = ["first", "second"]
+          # Instead, I'm making a yaml which is for some reason allowed but only
+          # in the alternate location for secrets...
+          "${maloja-config-file}:/run/secrets/maloja.yml"
+          "${maloja-rules-file}:/mjldata/rules/keks.tsv"
+        ];
         environment = {
           "MALOJA_DATA_DIRECTORY" = "/mjldata";
-          "MALOJA_NAME" = "Keks";
           "PUID" = "835";
           "PGID" = "835";
         };
