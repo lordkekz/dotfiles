@@ -16,6 +16,7 @@
       "heinrich-preiser.de"
       "hepr.me"
       "git.hepr.me"
+      "solux.cc"
     ];
 
     virusScanning = true;
