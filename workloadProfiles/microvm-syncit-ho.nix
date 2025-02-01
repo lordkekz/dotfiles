@@ -170,6 +170,8 @@ in {
             album_information_trust = "last";
             invalid_artists = ["[Unknown Artist]" "Unknown Artist" "Spotify" "Unbekannter Künstler"];
             remove_from_title = ["(Original Mix)" "(Radio Edit)" "(Album Version)" "(Explicit Version)" "(Bonus Track)" "(Live)"];
+            # Default only has first three
+            delimiters_informal = ["vs." "vs" "&" "and" "with" "und" "mit"];
             # Default is missing the simple comma
             delimiters_formal = ["," ";" "/" "|" "␝" "␞" "␟"];
             parse_remix_artists = true;
@@ -180,6 +182,7 @@ in {
 
           maloja-rules = lib.concatMapStringsSep "\n" (lib.concatStringsSep "\t") [
             ["replaceartist" "Galactikraken" "Jonathan Young"]
+            ["replaceartist" "Torre Florim" "De Staat"]
           ];
           maloja-rules-file = pkgs.writeText "maloja-rules.tsv" maloja-rules;
         in [
