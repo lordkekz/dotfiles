@@ -176,6 +176,7 @@ in {
             delimiters_formal = ["," ";" "/" "|" "␝" "␞" "␟"];
             parse_remix_artists = true;
             show_play_number_on_tiles = true;
+            week_offset = 1; # Start on Monday
             timezone = 1; # UTC+1 Berlin
           };
           maloja-config-file = pkgs.writeText "maloja-settings.yml" (lib.generators.toYAML {} maloja-config);
