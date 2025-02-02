@@ -68,6 +68,12 @@ args @ {
       # Override tinted-tmux using only second-darkest color, which is gray on da-one-black from stylix.
       set -g window-status-style "fg=#c8c8c8"
       set -g window-status-current-style ""
+
+      # Prevent delay when exiting insert mode in modal editors
+      # See: https://github.com/helix-editor/helix/issues/2039
+      # See: https://neovim.io/doc/user/faq.html#faq-runtime
+      #      (under "ESC IN TMUX OR GNU SCREEN IS DELAYED")
+      set -g escape-time 0
     '';
   };
 }
