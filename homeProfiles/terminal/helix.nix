@@ -24,30 +24,40 @@ args @ {
     ];
     ignores = [];
     languages = {};
-    settings.editor = {
-      scrolloff = 3;
-      line-number = "relative";
-      rulers = [80 120];
-      bufferline = "multiple";
-      color-modes = true;
-      # statusline = ...;
-      lsp.display-inlay-hints = true;
-      cursor-shape = {
-        normal = "block";
-        insert = "bar";
-        select = "block";
+    settings = {
+      editor = {
+        scrolloff = 3;
+        line-number = "relative";
+        rulers = [80 120];
+        bufferline = "multiple";
+        color-modes = true;
+        # statusline = ...;
+        lsp.display-inlay-hints = true;
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "block";
+        };
+        indent-guides = {
+          render = true;
+          character = "▏"; # U+258F "Left One Eigth Block"
+          skip-levels = 0;
+        };
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "error";
+        };
       };
-      indent-guides = {
-        render = true;
-        character = "▏"; # U+258F "Left One Eigth Block"
-        skip-levels = 0;
+      keys.normal = {
+        # See: https://github.com/helix-editor/helix/discussions/10361#discussioncomment-9089890
+        # Makes c and d not yank, use yc and yd instead.
+        "A-d" = "delete_selection";
+        "d" = "delete_selection_noyank";
+        "A-c" = "change_selection";
+        "c" = "change_selection_noyank";
       };
-      inline-diagnostics = {
-        cursor-line = "hint";
-        other-lines = "error";
-      };
+      theme = lib.mkForce "stylix-customized";
     };
-    settings.theme = lib.mkForce "stylix-customized";
     themes.stylix-customized = {
       # Get the default values from the stylix config
       inherits = "stylix";
