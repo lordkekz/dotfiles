@@ -184,6 +184,16 @@ in {
           maloja-rules = lib.concatMapStringsSep "\n" (lib.concatStringsSep "\t") [
             ["replaceartist" "Galactikraken" "Jonathan Young"]
             ["replaceartist" "Torre Florim" "De Staat"]
+            ["replaceartist" "LISA" "Lalisa"]
+            ["replaceartist" "Lisa" "Lalisa"]
+            ["countas" "Lalisa" "BLACKPINK"]
+            ["replaceartist" "ROSE" "Rosé"]
+            ["replaceartist" "ROSÉ" "Rosé"]
+            ["countas" "Rosé" "BLACKPINK"]
+            ["replaceartist" "JENNIE" "Jennie"]
+            ["countas" "Jennie" "BLACKPINK"]
+            ["replaceartist" "JISOO" "Jisoo"]
+            ["countas" "Jisoo" "BLACKPINK"]
           ];
           maloja-rules-file = pkgs.writeText "maloja-rules.tsv" maloja-rules;
         in [
