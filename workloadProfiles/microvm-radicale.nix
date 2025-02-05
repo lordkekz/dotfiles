@@ -46,6 +46,10 @@ in {
           htpasswd_filename = "${pkgs.writeText "radicale-users" personal-data.data.home.radicale.usersFile}";
           htpasswd_encryption = "autodetect";
         };
+        rights = {
+          type = "authenticated"; # use "file" if custom rules are needed
+          # file = ...;
+        };
         storage = {
           filesystem_folder = "/persist";
           # hook = ...;
