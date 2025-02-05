@@ -41,7 +41,8 @@ args @ {
       showScrollbars = true;
       openFileInTabs = true;
       viewContinuous = true;
-      #viewMode = "Single"; # not sure what this does
+      # Controls which pages to show, e.g. two or overview
+      viewMode = "Single";
       zoomMode = "autoFit";
       obeyDrm = false;
       mouseMode = "Browse";
@@ -58,4 +59,5 @@ args @ {
       memoryUsage = "Aggressive";
     };
   };
+  programs.plasma.configFile."okularrc"."Notification Messages"."presentationInfo" = false;
 }
