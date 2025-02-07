@@ -29,7 +29,6 @@ in rec {
     enable = true;
     #package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
     settings = {
-      "privacy.donottrackheader.enabled" = true;
       # Betterbird-specific options:
       #"mail.minimizeToTray" = true;
       #"mail.minimizeToTray.supportedDesktops" = "kde,gnome,xfce,mate, ,";
