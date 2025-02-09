@@ -54,7 +54,8 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
+    home-manager.url = "github:lordkekz/home-manager?ref=release-24.11";
+    # home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Kwin effect to force blur of transparent windows
