@@ -74,6 +74,7 @@ args @ {
     superTux
     superTuxKart
     extremetuxracer
+    shattered-pixel-dungeon
 
     # COMMUNICATION
     birdtray

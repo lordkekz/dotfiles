@@ -96,6 +96,7 @@ in {
         ".config/Podman Desktop"
         ".config/Signal"
         ".config/syncthing" # Syncthing settings, e.g. telemetry and web interface
+        ".local/share/.shatteredpixel" # Data of Shattered Pixel Dungeon roguelike
         ".local/share/Anki2"
         ".local/share/applications"
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
