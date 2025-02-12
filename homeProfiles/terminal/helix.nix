@@ -47,6 +47,7 @@ args @ {
           cursor-line = "hint";
           other-lines = "error";
         };
+        soft-wrap.enable = true;
       };
       keys.normal = {
         # See: https://github.com/helix-editor/helix/discussions/10361#discussioncomment-9089890
