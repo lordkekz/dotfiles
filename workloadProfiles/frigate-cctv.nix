@@ -21,7 +21,7 @@
           ffmpeg.inputs = [
             {
               path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=1&audio=1";
-              roles = ["record" "detect"];
+              roles = ["record"];
             }
           ];
         };
