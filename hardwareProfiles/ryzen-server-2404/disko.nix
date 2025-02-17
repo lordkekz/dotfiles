@@ -191,8 +191,15 @@ in {
           # Dataset for Frigate NVR
           frigate = {
             type = "zfs_fs";
-            mountpoint = "/var/lib/frigate";
-            inherit options;
+            # datasets.<name>.options.mountpoint only sets the ZFS attribute
+            # whereas datasets.<name>.mountpoint may also generate a systemd
+            # mount unit (depending on the mountpoint) which causes the
+            # zfs-mount.service (and dependents) to fail
+            options =
+              options
+              // {
+                mountpoint = "/var/lib/frigate";
+              };
           };
         };
       };

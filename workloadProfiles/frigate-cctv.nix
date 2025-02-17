@@ -88,6 +88,7 @@
     hostname = "frigate.hepr.me";
   };
 
+  systemd.services.frigate.serviceConfig.After = ["zfs-mount.service"];
   systemd.services.frigate.serviceConfig.EnvironmentFile = config.age.secrets.frigate-rtsp-passwords.path;
   age.secrets.frigate-rtsp-passwords.rekeyFile = "${inputs.self.outPath}/secrets/frigate-rtsp-passwords.age";
 
