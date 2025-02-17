@@ -20,7 +20,7 @@
           enabled = true;
           ffmpeg.inputs = [
             {
-              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=1";
+              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=1&audio=1";
               roles = ["record" "detect"];
             }
           ];
@@ -29,8 +29,35 @@
           enabled = true;
           ffmpeg.inputs = [
             {
-              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=2";
-              roles = ["record" "detect"];
+              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=5&audio=1";
+              roles = ["record"];
+            }
+          ];
+        };
+        front-3 = {
+          enabled = true;
+          ffmpeg.inputs = [
+            {
+              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=6&audio=1";
+              roles = ["record"];
+            }
+          ];
+        };
+        front-4 = {
+          enabled = true;
+          ffmpeg.inputs = [
+            {
+              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=7&audio=1";
+              roles = ["record"];
+            }
+          ];
+        };
+        front-5 = {
+          enabled = true;
+          ffmpeg.inputs = [
+            {
+              path = "rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_FRONT_PASSWORD}@{FRIGATE_RTSP_FRONT_IP}/axis-media/media.amp?camera=8&audio=1";
+              roles = ["record"];
             }
           ];
         };
