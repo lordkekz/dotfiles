@@ -12,6 +12,7 @@
     public-websites
     mailserver
     # owncast # Currently unused; disable to minimize attack surface
+    lemmy
   ];
 
   # PUBLIC MINECRAFT SERVER RUNS ON NASMAN (but forward ports on vortex)
