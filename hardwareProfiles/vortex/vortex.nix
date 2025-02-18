@@ -28,7 +28,7 @@ in {
 
   # Required for secrets
   age.rekey.hostPubkey = personal-data.data.lab.hosts.vortex.key;
-  age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519_key"];
+  age.identityPaths = lib.mkForce ["/persist/local/etc/ssh/ssh_host_ed25519"];
 
   # Make SSH server only listen on tailscale network
   services.openssh.listenAddresses = [
