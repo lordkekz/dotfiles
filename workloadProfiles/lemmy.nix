@@ -31,6 +31,46 @@
   age.secrets.lemmy-email-password.rekeyFile = "${inputs.self.outPath}/secrets/lemmy-email-password.age";
   age.secrets.lemmy-admin-password.rekeyFile = "${inputs.self.outPath}/secrets/lemmy-admin-password.age";
 
+  services.caddy.virtualHosts."lemmy.solux.cc".extraConfig = let
+    cfg = config.services.lemmy;
+  in
+    lib.mkForce ''
+      handle_path /static/* {
+        root * ${cfg.ui.package}/dist
+        file_server
+      }
+      handle_path /static/undefined/* {
+        root * ${cfg.ui.package}/dist
+        file_server
+      }
+      handle_path /static/${cfg.ui.package.passthru.commit_sha}/* {
+        root * ${cfg.ui.package}/dist
+        file_server
+      }
+      @for_backend {
+        path /api/* /pictrs/* /feeds/* /nodeinfo/*
+      }
+      handle @for_backend {
+        reverse_proxy 127.0.0.1:${toString cfg.settings.port}
+      }
+      @post {
+        method POST
+      }
+      handle @post {
+        reverse_proxy 127.0.0.1:${toString cfg.settings.port}
+      }
+      @jsonld {
+        header Accept "application/activity+json"
+        header Accept "application/ld+json; profile=\"https://www.w3.org/ns/activitystreams\""
+      }
+      handle @jsonld {
+        reverse_proxy 127.0.0.1:${toString cfg.settings.port}
+      }
+      handle {
+        reverse_proxy 127.0.0.1:${toString cfg.ui.port}
+      }
+    '';
+
   services.postgresql = {
     dataDir = "/persist/postgres";
   };
