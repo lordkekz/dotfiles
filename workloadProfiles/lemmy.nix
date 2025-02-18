@@ -30,4 +30,15 @@
 
   age.secrets.lemmy-email-password.rekeyFile = "${inputs.self.outPath}/secrets/lemmy-email-password.age";
   age.secrets.lemmy-admin-password.rekeyFile = "${inputs.self.outPath}/secrets/lemmy-admin-password.age";
+
+  services.postgresql = {
+    dataDir = "/persist/postgres";
+  };
+  services.postgresqlBackup = {
+    databases = [config.services.lemmy.settings.database.database];
+    # No compression = Easy deduplication of backups
+    compression = "none";
+    # This is backed up by borgbackup
+    location = "/persist/postgresBackup";
+  };
 }

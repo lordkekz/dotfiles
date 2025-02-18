@@ -45,6 +45,14 @@
                   mountpoint = "/persist/mail";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
+                persist-postgres = {
+                  mountpoint = "/persist/postgres";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                persist-postgresBackup = {
+                  mountpoint = "/persist/postgresBackup";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
                 persist-ephemeral = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];

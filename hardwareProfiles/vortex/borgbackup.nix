@@ -16,6 +16,8 @@
     in {
       paths = [
         "/persist/mail"
+        # Only backup the DB dumps. Restoring them will need to be done manually.
+        "/persist/postgresBackup"
       ];
       doInit = true;
       repo = "borg@nasman2404:.";
