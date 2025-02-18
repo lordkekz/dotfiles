@@ -48,13 +48,13 @@ in {
       "/var/lib/tailscale"
       "/var/lib/nixos"
       "/var/lib/owncast" # this config doesn't need backups but isn't reproducible
+      # I would prefer to only persist some of the files, but then it fails on
+      # boot because sshd starts too early and puts a new host key in the way
+      # Relevant: https://github.com/nix-community/impermanence/pull/88
+      "/etc/ssh"
     ];
     files = [
       "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
     ];
 
     users.${username} = {
