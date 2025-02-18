@@ -11,7 +11,6 @@
     enable = true;
     settings = {
       hostname = "lemmy.solux.cc";
-      database.createLocally = true;
       email = {
         smtp_server = "vortex.lkekz.de:465";
         smtp_login = "noreply-lemmy@solux.cc";
@@ -26,6 +25,7 @@
     smtpPasswordFile = config.age.secrets.lemmy-email-password.path;
     adminPasswordFile = config.age.secrets.lemmy-admin-password.path;
     caddy.enable = true;
+    database.createLocally = true;
   };
 
   age.secrets.lemmy-email-password.rekeyFile = "${inputs.self.outPath}/secrets/lemmy-email-password.age";
