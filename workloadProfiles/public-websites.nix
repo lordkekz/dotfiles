@@ -35,6 +35,20 @@
     '';
   };
 
+  services.caddy.virtualHosts."solux.cc" = {
+    serverAliases = ["www.solux.cc"];
+    extraConfig = ''
+      tls /var/lib/acme/solux.cc/cert.pem /var/lib/acme/solux.cc/key.pem
+      header Content-Type text/html
+      respond <<HTML
+        <html>
+          <head><title>solux.cc</title></head>
+          <body>Site under construction.</body>
+        </html>
+        HTML 200
+    '';
+  };
+
   services.caddy.virtualHosts."r4c.hepr.me" = {
     serverAliases = ["www.r4c.hepr.me"];
     extraConfig = ''
