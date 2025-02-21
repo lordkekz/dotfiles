@@ -75,6 +75,8 @@
     dataDir = "/persist/postgres";
   };
   services.postgresqlBackup = {
+    enable = true;
+    startAt = "*-*-* 23:30:00"; # This runs 30mins before borg backup
     databases = [config.services.lemmy.settings.database.database];
     # No compression = Easy deduplication of backups
     compression = "none";
