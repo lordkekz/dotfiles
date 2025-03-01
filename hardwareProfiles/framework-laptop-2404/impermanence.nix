@@ -101,6 +101,7 @@ in {
         ".local/share/applications"
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
         ".local/share/flatpak"
+        ".local/share/chat.fluffy.fluffychat"
         ".local/share/home-manager"
         ".local/share/JetBrains"
         ".local/share/kwalletd" # KWallet database, contains e.g. WiFi passwords

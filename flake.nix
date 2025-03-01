@@ -264,7 +264,11 @@
       # CHANNEL DEFINITIONS
       # Channels are automatically generated from nixpkgs inputs
       # e.g the inputs which contain `legacyPackages` attribute are used.
-      channelsConfig.allowUnfree = true;
+      channelsConfig = {
+        allowUnfree = true;
+        # FIXME remove once they replace libolm
+        permittedInsecurePackages = ["fluffychat-linux-1.23.0" "olm-3.2.16"];
+      };
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
         yazi
         nix-yazi-plugins
