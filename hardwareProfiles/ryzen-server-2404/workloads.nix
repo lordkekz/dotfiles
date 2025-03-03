@@ -21,6 +21,7 @@ in {
     microvm-minecraft
     frigate-cctv
     robots
+    ollama
   ];
 
   # This is probably only needed on first boot, but this

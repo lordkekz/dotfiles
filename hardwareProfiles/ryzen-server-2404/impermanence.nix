@@ -23,6 +23,7 @@ in {
       "/var/log"
       "/var/lib/systemd/coredump"
       "/var/lib/acme"
+      "/var/lib/ai-stuff" # Used by Ollama and Open WebUI
     ];
     files = [
     ];
