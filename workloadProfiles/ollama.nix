@@ -38,6 +38,8 @@
     };
   };
 
+  systemd.services.open-webui.serviceConfig.ReadWritePaths = [config.services.open-webui.stateDir];
+
   services.ollama = {
     enable = true;
     port = 11434;
