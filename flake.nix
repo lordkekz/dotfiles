@@ -311,26 +311,36 @@
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
 
-        nasman2404.modules = [
+        nasman.modules = [
           homelab
-          ryzen-server-2404
+          nasman
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
 
-        kekswork2404.modules = [
+        kekswork.modules = [
           personal
           graphical
-          framework-laptop-2404
+          kekswork
           # Adds entries for graphical sessions which first activate a home configuration
           (mkSessions "x86_64-linux")
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
 
-        keksjumbo2410.modules = [
+        keksjumbo.modules = [
           personal
           graphical
-          framework-laptop-2410
+          keksjumbo
+          # Adds entries for graphical sessions which first activate a home configuration
+          (mkSessions "x86_64-linux")
+          # Fallback so I get a decent tty experience without starting graphical session
+          (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
+        ];
+
+        keksmaxi.modules = [
+          personal
+          graphical
+          keksmaxi
           # Adds entries for graphical sessions which first activate a home configuration
           (mkSessions "x86_64-linux")
           # Fallback so I get a decent tty experience without starting graphical session
