@@ -409,7 +409,7 @@
       agenix-rekey = inputs.agenix-rekey.configure {
         userFlake = self;
         nodes = {
-          inherit (self.nixosConfigurations) kekswork2404 keksjumbo2410 nasman2404 vortex;
+          inherit (self.nixosConfigurations) kekswork keksjumbo keksmaxi nasman vortex;
         };
         # Example for colmena:
         # inherit ((colmena.lib.makeHive self.colmena).introspect (x: x)) nodes;
