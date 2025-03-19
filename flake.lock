@@ -2314,11 +2314,11 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1741905751,
-        "narHash": "sha256-vDe/ZkX5aCt30LBnJOUedEuy6Xnu1U+tiukjqeIZgB8=",
+        "lastModified": 1742411782,
+        "narHash": "sha256-EcR+MWsL7iZhrzmtsH1HroU9ipT3BuHVwmMbWOmHI9Q=",
         "owner": "lordkekz",
         "repo": "stylix",
-        "rev": "116cbdb3d2214dd0c077537224039944e0b7f756",
+        "rev": "14010f5c9d85a082aed74d510e4a381b7d265387",
         "type": "github"
       },
       "original": {
