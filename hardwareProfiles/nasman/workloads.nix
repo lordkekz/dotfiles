@@ -20,7 +20,6 @@ in {
     microvm-forgejo
     microvm-minecraft
     frigate-cctv
-    robots
     ollama
   ];
 
