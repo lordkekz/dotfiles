@@ -12,7 +12,7 @@
 
   disko.devices = {
     disk = {
-      main = {
+      kekswork = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-MKNSSDTS2TB-D8_MK22070814A05DA18";
         content = {
@@ -35,7 +35,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "crypted-kekswork";
                 # LUKS will ask for password during boot
                 passwordFile = "/tmp/luks-password";
                 settings = {

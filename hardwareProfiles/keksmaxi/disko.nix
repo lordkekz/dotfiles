@@ -12,9 +12,9 @@
 
   disko.devices = {
     disk = {
-      main = {
+      keksmaxi = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21JNXAGA47804H";
+        device = "/dev/disk/by-id/";
         content = {
           type = "gpt";
           partitions = {
@@ -35,7 +35,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "crypted-keksmaxi";
                 # LUKS will ask for password during boot
                 passwordFile = "/tmp/luks-password";
                 settings = {

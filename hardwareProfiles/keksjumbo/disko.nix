@@ -12,7 +12,7 @@
 
   disko.devices = {
     disk = {
-      main = {
+      keksjumbo = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-WD_BLACK_SN770M_2TB_23492Q802076";
         content = {
@@ -35,7 +35,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "crypted-keksjumbo";
                 # LUKS will ask for password during boot
                 passwordFile = "/tmp/luks-password";
                 settings = {
