@@ -8,7 +8,7 @@
     devenv.url = "github:cachix/devenv";
 
     # Disko for declarative partitioning
-    disko.url = "github:nix-community/disko?ref=v1.9.0";
+    disko.url = "github:nix-community/disko?ref=v1.11.0";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Flake utils for stripping some boilerplate
@@ -59,12 +59,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Kwin effect to force blur of transparent windows
-    kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur?ref=v1.3.4";
+    kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur?ref=v1.3.6";
     kwin-effects-forceblur.inputs.nixpkgs.follows = "nixpkgs";
     kwin-effects-forceblur.inputs.utils.follows = "flake-utils";
 
     # Lix (correctness-focused fork of Nix)
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-1.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
@@ -74,7 +74,7 @@
 
     # Tmux status bar configured in Rust
     #muxbar.url = "github:Dlurak/muxbar";
-    muxbar.url = "github:lordkekz/muxbar"; # FIXME Update once PR gets merged
+    muxbar.url = "github:lordkekz/muxbar";
     muxbar.inputs.nixpkgs.follows = "nixpkgs";
     muxbar.inputs.systems.follows = "systems";
 
@@ -100,9 +100,9 @@
     nix-minecraft.inputs.flake-utils.follows = "flake-utils";
 
     # NixVim distro for neovim
-    nixvim.url = "github:nix-community/nixvim/main";
-    #nixvim.url = "github:lordkekz/nixvim/main";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # nixvim.url = "github:nix-community/nixvim/main";
+    # nixvim.url = "github:lordkekz/nixvim/main";
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # Doesn't work: nixvim.inputs.pre-commit-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     # see: https://github.com/msteen/nix-flake-override
 
@@ -141,7 +141,7 @@
 
     # Stylix helps theme applications using base16
     #stylix.url = "/home/hpreiser/git/stylix";
-    stylix.url = "github:lordkekz/stylix?ref=release-24.11"; # FIXME switch back to upstream once merged
+    stylix.url = "github:lordkekz/stylix?ref=release-24.11";
     #stylix.url = "github:danth/stylix?ref=master";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
