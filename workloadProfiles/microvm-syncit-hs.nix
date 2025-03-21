@@ -41,6 +41,8 @@ in {
       dataDir = persistentFolder + "/.syncthing-folders"; # Default folder for new synced folders
       configDir = persistentFolder + "/.config/syncthing"; # Folder for Syncthing's settings and keys
       settings = personalSettings;
+      overrideFolders = false;
+      overrideDevices = false;
       guiAddress = "10.0.0.${vmId}:8384";
     };
   };
