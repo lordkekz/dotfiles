@@ -192,6 +192,7 @@ in {
       enable = true;
       dockerSocket.enable = true;
     };
+    networking.firewall.trustedInterfaces = ["podman*"];
   };
 
   age.secrets.forgejo-runner-registration-token = {
