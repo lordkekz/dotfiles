@@ -12,7 +12,7 @@
   user = "gitea-runner";
   group = "gitea-runner";
   unitsAfterPersist = ["gitea-runner-default.service"];
-  pathsToChown = ["/persist" microvmSecretsDir];
+  pathsToChown = ["/persist/gitea-runner" microvmSecretsDir];
   hostConfig = config;
   microvmSecretsDir = "/run/agenix-microvm-forgejo-ci";
 in {
@@ -200,6 +200,22 @@ in {
     };
     # Required for DNS in the containers started by Forgejo Runner
     networking.firewall.trustedInterfaces = ["podman+"];
+
+    microvm.writableStoreOverlay = "/persist/nix-store";
+    # microvm.nix tries to do this automatically with writableStoreOverlay, but
+    # we give not a volume but a directory inside a volume, so it gets confused.
+    fileSystems."/persist".neededForBoot = true;
+    fileSystems."/nix/store".depends = ["/persist"];
+    # Persist the nix store db before it gets used:
+    # - microvm.nix loads the db for the host's paths in boot.postBootCommands
+    # - nix-daemon is started by systemd (after boot.postBootCommands)
+    boot.postBootCommands = lib.mkBefore ''
+      mkdir -p /persist/nix-store/store
+      mkdir -p /persist/nix-store/work
+      mkdir -p /persist/nix-store/db
+      mkdir -p /nix/var/nix/db
+      ${pkgs.util-linux}/bin/mount --bind /persist/nix-store/db /nix/var/nix/db
+    '';
   };
 
   age.secrets.forgejo-runner-registration-token = {
