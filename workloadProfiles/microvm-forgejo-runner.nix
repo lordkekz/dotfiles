@@ -192,7 +192,8 @@ in {
       enable = true;
       dockerSocket.enable = true;
     };
-    networking.firewall.trustedInterfaces = ["podman*"];
+    # Required for DNS in the containers started by Forgejo Runner
+    networking.firewall.trustedInterfaces = ["podman+"];
   };
 
   age.secrets.forgejo-runner-registration-token = {
