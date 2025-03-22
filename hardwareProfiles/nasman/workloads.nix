@@ -18,6 +18,7 @@ in {
     microvm-syncit-hs
     microvm-radicale
     microvm-forgejo
+    microvm-forgejo-runner
     microvm-minecraft
     frigate-cctv
     ollama
