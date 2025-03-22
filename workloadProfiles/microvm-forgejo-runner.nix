@@ -36,6 +36,20 @@ in {
       }
     ];
 
+    users.users.${user} = {
+      isSystemUser = true;
+      inherit group;
+    };
+    users.groups.${group} = {};
+
+    # The gitea-actions-runner module doesn't allow changing the home dir of runners
+    # So we just link it to the mountpoint of /persist
+    systemd.services."init-permissions".preStart = ''
+      mkdir -p /persist/gitea-runner
+      mkdir -p /var/lib/private/gitea-runner
+      ${pkgs.util-linux}/bin/mount --bind /persist/gitea-runner /var/lib/private/gitea-runner
+    '';
+
     services.gitea-actions-runner = {
       package = pkgs.forgejo-actions-runner;
       instances.default = {
