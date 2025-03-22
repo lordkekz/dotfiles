@@ -7,11 +7,11 @@
   personal-data,
   ...
 }: let
-  vmName = "forgejo";
+  vmName = "forgejo-runner";
   vmId = "17";
-  user = "forgejo";
-  group = "forgejo";
-  unitsAfterPersist = ["forgejo-secrets.service" "forgejo.service"];
+  user = "gitea-runner";
+  group = "gitea-runner";
+  unitsAfterPersist = ["gitea-runner-*.service"];
   pathsToChown = ["/persist" microvmSecretsDir];
   hostConfig = config;
   microvmSecretsDir = "/run/agenix-microvm-forgejo-runner";
