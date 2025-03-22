@@ -24,6 +24,7 @@ in {
       "vm-${vmName}-b".allowedTCPPorts = [];
     };
 
+    microvm.vcpu = lib.mkForce 8;
     # FIXME increase memory once it actually builds software and I get more RAM
     microvm.balloonMem = lib.mkForce 2048; # MiB
 
