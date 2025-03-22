@@ -42,12 +42,17 @@ in {
     };
     users.groups.${group} = {};
 
-    # The gitea-actions-runner module doesn't allow changing the home dir of runners
-    # So we just link it to the mountpoint of /persist
+    # BEHOLD: A poor person's impermanence.
     systemd.services."init-permissions".preStart = ''
+      # Put gitea-runner data on /persist to keep runner id persistent
       mkdir -p /persist/gitea-runner
       mkdir -p /var/lib/private/gitea-runner
       ${pkgs.util-linux}/bin/mount --bind /persist/gitea-runner /var/lib/private/gitea-runner
+
+      # Put container data on /persist to avoid OOM
+      mkdir -p /persist/containers
+      mkdir -p /var/lib/containers
+      ${pkgs.util-linux}/bin/mount --bind /persist/containers /var/lib/containers
     '';
 
     services.gitea-actions-runner = {
