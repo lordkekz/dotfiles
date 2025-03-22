@@ -7,14 +7,14 @@
   personal-data,
   ...
 }: let
-  vmName = "forgejo-runner";
+  vmName = "forgejo-ci";
   vmId = "17";
   user = "gitea-runner";
   group = "gitea-runner";
-  unitsAfterPersist = ["gitea-runner-*.service"];
+  unitsAfterPersist = ["gitea-runner-default.service"];
   pathsToChown = ["/persist" microvmSecretsDir];
   hostConfig = config;
-  microvmSecretsDir = "/run/agenix-microvm-forgejo-runner";
+  microvmSecretsDir = "/run/agenix-microvm-forgejo-ci";
 in {
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId user group unitsAfterPersist pathsToChown;})];
@@ -31,7 +31,7 @@ in {
       {
         mountPoint = microvmSecretsDir;
         source = microvmSecretsDir;
-        tag = "microvm-forgejo-runner-secret";
+        tag = "microvm-forgejo-ci-secret";
         securityModel = "mapped";
       }
     ];
