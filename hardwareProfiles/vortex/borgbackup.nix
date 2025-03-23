@@ -18,6 +18,8 @@
         "/persist/mail"
         # Only backup the DB dumps. Restoring them will need to be done manually.
         "/persist/postgresBackup"
+        # Pictures of Lemmy instance
+        "/persist/pict-rs"
       ];
       doInit = true;
       repo = "borg@nasman2404:.";

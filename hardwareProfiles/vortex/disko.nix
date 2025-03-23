@@ -53,6 +53,10 @@
                   mountpoint = "/persist/postgresBackup";
                   mountOptions = ["compress=zstd" "noatime"];
                 };
+                persist-pict-rs = {
+                  mountpoint = "/persist/pict-rs";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
                 persist-ephemeral = {
                   mountpoint = "/persist/ephemeral";
                   mountOptions = ["compress=zstd" "noatime"];

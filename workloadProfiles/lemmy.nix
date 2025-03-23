@@ -71,6 +71,10 @@
       }
     '';
 
+  services.pict-rs = {
+    dataDir = "/persist/pict-rs";
+  };
+
   services.postgresql = {
     dataDir = "/persist/postgres";
   };
