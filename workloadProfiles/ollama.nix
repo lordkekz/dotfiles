@@ -25,7 +25,7 @@
     environment = {
       # Customization
       # ENV = "prod";
-      WEBUI_URL = "https://llm.hepr.me";
+      WEBUI_URL = "https://ai-chat.hepr.me";
       # Connect to local Ollama backend
       ENABLE_OLLAMA_API = "True";
       OLLAMA_BASE_URL = "http://localhost:11434";
