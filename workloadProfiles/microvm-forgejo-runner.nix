@@ -231,6 +231,12 @@ in {
       mkdir -p /nix/var/nix/db
       ${pkgs.util-linux}/bin/mount --bind /persist/nix-store/db /nix/var/nix/db
     '';
+
+    # Let Nix Daemon garbage-collect when disk starts getting full
+    nix.settings = {
+      min-free = 10 * 1024 * 1024 * 1024; # byte
+      max-free = 40 * 1024 * 1024 * 1024; # byte
+    };
   };
 
   age.secrets.forgejo-runner-registration-token = {
