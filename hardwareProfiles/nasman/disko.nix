@@ -159,6 +159,14 @@ in {
               format = "ext4";
             };
           };
+          microvm-forgejo-ci = {
+            type = "zfs_volume";
+            size = "240G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
           microvm-radicale = {
             type = "zfs_volume";
             size = "10G";
