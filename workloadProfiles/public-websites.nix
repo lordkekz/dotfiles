@@ -7,17 +7,24 @@
   personal-data,
   ...
 }: {
+  users.users."web-deployments" = {
+    isSystemUser = true;
+    group = "nogroup";
+    openssh.authorizedKeys.keys = [
+      ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8hxNHWcHNcSFEQ8dDhGeykudU4DdkN3rqdMJmjLSNJ''
+    ];
+  };
+
   services.caddy.virtualHosts."heinrich-preiser.de" = {
     serverAliases = ["www.heinrich-preiser.de"];
     extraConfig = ''
       tls /var/lib/acme/heinrich-preiser.de/cert.pem /var/lib/acme/heinrich-preiser.de/key.pem
-      header Content-Type text/html
-      respond <<HTML
-        <html>
-          <head><title>heinrich-preiser.de</title></head>
-          <body>Site under construction.</body>
-        </html>
-        HTML 200
+
+      @www-subdomain host www.heinrich-preiser.de
+      redir @www-subdomain https://heinrich-preiser.de{uri} permanent
+
+      root * /var/www/heinrich-preiser-de/prod
+      file_server
     '';
   };
 
