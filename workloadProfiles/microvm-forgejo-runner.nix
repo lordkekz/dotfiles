@@ -65,9 +65,12 @@ in {
         tokenFile = hostConfig.age.secrets.forgejo-runner-registration-token.path;
         labels = [
           "ubuntu:docker://ubuntu:latest"
-          "nix-flakes:docker://nixpkgs/nix-flakes:latest"
-          # optionally provide native execution on the host:
-          # "native:host"
+          "nix-docker:docker://nixpkgs/nix-flakes:latest"
+          # Allow jobs to run unisolated in the microvm.
+          # This is used only for Nix builds, but that isn't enforcable here.
+          # In any case, it's an acceptable risk because the CI is only for my
+          # own projects anyway.
+          "nix-native:host"
         ];
         settings = {
           # The level of logging, can be trace, debug, info, warn, error, fatal
@@ -191,6 +194,18 @@ in {
             # workdir_parent = "";
           };
         };
+        hostPackages = with pkgs; [
+          bash
+          coreutils
+          curl
+          gawk
+          gitMinimal
+          git-lfs # Fix LFS for host-mode jobs
+          gnused
+          nodejs
+          wget
+          config.nix.package
+        ];
       };
     };
 
