@@ -8,52 +8,42 @@
   ...
 }: {
   users.users."web-deployments" = {
-    isSystemUser = true;
+    # To give it a shell ??
+    isNormalUser = true;
     group = "nogroup";
     openssh.authorizedKeys.keys = [
-      ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8hxNHWcHNcSFEQ8dDhGeykudU4DdkN3rqdMJmjLSNJ''
+      ''command="${lib.getExe pkgs.rrsync} -wo /var/www/",restrict,from="10.0.0.17" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8hxNHWcHNcSFEQ8dDhGeykudU4DdkN3rqdMJmjLSNJ''
     ];
   };
 
-  services.caddy.virtualHosts."heinrich-preiser.de" = {
-    serverAliases = ["www.heinrich-preiser.de"];
-    extraConfig = ''
-      tls /var/lib/acme/heinrich-preiser.de/cert.pem /var/lib/acme/heinrich-preiser.de/key.pem
+  services.caddy.virtualHosts = let
+    mkPublicWebsite = domain: {
+      serverAliases = ["www.${domain}"];
+      extraConfig = ''
+        tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem
 
-      @www-subdomain host www.heinrich-preiser.de
-      redir @www-subdomain https://heinrich-preiser.de{uri} permanent
+        @www-subdomain host www.${domain}
+        redir @www-subdomain https://${domain}{uri} permanent
 
-      root * /var/www/heinrich-preiser-de/prod
-      file_server
-    '';
-  };
+        root * /var/www/${domain}/prod
+        file_server
+      '';
+    };
+    mkDraftWebsite = domain: {
+      extraConfig = ''
+        tls /var/lib/acme/drafts.hepr.me/cert.pem /var/lib/acme/drafts.hepr.me/key.pem
 
-  services.caddy.virtualHosts."hepr.me" = {
-    serverAliases = ["www.hepr.me"];
-    extraConfig = ''
-      tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
-      header Content-Type text/html
-      respond <<HTML
-        <html>
-          <head><title>hepr.me</title></head>
-          <body>Site under construction.</body>
-        </html>
-        HTML 200
-    '';
-  };
-
-  services.caddy.virtualHosts."solux.cc" = {
-    serverAliases = ["www.solux.cc"];
-    extraConfig = ''
-      tls /var/lib/acme/solux.cc/cert.pem /var/lib/acme/solux.cc/key.pem
-      header Content-Type text/html
-      respond <<HTML
-        <html>
-          <head><title>solux.cc</title></head>
-          <body>Site under construction.</body>
-        </html>
-        HTML 200
-    '';
+        root * /var/www/${domain}/test
+        file_server
+      '';
+    };
+  in {
+    "heinrich-preiser.de" = mkPublicWebsite "heinrich-preiser.de";
+    "hepr.me" = mkPublicWebsite "hepr.me";
+    "solux.cc" = mkPublicWebsite "solux.cc";
+    "heinrich-preiser-de.drafts.hepr.me" = mkDraftWebsite "heinrich-preiser.de";
+    "hepr-me.drafts.hepr.me" = mkDraftWebsite "hepr.me";
+    "solux-cc.drafts.hepr.me" = mkDraftWebsite "solux.cc";
   };
 
   # Enable podman containers

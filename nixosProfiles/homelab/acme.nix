@@ -23,7 +23,7 @@ in {
     certs = {
       "heinrich-preiser.de" = cloudflare "heinrich-preiser.de";
       "hepr.me" = cloudflare "hepr.me";
-      "r4c.hepr.me" = cloudflare "r4c.hepr.me";
+      "drafts.hepr.me" = cloudflare "drafts.hepr.me";
       "solux.cc" = cloudflare "solux.cc";
     };
   };
