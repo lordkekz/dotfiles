@@ -37,9 +37,19 @@
         file_server
       '';
     };
+    mkRedirect = domain: target: {
+      extraConfig = ''
+        tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem
+
+        @www-subdomain host www.${domain}
+        redir @www-subdomain https://${domain}{uri} permanent
+
+        redir * ${target} temporary
+      '';
+    };
   in {
     "heinrich-preiser.de" = mkPublicWebsite "heinrich-preiser.de";
-    "hepr.me" = mkPublicWebsite "hepr.me";
+    "hepr.me" = mkRedirect "hepr.me" "https://heinrich-preiser.de{uri}";
     "solux.cc" = mkPublicWebsite "solux.cc";
     "heinrich-preiser-de.drafts.hepr.me" = mkDraftWebsite "heinrich-preiser.de";
     "hepr-me.drafts.hepr.me" = mkDraftWebsite "hepr.me";
