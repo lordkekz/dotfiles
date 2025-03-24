@@ -36,10 +36,19 @@ in {
       addr = lab.tailscale.machines.vortex.ip;
       port = 22;
     }
+    # Port 22 doesn't go through from microvm forgejo-ci to here, but 2222 does.
+    {
+      addr = lab.tailscale.machines.vortex.ip;
+      port = 2222;
+    }
   ];
   # Only open firewall for tailscale interface
   services.openssh.openFirewall = false;
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [22];
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
+    22 # Allow SSH
+    2222 # Allow SSH
+    5201 # Allow iperf
+  ];
 
   networking.hostId = "f5bf3143";
 
@@ -92,12 +101,5 @@ in {
     #    DHCP = "no";
     #  };
     #};
-  };
-
-  networking.nat = {
-    enable = false;
-    enableIPv6 = true;
-    externalInterface = "eth0";
-    internalInterfaces = ["microvm-robot4care"];
   };
 }

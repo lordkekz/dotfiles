@@ -70,7 +70,10 @@
   };
 
   # Allow direct communication between Tailscale devices and VMs
-  # services.tailscale.extraSetFlags = ["--advertise-routes=100.80.64.0/20"];
+  services.tailscale.extraSetFlags = [
+    "--advertise-routes=10.0.0.0/24"
+    "--snat-subnet-routes=false"
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
