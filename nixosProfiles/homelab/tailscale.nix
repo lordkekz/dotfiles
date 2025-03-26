@@ -15,8 +15,9 @@
       # Allows access via routes to internal IPs advertised by other nodes. (gateway)
       "--accept-routes"
     ];
-    authKeyFile = config.age.secrets.tailscale-authkey.path;
+    # authKeyFile = config.age.secrets.tailscale-authkey.path;
   };
 
-  age.secrets.tailscale-authkey.rekeyFile = "${inputs.self.outPath}/secrets/tailscale-authkey.age";
+  # Don't bother, keys keep exiring and re-registering devices is rare
+  # age.secrets.tailscale-authkey.rekeyFile = "${inputs.self.outPath}/secrets/tailscale-authkey.age";
 }
