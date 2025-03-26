@@ -72,6 +72,37 @@
           };
         };
       };
+      rustygames = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-TOSHIBA_DT01ACA200_Y5GHG99GS";
+        content = {
+          type = "gpt";
+          partitions = {
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "crypted-rustygames";
+                # LUKS will ask for password during boot
+                passwordFile = "/tmp/luks-password";
+                settings = {
+                  allowDiscards = true;
+                };
+                content = {
+                  type = "btrfs";
+                  extraArgs = ["-f"];
+                  subvolumes = {
+                    rustygames = {
+                      mountpoint = "/persist/rustygames";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
     };
     nodev."/" = {
       fsType = "tmpfs";
