@@ -27,9 +27,10 @@ args @ {
 in {
   home.file = mkAutostart (
     [
-      #"element-desktop"
-      #"obsidian"
-      #"org.telegram.desktop"
+      "element-desktop"
+      # "obsidian"
+      "org.telegram.desktop"
+      "feishin"
     ]
     ++ (optionals (! config.wayland.windowManager.hyprland.enable) [
       "discord"
