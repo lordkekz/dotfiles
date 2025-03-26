@@ -35,7 +35,7 @@
   networking.hostId = "a2128b4d";
 
   # Required for secrets
-  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO47IEdA84D66Pu3af+lv9Xfzwk7e9xNlgNaGAQ3muJo hpreiser@kekswork2404";
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOx5U8xcaI2oWKGA1FW+w9NHOOJKc8Xa0yD40Cl2D9qt hpreiser@keksmaxi";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
