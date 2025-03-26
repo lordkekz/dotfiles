@@ -1898,11 +1898,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739836215,
-        "narHash": "sha256-macuINnr4IAwZ447c6AddFA5xmb4wd779Z6Ev3A0QkA=",
+        "lastModified": 1743014863,
+        "narHash": "sha256-SPorMx1YUxi8rd+H9K2WcIsmMy3PDA23B44f2VxzPQ0=",
         "owner": "lordkekz",
         "repo": "personal-data",
-        "rev": "926fe409bfc05c69de044d03451fd51b88c217f9",
+        "rev": "43f0108355463ed08b8381e032d845f9d94cd31d",
         "type": "github"
       },
       "original": {
