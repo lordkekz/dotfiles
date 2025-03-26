@@ -64,10 +64,8 @@ args @ {
     picard # MusicBrainz metadata editor
 
     # GAMING AND WINE
-    lutris # Open source gaming platform; use for GTA5
     prismlauncher
-    #minecraft # official launcher is BROKEN, see https://github.com/NixOS/nixpkgs/issues/114732
-    #optifine
+    heroic
     #steam # steam gets enabled in NixOSConfig
     wineWowPackages.stable # support both 32- and 64-bit applications
     #linux-wallpaperengine # Wallpaper Engine
