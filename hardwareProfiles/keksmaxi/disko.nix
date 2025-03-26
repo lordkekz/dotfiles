@@ -14,7 +14,7 @@
     disk = {
       keksmaxi = {
         type = "disk";
-        device = "/dev/disk/by-id/";
+        device = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_2000GB_22260N801336";
         content = {
           type = "gpt";
           partitions = {
