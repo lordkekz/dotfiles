@@ -87,6 +87,7 @@ in {
         ".config/discord"
         ".config/Element"
         ".config/feishin"
+        ".config/heroic"
         ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
