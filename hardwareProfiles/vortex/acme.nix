@@ -16,7 +16,7 @@ in {
   security.acme.certs."vortex.lkekz.de" = http "vortex.lkekz.de";
 
   services.caddy.virtualHosts."vortex.lkekz.de-http".hostName = "vortex.lkekz.de:80";
-  services.caddy.virtualHosts."vortex.lkekz.de".extraConfig = ''
+  services.caddy.virtualHosts."vortex.lkekz.de-http".extraConfig = ''
     handle_path /.well-known/acme-challenge/* {
       root /var/lib/acme/.well-known/acme-challenge
       file_server
