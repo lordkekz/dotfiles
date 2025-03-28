@@ -1999,6 +1999,7 @@
         "personal-data": "personal-data",
         "plasma-manager": "plasma-manager",
         "stylix": "stylix",
+        "stylix-image": "stylix-image",
         "systems": "systems_8",
         "walker": "walker",
         "worms-tex": "worms-tex",
@@ -2077,6 +2078,19 @@
         "ref": "release-24.11",
         "repo": "stylix",
         "type": "github"
+      }
+    },
+    "stylix-image": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-5ScSMvBxoQciXlwVTOa1XTK/p2WZJYXFWvOHKmMpEFU=",
+        "path": "/nix/store/61lqcqb01wl1n15lf3kn69hx3429zqal-source/assets/wallpapers/normandy.jpg",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/61lqcqb01wl1n15lf3kn69hx3429zqal-source/assets/wallpapers/normandy.jpg",
+        "type": "path"
       }
     },
     "systems": {

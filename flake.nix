@@ -146,6 +146,9 @@
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
 
+    stylix-image.url = "./assets/wallpapers/normandy.jpg";
+    stylix-image.flake = false;
+
     # Hyprland, a wayland tiling compositor
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
