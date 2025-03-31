@@ -27,11 +27,11 @@ in rec {
 
   programs.thunderbird = {
     enable = true;
-    #package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
+    package = pkgs.betterbird; # Betterbird has some extra features, like a tray icon.
     settings = {
       # Betterbird-specific options:
-      #"mail.minimizeToTray" = true;
-      #"mail.minimizeToTray.supportedDesktops" = "kde,gnome,xfce,mate, ,";
+      "mail.minimizeToTray" = true;
+      "mail.minimizeToTray.supportedDesktops" = "kde,gnome,xfce,mate, ,";
     };
     profiles.${mainProfile}.isDefault = true;
   };

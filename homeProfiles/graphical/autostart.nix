@@ -34,7 +34,7 @@ in {
     ]
     ++ (optionals (! config.wayland.windowManager.hyprland.enable) [
       "discord"
-      "com.ulduzsoft.Birdtray"
+      # "com.ulduzsoft.Birdtray"
       "signal-desktop"
     ])
   );
