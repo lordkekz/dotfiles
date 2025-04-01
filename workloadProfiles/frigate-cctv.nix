@@ -11,6 +11,10 @@
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy :4080
   '';
+  services.caddy.virtualHosts."frigate-lan.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy :4080
+  '';
 
   services.frigate = {
     enable = true;
