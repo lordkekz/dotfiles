@@ -50,7 +50,7 @@
           rev = "b3db65d07d129e77f13b433e4d29729d4a971651";
           hash = "sha256-zHOKVXHMJ0WEpWdBWCYXzN4hGBhp9s2EaoLUWivMTlc=";
         };
-        mvnHash = "sha256-CA4pUj2N2QIYeUkfbUJEEmFZA+EGNzX2ecfPm1aVpGI=";
+        mvnHash = "sha256-RlpgLB5gC21SrWJ+zOc3AeDgikGSe4M5KpLRqWpoIM4=";
 
         configurePhase = ''
           sed -i 's#<project.branch></project.branch>#<project.branch>development</project.branch>#' pom.xml
