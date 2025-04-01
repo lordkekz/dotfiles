@@ -11,7 +11,7 @@
       passphrasePath = config.age.secrets.borgbackup-passphrase-orion.path;
       identityPath = config.age.secrets.borgbackup-key-vortex.path;
       knownHostsPath = pkgs.writeText "borgbackup-to-nasman-orion-known_hosts" ''
-        [nasman2404]:4286 ${personal-data.data.lab.hosts.nasman.key}
+        [nasman]:4286 ${personal-data.data.lab.hosts.nasman.key}
       '';
     in {
       paths = [
@@ -22,7 +22,7 @@
         "/persist/pict-rs"
       ];
       doInit = true;
-      repo = "borg@nasman2404:.";
+      repo = "borg@nasman:.";
       encryption = {
         mode = "repokey";
         passCommand = "cat ${passphrasePath}";

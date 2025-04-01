@@ -108,7 +108,7 @@
     #
     # Note that some shares are on virtiofs and some are on 9p.
     # I did some benchmarks as of 2024-12-10:
-    # - nasman2404 on host    gets 3070MiB/s and 800k IOPS when reading,
+    # - nasman on host        gets 3070MiB/s and 800k IOPS when reading,
     #                                              similar when writing
     # - microvm with 9p       gets  360MiB/s and  90k IOPS when reading,
     #                               300MiB/s and  75k IOPS when writing
