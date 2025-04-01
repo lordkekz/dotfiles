@@ -43,3 +43,10 @@ def find-inpermanent (): path -> table {
 def nix-locate (name: string): string -> list<string> {
   ^nix-locate --minimal $name | lines | where ($it | str substring 0..1) !~ "\\("
 }
+
+def deploy-host-ssh (hostname: string, sshPort: int, buildOpts: list<string>, verb: string): {
+  let tmpdir = $"(mktemp -d)/result";
+  let flakeref = $".#nixosConfigurations.($hostname).config.system.build.toplevel";
+  nom build $flakeref -o $tmpdir ...$buildOpts
+  NIX_SSHOPTS=$"-p ($sshPort)" nixos-rebuild $verb --target-host $hostname --use-remote-sudo --flake $".#($hostname)"
+}
