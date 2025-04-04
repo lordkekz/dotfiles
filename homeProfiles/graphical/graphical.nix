@@ -62,6 +62,7 @@ args @ {
     kdePackages.gwenview
     kdePackages.kdenlive # KDE video editor
     picard # MusicBrainz metadata editor
+    yt-dlp
 
     # GAMING AND WINE
     prismlauncher
