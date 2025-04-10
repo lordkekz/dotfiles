@@ -121,7 +121,8 @@ in {
         "dom.security.https_only_mode" = lock-true;
         "widget.use-xdg-desktop-portal.file-picker" = lock-value 1;
 
-        "layout.css.prefers-color-scheme.content-override" = lock-value 0; # Set website appearance to dark mode.
+        # Set website appearance to match browser's polarity.
+        "layout.css.prefers-color-scheme.content-override" = lock-value 3;
       };
     };
   };
