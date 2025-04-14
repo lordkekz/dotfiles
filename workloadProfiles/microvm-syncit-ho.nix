@@ -121,6 +121,9 @@ in {
       settings = lib.foldl lib.recursiveUpdate personalSettings [{folders."Handy Kamera".enable = true;} overrideRescanIntervalForEachFolder];
     };
 
+    # See: https://docs.syncthing.net/users/faq.html#inotify-limits
+    boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
+
     services.navidrome = {
       enable = true;
       settings = {
