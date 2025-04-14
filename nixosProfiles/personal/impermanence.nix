@@ -91,6 +91,7 @@ in {
         ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
+        ".config/ludusavi"
         #".config/microsoft-edge"
         ".config/obs-studio"
         ".config/obsidian"
@@ -149,13 +150,17 @@ in {
     hideMounts = true;
     users.${username} = {
       directories = [
+        # Syncthing folders
+        ".ludusavi-backups"
         "Documents"
-        "git"
         "Music"
-        "Obsidian Vault"
         "Pictures"
         "Szechuan Sauce"
         "Videos"
+
+        # Non-syncthing but synchronized
+        "git"
+        "Obsidian Vault"
         "Zotero"
       ];
     };
