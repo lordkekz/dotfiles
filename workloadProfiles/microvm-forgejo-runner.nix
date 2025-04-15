@@ -25,8 +25,7 @@ in {
     };
 
     microvm.vcpu = lib.mkForce 8;
-    # FIXME increase memory once it actually builds software and I get more RAM
-    microvm.balloonMem = lib.mkForce 2048; # MiB
+    microvm.balloonMem = lib.mkForce 8192; # MiB
 
     microvm.shares = [
       {
@@ -224,12 +223,16 @@ in {
     # Persist the nix store db before it gets used:
     # - microvm.nix loads the db for the host's paths in boot.postBootCommands
     # - nix-daemon is started by systemd (after boot.postBootCommands)
+    # Also put /tmp on /persist to avoid "device full" due to Nix builds
     boot.postBootCommands = lib.mkBefore ''
       mkdir -p /persist/nix-store/store
       mkdir -p /persist/nix-store/work
       mkdir -p /persist/nix-store/db
       mkdir -p /nix/var/nix/db
       ${pkgs.util-linux}/bin/mount --bind /persist/nix-store/db /nix/var/nix/db
+      rm -rf /persist/tmp || :
+      mkdir -p /persist/tmp
+      ${pkgs.util-linux}/bin/mount --bind /persist/tmp /tmp
     '';
 
     # Let Nix Daemon garbage-collect when disk starts getting full
