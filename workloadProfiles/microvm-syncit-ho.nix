@@ -65,7 +65,7 @@ in {
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId;})];
 
-    microvm.balloonMem = lib.mkForce 2048; # MiB, speeds up big folders
+    microvm.balloonMem = lib.mkForce 4096; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
       "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 42010 42020];
