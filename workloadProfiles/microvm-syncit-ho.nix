@@ -263,12 +263,14 @@ in {
     ######################### SIGNALBACKUP ##########################
     services.caddy = {
       enable = true;
-      virtualHosts."http://10.0.0.${vmId}:42020".extraConfig = ''
-        root /persist/.signalbackup-html
-        header Worm Storm
-        file_server
+      virtualHosts.":42020".extraConfig = ''
+        handle {
+          root * /persist/.signalbackup-html
+          file_server
+        }
       '';
     };
+    systemd.services.caddy.serviceConfig.ReadWritePaths = ["/persist/.signalbackup-html"];
     systemd.services.signal-backup-automation = {
       enableStrictShellChecks = true;
       path = [outputs.packages.${system}.signal-backup-automation];
