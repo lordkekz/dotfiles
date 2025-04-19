@@ -33,8 +33,13 @@ merged_prev=${dir_output}/merged-${cutoff_raw}.backup
 
 export_log=${dir_output}/export-${cutoff_next_raw}.log
 
+if [[ -z "$cutoff_next_raw" ]]; then
+  echo "NOTHING TO DO: THERE IS NO LATEST BACKUP"
+  exit 0
+fi
+
 if [[ "$cutoff_next_raw" == "$cutoff_raw" ]]; then
-  echo "NOTHING TO DO; CUTOFF IS $cutoff"
+  echo "NOTHING TO DO: LATEST IS ALREADY PROCESSED, cutoff=$cutoff"
   exit 0
 fi
 
