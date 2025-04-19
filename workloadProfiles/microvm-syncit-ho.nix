@@ -56,6 +56,7 @@ in {
         ${with personal-data.data.lab.signal-backups; "${user} ${pw}"}
       }
       reverse_proxy http://10.0.0.${vmId}:42020 {
+        header_up Host {upstream_hostport}
         header_up X-Forwarded-User {http.auth.user.id}
       }
     }
@@ -262,8 +263,9 @@ in {
     ######################### SIGNALBACKUP ##########################
     services.caddy = {
       enable = true;
-      virtualHosts."signal-backup.hepr.me".extraConfig = ''
+      virtualHosts."http://10.0.0.${vmId}:42020".extraConfig = ''
         root /persist/.signalbackup-html
+        header Worm Storm
         file_server
       '';
     };
