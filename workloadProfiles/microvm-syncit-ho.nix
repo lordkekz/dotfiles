@@ -5,6 +5,7 @@
   config,
   pkgs,
   personal-data,
+  system,
   ...
 }: let
   vmName = "syncit-ho";
@@ -48,6 +49,17 @@ in {
     }
     reverse_proxy http://10.0.0.${vmId}:42010
   '';
+  services.caddy.virtualHosts."signal-backup.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    handle {
+      basic_auth {
+        ${with personal-data.data.lab.signal-backups; "${user} ${pw}"}
+      }
+      reverse_proxy http://10.0.0.${vmId}:42020 {
+        header_up X-Forwarded-User {http.auth.user.id}
+      }
+    }
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId;})];
@@ -55,7 +67,7 @@ in {
     microvm.balloonMem = lib.mkForce 2048; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 42010];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 42010 42020];
       "vm-${vmName}-b" = {
         allowedTCPPorts = [22000];
         allowedUDPPorts = [22000 21027];
@@ -70,14 +82,19 @@ in {
           group = "syncthing";
         }
         {
+          path = "/persist/.navidrome";
+          user = "navidrome";
+          group = "navidrome";
+        }
+        {
           path = "/persist/.maloja";
           user = "maloja";
           group = "maloja";
         }
         {
-          path = "/persist/.navidrome";
-          user = "navidrome";
-          group = "navidrome";
+          path = "/persist/.signalbackup-html";
+          user = "signalbackup";
+          group = "caddy";
         }
         {
           path = "/persist/.syncthing-folders";
@@ -85,9 +102,14 @@ in {
           group = "syncthing";
         }
         {
-          path = microvmSecretsDir;
+          path = microvmSecretsDir + "/maloja";
           user = "maloja";
           group = "maloja";
+        }
+        {
+          path = microvmSecretsDir + "/signalbackup";
+          user = "signalbackup";
+          group = "signalbackup";
         }
       ]
       ++ lib.mapAttrsToList (n: v: {
@@ -96,6 +118,8 @@ in {
         group =
           if n == "Musik"
           then "navidrome"
+          else if n == "Backups Signal"
+          then "signalbackup"
           else "syncthing";
       })
       personalSettings.folders;
@@ -109,6 +133,7 @@ in {
       }
     ];
 
+    ######################### SYNCTHING #########################
     services.syncthing = {
       enable = true;
 
@@ -118,12 +143,19 @@ in {
       guiAddress = "10.0.0.${vmId}:8384";
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings = lib.foldl lib.recursiveUpdate personalSettings [{folders."Handy Kamera".enable = true;} overrideRescanIntervalForEachFolder];
+      settings = lib.foldl lib.recursiveUpdate personalSettings [
+        {
+          folders."Handy Kamera".enable = true;
+          folders."Backups Signal".enable = true;
+        }
+        overrideRescanIntervalForEachFolder
+      ];
     };
 
     # See: https://docs.syncthing.net/users/faq.html#inotify-limits
     boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
 
+    ######################### NAVIDROME #########################
     services.navidrome = {
       enable = true;
       settings = {
@@ -152,6 +184,7 @@ in {
       "/run/systemd/resolve/stub-resolv.conf"
     ];
 
+    #########################  MALOJA  ##########################
     virtualisation.oci-containers = {
       backend = "podman";
       containers.maloja-scrobble = {
@@ -216,7 +249,7 @@ in {
           "PUID" = "835";
           "PGID" = "835";
         };
-        environmentFiles = ["${microvmSecretsDir}/maloja-password.env"];
+        environmentFiles = ["${microvmSecretsDir}/maloja/password.env"];
       };
     };
     users.users.maloja = {
@@ -225,11 +258,46 @@ in {
       uid = 835; # Just some UID
     };
     users.groups.maloja.gid = 835; # Just some GID
+
+    ######################### SIGNALBACKUP ##########################
+    services.caddy = {
+      enable = true;
+      virtualHosts."signal-backup.hepr.me".extraConfig = ''
+        root /persist/.signalbackup-html
+        file_server
+      '';
+    };
+    systemd.services.signal-backup-automation = {
+      enableStrictShellChecks = true;
+      path = [outputs.packages.${system}.signal-backup-automation];
+      script = ''
+        signal-backup-automation \
+          "/persist/.signal-backups" \
+          "/persist/Documents/Backup/Signal/" \
+          "/persist/.signalbackup-html" \
+          "${microvmSecretsDir}/signalbackup/passphrase"
+      '';
+      startAt = "minutely";
+    };
+    users.users.signalbackup = {
+      isSystemUser = true;
+      group = "signalbackup";
+      uid = 836; # Just some UID
+    };
+    users.groups.signalbackup.gid = 836; # Just some GID
   };
 
   age.secrets.maloja-password = {
     rekeyFile = "${inputs.self.outPath}/secrets/maloja-password.age";
-    path = "${microvmSecretsDir}/maloja-password.env";
+    path = "${microvmSecretsDir}/maloja/password.env";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for radicale user
+    owner = "microvm";
+    group = "kvm";
+  };
+  age.secrets.signalbackup-passphrase = {
+    rekeyFile = "${inputs.self.outPath}/secrets/signalbackup-passphrase.age";
+    path = "${microvmSecretsDir}/signalbackup/passphrase";
     symlink = false; # Required since the vm can't see the target if it's a symlink
     mode = "600"; # Allow the VM's root to chown it for radicale user
     owner = "microvm";

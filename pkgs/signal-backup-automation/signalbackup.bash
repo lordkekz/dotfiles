@@ -33,6 +33,11 @@ merged_prev=${dir_output}/merged-${cutoff_raw}.backup
 
 export_log=${dir_output}/export-${cutoff_next_raw}.log
 
+if [[ "$cutoff_next_raw" == "$cutoff_raw" ]]; then
+  echo "NOTHING TO DO; CUTOFF IS $cutoff"
+  exit 0
+fi
+
 echo "CROPPING"
 echo "signalbackup-tools \"$most_recent_backup\" --croptodates \"$cutoff,$cutoff_next\" --output \"$cropped\" > \"$cropped_log\""
 signalbackup-tools \
