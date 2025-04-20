@@ -13,6 +13,7 @@
     mailserver
     # owncast # Currently unused; disable to minimize attack surface
     lemmy
+    statping-ng
   ];
 
   # PUBLIC MINECRAFT SERVER RUNS ON NASMAN (but forward ports on vortex)

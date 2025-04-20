@@ -33,6 +33,9 @@
       extraConfig = ''
         tls /var/lib/acme/drafts.hepr.me/cert.pem /var/lib/acme/drafts.hepr.me/key.pem
 
+        @denied not client_ip 192.168.0.0/16 100.80.81.0/24
+        respond @denied 200
+
         root * /var/www/${domain}/test
         file_server
       '';

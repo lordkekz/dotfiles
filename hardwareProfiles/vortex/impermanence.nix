@@ -48,6 +48,7 @@ in {
       "/var/lib/tailscale"
       "/var/lib/nixos"
       "/var/lib/owncast" # this config doesn't need backups but isn't reproducible
+      "/var/lib/statping-ng" # this config doesn't need backups but isn't reproducible
       "/var/www"
       # I would prefer to only persist some of the files, but then it fails on
       # boot because sshd starts too early and puts a new host key in the way
