@@ -30,12 +30,12 @@
       ports = ["42100:8080"]; # 42100 host -> 8080 container
       volumes = ["/var/lib/statping-ng:/app"];
       environment = {};
-      user = "statping-ng:statping-ng";
+      # user = "statping-ng:statping-ng";
     };
   };
-  users.users.statping-ng = {
-    isSystemUser = true;
-    group = "statping-ng";
-  };
-  users.groups.statping-ng = {};
+  # users.users.statping-ng = {
+  #   isSystemUser = true;
+  #   group = "statping-ng";
+  # };
+  # users.groups.statping-ng = {};
 }
