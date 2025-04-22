@@ -282,6 +282,7 @@ in {
           "${microvmSecretsDir}/signalbackup/passphrase"
       '';
       startAt = "minutely";
+      serviceConfig.User = "signalbackup";
     };
     users.users.signalbackup = {
       isSystemUser = true;
