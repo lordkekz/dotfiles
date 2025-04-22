@@ -78,7 +78,7 @@ find "$dir_output" -mindepth 1 -maxdepth 1 -type f -delete
 
 # Move some remains into the output dir
 # shellcheck disable=SC2046
-mv $(find "$dir_output/.next/*" -mindepth 1 -maxdepth 1 -type f) "$dir_output"
+mv $(find "$dir_output/.next" -mindepth 1 -maxdepth 1 -type f) "$dir_output"
 rm -d "$dir_output/.next"
 
 # Put original file from phone in output dir
