@@ -24,14 +24,14 @@ cutoff_next_raw=$(echo "$most_recent_backup" | sed 's:.*/signal-\(.*\)\.backup:\
 # shellcheck disable=SC2001
 cutoff_next=$(echo "$cutoff_next_raw" | sed 's#\(....-..-..\)-\(..\)-\(..\)-\(..\)#\1 \2:\3:\4#')
 
-cropped=${dir_output}/signal-${cutoff_next_raw}-cropped-since-${cutoff_raw}.backup
-cropped_log=${dir_output}/signal-${cutoff_next_raw}-cropped-since-${cutoff_raw}.log
-merged=${dir_output}/merged-${cutoff_next_raw}.backup
-merged_log=${dir_output}/merged-${cutoff_next_raw}.log
+# Prepare the paths, initially inside a new directory for easily deleting older versions
+cropped=${dir_output}/.next/signal-${cutoff_next_raw}-cropped-since-${cutoff_raw}.backup
+cropped_log=${dir_output}/.next/signal-${cutoff_next_raw}-cropped-since-${cutoff_raw}.log
+merged=${dir_output}/.next/merged-${cutoff_next_raw}.backup
+merged_log=${dir_output}/.next/merged-${cutoff_next_raw}.log
+export_log=${dir_output}/.next/export-${cutoff_next_raw}.log
 
 merged_prev=${dir_output}/merged-${cutoff_raw}.backup
-
-export_log=${dir_output}/export-${cutoff_next_raw}.log
 
 if [[ -z "$cutoff_next_raw" ]]; then
   echo "NOTHING TO DO: THERE IS NO LATEST BACKUP"
@@ -42,6 +42,8 @@ if [[ "$cutoff_next_raw" == "$cutoff_raw" ]]; then
   echo "NOTHING TO DO: LATEST IS ALREADY PROCESSED, cutoff=$cutoff"
   exit 0
 fi
+
+mkdir "$dir_output/.next"
 
 echo "CROPPING"
 echo "signalbackup-tools \"$most_recent_backup\" --croptodates \"$cutoff,$cutoff_next\" --output \"$cropped\" > \"$cropped_log\""
@@ -68,5 +70,19 @@ signalbackup-tools \
   > "$export_log"
 
 echo "FINISHING"
+# Keep one previous merged backup, just in case something went wrong
+mv "$merged_prev" "$dir_output/.next"
+
+# Clean up previous backups from output dir
+find "$dir_output" -mindepth 1 -maxdepth 1 -type f -delete
+
+# Move some remains into the output dir
+# shellcheck disable=SC2046
+mv $(find "$dir_output/.next/*" -mindepth 1 -maxdepth 1 -type f) "$dir_output"
+rm -d "$dir_output/.next"
+
+# Put original file from phone in output dir
 mv -v "$most_recent_backup" "$dir_output/"
+
+# Remember cutoff
 echo "$cutoff_next_raw" > "$dir_output/cutoff_raw.txt"
