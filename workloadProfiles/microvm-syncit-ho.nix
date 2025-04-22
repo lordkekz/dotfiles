@@ -119,7 +119,7 @@ in {
         group =
           if n == "Musik"
           then "navidrome"
-          else if n == "Backups Signal"
+          else if n == "Backups Signal" || n == "Documents"
           then "signalbackup"
           else "syncthing";
       })
