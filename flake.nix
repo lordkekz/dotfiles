@@ -46,9 +46,9 @@
     agenix-rekey.inputs.nixpkgs.follows = "nixpkgs";
 
     # Anyrun is a modern, wayland-native runner written in Rust.
-    anyrun.url = "github:lordkekz/anyrun?ref=add-nix-overlay";
-    #anyrun.url = "github:anyrun-org/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    # anyrun.url = "github:lordkekz/anyrun?ref=add-nix-overlay";
+    # #anyrun.url = "github:anyrun-org/anyrun";
+    # anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware configs for known systems.
     hardware.url = "github:nixos/nixos-hardware";
@@ -147,31 +147,31 @@
     stylix.inputs.home-manager.follows = "home-manager";
 
     # Hyprland, a wayland tiling compositor
-    hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.inputs.systems.follows = "systems";
-    hyprlock.url = "github:hyprwm/hyprlock?ref=main"; #FIXME update with the next release
-    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
-    hyprlock.inputs.systems.follows = "systems";
-    hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2";
-    hypridle.inputs.nixpkgs.follows = "nixpkgs";
-    hypridle.inputs.systems.follows = "systems";
-    hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.6.0";
-    hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
-    #hyprpaper.inputs.systems.follows = "systems";
-    hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0";
-    hyprpicker.inputs.nixpkgs.follows = "nixpkgs";
-    #hyprpicker.inputs.systems.follows = "systems";
-    hyprland-contrib.url = "github:hyprwm/contrib?ref=v0.1";
-    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
-    #hyprland-contrib.inputs.systems.follows = "systems";
+    # hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
+    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    # hyprland.inputs.systems.follows = "systems";
+    # hyprlock.url = "github:hyprwm/hyprlock?ref=main"; #FIXME update with the next release
+    # hyprlock.inputs.nixpkgs.follows = "nixpkgs";
+    # hyprlock.inputs.systems.follows = "systems";
+    # hypridle.url = "github:hyprwm/hypridle?ref=v0.1.2";
+    # hypridle.inputs.nixpkgs.follows = "nixpkgs";
+    # hypridle.inputs.systems.follows = "systems";
+    # hyprpaper.url = "github:hyprwm/hyprpaper?ref=v0.6.0";
+    # hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
+    # #hyprpaper.inputs.systems.follows = "systems";
+    # hyprpicker.url = "github:hyprwm/hyprpicker?ref=v0.2.0";
+    # hyprpicker.inputs.nixpkgs.follows = "nixpkgs";
+    # #hyprpicker.inputs.systems.follows = "systems";
+    # hyprland-contrib.url = "github:hyprwm/contrib?ref=v0.1";
+    # hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
+    # #hyprland-contrib.inputs.systems.follows = "systems";
 
     # The phinger-cursor theme, but packaged as a SVG Hyprcursor theme
-    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
-    hyprcursor-phinger.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
+    # hyprcursor-phinger.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Walker, a Wayland-native runner
-    walker.url = "github:abenz1267/walker";
+    # walker.url = "github:abenz1267/walker";
 
     # Worms.tex contains my custom texmf stuff
     worms-tex = {
@@ -273,13 +273,13 @@
         yazi
         nix-yazi-plugins
         nix-minecraft
-        hyprland
-        hyprlock
-        hypridle
-        hyprpaper
-        hyprpicker
-        hyprland-contrib
-        anyrun
+        # hyprland
+        # hyprlock
+        # hypridle
+        # hyprpaper
+        # hyprpicker
+        # hyprland-contrib
+        # anyrun
         agenix
         agenix-rekey
       ]);
