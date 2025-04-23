@@ -64,7 +64,7 @@
     kwin-effects-forceblur.inputs.utils.follows = "flake-utils";
 
     # Lix (correctness-focused fork of Nix)
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-1.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
@@ -112,7 +112,7 @@
 
     # Yazi plugins
     # nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
-    nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins";
+    nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/dabrowskiw/main";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi flake
