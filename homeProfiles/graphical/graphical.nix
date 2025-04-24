@@ -40,6 +40,7 @@ args @ {
     filezilla # FTP client
     filelight # A fancy directory size viewer by KDE
     meld # visual diff and merge tool
+    diffpdf # visual diff tool for PDFs
     kleopatra
     isoimagewriter # KDE's ISO Image Writer
     piper # Frontend to configure peripherals using ratbagd
