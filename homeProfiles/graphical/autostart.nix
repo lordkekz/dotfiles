@@ -29,11 +29,11 @@ in {
     [
       "element-desktop"
       # "obsidian"
-      "org.telegram.desktop"
+      # "org.telegram.desktop"
       "feishin"
     ]
     ++ (optionals (! config.wayland.windowManager.hyprland.enable) [
-      "discord"
+      # "discord"
       "com.ulduzsoft.Birdtray"
       "signal-desktop"
     ])
