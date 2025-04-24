@@ -191,8 +191,8 @@ in {
       containers.maloja-scrobble = {
         imageFile = pkgs.dockerTools.pullImage {
           imageName = "krateng/maloja";
-          imageDigest = "sha256:034896ea414f903153933a3d555082d6bbaec40b4703d0baf6aaf9d1285c6144";
-          sha256 = "0c83ixfaaw924ib0i81ijpvyb35z5q2mdyb0ra7abl67sahgamlq";
+          imageDigest = "sha256:4ecea26058d2ca5168a8d53820279942d28f0606664cea6425f42371d5d88f95";
+          sha256 = "1yi8wnpv80bqqfpy1m3gbh2r4nzwc33fyj8gfm85a639jyrgdzx2";
           finalImageName = "krateng/maloja";
           finalImageTag = "latest";
         };
