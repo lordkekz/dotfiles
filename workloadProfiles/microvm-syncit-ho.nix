@@ -112,6 +112,11 @@ in {
           user = "signalbackup";
           group = "signalbackup";
         }
+        {
+          path = microvmSecretsDir + "/syncthing";
+          user = "syncthing";
+          group = "syncthing";
+        }
       ]
       ++ lib.mapAttrsToList (n: v: {
         inherit (v) path;
@@ -144,6 +149,7 @@ in {
       guiAddress = "10.0.0.${vmId}:8384";
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
+      apiKeyFile = "${microvmSecretsDir}/syncthing/apiKey";
       settings = lib.foldl lib.recursiveUpdate personalSettings [
         {
           folders."Handy Kamera".enable = true;
@@ -303,6 +309,14 @@ in {
   age.secrets.signalbackup-passphrase = {
     rekeyFile = "${inputs.self.outPath}/secrets/signalbackup-passphrase.age";
     path = "${microvmSecretsDir}/signalbackup/passphrase";
+    symlink = false; # Required since the vm can't see the target if it's a symlink
+    mode = "600"; # Allow the VM's root to chown it for radicale user
+    owner = "microvm";
+    group = "kvm";
+  };
+  age.secrets.syncthing-api-key-nasman = {
+    rekeyFile = "${inputs.self.outPath}/secrets/syncthing-api-key-nasman.age";
+    path = "${microvmSecretsDir}/syncthing/apiKey";
     symlink = false; # Required since the vm can't see the target if it's a symlink
     mode = "600"; # Allow the VM's root to chown it for radicale user
     owner = "microvm";

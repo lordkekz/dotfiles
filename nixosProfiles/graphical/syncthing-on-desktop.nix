@@ -32,10 +32,23 @@
 
     overrideDevices = true; # overrides any devices added or deleted through the WebUI
     overrideFolders = true; # overrides any folders added or deleted through the WebUI
+    apiKeyFile = config.age.secrets."syncthing-api-key-${config.system.name}".path;
     settings = lib.foldl lib.recursiveUpdate personalSettings [
       {
         # Put overrides here
       }
     ];
+  };
+
+  age.secrets."syncthing-api-key-${config.system.name}" = {
+    rekeyFile = "${inputs.self.outPath}/secrets/syncthing-api-key-${config.system.name}.age";
+    owner = personal-data.data.home.username;
+    group = "users";
+  };
+  # Used by homeProfiles/graphical/syncthing.nix
+  age.secrets."syncthing-api-key-nasman" = {
+    rekeyFile = "${inputs.self.outPath}/secrets/syncthing-api-key-nasman.age";
+    owner = personal-data.data.home.username;
+    group = "users";
   };
 }

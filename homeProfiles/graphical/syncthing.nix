@@ -69,8 +69,6 @@ args @ {
       webview.disabled = "true";
     });
     config-script =
-      # FIXME: Provision API keys via secrets.
-      # See: https://github.com/NixOS/nixpkgs/issues/401745
       pkgs.writers.writeNuBin "configure-syncthingtray" {
         makeWrapperArgs = [
           "--prefix"
@@ -81,7 +79,7 @@ args @ {
       } ''
         def main [pathToConfigTemplate: string] {
           let SYNCTHING_APIKEY_LOCAL = syncthingctl cat | from json | get gui.apiKey
-          let SYNCTHING_APIKEY_NASMAN = $SYNCTHING_APIKEY_LOCAL
+          let SYNCTHING_APIKEY_NASMAN = open --raw /run/agenix/syncthing-api-key-keksmaxi
           let configTemplate = open --raw $pathToConfigTemplate
           let finalConfig = (
             $configTemplate
