@@ -79,7 +79,7 @@ args @ {
       } ''
         def main [pathToConfigTemplate: string] {
           let SYNCTHING_APIKEY_LOCAL = syncthingctl cat | from json | get gui.apiKey
-          let SYNCTHING_APIKEY_NASMAN = open --raw /run/agenix/syncthing-api-key-keksmaxi
+          let SYNCTHING_APIKEY_NASMAN = open --raw /run/agenix/syncthing-api-key-nasman | str trim
           let configTemplate = open --raw $pathToConfigTemplate
           let finalConfig = (
             $configTemplate
