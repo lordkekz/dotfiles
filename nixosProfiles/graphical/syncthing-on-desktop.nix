@@ -23,6 +23,7 @@
   services.syncthing = let
     user = personal-data.data.home.username;
     userHome = config.users.users.${user}.home;
+    personalSettings = personal-data.data.home.syncthing.settings userHome;
   in {
     enable = true;
     inherit user;
@@ -31,6 +32,10 @@
 
     overrideDevices = true; # overrides any devices added or deleted through the WebUI
     overrideFolders = true; # overrides any folders added or deleted through the WebUI
-    settings = personal-data.data.home.syncthing.settings userHome;
+    settings = lib.foldl lib.recursiveUpdate personalSettings [
+      {
+        # Put overrides here
+      }
+    ];
   };
 }

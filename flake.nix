@@ -26,7 +26,7 @@
 
     # My personal data which is *not* technically secret but I don't want to show in this repo.
     personal-data.url = "github:lordkekz/personal-data";
-    #personal-data.url = "/home/hpreiser/git/personal-data";
+    # personal-data.url = "/home/hpreiser/git/personal-data";
     personal-data.inputs.haumea.follows = "haumea";
     personal-data.inputs.systems.follows = "systems";
     personal-data.inputs.nixpkgs.follows = "nixpkgs";

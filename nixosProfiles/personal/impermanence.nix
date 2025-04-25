@@ -138,7 +138,6 @@ in {
         ".config/gh/hosts.yml"
         ".config/powerdevilrc"
         ".config/powermanagementprofilesrc"
-        ".config/syncthingtray.ini"
         ".config/nix/nix.conf"
       ];
     };

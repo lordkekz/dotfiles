@@ -33,7 +33,6 @@ args @ {
 
     # UTILITY
     tailscale-systray
-    syncthingtray # It also has a plasmoid.
     anki-bin # Spaced-repetition flashcards
     kdePackages.dolphin # KDE file explorer
     kdePackages.ark # KDE file archiver

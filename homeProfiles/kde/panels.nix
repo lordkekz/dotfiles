@@ -87,6 +87,7 @@ args @ {
           };
         }
         "org.kde.plasma.panelspacer"
+        "martchus.syncthingplasmoid"
         "org.kde.plasma.systemtray"
       ];
     }
