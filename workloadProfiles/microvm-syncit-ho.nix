@@ -211,7 +211,8 @@ in {
             # Options: first, last, majority
             # Default: first
             album_information_trust = "last";
-            invalid_artists = ["[Unknown Artist]" "Unknown Artist" "Spotify" "Unbekannter Künstler"];
+            # FIXME update after https://github.com/krateng/maloja/issues/401
+            invalid_artists = []; #["[Unknown Artist]" "Unknown Artist" "Spotify" "Unbekannter Künstler"];
             remove_from_title = ["(Original Mix)" "(Radio Edit)" "(Album Version)" "(Explicit Version)" "(Bonus Track)" "(Live)"];
             # Default only has first three
             delimiters_informal = ["vs." "vs" "&" "and" "with" "und" "mit"];
