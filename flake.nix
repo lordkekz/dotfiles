@@ -113,7 +113,8 @@
 
     # Yazi plugins
     # nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
-    nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/dabrowskiw/main";
+    nix-yazi-plugins.url = "github:dabrowskiw/nix-yazi-plugins?ref=main";
+    # nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/dabrowskiw/main";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi flake

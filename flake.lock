@@ -1151,16 +1151,16 @@
       "locked": {
         "lastModified": 1737403982,
         "narHash": "sha256-5QcwfZDYkUD8N8OfoEO4i1ZOG/qZC9dEpqQxwtzJjtE=",
-        "ref": "refs/heads/dabrowskiw/main",
+        "owner": "dabrowskiw",
+        "repo": "nix-yazi-plugins",
         "rev": "33e2900b13a7f56b50a88176cc67decefed94bc6",
-        "revCount": 45,
-        "type": "git",
-        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
+        "type": "github"
       },
       "original": {
-        "ref": "refs/heads/dabrowskiw/main",
-        "type": "git",
-        "url": "file:///home/hpreiser/git/nix-yazi-plugins"
+        "owner": "dabrowskiw",
+        "ref": "main",
+        "repo": "nix-yazi-plugins",
+        "type": "github"
       }
     },
     "nixos-generators": {
