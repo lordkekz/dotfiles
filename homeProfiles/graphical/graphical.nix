@@ -73,34 +73,33 @@ args @ {
     # PROGRAMMING
     ollama
     jetbrains-toolbox
-    jetbrains.idea-ultimate
-    jetbrains.rust-rover
-    jetbrains.pycharm-professional
+    # jetbrains.idea-ultimate
+    # jetbrains.rust-rover
+    # jetbrains.pycharm-professional
     sqlitebrowser
     python311Full
     python311Packages.pip
     # vscodium
-    (vscode-with-extensions.override
-      {
-        vscode = pkgs-unstable.vscodium;
-        vscodeExtensions = with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
-          jnoortheen.nix-ide
-          thenuprojectcontributors.vscode-nushell-lang
-          ms-azuretools.vscode-docker
-          #tecosaur.latex-utilities #their defaults are annoying
-          james-yu.latex-workshop
-          vscodevim.vim
-          ms-toolsai.jupyter
-          ms-python.python
-          ms-python.black-formatter
-        ];
-      })
+    # (vscode-with-extensions.override
+    #   {
+    #     vscode = pkgs-unstable.vscodium;
+    #     vscodeExtensions = with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
+    #       jnoortheen.nix-ide
+    #       thenuprojectcontributors.vscode-nushell-lang
+    #       ms-azuretools.vscode-docker
+    #       #tecosaur.latex-utilities #their defaults are annoying
+    #       james-yu.latex-workshop
+    #       vscodevim.vim
+    #       ms-toolsai.jupyter
+    #       ms-python.python
+    #       ms-python.black-formatter
+    #     ];
+    #   })
   ];
 
   services.kdeconnect = {
     enable = true;
     indicator = true;
-    package = pkgs.kdePackages.kdeconnect-kde; # FIXME remove this once home-manager defaults to Qt6 version
   };
 
   # Declaratively configure connection of virt-manager to libvirtd QEMU/KVM
