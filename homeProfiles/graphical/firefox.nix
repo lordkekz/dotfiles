@@ -77,6 +77,7 @@ args @ {
       "Bing".metaData.hidden = true;
       "DuckDuckGo".metaData.hidden = true;
       "Google".metaData.hidden = true;
+      "eBay".metaData.hidden = true;
 
       "Nix Packages" = {
         urls = [{template = "https://search.nixos.org/packages?channel=${channel}&query={searchTerms}";}];
