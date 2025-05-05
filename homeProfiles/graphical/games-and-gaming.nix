@@ -38,4 +38,13 @@ args @ {
       '';
     })
   ];
+
+  xdg.desktopEntries."Dungeondraft" = {
+    name = "Dungeondraft";
+    comment = "Dungeondraft is a tabletop encounter map creation tool designed to draw aesthetic maps without the typical frustrations and time investment.";
+    exec = "${lib.getExe pkgs.steam-run} ${config.home.homeDirectory}/Documents/Backup/Spielstände/Dungeondraft/latest/Dungeondraft.x86_64";
+    settings.Path = "${config.home.homeDirectory}/Documents/Backup/Spielstände/Dungeondraft/latest/";
+    icon = "${config.home.homeDirectory}/Documents/Backup/Spielstände/Dungeondraft/latest/Dungeondraft.png";
+    categories = ["Graphics"];
+  };
 }
