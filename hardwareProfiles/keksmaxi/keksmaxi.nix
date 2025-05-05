@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  pkgs-unstable,
   modulesPath,
   system,
   ...
@@ -23,6 +24,9 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
+
+  # boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs-unstable.linuxPackages;
 
   boot.tmp = {
     useTmpfs = true;

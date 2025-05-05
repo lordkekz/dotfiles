@@ -299,6 +299,7 @@
         specialArgs = {
           inherit inputs outputs assets nixosProfiles hardwareProfiles workloadProfiles;
           inherit (inputs) personal-data;
+          pkgs-unstable = outputs.channels."x86_64-linux".nixpkgs-unstable;
           system = "x86_64-linux"; # FIXME for other architectures
         };
         channelName = "nixpkgs";
