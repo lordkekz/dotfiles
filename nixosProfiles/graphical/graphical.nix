@@ -17,6 +17,9 @@
 
   programs.dconf.enable = true;
 
+  # Force GTK apps to use portal for file picker
+  environment.variables."GTK_USE_PORTAL" = "1";
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
