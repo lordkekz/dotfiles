@@ -47,4 +47,13 @@ args @ {
     icon = "${config.home.homeDirectory}/Documents/Backup/Spielstände/Dungeondraft/latest/Dungeondraft.png";
     categories = ["Graphics"];
   };
+
+  xdg.desktopEntries."FoundryVTT" = {
+    name = "Foundry VTT";
+    comment = "A Self-Hosted & Modern Roleplaying Platform";
+    exec = "${lib.getExe pkgs.steam-run} ${config.home.homeDirectory}/Documents/Backup/Spielstände/FoundryVTT/foundryvtt";
+    settings.Path = "${config.home.homeDirectory}/Documents/Backup/Spielstände/FoundryVTT";
+    icon = "${config.home.homeDirectory}/Documents/Backup/Spielstände/FoundryVTT/icon.png";
+    categories = ["Game"];
+  };
 }
