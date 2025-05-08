@@ -342,12 +342,12 @@ in {
       in ''
         echo "[FOUNDRYVTT SCRIPT] Linking options"
         mkdir -p '/persist/.foundry/Config'
-        ln -sf '/persist/.foundry/Config/options.json' ${lib.escapeShellArg foundryOptionsJSON}
+        ln -sf -T ${lib.escapeShellArg foundryOptionsJSON} '/persist/.foundry/Config/options.json'
 
         echo "[FOUNDRYVTT SCRIPT] Linking synced data"
-        mkdir -p '/persist/.foundry/Data/keks'
+        mkdir -p '/persist/.foundry/Data'
         mkdir -p '/persist/FoundryVTT/Data/keks'
-        ln -sf '/persist/.foundry/Data/keks' '/persist/FoundryVTT/Data/keks'
+        ln -sf -T '/persist/FoundryVTT/Data/keks' '/persist/.foundry/Data/keks'
 
         cd '/persist/FoundryVTT/Node'
         node main.js --port=30000 --dataPath=/persist/.foundry
