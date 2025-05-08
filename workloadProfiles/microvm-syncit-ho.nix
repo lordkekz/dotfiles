@@ -107,14 +107,14 @@ in {
           group = "syncthing";
         }
         {
+          path = "/persist/.foundry";
+          user = "foundryvtt";
+          group = "foundryvtt";
+        }
+        {
           path = microvmSecretsDir + "/maloja";
           user = "maloja";
           group = "maloja";
-        }
-        {
-          path = microvmSecretsDir + "/.foundry";
-          user = "foundryvtt";
-          group = "foundryvtt";
         }
         {
           path = microvmSecretsDir + "/signalbackup";
