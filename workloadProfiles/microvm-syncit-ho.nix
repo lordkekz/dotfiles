@@ -342,7 +342,7 @@ in {
       in ''
         echo "[FOUNDRYVTT SCRIPT] Linking options"
         mkdir -p '/persist/.foundry/Config'
-        ln -sf -T ${lib.escapeShellArg foundryOptionsJSON} '/persist/.foundry/Config/options.json'
+        cp -f ${lib.escapeShellArg foundryOptionsJSON} '/persist/.foundry/Config/options.json'
 
         echo "[FOUNDRYVTT SCRIPT] Linking synced data"
         mkdir -p '/persist/.foundry/Data'
