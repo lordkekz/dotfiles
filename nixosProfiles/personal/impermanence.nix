@@ -152,6 +152,7 @@ in {
       directories = [
         # Syncthing folders
         ".ludusavi-backups"
+        "FoundryVTT"
         "Documents"
         "Music"
         "Pictures"
