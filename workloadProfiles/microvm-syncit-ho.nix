@@ -353,6 +353,7 @@ in {
         node main.js --port=30000 --dataPath=/persist/.foundry
       '';
       serviceConfig.User = "foundryvtt";
+      wantedBy = ["multi-user.target"];
     };
     users.users.foundryvtt = {
       isSystemUser = true;
