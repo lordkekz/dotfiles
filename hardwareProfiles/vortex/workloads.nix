@@ -49,4 +49,10 @@
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy https://nasman.hepr.me
   '';
+
+  # Forward vtt.hepr.me to nasman, but use the same SNI matcher for both nasman and vortex.
+  services.caddy.virtualHosts."vtt.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy https://nasman.hepr.me
+  '';
 }
