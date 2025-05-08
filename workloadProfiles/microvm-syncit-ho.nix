@@ -61,6 +61,10 @@ in {
       }
     }
   '';
+  services.caddy.virtualHosts."vtt.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.${vmId}:30000
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId;})];
@@ -68,7 +72,7 @@ in {
     microvm.balloonMem = lib.mkForce 4096; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 42010 42020];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 30000 42010 42020];
       "vm-${vmName}-b" = {
         allowedTCPPorts = [22000];
         allowedUDPPorts = [22000 21027];
@@ -108,6 +112,11 @@ in {
           group = "maloja";
         }
         {
+          path = microvmSecretsDir + "/.foundry";
+          user = "foundryvtt";
+          group = "foundryvtt";
+        }
+        {
           path = microvmSecretsDir + "/signalbackup";
           user = "signalbackup";
           group = "signalbackup";
@@ -124,6 +133,8 @@ in {
         group =
           if n == "Musik"
           then "navidrome"
+          else if n == "FoundryVTT"
+          then "foundryvtt"
           else if n == "Backups Signal" || n == "Documents"
           then "signalbackup"
           else "syncthing";
@@ -297,6 +308,58 @@ in {
       uid = 836; # Just some UID
     };
     users.groups.signalbackup.gid = 836; # Just some GID
+
+    ######################### FOUNDRYVTT ##########################
+    systemd.services.foundryvtt = {
+      enableStrictShellChecks = true;
+      path = [pkgs.nodejs_20 pkgs.util-linux];
+      script = let
+        foundryOptionsJSON = pkgs.writers.writeJSON "FoundryVTT-options.json" {
+          "port" = 30000;
+          "hostname" = "vtt.hepr.me";
+          "proxyPort" = 443;
+          "proxySSL" = true;
+          "dataPath" = "/persist/.foundry";
+          "compressStatic" = true;
+          "fullscreen" = false;
+          "language" = "en.core";
+          "localHostname" = null;
+          "routePrefix" = null;
+          "updateChannel" = "stable";
+          "upnp" = false;
+          "awsConfig" = null;
+          "compressSocket" = true;
+          "cssTheme" = "dark";
+          "deleteNEDB" = false;
+          "hotReload" = false;
+          "passwordSalt" = null;
+          "sslCert" = null;
+          "sslKey" = null;
+          "world" = null;
+          "serviceConfig" = null;
+          "telemetry" = false;
+        };
+      in ''
+        echo "[FOUNDRYVTT SCRIPT] Linking options"
+        mkdir -p '/persist/.foundry/Config'
+        ln -sf '/persist/.foundry/Config/options.json' ${lib.escapeShellArg foundryOptionsJSON}
+
+        echo "[FOUNDRYVTT SCRIPT] Linking synced data"
+        mkdir -p '/persist/.foundry/Data/keks'
+        mkdir -p '/persist/FoundryVTT/Data/keks'
+        ln -sf '/persist/.foundry/Data/keks' '/persist/FoundryVTT/Data/keks'
+
+        cd '/persist/FoundryVTT/Node'
+        node main.js --port=30000 --dataPath=/persist/.foundry
+      '';
+      serviceConfig.User = "foundryvtt";
+    };
+    users.users.foundryvtt = {
+      isSystemUser = true;
+      group = "foundryvtt";
+      uid = 837; # Just some UID
+    };
+    users.groups.foundryvtt.gid = 837; # Just some GID
   };
 
   age.secrets.maloja-password = {
