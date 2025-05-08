@@ -103,6 +103,7 @@ in {
         ".local/share/applications"
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
         ".local/share/flatpak"
+        ".local/share/FoundryVTT" # Only user data of Foundry VTT desktop version
         ".local/share/chat.fluffy.fluffychat"
         ".local/share/home-manager"
         ".local/share/JetBrains"
