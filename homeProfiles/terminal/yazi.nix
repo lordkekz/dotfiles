@@ -16,7 +16,7 @@ args @ {
 
   programs.yazi = {
     enable = true;
-    package = pkgs-unstable.yazi;
+    package = inputs.yazi.packages.${system}.yazi;
     enableNushellIntegration = true;
     # This is overridden by overlay from yazi flake
     settings = {

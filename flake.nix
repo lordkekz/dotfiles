@@ -113,13 +113,12 @@
 
     # Yazi plugins
     # nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
-    nix-yazi-plugins.url = "github:dabrowskiw/nix-yazi-plugins?ref=main";
-    # nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/dabrowskiw/main";
-    nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs";
+    nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/main";
+    nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Yazi flake
-    yazi.url = "github:sxyazi/yazi?ref=v0.4.2";
-    #yazi.inputs.nixpkgs.follows = "nixpkgs-unstable"; # FIXME there's an infinite recursion as of 2024-12-15
+    yazi.url = "github:sxyazi/yazi?ref=v25.4.8";
+    # yazi.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Generate images etc. from NixOS configs
     nixos-generators.url = "github:nix-community/nixos-generators";
