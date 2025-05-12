@@ -102,6 +102,7 @@ in {
         ".local/share/Anki2"
         ".local/share/applications"
         ".local/share/atuin" # Atuin shell history database, host_id and sync keys
+        ".local/share/Dungeondraft" # Only config and thumbnail cache
         ".local/share/flatpak"
         ".local/share/FoundryVTT" # Only user data of Foundry VTT desktop version
         ".local/share/chat.fluffy.fluffychat"
