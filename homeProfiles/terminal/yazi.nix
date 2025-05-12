@@ -16,6 +16,7 @@ args @ {
 
   programs.yazi = {
     enable = true;
+    package = inputs.yazi.packages.${system}.yazi;
     enableNushellIntegration = true;
     # This is overridden by overlay from yazi flake
     settings = {
@@ -28,7 +29,7 @@ args @ {
     };
     yaziPlugins = {
       enable = true;
-      yaziBasePackage = pkgs.yazi;
+      # yaziBasePackage = pkgs.yazi;
       plugins = {
         bypass.enable = true;
         chmod.enable = true;
@@ -46,6 +47,8 @@ args @ {
         };
         smart-filter.enable = true; # 'F' replaces yazi builtin
         starship.enable = true;
+        # open-with-cmd.enable = true;
+        # bookmarks.enable = true;
       };
     };
   };
