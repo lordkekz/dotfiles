@@ -249,6 +249,7 @@ in {
             ["countas" "Jennie" "BLACKPINK"]
             ["replaceartist" "JISOO" "Jisoo"]
             ["countas" "Jisoo" "BLACKPINK"]
+            ["belongtogether" "Abor & Tynna"]
           ];
           maloja-rules-file = pkgs.writeText "maloja-rules.tsv" maloja-rules;
         in [
