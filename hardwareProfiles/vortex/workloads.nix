@@ -11,7 +11,7 @@
   imports = with workloadProfiles; [
     public-websites
     mailserver
-    # owncast # Currently unused; disable to minimize attack surface
+    owncast # Currently unused; disable to minimize attack surface
     lemmy
     statping-ng
   ];
