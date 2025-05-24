@@ -54,8 +54,8 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
-    home-manager.url = "github:lordkekz/home-manager?ref=release-24.11";
-    # home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
+    # home-manager.url = "github:lordkekz/home-manager?ref=release-24.11";
+    home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Kwin effect to force blur of transparent windows
@@ -83,8 +83,8 @@
     naersk.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nixpkgs
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-stable.url = "github:lordkekz/nixpkgs/nixos-24.11";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:lordkekz/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-stable";
 
@@ -127,9 +127,9 @@
     nixos-generators.inputs.nixlib.follows = "nixpkgs";
 
     # Simple NixOS mailserver
-    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
     nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nixos-mailserver.inputs.nixpkgs-24_11.follows = "nixpkgs-stable";
+    nixos-mailserver.inputs.nixpkgs-25_05.follows = "nixpkgs-stable";
 
     # NixOS-WSL
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
@@ -143,8 +143,7 @@
 
     # Stylix helps theme applications using base16
     #stylix.url = "/home/hpreiser/git/stylix";
-    stylix.url = "github:lordkekz/stylix?ref=release-24.11";
-    #stylix.url = "github:danth/stylix?ref=master";
+    stylix.url = "github:danth/stylix?ref=release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
 
