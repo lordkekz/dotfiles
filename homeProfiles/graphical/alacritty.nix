@@ -14,8 +14,8 @@ args @ {
   programs.alacritty = {
     enable = true;
     settings = {
-      shell.program = "${config.programs.tmux.package}/bin/tmux"; # references whichever package is used to enable tmux in terminal.nix
-      shell.args = ["attach"];
+      terminal.shell.program = "${config.programs.tmux.package}/bin/tmux";
+      terminal.shell.args = ["attach"];
 
       window = {
         padding = {

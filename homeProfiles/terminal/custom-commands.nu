@@ -18,7 +18,7 @@ def walklink (): path -> list<string> {
   return $result;
 }
 
-def dwhich (application: string, ...rest: string) -> table<command: string, steps: list<path>> {
+def dwhich (application: string, ...rest: string): nothing -> table<command: string, steps: list<path>> {
   $rest | prepend $application | each {|command|
     {
       command: $command,
@@ -27,7 +27,7 @@ def dwhich (application: string, ...rest: string) -> table<command: string, step
   }
 }
 
-def dwhich1 (application: string) -> path {
+def dwhich1 (application: string): nothing -> path {
   dwhich $application | get steps | first-or-null | first-or-null | last-or-null
 }
 
@@ -44,7 +44,7 @@ def nix-locate (name: string): string -> list<string> {
   ^nix-locate --minimal $name | lines | where ($it | str substring 0..1) !~ "\\("
 }
 
-def deploy-host-ssh (hostname: string, sshPort: int, buildOpts: list<string>, verb: string): {
+def deploy-host-ssh (hostname: string, sshPort: int, buildOpts: list<string>, verb: string) {
   let tmpdir = $"(mktemp -d)/result";
   let flakeref = $".#nixosConfigurations.($hostname).config.system.build.toplevel";
   nom build $flakeref -o $tmpdir ...$buildOpts
