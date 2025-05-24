@@ -144,9 +144,6 @@ in {
         settings-default
         // {};
       inherit search;
-      # Generate the entry only for Hyprland
-      desktopFile.enable = config.wayland.windowManager.hyprland.enable;
-      desktopFile.icon = "${inputs.self.outPath}/assets/Firefox_Homework_Icon_128x128.png";
     };
   };
 
