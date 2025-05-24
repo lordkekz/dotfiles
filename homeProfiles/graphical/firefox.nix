@@ -149,4 +149,8 @@ in {
       desktopFile.icon = "${inputs.self.outPath}/assets/Firefox_Homework_Icon_128x128.png";
     };
   };
+
+  stylix.targets.firefox = {
+    profileNames = ["default"];
+  };
 }

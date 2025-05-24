@@ -21,7 +21,8 @@ args @ {
   # Enable Stylix GTK here so terminal homeConfig isn't affected
   stylix.targets.gtk.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs;
+  with kdePackages; [
     # OFFICE
     obsidian # Markdown-based Notes
     pandoc
@@ -33,8 +34,8 @@ args @ {
 
     # UTILITY
     anki-bin # Spaced-repetition flashcards
-    kdePackages.dolphin # KDE file explorer
-    kdePackages.ark # KDE file archiver
+    dolphin # KDE file explorer
+    ark # KDE file archiver
     filezilla # FTP client
     filelight # A fancy directory size viewer by KDE
     meld # visual diff and merge tool
@@ -58,8 +59,8 @@ args @ {
     audacity
     gimp
     (inkscape-with-extensions.override {inkscapeExtensions = with inkscape-extensions; [hexmap];})
-    kdePackages.gwenview
-    kdePackages.kdenlive # KDE video editor
+    gwenview
+    kdenlive # KDE video editor
     picard # MusicBrainz metadata editor
     yt-dlp
 

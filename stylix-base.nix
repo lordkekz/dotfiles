@@ -18,20 +18,18 @@
 
     polarity = "dark";
 
-    fonts = let
-      nerdfonts = pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Arimo" "Tinos"];};
-    in {
+    fonts = {
       monospace = {
         name = "JetBrainsMono Nerd Font";
-        package = nerdfonts;
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
       sansSerif = {
         name = "Arimo Nerd Font";
-        package = nerdfonts;
+        package = pkgs.nerd-fonts.arimo;
       };
       serif = {
         name = "Tinos Nerd Font";
-        package = nerdfonts;
+        package = pkgs.nerd-fonts.tinos;
       };
       sizes = {
         applications = 12;

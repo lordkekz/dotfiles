@@ -83,7 +83,7 @@ in {
     signing = {
       inherit (personal-data.data.home.git.signing) key;
       signByDefault = true;
-      gpgPath = "${wsl-gpg-wrapper}/bin/wsl-gpg-wrapper";
+      signer = "${wsl-gpg-wrapper}/bin/wsl-gpg-wrapper";
     };
   };
 
