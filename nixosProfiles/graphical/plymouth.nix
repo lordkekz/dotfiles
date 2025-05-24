@@ -26,7 +26,7 @@
         ];
       })
       pkgs.nixos-bgrt-plymouth # Theme name: "nixos-bgrt"
-      pkgs.breeze-plymouth # Theme name: "breeze"
+      pkgs.kdePackages.breeze-plymouth # Theme name: "breeze"
     ];
     #logo = ...;
   };
