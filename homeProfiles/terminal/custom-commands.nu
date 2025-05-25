@@ -32,7 +32,7 @@ def dwhich1 (application: string): nothing -> path {
 }
 
 
-def find-inpermanent (): path -> table {
+def find-impermanent (): nothing -> table {
   sudo nu -c 'rsync -amvxx --dry-run --no-links / /this/path/does/not/exist
   | lines | skip 2 | drop 3
   | where {|x| $x !~ "^skipping|/$"}
