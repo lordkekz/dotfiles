@@ -138,6 +138,7 @@ in {
       ];
       files = [
         ".config/gh/hosts.yml"
+        ".config/kwinoutputconfig.json"
         ".config/powerdevilrc"
         ".config/powermanagementprofilesrc"
         ".config/nix/nix.conf"
