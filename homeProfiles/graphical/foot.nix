@@ -30,7 +30,7 @@ args @ {
         notify = "yes"; # Does nothing because desktop-notifications.command is unset
         visual = "yes";
         # Play bell souhd. This is analogous to the command in alacritty.nix
-        command = "${pkgs.vlc}/bin/cvlc --play-and-exit ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/bell.oga";
+        # command = "${pkgs.vlc}/bin/cvlc --play-and-exit ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/bell.oga";
         command-focused = "yes";
       };
 
