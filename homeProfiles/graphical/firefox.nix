@@ -63,21 +63,21 @@ args @ {
     force = true;
     default = "MyDuckDuckGo";
     privateDefault = default;
-    order = ["MyDuckDuckGo" "Google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options" "Noogle Functions"];
+    order = ["MyDuckDuckGo" "google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options" "Noogle Functions"];
     engines = {
       "MyDuckDuckGo" = {
         urls = [{template = "https://duckduckgo.com/?kae=t&k9=48f1ef&kaa=844ad2&kx=25ac86&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kav=1&t=ffab&q={searchTerms}";}];
-        iconUpdateURL = "https://duckduckgo.com/favicon.png";
+        icon = "https://duckduckgo.com/favicon.png";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@ddg" "@duckduckgo"];
       };
 
-      "Wikipedia (en)".metaData.hidden = true;
-      "Amazon.de".metaData.hidden = true;
-      "Bing".metaData.hidden = true;
-      "DuckDuckGo".metaData.hidden = true;
-      "Google".metaData.hidden = true;
-      "eBay".metaData.hidden = true;
+      "wikipedia".metaData.hidden = true;
+      "amazon".metaData.hidden = true;
+      "bing".metaData.hidden = true;
+      "duckduckgo".metaData.hidden = true;
+      "google".metaData.hidden = true;
+      "ebay".metaData.hidden = true;
 
       "Nix Packages" = {
         urls = [{template = "https://search.nixos.org/packages?channel=${channel}&query={searchTerms}";}];
@@ -107,19 +107,19 @@ args @ {
       };
       "MyNixOS" = {
         urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
-        iconUpdateURL = "https://mynixos.com/favicon.ico";
+        icon = "https://mynixos.com/favicon.ico";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@nix"];
       };
       "Arch Wiki" = {
         urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
-        iconUpdateURL = "https://archlinux.org/static/logos/apple-touch-icon-144x144.38cf584757c3.png";
+        icon = "https://archlinux.org/static/logos/apple-touch-icon-144x144.38cf584757c3.png";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@arch"];
       };
       "Google Scholar" = {
         urls = [{template = "https://scholar.google.com/scholar?q={searchTerms}";}];
-        iconUpdateURL = "https://scholar.google.com/favicon.ico";
+        icon = "https://scholar.google.com/favicon.ico";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@gs"];
       };
