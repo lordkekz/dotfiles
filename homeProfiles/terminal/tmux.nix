@@ -41,6 +41,7 @@ args @ {
 
       # Improve chances that images work. See https://yazi-rs.github.io/docs/image-preview/#tmux-users
       set -g allow-passthrough on
+      set -g default-terminal "tmux"
       set -ga update-environment TERM
       set -ga update-environment TERM_PROGRAM
 
