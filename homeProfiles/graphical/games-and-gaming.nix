@@ -48,6 +48,15 @@ args @ {
     categories = ["Graphics"];
   };
 
+  xdg.desktopEntries."Wonderdraft" = {
+    name = "Wonderdraft";
+    comment = "Wonderdraft is a powerful yet intuitive fantasy map creation tool.";
+    exec = "${lib.getExe pkgs.steam-run} ${config.home.homeDirectory}/Documents/Backup/Spielstände/Wonderdraft/latest/Wonderdraft.x86_64";
+    settings.Path = "${config.home.homeDirectory}/Documents/Backup/Spielstände/Wonderdraft/latest/";
+    icon = "${config.home.homeDirectory}/Documents/Backup/Spielstände/Wonderdraft/latest/Wonderdraft.png";
+    categories = ["Graphics"];
+  };
+
   xdg.desktopEntries."FoundryVTT" = {
     name = "Foundry VTT";
     comment = "A Self-Hosted & Modern Roleplaying Platform";
