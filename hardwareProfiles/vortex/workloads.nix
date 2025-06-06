@@ -12,7 +12,7 @@
     public-websites
     mailserver
     # owncast # Currently unused; disable to minimize attack surface
-    lemmy
+    # lemmy # Currently unused; disable to minimize attack surface
     statping-ng
   ];
 
