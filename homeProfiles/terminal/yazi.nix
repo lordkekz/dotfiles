@@ -26,6 +26,18 @@ args @ {
         scrolloff = 4;
       };
     };
+    keymap.manager.prepend_keymap = [
+      {
+        on = "Z";
+        run = "plugin fzf";
+        desc = "Jump to a file/directory via fzf";
+      }
+      {
+        on = "z";
+        run = "plugin zoxide";
+        desc = "Jump to a directory via zoxide";
+      }
+    ];
     yaziPlugins = {
       enable = true;
       # yaziBasePackage = pkgs.yazi;
