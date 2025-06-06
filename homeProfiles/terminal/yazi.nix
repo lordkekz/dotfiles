@@ -16,7 +16,6 @@ args @ {
 
   programs.yazi = {
     enable = true;
-    package = inputs.yazi.packages.${system}.yazi;
     enableNushellIntegration = true;
     # This is overridden by overlay from yazi flake
     settings = {
@@ -35,6 +34,7 @@ args @ {
         chmod.enable = true;
         # fg.enable = true; # I don't use this normally
         full-border.enable = true;
+        git.enable = true;
         max-preview.enable = true; # 'R' to maximize
         hide-preview.enable = true; # 'T' to hide
         # jump-to-char.enable = true; # I don't use this normally

@@ -112,13 +112,9 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=main";
-    # nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/main";
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=refs/heads/fix-bypass-smart-enter";
+    # nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/fix-bypass-smart-enter";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    # Yazi flake
-    yazi.url = "github:sxyazi/yazi?ref=v25.4.8";
-    # yazi.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Generate images etc. from NixOS configs
     nixos-generators.url = "github:nix-community/nixos-generators";
@@ -270,7 +266,6 @@
         permittedInsecurePackages = ["fluffychat-linux-1.23.0" "olm-3.2.16"];
       };
       sharedOverlays = map (i: i.overlays.default) (with inputs; [
-        yazi
         nix-yazi-plugins
         nix-minecraft
         # hyprland
