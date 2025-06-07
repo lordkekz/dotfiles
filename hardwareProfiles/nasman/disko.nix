@@ -175,13 +175,18 @@ in {
               format = "ext4";
             };
           };
-          microvm-cctv = {
-            type = "zfs_volume";
-            size = "100G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-            };
+          # Dataset for Jellyfin media
+          jellyfin = {
+            type = "zfs_fs";
+            # datasets.<name>.options.mountpoint only sets the ZFS attribute
+            # whereas datasets.<name>.mountpoint may also generate a systemd
+            # mount unit (depending on the mountpoint) which causes the
+            # zfs-mount.service (and dependents) to fail
+            options =
+              options
+              // {
+                mountpoint = "/var/lib/jellyfin";
+              };
           };
         };
       };
@@ -213,8 +218,18 @@ in {
       };
     };
 
-    # Also used by frigate
+    # Used for transcoding and whatnot
     nodev."/var/cache/frigate" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=25%"
+        "defaults"
+        "mode=755"
+      ];
+    };
+
+    # Used for transcoding
+    nodev."/var/cache/jellyfin" = {
       fsType = "tmpfs";
       mountOptions = [
         "size=25%"
