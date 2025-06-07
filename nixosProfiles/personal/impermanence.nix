@@ -87,6 +87,7 @@ in {
         ".config/discord"
         ".config/Element"
         ".config/feishin"
+        ".config/ghb" # HandBrake GUI settings
         ".config/heroic"
         ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone

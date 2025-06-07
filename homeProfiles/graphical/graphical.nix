@@ -63,6 +63,7 @@ args @ {
     kdenlive # KDE video editor
     picard # MusicBrainz metadata editor
     yt-dlp
+    handbrake
 
     # COMMUNICATION
     birdtray
