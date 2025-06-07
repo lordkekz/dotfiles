@@ -175,7 +175,7 @@ in {
               format = "ext4";
             };
           };
-          # Dataset for Jellyfin media
+          # Dataset for Jellyfin data
           jellyfin = {
             type = "zfs_fs";
             # datasets.<name>.options.mountpoint only sets the ZFS attribute
@@ -187,6 +187,11 @@ in {
               // {
                 mountpoint = "/var/lib/jellyfin";
               };
+          };
+          # Dataset for Jellyfin media
+          media-library = {
+            type = "zfs_fs";
+            inherit options;
           };
         };
       };
