@@ -21,7 +21,7 @@ in {
     microvm-forgejo-runner
     microvm-minecraft
     frigate-cctv
-    jellyfin
+    # jellyfin
     ollama
   ];
 

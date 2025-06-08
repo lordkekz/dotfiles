@@ -15,7 +15,7 @@
   # Syncthing config
   persistentFolder = "/persist";
   personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
-  overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_:_: {rescanIntervalS = 86400;}) personalSettings.folders;
+  overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_: _: {rescanIntervalS = 86400;}) personalSettings.folders;
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
@@ -65,6 +65,10 @@ in {
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy http://10.0.0.${vmId}:30000
   '';
+  services.caddy.virtualHosts."jellyfin.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy http://10.0.0.${vmId}:8096
+  '';
 
   microvm.vms.${vmName}.config = {config, ...}: {
     imports = [(import ./__microvmBaseConfig.nix {inherit personal-data vmName vmId;})];
@@ -72,7 +76,7 @@ in {
     microvm.balloonMem = lib.mkForce 4096; # MiB, speeds up big folders
 
     networking.firewall.interfaces = {
-      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 30000 42010 42020];
+      "vm-${vmName}-a".allowedTCPPorts = [22 8384 4533 8096 30000 42010 42020];
       "vm-${vmName}-b" = {
         allowedTCPPorts = [22000];
         allowedUDPPorts = [22000 21027];
@@ -95,6 +99,11 @@ in {
           path = "/persist/.maloja";
           user = "maloja";
           group = "maloja";
+        }
+        {
+          path = "/persist/.jellyfin";
+          user = "jellyfin";
+          group = "jellyfin";
         }
         {
           path = "/persist/.signalbackup-html";
@@ -133,6 +142,8 @@ in {
         group =
           if n == "Musik"
           then "navidrome"
+          else if n == "Videos"
+          then "jellyfin"
           else if n == "FoundryVTT"
           then "foundryvtt"
           else if n == "Backups Signal" || n == "Documents"
@@ -362,6 +373,13 @@ in {
       uid = 837; # Just some UID
     };
     users.groups.foundryvtt.gid = 837; # Just some GID
+
+    #########################  JELLYFIN  ##########################
+    services.jellyfin = {
+      enable = true;
+      dataDir = "/persist/.jellyfin";
+      cacheDir = "/var/cache/jellyfin";
+    };
   };
 
   age.secrets.maloja-password = {
