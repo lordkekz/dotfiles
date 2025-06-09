@@ -38,8 +38,9 @@ backup_volume() {
       return 0
     fi
 
-    echo $ zfs send -RI "${target_snap_name}" "${source_snap}" \| zfs receive -Fvu "${target_volume}"
-    zfs send -RI "${target_snap_name}" "${source_snap}" | zfs receive -Fvu "${target_volume}"
+    # Send incremental stream containing delta of $target_snap to $source_snap
+    echo $ zfs send -RI "${target_snap_name}" "${source_snap}" \| zfs receive -vu "${target_volume}"
+    zfs send -RI "${target_snap_name}" "${source_snap}" | zfs receive -vu "${target_volume}"
   else
     echo "Target volume doesn't exist! Creating from a full stream..."
     echo $ zfs send -R "${source_snap}" \| zfs receive -Fvu "${target_volume}"
@@ -68,7 +69,7 @@ prune_automatic_snapshots() {
 
     # Check if the snapshot is older than 4 days
     if [ $age_days -gt "$max_age_days" ]; then
-      echo "DROP snapshot: $snapshot"
+      echo $ zfs destroy "$snapshot"
       zfs destroy "$snapshot"
     # else
       # echo "KEEP snapshot: $snapshot"
