@@ -66,5 +66,7 @@ in {
   };
   services.displayManager.defaultSession = lib.mkForce "kde";
 
+  age.rekey.masterIdentities = ["/does/not/exist"];
+
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }
