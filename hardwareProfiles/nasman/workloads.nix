@@ -60,6 +60,14 @@ in {
         ${builtins.readFile ./backup-lib.bash}
 
         echo "####################################"
+        echo "Pruning old automatic snapshots from zpool artemis!"
+        prune_automatic_snapshots artemis 7
+
+        echo "####################################"
+        echo "Pruning old automatic snapshots from zpool artemis!"
+        prune_automatic_snapshots orion 60
+
+        echo "####################################"
         echo "Creating snapshot for zpool artemis!"
         new_snap_name=$(date +%Y-%m-%d-%H%M-autobackup)
         create_recursive_snapshot artemis "$new_snap_name"

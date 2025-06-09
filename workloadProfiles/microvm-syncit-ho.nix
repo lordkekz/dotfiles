@@ -15,7 +15,7 @@
   # Syncthing config
   persistentFolder = "/persist";
   personalSettings = personal-data.data.home.syncthing.settings persistentFolder;
-  overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_:_: {rescanIntervalS = 86400;}) personalSettings.folders;
+  overrideRescanIntervalForEachFolder.folders = lib.mapAttrs (_: _: {rescanIntervalS = 86400;}) personalSettings.folders;
 in {
   services.caddy.virtualHosts."syncit.hepr.me".extraConfig = ''
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem

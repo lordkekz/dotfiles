@@ -46,3 +46,32 @@ backup_volume() {
     zfs send -R "${source_snap}" | zfs receive -Fvu "${target_volume}"
   fi
 }
+
+prune_automatic_snapshots() {
+  pool_name=$1
+  max_age_days=$2
+
+  # Get the current date in seconds since epoch
+  current_date=$(date +%s)
+
+  # Loop through each snapshot of a dataset starting with $pool_name and containing "autobackup"
+  for snapshot in $(zfs list -t snapshot -H -o name | grep -P "^$pool_name(/[^@]+)?@\d{4}-\d{2}-\d{2}-\d{4}-autobackup\$"); do
+    # Extract the date from the snapshot name (format: YYYY-MM-DD)
+    snapshot_datetime=$(echo "$snapshot" | grep -oP '\d{4}-\d{2}-\d{2}-\d{4}')
+
+    # Convert the snapshot date to seconds since epoch
+    # date = first 10 characters; time = last 4 characters
+    snapshot_epoch=$(date -d "${snapshot_datetime:0:10} ${snapshot_datetime:11:4}" +%s)
+
+    # Calculate the age of the snapshot in days
+    age_days=$(( (current_date - snapshot_epoch) / 86400 ))
+
+    # Check if the snapshot is older than 4 days
+    if [ $age_days -gt "$max_age_days" ]; then
+      echo "DROP snapshot: $snapshot"
+      zfs destroy "$snapshot"
+    # else
+      # echo "KEEP snapshot: $snapshot"
+    fi
+  done
+}
