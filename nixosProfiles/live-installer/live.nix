@@ -7,6 +7,7 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }: let
   inherit (personal-data.data.lab) username fullName hashedPassword publicKeys;
@@ -56,6 +57,14 @@ in {
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
+
+  # Define sessions for multi-hm
+  multi-hm.sessions.kde = {
+    homeConfiguration = outputs.legacyPackages.${system}.homeConfigurations.terminal;
+    launchCommand = "startplasma-wayland";
+    displayName = "Plasma 6 (mutli-hm)";
+  };
+  services.displayManager.defaultSession = lib.mkForce "kde";
 
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }
