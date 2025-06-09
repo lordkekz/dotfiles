@@ -46,6 +46,7 @@ in {
         # Contains some KDE config and telemetry
         ".config/KDE"
         ".config/kde.org"
+        ".config/vlc"
       ];
       files = [
         ".config/birdtray-config.json"
@@ -87,6 +88,7 @@ in {
         ".config/discord"
         ".config/Element"
         ".config/feishin"
+        ".config/filezilla"
         ".config/ghb" # HandBrake GUI settings
         ".config/heroic"
         ".config/JetBrains"
