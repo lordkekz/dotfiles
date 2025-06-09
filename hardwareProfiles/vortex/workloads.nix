@@ -55,4 +55,10 @@
     tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
     reverse_proxy https://nasman.hepr.me
   '';
+
+  # Forward jellyfin.hepr.me to nasman, but use the same SNI matcher for both nasman and vortex.
+  services.caddy.virtualHosts."jellyfin.hepr.me".extraConfig = ''
+    tls /var/lib/acme/hepr.me/cert.pem /var/lib/acme/hepr.me/key.pem
+    reverse_proxy https://nasman.hepr.me
+  '';
 }
