@@ -10,12 +10,12 @@
 }: {
   imports = [
     hardwareProfiles.common
-    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
   ];
 
   boot.kernelParams = ["copytoram"];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # Cool stuff
     pkgs.fastfetch
     pkgs.nushell
@@ -32,7 +32,7 @@
     pkgs.pciutils # provides lspci
     pkgs.usbutils # provides lsusb
     pkgs.fwupd
-    pkgs.plasma5Packages.plasma-thunderbolt
+    pkgs.kdePackages.plasma-thunderbolt
   ];
 
   # Enable SSH for headless access
