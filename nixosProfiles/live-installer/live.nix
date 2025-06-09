@@ -3,11 +3,14 @@
   inputs,
   outputs,
   hardwareProfiles,
+  personal-data,
   lib,
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (personal-data.data.lab) username fullName hashedPassword publicKeys;
+in {
   imports = [
     hardwareProfiles.common
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
@@ -35,9 +38,24 @@
     pkgs.kdePackages.plasma-thunderbolt
   ];
 
-  # Enable SSH for headless access
-  systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
-  users.users.nixos.password = "5cLFL4D3r4F6"; # This is really, really not safe at all! But it's easy, so...
+  # Add my own user and set up public ssh keys
+  users.mutableUsers = false;
+  users.users.${username} = {
+    isNormalUser = true;
+    description = fullName;
+    inherit hashedPassword;
+    openssh.authorizedKeys.keys = publicKeys;
+    extraGroups = ["wheel" "systemd-journal"];
+  };
+
+  # Basic SSH hardening is good even on live image
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "no";
+    # require public key authentication for better security
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }
