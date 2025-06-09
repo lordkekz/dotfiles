@@ -14,7 +14,7 @@
 in {
   imports = [
     hardwareProfiles.common
-    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
   ];
 
   boot.kernelParams = ["copytoram"];
@@ -29,14 +29,14 @@ in {
     pkgs.geekbench
 
     # KDE Info Center dependencies
-    pkgs.wayland-utils
-    pkgs.clinfo
-    pkgs.glxinfo
-    pkgs.vulkan-tools-lunarg
+    # pkgs.wayland-utils
+    # pkgs.clinfo
+    # pkgs.glxinfo
+    # pkgs.vulkan-tools-lunarg
     pkgs.pciutils # provides lspci
     pkgs.usbutils # provides lsusb
-    pkgs.fwupd
-    pkgs.kdePackages.plasma-thunderbolt
+    # pkgs.fwupd
+    # pkgs.kdePackages.plasma-thunderbolt
   ];
 
   # Add my own user and set up public ssh keys
@@ -59,12 +59,12 @@ in {
   };
 
   # Define sessions for multi-hm
-  multi-hm.sessions.kde = {
-    homeConfiguration = outputs.legacyPackages.${system}.homeConfigurations.terminal;
-    launchCommand = "startplasma-wayland";
-    displayName = "Plasma 6 (mutli-hm)";
-  };
-  services.displayManager.defaultSession = lib.mkForce "kde";
+  # multi-hm.sessions.kde = {
+  #   homeConfiguration = outputs.legacyPackages.${system}.homeConfigurations.terminal;
+  #   launchCommand = "startplasma-wayland";
+  #   displayName = "Plasma 6 (mutli-hm)";
+  # };
+  # services.displayManager.defaultSession = lib.mkForce "kde";
 
   age.rekey.masterIdentities = ["/does/not/exist"];
 
