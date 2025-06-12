@@ -15,6 +15,9 @@
     globalConfig = ''
       debug
       auto_https disable_certs
+      servers {
+        trusted_proxies static 100.80.80.1/32 100.80.80.2/32
+      }
     '';
   };
   networking.firewall.allowedTCPPorts = [80 443];
