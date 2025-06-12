@@ -63,7 +63,15 @@ args @ {
     kdenlive # KDE video editor
     picard # MusicBrainz metadata editor
     yt-dlp
+    # To convert DVDs
     handbrake
+    # To rip audio CDs
+    (asunder.override {
+      mp3Support = true;
+      oggSupport = true;
+      flacSupport = true;
+      opusSupport = true;
+    })
 
     # COMMUNICATION
     birdtray

@@ -84,6 +84,7 @@ in {
 
     users.${username} = {
       directories = [
+        ".config/asunder" # Asunder audio CD rip settings
         ".config/AusweisApp"
         ".config/discord"
         ".config/Element"
