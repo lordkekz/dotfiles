@@ -92,6 +92,7 @@ in {
         ".config/filezilla"
         ".config/ghb" # HandBrake GUI settings
         ".config/heroic"
+        ".config/jellyfin.org"
         ".config/JetBrains"
         ".config/kdeconnect" # KDEconnect, contains keys for paired phone
         ".config/lutris"
@@ -112,6 +113,8 @@ in {
         ".local/share/FoundryVTT" # Only user data of Foundry VTT desktop version
         ".local/share/chat.fluffy.fluffychat"
         ".local/share/home-manager"
+        ".local/share/Jellyfin Media Player"
+        ".local/share/jellyfinmediaplayer"
         ".local/share/JetBrains"
         ".local/share/kwalletd" # KWallet database, contains e.g. WiFi passwords
         ".local/share/kscreen" # KDE Plasma Display/Monitor configuration
