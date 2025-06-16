@@ -28,7 +28,7 @@ args @ {
       only_physical = true;
       use_fstab = false;
       zfs_hide_datasets = false;
-      disks_filter = "/ /nix /persist/ephemeral /persist/local /persist/roaming /mnt"; # FIXME are wildcards possible?
+      disks_filter = "/ /nix /persist/ephemeral /persist/local /persist/roaming /persist/rustygames /mnt"; # FIXME are wildcards possible?
       show_io_stat = true;
     };
   };

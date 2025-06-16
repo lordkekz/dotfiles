@@ -29,8 +29,13 @@
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["zfs"];
 
-  # This should enable the `amd_pstate` cpuidle driver, by default it ended up with `none`
-  boot.kernelParams = ["amd_pstate=active"];
+  boot.kernelParams = [
+    # This should enable the `amd_pstate` cpuidle driver, by default it ended up with `none`
+    "amd_pstate=active"
+    # Limit ZFS ARC to 10 GiB out of 48 GiB because some programs like ollama
+    # want to allocate several GiB instantly (which is more than remains free usually).
+    "zfs.zfs_arc_max=10737418240"
+  ];
 
   # btrfs tools are for some reason not always included if there is no btrfs filesystem in config
   environment.systemPackages = with pkgs; [e2fsprogs btrfs-progs];
