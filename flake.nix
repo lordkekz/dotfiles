@@ -55,7 +55,7 @@
 
     # Home manager
     # home-manager.url = "github:lordkekz/home-manager?ref=release-24.11";
-    home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
+    home-manager.url = "github:nix-community/home-manager?ref=master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Kwin effect to force blur of transparent windows
@@ -64,12 +64,12 @@
     kwin-effects-forceblur.inputs.utils.follows = "flake-utils";
 
     # Lix (correctness-focused fork of Nix)
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.1.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
     # microvm.nix
-    #microvm.url = "github:astro/microvm.nix?ref=main";
-    microvm.url = "github:lordkekz/microvm.nix?ref=initialize-shares-permissions"; # FIXME update after merge
+    microvm.url = "github:astro/microvm.nix?ref=main";
+    # microvm.url = "github:lordkekz/microvm.nix?ref=initialize-shares-permissions"; # FIXME update after merge
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Tmux status bar configured in Rust
@@ -85,8 +85,10 @@
     # Nixpkgs
     # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-stable.url = "github:lordkekz/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.follows = "nixpkgs-stable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:lordkekz/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:lordkekz/nixpkgs/syncthing-apiKey";
+    nixpkgs.follows = "nixpkgs-unstable";
 
     # A nixpkgs downstream which only contains the lib
     #nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
@@ -138,7 +140,7 @@
 
     # Stylix helps theme applications using base16
     #stylix.url = "/home/hpreiser/git/stylix";
-    stylix.url = "github:danth/stylix?ref=release-25.05";
+    stylix.url = "github:danth/stylix?ref=master";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
 
