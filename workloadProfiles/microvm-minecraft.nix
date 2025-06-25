@@ -147,7 +147,7 @@ in {
     ];
 
     microvm.vcpu = lib.mkForce 10;
-    microvm.balloonMem = lib.mkForce 7680; # MiB => total max of 8GiB memory
+    microvm.mem = lib.mkForce 8192; # MiB => total max of 8GiB memory
 
     networking.firewall.interfaces = {
       "vm-${vmName}-a" = {

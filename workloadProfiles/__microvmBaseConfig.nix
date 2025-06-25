@@ -21,8 +21,8 @@
     };
   };
   config = {
-    microvm.mem = 512; # This can't be exactly 2GiB because QEMU hangs otherwise
-    microvm.balloonMem = 1024;
+    microvm.mem = 1536; # This can't be exactly 2GiB because QEMU hangs otherwise
+    microvm.balloon = true;
     microvm.vcpu = 4;
 
     systemd.network.enable = true;

@@ -25,7 +25,7 @@ in {
     };
 
     microvm.vcpu = lib.mkForce 8;
-    microvm.balloonMem = lib.mkForce 8192; # MiB
+    microvm.mem = lib.mkForce 8192; # MiB
 
     microvm.shares = [
       {
