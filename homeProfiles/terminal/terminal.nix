@@ -46,6 +46,8 @@ args @ {
     ookla-speedtest
     # S.M.A.R.T. tools; provides smartctl
     smartmontools
+    # Can do firmware updates for NVMe drives
+    nvme-cli
     # Mobile shell that stays connected after sleep
     mosh
 
