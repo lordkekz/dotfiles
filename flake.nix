@@ -365,7 +365,6 @@
             extraSpecialArgs = {
               inherit flake inputs outputs assets system pkgs-stable pkgs-unstable homeProfiles;
               inherit (inputs) personal-data;
-              inherit (inputs) stylix-image;
             };
             modules = [homeProfile] ++ (attrValues homeManagerModules);
           })

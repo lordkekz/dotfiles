@@ -4,13 +4,12 @@
   lib,
   pkgs,
   config,
-  stylix-image,
+  inputs,
   ...
 }: {
   stylix = {
     enable = true;
 
-    #image = stylix-image;
     image = config.lib.stylix.pixel "base00"; # Black background for OLED
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/tomorrow-night.yaml";
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
