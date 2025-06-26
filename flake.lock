@@ -1178,16 +1178,16 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1749229833,
-        "narHash": "sha256-sflqebRiqEf27WyFN+4uOfLMORgLpZmhf7vtxtLumwQ=",
+        "lastModified": 1750975942,
+        "narHash": "sha256-wEMvmGJu9yFW+/MnCX/WsUYIPjuxr7UVlqikE31Driw=",
         "owner": "lordkekz",
         "repo": "nix-yazi-plugins",
-        "rev": "747bd9f8be583158ce069ebf941afafcbd2a3663",
+        "rev": "ba1fc0f9b87f34aeef0b9f566f015e648dc2aaf8",
         "type": "github"
       },
       "original": {
         "owner": "lordkekz",
-        "ref": "refs/heads/fix-bypass-smart-enter",
+        "ref": "refs/heads/main",
         "repo": "nix-yazi-plugins",
         "type": "github"
       }

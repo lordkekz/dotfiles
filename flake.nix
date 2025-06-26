@@ -112,7 +112,7 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # Yazi plugins
-    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=refs/heads/fix-bypass-smart-enter";
+    nix-yazi-plugins.url = "github:lordkekz/nix-yazi-plugins?ref=refs/heads/main";
     # nix-yazi-plugins.url = "/home/hpreiser/git/nix-yazi-plugins?ref=refs/heads/fix-bypass-smart-enter";
     nix-yazi-plugins.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
