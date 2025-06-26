@@ -15,6 +15,8 @@
     # Get the defaults from nixos-hardware
     inputs.hardware.nixosModules.framework-12th-gen-intel
 
+    "${inputs.self.outPath}/stylix-light.nix"
+
     # Default imports
     (modulesPath + "/installer/scan/not-detected.nix")
   ];

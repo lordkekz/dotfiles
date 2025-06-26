@@ -232,12 +232,17 @@
     hardwareProfiles = lib.my.loadProfiles "hardware";
     workloadProfiles = lib.my.loadProfiles.loadModulesOfProfiles "workload";
     getHomeConfig = system: name: outputs.legacyPackages.${system}.homeConfigurations.${name};
-    mkSessions = system: {
+    mkSessions = system: defaultSession: {
       config.multi-hm.sessions = {
         kde = {
           homeConfiguration = getHomeConfig system "kde";
           launchCommand = "startplasma-wayland";
-          displayName = "Plasma 6 (mutli-hm)";
+          displayName = "Plasma 6 Dark (mutli-hm)";
+        };
+        kde-light = {
+          homeConfiguration = getHomeConfig system "kde-light";
+          launchCommand = "startplasma-wayland";
+          displayName = "Plasma 6 Light (mutli-hm)";
         };
         #hypr = {
         #  homeConfiguration = getHomeConfig system "hypr";
@@ -245,7 +250,7 @@
         #  displayName = "Hyprland (multi-hm)";
         #};
       };
-      config.services.displayManager.defaultSession = lib.mkForce "kde";
+      config.services.displayManager.defaultSession = lib.mkForce defaultSession;
     };
 
     # A set containing the paths of assets in ./assets directory
@@ -318,7 +323,7 @@
           graphical
           kekswork
           # Adds entries for graphical sessions which first activate a home configuration
-          (mkSessions "x86_64-linux")
+          (mkSessions "x86_64-linux" "kde-light")
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
@@ -328,7 +333,7 @@
           graphical
           keksjumbo
           # Adds entries for graphical sessions which first activate a home configuration
-          (mkSessions "x86_64-linux")
+          (mkSessions "x86_64-linux" "kde")
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
@@ -338,7 +343,7 @@
           graphical
           keksmaxi
           # Adds entries for graphical sessions which first activate a home configuration
-          (mkSessions "x86_64-linux")
+          (mkSessions "x86_64-linux" "kde")
           # Fallback so I get a decent tty experience without starting graphical session
           (lib.my.mkNixosModuleForHomeProfile (getHomeConfig "x86_64-linux" "terminal"))
         ];
