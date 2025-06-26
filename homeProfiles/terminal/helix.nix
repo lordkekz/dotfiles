@@ -98,7 +98,7 @@ args @ {
       };
 
       # Make line length rulers darker
-      "ui.virtual.ruler" = {
+      "ui.virtual.ruler" = lib.mkIf (config.stylix.polarity == "dark") {
         bg = "#141414";
       };
 
