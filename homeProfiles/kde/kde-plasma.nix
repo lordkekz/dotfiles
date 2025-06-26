@@ -50,7 +50,7 @@ args @ {
     accessibility = {
       highlightLinks = true;
       changeColors = {
-        enable = true;
+        enable = config.stylix.polarity == "dark";
         mode = "InvertLuma";
       };
     };
