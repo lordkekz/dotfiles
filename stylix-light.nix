@@ -10,9 +10,9 @@
   stylix = {
     enable = true;
 
-    image = "${inputs.self.outPath}/assets/wallpapers/italy.jpg";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tomorrow.yaml";
+    image = lib.mkForce "${inputs.self.outPath}/assets/wallpapers/italy.jpg";
+    base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/tomorrow.yaml";
 
-    polarity = "light";
+    polarity = lib.mkForce "light";
   };
 }
