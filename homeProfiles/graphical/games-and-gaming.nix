@@ -37,6 +37,15 @@ args @ {
         ludusavi --config "$HOME/.config/ludusavi" wrap --gui --infer heroic -- "$@"
       '';
     })
+    (pkgs.writeShellApplication {
+      # REQUIRES: manual setup in Steam; set "launch options"
+      # to "ludusavi-wrapper-steam %command%"
+      # See: https://github.com/mtkennerly/ludusavi/blob/cef02676fab5b8567cdb4e35f3f1f925dfdf71c9/docs/help/game-launch-wrapping.md#steam
+      name = "ludusavi-wrapper-steam";
+      text = ''
+        ludusavi --config "$HOME/.config/ludusavi" wrap --gui --infer steam -- "$@"
+      '';
+    })
   ];
 
   xdg.desktopEntries."Dungeondraft" = {
