@@ -53,7 +53,7 @@ args @ {
 
     # Misc
     tree
-    devenv
+    inputs.devenv.packages.${system}.devenv
   ];
 
   programs.nh.enable = true; # Enable yet another nix helper
