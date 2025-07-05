@@ -20,13 +20,14 @@
   # Enable bluetooth (why wouldn't they enable it in nixos-hardware?!?)
   hardware.bluetooth.enable = true;
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "wl"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = with config.boot.kernelPackages; [broadcom_sta];
+  boot.blacklistedKernelModules = ["bcma" "b43"];
 
-  # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs-unstable.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs-unstable.linuxPackages;
 
   boot.tmp = {
     useTmpfs = true;
