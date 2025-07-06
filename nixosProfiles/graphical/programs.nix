@@ -18,7 +18,6 @@
     pkgs.vulkan-tools-lunarg
     pkgs.pciutils # provides lspci
     pkgs.usbutils # provides lsusb
-    pkgs.fwupd
   ];
 
   # Enable graphical KDE Partition Manager
