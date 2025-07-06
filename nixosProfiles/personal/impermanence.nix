@@ -20,6 +20,7 @@ in {
     directories = [
       "/var/log"
       "/var/lib/systemd/coredump"
+      "/var/cache/fwupd"
     ];
     files = [
     ];
@@ -35,8 +36,8 @@ in {
 
         ".cache/bat"
         ".cache/bookmarksrunner"
-        ".cache/fontconfig"
         ".cache/flatpak"
+        ".cache/fontconfig"
         ".cache/nix"
         ".cache/tealdeer"
         ".cache/thumbnails"
@@ -72,6 +73,7 @@ in {
       "/var/lib/waydroid"
       "/var/lib/tailscale"
       "/var/lib/upower"
+      "/var/lib/fwupd"
 
       "/var/lib/bluetooth"
       "/var/lib/flatpak"
