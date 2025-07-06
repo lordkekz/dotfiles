@@ -10,13 +10,6 @@
   pkgs-unstable,
   ...
 }: {
-  # Enable Incus Linux containers
-  virtualisation.incus = {
-    enable = false; # FIXME Incus on NixOS is unsupported using iptables. Set `networking.nftables.enable = true;`
-    # Start when socket opened instead of at boot.
-    socketActivation = true;
-  };
-
   # Enable podman containers
   virtualisation.podman = {
     enable = true;
@@ -31,7 +24,7 @@
 
   # Enable virt-manager for QUEMU/KVM based VMs
   virtualisation.libvirtd = {
-    enable = false;
+    enable = true;
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;
@@ -48,5 +41,5 @@
       };
     };
   };
-  programs.virt-manager.enable = false;
+  programs.virt-manager.enable = true;
 }
