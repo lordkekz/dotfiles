@@ -63,7 +63,7 @@ args @ {
     force = true;
     default = "MyDuckDuckGo";
     privateDefault = default;
-    order = ["MyDuckDuckGo" "google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options" "Noogle Functions"];
+    order = ["MyDuckDuckGo" "google" "MyNixOS" "NixOS Wiki" "Nix Packages" "Nix Options" "Noogle Functions" "LEO Ita-Deu"];
     engines = {
       "MyDuckDuckGo" = {
         urls = [{template = "https://duckduckgo.com/?kae=t&k9=48f1ef&kaa=844ad2&kx=25ac86&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kav=1&t=ffab&q={searchTerms}";}];
@@ -122,6 +122,12 @@ args @ {
         icon = "https://scholar.google.com/favicon.ico";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = ["@gs"];
+      };
+      "LEO Ita-Deu" = {
+        urls = [{template = "https://dict.leo.org/tedesco-italiano/{searchTerms}";}];
+        icon = "https://dict.leo.org/img/favicons/itde.ico";
+        updateInterval = 24 * 60 * 60 * 1000; # every day
+        definedAliases = ["@ita"];
       };
     };
   };
