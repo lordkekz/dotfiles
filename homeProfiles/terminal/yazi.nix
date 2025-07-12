@@ -19,7 +19,7 @@ args @ {
     enableNushellIntegration = true;
     # This is overridden by overlay from yazi flake
     settings = {
-      manager = {
+      mgr = {
         show_hidden = true;
         sort_dir_first = true;
         linemode = "mtime";
