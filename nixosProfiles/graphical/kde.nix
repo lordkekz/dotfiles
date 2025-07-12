@@ -27,6 +27,9 @@
     # KDE Info Center dependencies
     pkgs.kdePackages.plasma-thunderbolt
     pkgs.dmidecode
+
+    # Virtual Keyboard
+    pkgs.maliit-keyboard
   ];
 
   # Disable fingerprint for lock screen auth, because passwords
